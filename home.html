@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Demo DNDL</title>
+        <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+        <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+        <style>
+            p {
+                text-align: center;
+                vertical-align: middle;
+                background-color: aqua;
+            }
+
+            div{
+                display: table;
+                margin: auto;
+                padding: 20px;
+                
+            }
+        
+        
+        </style>
+        <script>
+
+            $('body').on('swipeleft swiperight',function(event){
+                if (event.type == "swiperight") {
+                alert("swipped right side");      
+                }
+                if (event.type == "swipeleft") {
+                    alert("swipped left side");
+                }
+                event.preventDefault();
+            }); 
+        </script>
+    
+    </head>
+
+    <body>
+        
+        <div data-role="page">
+            
+            <p class="unlabled-text" id="15508A">Hôm nay thời tiết thật là đẹp</p>
+
+        </div>
+        
+
+    </body>
+</html>
