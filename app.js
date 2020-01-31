@@ -1,15 +1,13 @@
 const http = require('http');
 const url = require('url');
 
-// var adr = 'http://localhost:8080/default.htm?year=2017&month=february';
-// var q = url.parse(adr, true)
+// var adr = 'http://localhost:8080';
+//  var q = url.parse(adr, true)
 
-// console.log(q.host)
-// console.log(q.pathname)
-// console.log(q.search)
+// // console.log(q.host)
+//  console.log(q.pathname)
+// // console.log(q.search)
 
-var qdata = q.query;
-console.log(qdata.month);
 
 const hostname = '127.0.0.1';
 const port = 8000;
@@ -19,6 +17,11 @@ const fs = require('fs');
 
 const server = http.createServer((req, res) => {
     var q = url.parse(req.url, true);
+    if (q.pathname == "/") {
+        res.writeHead(200, {'Content-Type': 'text/html'});
+        res.write("<h1>Hello, this is DNDL project<h1>");
+        res.end();
+    }
     var filename = "." + q.pathname;
     fs.readFile(filename, function(err, data){
         if (err) {
