@@ -9,7 +9,7 @@ const url = require('url');
 // // console.log(q.search)
 
 
-const HOSTNAME = process.env.YOUR_HOST || '127.0.0.1';
+const HOSTNAME =  '0.0.0.0';
 const PORT = process.env.PORT || 8000;
 
 const fs = require('fs');
@@ -36,5 +36,5 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(PORT, HOSTNAME, () => {
-    console.log(`Server running at http://${HOSTNAME}}:${PORT}/`);
+    console.log(`Server running at http://${HOSTNAME}:${PORT}/`);
 })
