@@ -1,0 +1,23 @@
+{
+  "name": "infore.dndl",
+  "version": "0.0.9",
+  "description": "An online-task training system for the blind",
+  "main": "app.js",
+  "dependencies": {
+    "hammerjs": "^2.0.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NgDMau/dndl.git"
+  },
+  "author": "Mau Dinh Nguyen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NgDMau/dndl/issues"
+  },
+  "homepage": "https://github.com/NgDMau/dndl#readme"
+}
