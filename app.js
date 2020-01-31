@@ -9,7 +9,7 @@ const url = require('url');
 // // console.log(q.search)
 
 
-const HOSTNAME = '127.0.0.1';
+const HOSTNAME = process.env.YOUR_HOST || '127.0.0.1';
 const PORT = process.env.PORT || 8000;
 
 const fs = require('fs');
