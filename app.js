@@ -1,28 +1,47 @@
-var express = require('express');
-var path = require("path");
+const http = require('http');
+const url = require('url');
 
-//reponse login
+// var adr = 'http://localhost:8080';
+//  var q = url.parse(adr, true)
 
-var app = express();
-
-app.use(express.static(path.join(__dirname, ".")));
-
-app.get('/about', function (req, res) {
-
-	res.sendFile( path.join(__dirname, 'about.html'));
-
-})
-
-app.get('/index', function (req, res) {
-
-	res.sendFile( path.join(__dirname, 'index.html'));
-
-})
-
-var app = app.listen(8000, function () {
-
-  var host = app.address().address
-  var port = app.address().port
+// // console.log(q.host)
+//  console.log(q.pathname)
+// // console.log(q.search)
 
 
+const HOSTNAME =  '0.0.0.0';
+const PORT = process.env.PORT || 8000;
+
+const fs = require('fs');
+// const data = fs.readFileSync('file.md');
+
+const server = http.createServer((req, res) => {
+    var q = url.parse(req.url, true);
+    if (q.pathname == "/") {
+        fs.readFile('about.html', function(err, data){
+            if (err) {
+                res.writeHead(404, { 'Content-Type': 'text/html' });
+                console.log(err);
+                return res.end("404 Not Found");
+            }
+            res.writeHead(200, { 'Content-Type': 'text/html' });
+            res.write(data);
+            res.end();
+            return 
+        })
+    }
+    var filename = "." + q.pathname;
+    fs.readFile(filename, function(err, data){
+        if (err) {
+            res.writeHead(404, {'Content-Type': 'text/html'});
+            return res.end("404 Not Found");
+        }
+        res.writeHead(200, {'Content-Type': 'text/html'});
+        res.write(data);
+        res.end();
+    })
+});
+
+server.listen(PORT, HOSTNAME, () => {
+    console.log(`Server running at http://${HOSTNAME}:${PORT}/`);
 })
