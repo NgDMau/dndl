@@ -5,10 +5,12 @@
         <title>Giới thiệu</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
-            header{
+            .head{
+                display: flex;
+                align-items: center;
                 background-color: #ab36ff;
                 position: fixed;
-                height: 75px;
+                height: 10%;
                 width: 100%;
                 margin: 0;
                 left: 0px;
@@ -16,10 +18,13 @@
                 z-index: 10;
             }
             h1{
-                padding: 5px;
+                padding: 20px;
                 vertical-align: middle;
-                left: 10px;
+                font-size: 2vw;
 
+            }
+            h2{
+                font-family:Arial, Helvetica, sans-serif;
             }
             body{
                 background-color: #d6c0ed;
@@ -36,14 +41,15 @@
                 display: block;
                 width: 100%;
                 height: auto;
+                border-radius:5px;
             }
             
         </style>
     </head>
 
     <body >
-        
-        <header><h1>Dự án ứng dụng dán nhãn dữ liệu dành cho người mù</h1></header>
+        <div class = "container">
+        <div class = "head"><h1>Dự án ứng dụng dán nhãn dữ liệu dành cho người mù</h1></div>
         <div class = "container">
             <div class = "background-text">
             <img src="pictures/phone.jpg" alt="phone-picture" >
@@ -80,12 +86,12 @@
             <h3><p>Thời gian phát triển dự án: Quý I năm 2020</p></h3>
             <h2>Một số việc trên hệ thống mà người khuyết tật có thể làm:</h2>
             <ul>
-                <li>Dán nhãn dữ liệu âm thanh (<i>theo sắc thái: tiêu cực/tích cực, theo nội dung: thể thao/chính trị,...theo ngôn ngữ: tiếng Việt, tiếng Nhật, tiếng Anh,... theo tâm trạng: vui/buồn/ngạc nhiên,.... theo giới tính,....</i>) </li>
+                <li>Dán nhãn dữ liệu âm thanh<br> (<i>theo sắc thái: tiêu cực/tích cực, theo nội dung: thể thao/chính trị,...theo ngôn ngữ: tiếng Việt, tiếng Nhật, tiếng Anh,... theo tâm trạng: vui/buồn/ngạc nhiên,.... theo giới tính,....</i>) </li>
                 <li>Tạo dữ liệu âm thanh để tổng hợp giọng nói</li>
-                <li> Tạo văn bản dạng hội thoại (<i>ghi âm, gõ, ...</i>) (<i>Trả lời câu hỏi theo tình huống có sẵn, thể hiện thái độ theo tình huống,...</i>)</li>
-                <li>Phân loại văn bản (<i>email: spam/business/hacked,... nội dung: thể thao/chính trị/văn hóa,... comment: tích cực/tiêu cực/trung tính/xúc phạm/tôn trọng, ngưỡng mộ...</i>) </li>
-                <li>Phân loại hình ảnh (<i>Xác định vật thể trong ảnh: người, chó, mèo, ô tô, ... xác định biểu cảm của người trong ảnh: vui/buồn/giận/lo,... xác định nội dung ảnh: bạo lực/người lớn/nhạy cảm,.... xác định vị trí vật trong ảnh: vẽ khung, đường viên bao quanh vật,...</i>)</li>
-                <li>Đánh giá độ hoàn thiện chatbot (<i>trả lời giống người không?, trả lời nhanh không? hoàn thành task hay không?...</i>)</li>
+                <li> Tạo văn bản dạng hội thoại <br>(<i>ghi âm, gõ, ...</i>) (<i>Trả lời câu hỏi theo tình huống có sẵn, thể hiện thái độ theo tình huống,...</i>)</li>
+                <li>Phân loại văn bản <br>(<i>email: spam/business/hacked,... nội dung: thể thao/chính trị/văn hóa,... comment: tích cực/tiêu cực/trung tính/xúc phạm/tôn trọng, ngưỡng mộ...</i>) </li>
+                <li>Phân loại hình ảnh <br>(<i>Xác định vật thể trong ảnh: người, chó, mèo, ô tô, ... xác định biểu cảm của người trong ảnh: vui/buồn/giận/lo,... xác định nội dung ảnh: bạo lực/người lớn/nhạy cảm,.... xác định vị trí vật trong ảnh: vẽ khung, đường viên bao quanh vật,...</i>)</li>
+                <li>Đánh giá độ hoàn thiện chatbot <br>(<i>trả lời giống người không?, trả lời nhanh không? hoàn thành task hay không?...</i>)</li>
             </ul> 
             <h3>Chức năng của hệ thống:</h3>
             <ul>
@@ -99,6 +105,7 @@
                 <li> Quản lý sản phẩm dán nhãn và tiền công</li>
             </ul>
         </div>
+    </div>
     </div> 
     </ol>           
     </body>
