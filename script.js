@@ -5,9 +5,10 @@ const questionElement = document.getElementById('question')
 const answerButtonsElement = document.getElementById('answer-buttons')
 const titleElement = document.getElementById('title')
 const resultElement = document.getElementById('result')
+const labelElement = document.getElementById('label')
 
 let shuffledQuestions, currentQuestionIndex
-let currentField=0
+let currentField=0,pre_currentField
 
 startButton.addEventListener('click', start)
 nextButton.addEventListener('click', () => {
@@ -22,6 +23,7 @@ function start() {
   currentQuestionIndex = 0
   currentField =0
   questionContainerElement.classList.remove('hide')
+  labelElement.classList.remove('hide')
   titleElement.innerText = 'Câu hỏi'
 
   setNextQuestion()
@@ -39,7 +41,7 @@ function showQuestion(question) {
     const button = document.createElement('button')
     button.id += "btn_"+index
     button.innerText = answer.text
-    button.classList.add('btn')
+    button.classList.add('btn-answer')
     if (answer.correct) {
       button.dataset.correct = answer.correct
     }
@@ -160,6 +162,8 @@ mc.on("swipeleft", function(ev) {
 
 mc.on("swiperight", function(ev) {
 
+  pre_currentField = currentField;
+
   while(document.getElementById(field[currentField])==null || document.getElementById(field[currentField]).className.includes('hide')){
     currentField++
      if ((currentField)>field.length) 
@@ -176,7 +180,12 @@ mc.on("swiperight", function(ev) {
       document.getElementById(field[currentField]).style.backgroundColor = "red";
       for (var i = 0; i < field.length; i++) {
         if (i != currentField && document.getElementById(field[i]) != null) {
-          document.getElementById(field[i]).style.backgroundColor = "white";
+          if (field[i]=="title") {
+            document.getElementById(field[i]).style.backgroundColor = "white";
+          }else{
+            document.getElementById(field[i]).style.backgroundColor = "DodgerBlue";
+          }
+          
         }
       }
       currentField++;
@@ -184,12 +193,17 @@ mc.on("swiperight", function(ev) {
       document.getElementById(field[currentField]).style.backgroundColor = "red";
       for (var i = 0; i < field.length; i++) {
         if (i != currentField && document.getElementById(field[i]) != null) {
-          document.getElementById(field[i]).style.backgroundColor = "white";
+          if (field[i]=="title") {
+            document.getElementById(field[i]).style.backgroundColor = "white";
+          }else{
+            document.getElementById(field[i]).style.backgroundColor = "DodgerBlue";
+          }
         }
       }
       currentField++;
 
     }
+    console.log(pre_currentField);
     console.log(currentField);
 });
 

@@ -23,50 +23,56 @@
 }
 
 .container {
-  background-color: white;
+  background-color: DodgerBlue;
   border-radius: 5px;
   padding: 10px;
   box-shadow: 0 0 10px 2px;
 }
 
-.grid-container {
-  display: grid;
+.flex-container {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 10px;
 }
-.grid-container > div {
-  padding: 9px 0;
+.flex-container > div {
+  padding: 9px 9px;
+  width: 90%;
+  font: bold 15px arial;
+  color: white;
 
 }
 
 .empty {
   width: 300px;
-  height: 100px;
+  height: 50px;
 }
 
 #title {
   height: 50px;
+  font: bold 30px arial;
+  color: blue;
 }
 
 .data {
   justify-content: center;
   align-items: center;
-  width: 300px;
-  height: 100px;
-  background-color: white;
   border-radius: 5px;
   border: 1px solid rgba(0, 0, 0, 0.8);
-
+  height: 150px;
+  background-color: DodgerBlue;
+  padding: 9px;
 }
+
 
 .label {
   justify-content: center;
   align-items: center;
-  width: 300px;
   background-color: white;
   border-radius: 5px;
   padding: 10px;
+  height: 150px;
 
 }
 
@@ -75,6 +81,7 @@
   grid-template-columns: repeat(2, auto);
   gap: 10px;
   margin: 20px 0;
+  height: 50px;
 }
 
 .btn {
@@ -82,6 +89,19 @@
   border-radius: 5px;
   padding: 5px 10px;
   outline: none;
+  color: white;
+  background-color: DodgerBlue;
+}
+
+.btn-answer {
+  border: 1px solid ;
+  border-radius: 5px;
+  padding: 5px 10px;
+  outline: none;
+  height: 50px;
+  font: bold 15px arial;
+  color: white;
+  background-color: DodgerBlue;
 }
 
 .btn.correct {
@@ -90,8 +110,8 @@
 
 
 .start-btn, .next-btn {
-  font-size: 1.5rem;
-  font-weight: bold;
+  color: white;
+  font: bold 15px arial;
   padding: 10px 20px;
 }
 
@@ -111,20 +131,24 @@
 <body>
   <div id="overlay"></div>
 
-  <div class="grid-container">
+  <div class="flex-container">
       <div class="empty">
       </div>
       <div id="title">Hướng dẫn</div>
       <div id="question" class="data">
-        <div style="padding: 9px; display: flex;">Bạn hãy chọn 1 trong bốn loại nhãn: Tích cực/ Tiêu cực/ Trung tính/ Không biết, tương ứng cho câu sau đây:</div>
+        Bạn hãy chọn 1 trong bốn loại nhãn: Tích cực/ Tiêu cực/ Trung tính/ Không biết, tương ứng cho câu sau đây:
       </div>
-      <div class="label">
+      <div id="label" class="label hide">
         <div id="question-container" class="hide">
           <div id="answer-buttons" class="btn-grid">
-            <button  class="btn">Answer 1</button>
-            <button  class="btn">Answer 2</button>
-            <button  class="btn">Answer 3</button>
-            <button  class="btn">Answer 4</button>
+            <button  class="btn-answer">Answer 1</button>
+            <button  class="btn-answer">Answer 2</button>
+            <button  class="btn-answer">Answer 3</button>
+            <button  class="btn-answer">Answer 4</button>
+            <button  class="btn-answer">Answer 1</button>
+            <button  class="btn-answer">Answer 2</button>
+            <button  class="btn-answer">Answer 3</button>
+            <button  class="btn-answer">Answer 4</button>
           </div>
         </div>
       </div>
