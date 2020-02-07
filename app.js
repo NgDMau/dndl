@@ -1,47 +1,26 @@
-const http = require('http');
-const url = require('url');
+const express = require('express')
+const app = express()
+const port = process.env.PORT || 8000;
 
-// var adr = 'http://localhost:8080';
-//  var q = url.parse(adr, true)
+app.use(express.static('public'))
 
-// // console.log(q.host)
-//  console.log(q.pathname)
-// // console.log(q.search)
+var path = require('path')
+var fs = require('fs')
 
-
-const HOSTNAME =  '0.0.0.0';
-const PORT = process.env.PORT || 8000;
-
-const fs = require('fs');
-// const data = fs.readFileSync('file.md');
-
-const server = http.createServer((req, res) => {
-    var q = url.parse(req.url, true);
-    if (q.pathname == "/") {
-        fs.readFile('about.html', function(err, data){
-            if (err) {
-                res.writeHead(404, { 'Content-Type': 'text/html' });
-                console.log(err);
-                return res.end("404 Not Found");
-            }
-            res.writeHead(200, { 'Content-Type': 'text/html' });
-            res.write(data);
-            res.end();
-            return 
-        })
-    }
-    var filename = "." + q.pathname;
-    fs.readFile(filename, function(err, data){
-        if (err) {
-            res.writeHead(404, {'Content-Type': 'text/html'});
-            return res.end("404 Not Found");
-        }
-        res.writeHead(200, {'Content-Type': 'text/html'});
-        res.write(data);
-        res.end();
+function displayPage(filename, req, res) {
+    fs.readFile(filename, function (error, content) {
+        res.send(content)
     })
+}
+
+app.get('/', function (req, res) {
+    res.sendFile(path.join(__dirname, '/', 'index.html'))
 });
 
-server.listen(PORT, HOSTNAME, () => {
-    console.log(`Server running at http://${HOSTNAME}:${PORT}/`);
-})
+app.get('/', function (req, res) {
+    res.sendFile(path.join(__dirname, '/', 'about.html'))
+});
+
+
+
+app.listen(port, () => console.log(`Example app listening on port ${port}`))
