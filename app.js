@@ -10,8 +10,8 @@ app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname, '/', 'index.html'))
 });
 
-app.get(filename, function (req, res) {
-    res.sendFile(path.join(__dirname, '/', filename))
+app.get('/index', function (req, res) {
+    res.sendFile(path.join(__dirname, '/', 'index.html'))
 });
 
 app.get('/', function (req, res) {
