@@ -217,6 +217,5 @@ mc.on("swiperight", function(ev) {
         }
       }
       currentField++;
-
     }
 });
