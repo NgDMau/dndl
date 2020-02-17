@@ -1,47 +1,38 @@
-const http = require('http');
-const url = require('url');
+const express = require('express')
+const path = require('path')
 
-// var adr = 'http://localhost:8080';
-//  var q = url.parse(adr, true)
+const app = express()
+const port = process.env.PORT || 8000;
 
-// // console.log(q.host)
-//  console.log(q.pathname)
-// // console.log(q.search)
+var logger = function(req, res, next) {
+    console.log('Got Request!');
+    console.log(req.originalUrl);
+    next();
+}
 
+app.use(logger);
 
-const HOSTNAME =  '0.0.0.0';
-const PORT = process.env.PORT || 8000;
+app.use(express.static('public'));
+app.use(express.static('view'));
 
-const fs = require('fs');
-// const data = fs.readFileSync('file.md');
+app.set('view engine', 'pug')
 
-const server = http.createServer((req, res) => {
-    var q = url.parse(req.url, true);
-    if (q.pathname == "/") {
-        fs.readFile('about.html', function(err, data){
-            if (err) {
-                res.writeHead(404, { 'Content-Type': 'text/html' });
-                console.log(err);
-                return res.end("404 Not Found");
-            }
-            res.writeHead(200, { 'Content-Type': 'text/html' });
-            res.write(data);
-            res.end();
-            return 
-        })
-    }
-    var filename = "." + q.pathname;
-    fs.readFile(filename, function(err, data){
-        if (err) {
-            res.writeHead(404, {'Content-Type': 'text/html'});
-            return res.end("404 Not Found");
-        }
-        res.writeHead(200, {'Content-Type': 'text/html'});
-        res.write(data);
-        res.end();
-    })
+app.get('/', function (req, res) {
+    console.log(req.originalUrl);
+    res.sendFile(path.join(__dirname, '/views/', 'index.html'));
 });
 
-server.listen(PORT, HOSTNAME, () => {
-    console.log(`Server running at http://${HOSTNAME}:${PORT}/`);
-})
+app.get('/index', function (req, res) {
+    res.sendFile(path.join(__dirname, '/views/', 'index.html'))
+});
+
+app.get('/about', function (req, res) {
+    console.log(req.originalUrl);
+    res.sendFile(path.join(__dirname, '/views/', 'about.html'))
+});
+
+app.get('/demo', function(req, res) {
+    res.render('demo');
+});
+
+app.listen(port, () => console.log(`Example app listening on port ${port}`))

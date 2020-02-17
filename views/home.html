@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Demo DNDL</title>
+        <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+        <link rel="shortcut icon" href="#">
+        <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+        <!-- <script src="./node_modules/hammerjs/src/hammer.js"></script> -->
+        <script src="https://hammerjs.github.io/dist/hammer.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.js"></script>
+        <!-- <script src="/scripts/tap-gesture.js"></script> -->
+        <style>
+            p {
+                text-align: center;
+                vertical-align: middle;
+                background-color: aqua;
+                width: 90px;
+                height: 90px;
+                background-color: #689F38;
+                transition: transform 300ms ease-out;
+            }
+
+            div{
+                display: table;
+                margin: auto;
+                padding: 20px;
+                padding-top: 150px;
+            }
+        
+
+        
+        </style>
+        <script>
+            
+            document.addEventListener("DOMContentLoaded", function(){
+                
+                console.log("DOMContentLoaded");
+
+                var para = document.getElementById("15508A");
+                var manager = new Hammer.Manager(para);
+
+                var Swipe = new Hammer.Swipe();
+
+                manager.add(Swipe);
+
+                var deltaX = 0;
+                var deltaY = 0;
+
+                manager.on('swipe', function(e){
+                    deltaX += e.deltaX;
+                    var direction = e.offsetDirection;
+                    var translated3d = 'translate3d(' + deltaX + 'px, 0, 0)';
+
+                    if (direction == 4 || direction == 2) {
+                        e.target.innerText = deltaX;
+                        e.target.style.transform = translated3d;
+                    }
+                });
+            });
+
+        </script>
+    
+    </head>
+
+    <body >
+        
+        <div id="15508A" >
+            
+            <p  class="unlabled-text" >Hôm nay thời tiết thật là đẹp</p>
+            <div class="square"></div>
+        </div>
+        
+
+    </body>
+</html>

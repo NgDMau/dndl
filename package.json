@@ -4,8 +4,15 @@
   "description": "An online-task training system for the blind",
   "main": "app.js",
   "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.4",
+    "db_module": "file:local_modules/db_module",
+    "express": "^4.17.1",
     "hammerjs": "^2.0.8",
-    "pg": "^7.18.1"
+    "local_modules": "file:local_modules",
+    "multer": "^1.4.2",
+    "pg": "^7.18.1",
+    "pug": "^2.0.4"
   },
   "engines": {
     "node": "13.7.0"
@@ -24,5 +31,9 @@
   "bugs": {
     "url": "https://github.com/NgDMau/dndl/issues"
   },
-  "homepage": "https://github.com/NgDMau/dndl#readme"
+  "homepage": "https://github.com/NgDMau/dndl#readme",
+  "directories": {
+    "test": "tests"
+  },
+  "keywords": []
 }

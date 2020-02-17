@@ -1,0 +1,124 @@
+
+.container {
+  background-color: DodgerBlue;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 0 10px 2px;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+.flex-container > div {
+  width: 90%;
+  font: bold 15px arial;
+  color: black;
+
+}
+
+.empty {
+  height: 30px;
+}
+
+#title {
+  height: 50px;
+  font: bold 30px arial;
+  color: black;
+}
+
+.data {
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  height: 100px;
+  margin: 10px;
+  padding: 9px;
+}
+
+.shortcut_label {
+  display: flex;
+  margin: 0 10px;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  margin: 20px 0;
+}
+.shortcut_label > input {
+  margin: 0 10px;
+  width: 70%;
+  height: 20px;
+  border-radius: 5px;
+  border: solid 1px;
+  padding: 5px;
+
+}
+
+.btn {
+  border-radius: 5px;
+  border: 0px;
+  height: 30px;
+  font: bold 15px arial;
+  color: black;
+}
+.label {
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 5px;
+  overflow: auto;
+  height: 150px;
+
+}
+
+.btn-grid {
+  display: grid;
+  grid-template-columns: auto;
+  gap: 10px;
+  height: 50px;
+}
+
+.btn-answer {
+  border-radius: 100px;
+  padding: 5px 10px;
+  outline: none;
+  height: 30px;
+  font: bold 15px arial;
+  color: black;
+
+}
+
+.start-btn, .next-btn {
+  border-radius: 100px;
+  outline: none;
+  color: black;
+  font: bold 15px arial;
+  padding: 10px 20px;
+  width: 100%;
+  height: 50px;
+  margin-top: 10px;
+
+}
+
+.result {
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+  font: bold 15px arial;
+  width: 100%;
+  height: 50px;
+  margin-top: 80px;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hide {
+  display: none;
+}
