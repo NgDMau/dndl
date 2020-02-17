@@ -1,87 +1,116 @@
-#overlay {
-  position: fixed;
-  display: block;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 2;
-  cursor: pointer;
-}
 
 .container {
-  background-color: white;
+  background-color: DodgerBlue;
   border-radius: 5px;
   padding: 10px;
   box-shadow: 0 0 10px 2px;
 }
 
-.grid-container {
-  display: grid;
+.flex-container {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 10px;
 }
-.grid-container > div {
-  padding: 9px 0;
+.flex-container > div {
+  width: 90%;
+  font: bold 15px arial;
+  color: black;
 
 }
 
 .empty {
-  width: 300px;
-  height: 100px;
+  height: 30px;
 }
 
 #title {
   height: 50px;
+  font: bold 30px arial;
+  color: black;
 }
 
 .data {
   justify-content: center;
   align-items: center;
-  width: 300px;
-  height: 100px;
-  background-color: white;
   border-radius: 5px;
-  border: 1px solid rgba(0, 0, 0, 0.8);
+  height: 100px;
+  margin: 10px;
+  padding: 9px;
+}
+
+.shortcut_label {
+  display: flex;
+  margin: 0 10px;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  margin: 20px 0;
+}
+.shortcut_label > input {
+  margin: 0 10px;
+  width: 70%;
+  height: 20px;
+  border-radius: 5px;
+  border: solid 1px;
+  padding: 5px;
 
 }
 
+.btn {
+  border-radius: 5px;
+  border: 0px;
+  height: 30px;
+  font: bold 15px arial;
+  color: black;
+}
 .label {
   justify-content: center;
   align-items: center;
-  width: 300px;
   background-color: white;
   border-radius: 5px;
-  padding: 10px;
+  overflow: auto;
+  height: 150px;
 
 }
 
 .btn-grid {
   display: grid;
-  grid-template-columns: repeat(2, auto);
+  grid-template-columns: auto;
   gap: 10px;
-  margin: 20px 0;
+  height: 50px;
 }
 
-.btn {
-  border: 1px solid ;
-  border-radius: 5px;
+.btn-answer {
+  border-radius: 100px;
   padding: 5px 10px;
   outline: none;
-}
+  height: 30px;
+  font: bold 15px arial;
+  color: black;
 
-.btn.correct {
-  background-color: green;
 }
-
 
 .start-btn, .next-btn {
-  font-size: 1.5rem;
-  font-weight: bold;
+  border-radius: 100px;
+  outline: none;
+  color: black;
+  font: bold 15px arial;
   padding: 10px 20px;
+  width: 100%;
+  height: 50px;
+  margin-top: 10px;
+
+}
+
+.result {
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+  font: bold 15px arial;
+  width: 100%;
+  height: 50px;
+  margin-top: 80px;
 }
 
 .controls {
