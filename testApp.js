@@ -1,8 +1,7 @@
 var express = require('express');
 var passport = require('passport');
 var Strategy = require('passport-http').BasicStrategy;
-var db = require('./db');
-
+var db = require('./local_modules/database');
 
 // Configure the Basic strategy for use by Passport.
 //
@@ -21,14 +20,32 @@ passport.use(new Strategy(
     });
   }));
 
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
 
 // Create a new Express application.
 var app = express();
 
-// Configure Express application.
-app.configure(function() {
-  app.use(express.logger());
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+app.post('/login',
+    passport.authenticate('basic'),
+    function(req, res) {
+    // If this function gets called, authentication was successful.
+    // `req.user` contains the authenticated user.
+        res.redirect('/users/' + req.user.username);
 });
+
+
+// Configure Express application.
 
 app.get('/',
   passport.authenticate('basic', { session: false }),

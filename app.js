@@ -19,18 +19,12 @@ passport.use(new Strategy(
         });
     }));
 
-var logger = function(req, res, next) {
-    console.log('Got Request!');
-    console.log(req.originalUrl);
-    next();
-}
-
-app.use(logger);
-app.use(cookieParser("infore"))
+app.use(cookieParser())
 app.use(session(
     {
-      saveUninitialized: false,
-      resave: false
+        secret: "xinchao",
+        saveUninitialized: false,
+        resave: false
     }
    ));
 
@@ -39,12 +33,20 @@ let users = {
     age: "21"
 }
 
+app.post('/login',
+  passport.authenticate('local'),
+  function(req, res) {
+    // If this function gets called, authentication was successful.
+    // `req.user` contains the authenticated user.
+    res.redirect('/users/' + req.user.username);
+  });
+
 app.get('/setuser', (req, res) => {
     res.cookie('cart', 'test');
     res.send(req.cookies);
     console.log(res.cookies)
 });
-
+                                                                                                                                                                                                                                                                                                                                                                  
 app.get('/getuser', (req, res) => {
     res.send(req.cookies);
     console.log(req.cookies)
