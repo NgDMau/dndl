@@ -30,6 +30,15 @@ app.get('/about', function (req, res) {
     console.log(req.originalUrl);
     res.sendFile(path.join(__dirname, '/views/', 'about.html'))
 });
+app.get('/login', function (req, res) {
+    res.sendFile(path.join(__dirname, '/views/', 'login.html'))
+});
+app.get('/forgotpass', function (req, res) {
+    res.sendFile(path.join(__dirname, '/views/', 'forgotpass.html'))
+});
+app.get('/signup', function (req, res) {
+    res.sendFile(path.join(__dirname, '/views/', 'signup.html'))
+});
 
 app.get('/demo', function(req, res) {
     res.render('demo');
