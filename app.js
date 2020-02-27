@@ -11,8 +11,8 @@ var localStrategy = require('passport-local').Strategy;
 const app = express()
 const port = process.env.PORT || 8000;
 
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(passport.initialize()); 
+
+
 
 // var logger = function(req, res, next) {
 //     console.log('Got Request!');
@@ -23,37 +23,33 @@ app.use(passport.initialize());
 // app.use(logger);
 
 passport.use(new localStrategy(
-    function(username, password, done) {
-        // db.users.findByUsername(username, function(err, user) {
-        //     if (err) { return cb(err); }
-        //     if (!user) { return cb(null, false, { message: 'Incorrect username.' }) }
-        //     if (user.password != password) { 
-        //         return cb(null, false, { message: 'Incorrect password.' }); }
-        //     return cb(null, user);
-        if (username == 'mau') {
-            if (password == 'infore2811') {
-                return done(null, username)
-            } else {
-                return done(null, false);
-            }
-        } else {
-            return done(null, false);
-        }
-    })
-);
+    function(username, password, cb) {
+        db.users.findByUsername(username, function(err, user) {
+          if (err) { return cb(err); }
+          if (!user) { return cb(null, false); }
+          if (user.password != password) { return cb(null, false); }
+          return cb(null, user);
+        });
+      }));
 
-passport.serializeUser((username, done) => {
-    done(null, username);
+passport.serializeUser((user, done) => {
+    done(null, user.username);
 })
 
-passport.deserializeUser((name, done) => {
+passport.deserializeUser((username, done) => {
     //tại đây hứng dữ liệu để đối chiếu
-    if (name == 'mau') { //tìm xem có dữ liệu trong kho đối chiếu không
-        return done(null, name)
-    } else {
-        return done(null, false)
-    }
-})
+    db.users.findByUsername(username, function(err, user) {
+        if (err) { return done(err); }
+        done(null, user);
+    })
+});
+
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(require('express-session')({ secret: 'infore',
+                                     resave: false,
+                                     saveUninitialized: false }));
+app.use(passport.initialize()); 
+// app.use(passport.session());
 
 app.use(flash());
 app.use(session({  
@@ -69,24 +65,33 @@ app.set('view engine', 'pug')
 
 app.post('/login',
     passport.authenticate('local', { successRedirect: '/',
-                                     failureRedirect: '/login',}));
+                                     failureRedirect: '/login'}));
 
 app.get('/', function (req, res) {
-    console.log(req.originalUrl);
-    res.sendFile(path.join(__dirname, '/views/', 'index.html'));
+    if (req.isAuthenticated()) {
+        res.sendFile(path.join(__dirname, '/views/', 'index.html'));
+    } else {
+        res.redirect('/login')
+    }
 });
 
-app.get('/index', function (req, res) {
-    res.sendFile(path.join(__dirname, '/views/', 'index.html'))
+app.get('/login', function (req, res, next) {
+    res.sendFile(path.join(__dirname, '/views/', 'login.html'))
+    // passport.authenticate('local', function(err, user, info) {
+    //     if (err) { return next(err); }
+    //     if (!user) { return res.redirect('/login') }
+    //     req.logIn(user, function(err) {
+    //         if (err) { return next(err); }
+    //         return res.redirect('/users/' + user.username);
+    //     });
+    // })(req, res, next);
 });
 
 app.get('/about', function (req, res) {
     console.log(req.originalUrl);
     res.sendFile(path.join(__dirname, '/views/', 'about.html'))
 });
-app.get('/login', function (req, res) {
-    res.sendFile(path.join(__dirname, '/views/', 'login.html'))
-});
+
 app.get('/forgotpass', function (req, res) {
     res.sendFile(path.join(__dirname, '/views/', 'forgotpass.html'))
 });
@@ -98,4 +103,4 @@ app.get('/signup', function (req, res) {
 //     res.render('demo');
 // });
 
-app.listen(port, () => console.log(`Example app listening on port ${port}`))
+app.listen(port, () => { console.log(`Example app listening on port ${port}` )});
