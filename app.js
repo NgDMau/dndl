@@ -3,7 +3,7 @@ const path = require('path')
 const db = require('./local_modules/database')
 
 var flash=require("connect-flash");
-var session = require('express-session');
+const session = require('express-session');
 const bodyParser = require('body-parser');
 var passport = require('passport');
 var localStrategy = require('passport-local').Strategy;
@@ -45,17 +45,20 @@ passport.deserializeUser((username, done) => {
 });
 
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(require('express-session')({ secret: 'infore',
-                                     resave: false,
-                                     saveUninitialized: false }));
-app.use(passport.initialize()); 
-// app.use(passport.session());
+// app.use(require('express-session')({ secret: 'infore',
+//                                      resave: false,
+//                                      saveUninitialized: false }));
 
-app.use(flash());
 app.use(session({  
     secret: 'woot',
     resave: false, 
     saveUninitialized: false}));
+
+app.use(passport.initialize()); 
+// app.use(passport.session());
+
+app.use(flash());
+
 app.use(passport.session());
 
 app.use(express.static('public'));
@@ -68,6 +71,22 @@ app.post('/login',
                                      failureRedirect: '/login'}));
 
 app.get('/', function (req, res) {
+    if (req.isAuthenticated()) {
+        res.sendFile(path.join(__dirname, '/views/', 'dashboard.html'));
+    } else {
+        res.redirect('/login')
+    }
+});
+
+app.get('/dashboard', function (req, res) {
+    if (req.isAuthenticated()) {
+        res.sendFile(path.join(__dirname, '/views/', 'dashboard.html'));
+    } else {
+        res.redirect('/login')
+    }
+});
+
+app.get('/index', function (req, res) {
     if (req.isAuthenticated()) {
         res.sendFile(path.join(__dirname, '/views/', 'index.html'));
     } else {
@@ -88,16 +107,18 @@ app.get('/login', function (req, res, next) {
 });
 
 app.get('/about', function (req, res) {
-    console.log(req.originalUrl);
     res.sendFile(path.join(__dirname, '/views/', 'about.html'))
 });
 
 app.get('/forgotpass', function (req, res) {
     res.sendFile(path.join(__dirname, '/views/', 'forgotpass.html'))
 });
+
 app.get('/signup', function (req, res) {
     res.sendFile(path.join(__dirname, '/views/', 'signup.html'))
 });
+
+
 
 // app.get('/demo', function(req, res) {
 //     res.render('demo');
