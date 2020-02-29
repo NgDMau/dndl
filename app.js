@@ -11,17 +11,6 @@ var localStrategy = require('passport-local').Strategy;
 const app = express()
 const port = process.env.PORT || 8000;
 
-
-
-
-// var logger = function(req, res, next) {
-//     console.log('Got Request!');
-//     console.log(req.originalUrl);
-//     next();
-// }
-
-// app.use(logger);
-
 passport.use(new localStrategy(
     function(username, password, cb) {
         db.users.findByUsername(username, function(err, user) {
