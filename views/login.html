@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset=UTF-8">
+    <title>Đăng nhập</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:400,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/login.css">
+</head>
+<body>
+    <div class = "container"> 
+
+        <div class = "logobox">
+            <img src="/img/icon.png" alt="icon" width = "70" height = "70">
+            <h1 class = "headtext">TÊN DỰ ÁN</h1>
+        </div>
+
+        <div>
+            <form class="inputform" action="/login" method="post">
+                <h2>Đăng nhập </h2>
+                <input type="text" id="uname" name="username" placeholder="Tên đăng nhập">
+                </br>
+                <input type="password" id="pass" name="password" placeholder="Mật khẩu">
+              
+                <input type="submit" value="Submit">
+              </form>
+
+              <div class = "otheroption">
+                <a href="/forgotpass"><h4>Quên mật khẩu</h4></a>           
+                <a href="/signup"><h4>Đăng ký</h4></a>           
+             </div>
+        </div>
+
+        <div class="footer">
+            <p class = "footertext">Product of team Javy, a member of InfoRe Technology</p>
+        </div>
+
+    </div>
+</body>
+</html>
