@@ -3,24 +3,13 @@ const path = require('path')
 const db = require('./local_modules/database')
 
 var flash=require("connect-flash");
-var session = require('express-session');
+const session = require('express-session');
 const bodyParser = require('body-parser');
 var passport = require('passport');
 var localStrategy = require('passport-local').Strategy;
 
 const app = express()
 const port = process.env.PORT || 8000;
-
-
-
-
-// var logger = function(req, res, next) {
-//     console.log('Got Request!');
-//     console.log(req.originalUrl);
-//     next();
-// }
-
-// app.use(logger);
 
 passport.use(new localStrategy(
     function(username, password, cb) {
@@ -45,29 +34,51 @@ passport.deserializeUser((username, done) => {
 });
 
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(require('express-session')({ secret: 'infore',
-                                     resave: false,
-                                     saveUninitialized: false }));
-app.use(passport.initialize()); 
-// app.use(passport.session());
 
-app.use(flash());
 app.use(session({  
     secret: 'woot',
     resave: false, 
     saveUninitialized: false}));
-app.use(passport.session());
 
+app.use(passport.initialize()); 
+app.use(passport.session());
 app.use(express.static('public'));
 app.use(express.static('view'));
+app.use(flash());
 
 app.set('view engine', 'pug')
 
 app.post('/login',
     passport.authenticate('local', { successRedirect: '/',
                                      failureRedirect: '/login'}));
+var user_sample_data = {
+    username: "ngdmau",
+    current_income: 100000,
+    current_jobs: ['text_sentiment', 'text_topic', 'audio_sentiment'],
+    new_jobs: ['audio_topic', 'audio_gender'],
+    no_current_jobs: 3,
+    no_new_jobs: 2,
+}
+
 
 app.get('/', function (req, res) {
+    if (req.isAuthenticated()) {
+        // res.sendFile(path.join(__dirname, '/views/', 'dashboard.html'));
+        res.render('dashboard', user_sample_data)
+    } else {
+        res.redirect('/login')
+    }
+});
+
+app.get('/dashboard', function (req, res) {
+    if (req.isAuthenticated()) {
+        res.sendFile(path.join(__dirname, '/views/', 'dashboard.html'));
+    } else {
+        res.redirect('/login')
+    }
+});
+
+app.get('/index', function (req, res) {
     if (req.isAuthenticated()) {
         res.sendFile(path.join(__dirname, '/views/', 'index.html'));
     } else {
@@ -75,32 +86,31 @@ app.get('/', function (req, res) {
     }
 });
 
-app.get('/login', function (req, res, next) {
-    res.sendFile(path.join(__dirname, '/views/', 'login.html'))
-    // passport.authenticate('local', function(err, user, info) {
-    //     if (err) { return next(err); }
-    //     if (!user) { return res.redirect('/login') }
-    //     req.logIn(user, function(err) {
-    //         if (err) { return next(err); }
-    //         return res.redirect('/users/' + user.username);
-    //     });
-    // })(req, res, next);
+app.get('/login', function (req, res) {
+    if (req.isAuthenticated()) {
+        res.redirect('/')
+    } else {
+        res.sendFile(path.join(__dirname, '/views/', 'login.html'))
+    }
+    
 });
 
 app.get('/about', function (req, res) {
-    console.log(req.originalUrl);
     res.sendFile(path.join(__dirname, '/views/', 'about.html'))
 });
 
 app.get('/forgotpass', function (req, res) {
     res.sendFile(path.join(__dirname, '/views/', 'forgotpass.html'))
 });
+
 app.get('/signup', function (req, res) {
     res.sendFile(path.join(__dirname, '/views/', 'signup.html'))
 });
 
-// app.get('/demo', function(req, res) {
-//     res.render('demo');
-// });
+app.get('/logout', function (req, res){
+    req.session.destroy(function (err) {
+      res.redirect('/'); //Inside a callback… bulletproof!
+    });
+});
 
 app.listen(port, () => { console.log(`Example app listening on port ${port}` )});
