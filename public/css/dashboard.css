@@ -1,6 +1,7 @@
 html{
   font-family: 'Barlow Condensed', sans-serif;
   color: #434556;
+  font-size: 15px;
 }
 
 a {
@@ -66,12 +67,13 @@ img{
   width: 100%;
 }
 .swiper-wrapper {
-  width: 50%;
-  
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .btn {
   
-  width: auto;
+  width: 200px;;
   min-height: 150px;
   min-width: 200px;
   text-align: center;
@@ -86,4 +88,13 @@ img{
 .swiper-wrapper div:hover {
   background: #434556;
   color: white;
+}
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding:10px;
+  background-color: #24252E;
+  
 }
