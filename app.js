@@ -42,18 +42,18 @@ app.use(session({
 
 app.use(passport.initialize()); 
 app.use(passport.session());
-<<<<<<< HEAD
+
 
 app.set('view engine', 'pug')
 
 
+
 app.use(express.static('public'));
 app.set('views', path.join(__dirname, 'views'));
-=======
 app.use(express.static('public'));
 app.use(express.static('view'));
 app.use(flash());
->>>>>>> 0c6ceb0a18d242bf9a117250cda74c2cebb946db
+
 
 
 app.post('/login',
@@ -71,14 +71,13 @@ var user_sample_data = {
 
 app.get('/', function (req, res) {
     if (req.isAuthenticated()) {
-<<<<<<< HEAD
         //res.send(req.session.passport.user)
         // res.sendFile(path.join(__dirname, '/views/', 'dashboard.html'));
         res.render('dashboard', { username: req.session.passport.user, salary: '100.000', newjobs: "4", currentjobs:"5" })
-=======
         // res.sendFile(path.join(__dirname, '/views/', 'dashboard.html'));
         res.render('dashboard', user_sample_data)
->>>>>>> 0c6ceb0a18d242bf9a117250cda74c2cebb946db
+        // res.sendFile(path.join(__dirname, '/views/', 'dashboard.html'));
+        res.render('dashboard', user_sample_data)
     } else {
         res.redirect('/login')
         //res.render('dashboard');
@@ -103,7 +102,6 @@ app.get('/index', function (req, res) {
     }
 });
 
-<<<<<<< HEAD
 app.get('/idk', function (req, res) {
     res.sendFile(path.join(__dirname, '/views/', 'audio_sentiment.html'));
     // res.render('dashboard', { title: 'Hey', message: 'Hello there!' })
@@ -111,24 +109,15 @@ app.get('/idk', function (req, res) {
 
 app.get('/login', function (req, res, next) {
     res.sendFile(path.join(__dirname, '/views/', 'login.html'))
-    // passport.authenticate('local', function(err, user, info) {
-    //     if (err) { return next(err); }
-    //     if (!user) { return res.redirect('/login') }
-    //     req.logIn(user, function(err) {
-    //         if (err) { return next(err); }
-    //         return res.redirect('/users/' + user.username);
-    //     });
-    // })(req, res, next);
-=======
+})
+
 app.get('/login', function (req, res) {
     if (req.isAuthenticated()) {
         res.redirect('/')
     } else {
         res.sendFile(path.join(__dirname, '/views/', 'login.html'))
     }
-    
->>>>>>> 0c6ceb0a18d242bf9a117250cda74c2cebb946db
-});
+})
 
 app.get('/about', function (req, res) {
     res.sendFile(path.join(__dirname, '/views/', 'about.html'))
@@ -142,17 +131,14 @@ app.get('/signup', function (req, res) {
     res.sendFile(path.join(__dirname, '/views/', 'signup.html'))
 });
 
-<<<<<<< HEAD
-
-
 app.get('/demo', function(req, res) {
     res.render('demo');
-=======
+})
+
 app.get('/logout', function (req, res){
     req.session.destroy(function (err) {
       res.redirect('/'); //Inside a callback… bulletproof!
     });
->>>>>>> 0c6ceb0a18d242bf9a117250cda74c2cebb946db
 });
 
-app.listen(port, () => { console.log(`Example app listening on port ${port}` )});
+app.listen(port, () => { console.log(`Example app listening on port ${port}` )})
