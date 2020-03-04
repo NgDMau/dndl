@@ -78,8 +78,8 @@ var user_sample_data = {
 
 app.get('/', function (req, res) {
     if (req.isAuthenticated()) {
-        // res.sendFile(path.join(__dirname, '/views/', 'dashboard.html'));
-        res.render('dashboard', user_sample_data)
+        res.sendFile(path.join(__dirname, '/views/', 'dashboard.html'));
+        //res.render('dashboard', user_sample_data)
     } else {
         res.redirect('/login')
     }

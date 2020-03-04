@@ -71,16 +71,16 @@ img{
   align-items: center;
   justify-content: center;
 }
-.swiper-slide {
+.btn {
   
   width: 200px;;
   min-height: 150px;
-    min-width: 200px;
+  min-width: 200px;
   text-align: center;
   font-size: 18px;
   background: #fff;
   margin: 2em 1em;
-    border: 2px solid #434556;
+  border: 2px solid #434556;
 
   /* Center slide text vertically */
   

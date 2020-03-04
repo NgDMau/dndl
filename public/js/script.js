@@ -118,7 +118,7 @@ function goto_label(){
 
 const questions = [
   {
-    id: '12203',
+    id: '1',
     question: 'Cửa hàng này chán quá',
     answers: [
       { text: 'Tích cực', correct: false},
@@ -128,8 +128,8 @@ const questions = [
     ]
   },
   {
-    id: '12204',
-    question: 'Em đẹp lắm',
+    id: '2',
+    question: 'Thời tiêt thật đẹp',
     answers: [
       { text: 'Tích cực', correct: true},
       { text: 'Tiêu cực', correct: false},
@@ -138,7 +138,7 @@ const questions = [
     ]
   },
   {
-    id: '12205',
+    id: '3',
     question: 'Đi làm',
     answers: [
       { text: 'Tích cực', correct: false},
@@ -148,7 +148,7 @@ const questions = [
     ]
   },
   {
-    id: '12206',
+    id: '4',
     question: '111111111111',
     answers: [
       { text: 'Tích cực', correct: false},
@@ -158,8 +158,8 @@ const questions = [
     ]
   },
   {
-    id: '12203',
-    question: 'Cửa hàng này chán quá',
+    id: '5',
+    question: 'Em làm chưa được tốt',
     answers: [
       { text: 'Tích cực', correct: false},
       { text: 'Tiêu cực', correct: true},
@@ -168,8 +168,18 @@ const questions = [
     ]
   },
   {
-    id: '12203',
-    question: 'Cửa hàng này chán quá',
+    id: '6',
+    question: 'Đi đấu thế này ?',
+    answers: [
+      { text: 'Tích cực', correct: false},
+      { text: 'Tiêu cực', correct: false},
+      { text: 'Trung tính', correct: true},
+      { text: 'Không biết', correct: false}
+    ]
+  },
+  {
+    id: '7',
+    question: 'Việc làm thiếu trách nhiệm đã để lại nhiều hậu quả',
     answers: [
       { text: 'Tích cực', correct: false},
       { text: 'Tiêu cực', correct: true},
@@ -178,8 +188,8 @@ const questions = [
     ]
   },
   {
-    id: '12203',
-    question: 'Cửa hàng này chán quá',
+    id: '8',
+    question: 'Món này ngon quá',
     answers: [
       { text: 'Tích cực', correct: false},
       { text: 'Tiêu cực', correct: true},
@@ -188,27 +198,17 @@ const questions = [
     ]
   },
   {
-    id: '12203',
-    question: 'Cửa hàng này chán quá',
+    id: '9',
+    question: 'This branch has no conflicts with the base branch',
     answers: [
       { text: 'Tích cực', correct: false},
-      { text: 'Tiêu cực', correct: true},
+      { text: 'Tiêu cực', correct: false},
       { text: 'Trung tính', correct: false},
-      { text: 'Không biết', correct: false}
+      { text: 'Không biết', correct: true}
     ]
   },
   {
-    id: '12203',
-    question: 'Cửa hàng này chán quá',
-    answers: [
-      { text: 'Tích cực', correct: false},
-      { text: 'Tiêu cực', correct: true},
-      { text: 'Trung tính', correct: false},
-      { text: 'Không biết', correct: false}
-    ]
-  },
-  {
-    id: '12203',
+    id: '10',
     question: 'Cửa hàng này chán quá',
     answers: [
       { text: 'Tích cực', correct: false},
