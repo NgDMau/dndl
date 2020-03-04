@@ -7,6 +7,7 @@
   <link href="/css/training_audio.css" rel="stylesheet">
   <script defer src="/js/training_audio.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:400,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <title>Hướng dẫn</title>
 
 
@@ -29,11 +30,11 @@
       </div>
       <div class="title" id="title">Hướng dẫn</div>
       <div id="question" class="data">
-        Bạn hãy chọn 1 trong bốn loại nhãn: Tích cực/ Tiêu cực/ Trung tính/ Không biết, tương ứng cho câu sau đây:
+        Bạn hãy làm theo hướng dẫn và chọn các nhãn thích hợp cho các đoạn hội thoại sau đây:
       </div>
-      <audio id="src_audio" class="hide" controls>
-        <source src="audio/audio_1.mp3" type="audio/mp3">
-      </audio>
+      <audio id="src_audio" class="hide" src="audio/audio_1.mp3" type="audio/mp3"> </audio>
+      <button id="btn_play" onclick="togglePlay()" class="btn-play-stop hide"><i class="fa fa-pause"></i></button>
+
       <div id="shortcut_label" class="shortcut_label hide">
         <input id="sl_label" placeholder="Điền nhãn muốn chọn" type="text" >
         <button onclick="goto_label()" class="btn">Chọn</button>
@@ -59,7 +60,7 @@
       </div>
       <div class="controls">
         <button id="start-btn" class="start-btn">Bắt đầu</button>
-        <button id="next-btn" class="next-btn btn hide">Tiếp tục</button>
+        <button id="next-btn" onclick="end_audio()" class="next-btn btn hide">Tiếp tục</button>
         <button id="next-lvl-btn" class="next-btn btn hide">Tiếp tục</button>
       </div>
   </div>
@@ -87,4 +88,44 @@
   </div>
 </footer>
 </body>
+
+<script>
+  var myAudio = document.getElementById("src_audio");
+  var isPlaying = false;
+  var playElement = document.getElementById("btn_play");
+
+  function togglePlay() {
+    if (isPlaying) {
+      myAudio.pause()
+      playElement.getElementsByTagName('i')[0].classList.remove('fa-play')
+      playElement.getElementsByTagName('i')[0].classList.add('fa-pause')
+
+    } else {
+      myAudio.play();
+      playElement.getElementsByTagName('i')[0].classList.remove('fa-pause')
+      playElement.getElementsByTagName('i')[0].classList.add('fa-play')
+    }
+  };
+
+  myAudio.onended = function() {
+    playElement.getElementsByTagName('i')[0].classList.remove('fa-play')
+    playElement.getElementsByTagName('i')[0].classList.add('fa-pause')
+  };
+
+  function end_audio(){
+    if (isPlaying) {
+      myAudio.pause()
+      playElement.getElementsByTagName('i')[0].classList.remove('fa-play')
+      playElement.getElementsByTagName('i')[0].classList.add('fa-pause')
+      isPlaying = false;
+    }
+  }
+
+  myAudio.onplaying = function() {
+    isPlaying = true;
+  };
+  myAudio.onpause = function() {
+    isPlaying = false;
+};
+</script>
 </html>

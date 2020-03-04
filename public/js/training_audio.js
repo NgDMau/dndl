@@ -8,6 +8,7 @@ const titleElement = document.getElementById('title')
 const labelElement = document.getElementById('label')
 const resultElement = document.getElementById('result')
 const audioElement = document.getElementById('src_audio')
+const playButton = document.getElementById('btn_play')
 var score = 0;
 
 const status = {
@@ -35,6 +36,7 @@ function start() {
   currentField =0
   labelElement.classList.remove('hide')
   audioElement.classList.remove('hide')
+  playButton.classList.remove('hide')
   titleElement.innerText = 'Câu hỏi'
   document.getElementById("shortcut_label").classList.remove('hide')
 
@@ -122,19 +124,9 @@ function goto_label(){
 
 const questions = [
   {
-    id: '12203',
-    question: 'Cửa hàng này chán quá',
+    id: '1',
+    question: 'Chọn nhãn thích hợp cho đoạn hội thoại dưới:',
     src: 'audio/audio_1.mp3',
-    answers: [
-      { text: 'Tích cực', correct: false},
-      { text: 'Tiêu cực', correct: true},
-      { text: 'Trung tính', correct: false},
-      { text: 'Không biết', correct: false}
-    ]
-  },
-  {
-    id: '12204',
-    question: 'Em đẹp lắm',
     answers: [
       { text: 'Tích cực', correct: true},
       { text: 'Tiêu cực', correct: false},
@@ -143,8 +135,31 @@ const questions = [
     ]
   },
   {
-    id: '12205',
-    question: 'Đi làm',
+    id: '2',
+    question: 'Chọn nhãn thích hợp cho đoạn hội thoại dưới:',
+    src: 'audio/audio_2.mp3',
+    answers: [
+      { text: 'Tích cực', correct: false},
+      { text: 'Tiêu cực', correct: true},
+      { text: 'Trung tính', correct: false},
+      { text: 'Không biết', correct: false}
+    ]
+  },
+  {
+    id: '3',
+    question: 'Chọn nhãn thích hợp cho đoạn hội thoại dưới:',
+    src: 'audio/audio_3.mp3',
+    answers: [
+      { text: 'Tích cực', correct: true},
+      { text: 'Tiêu cực', correct: false},
+      { text: 'Trung tính', correct: false},
+      { text: 'Không biết', correct: false}
+    ]
+  },
+  {
+    id: '4',
+    question: 'Chọn nhãn thích hợp cho đoạn hội thoại dưới:',
+    src: 'audio/audio_4.mp3',
     answers: [
       { text: 'Tích cực', correct: false},
       { text: 'Tiêu cực', correct: false},
@@ -153,73 +168,69 @@ const questions = [
     ]
   },
   {
-    id: '12206',
-    question: '111111111111',
+    id: '5',
+    question: 'Chọn nhãn thích hợp cho đoạn hội thoại dưới:',
+    src: 'audio/audio_5.mp3',
+    answers: [
+      { text: 'Tích cực', correct: false},
+      { text: 'Tiêu cực', correct: true},
+      { text: 'Trung tính', correct: false},
+      { text: 'Không biết', correct: false}
+    ]
+  },
+  {
+    id: '6',
+    question: 'Chọn nhãn thích hợp cho đoạn hội thoại dưới:',
+    src: 'audio/audio_6.mp3',
+    answers: [
+      { text: 'Tích cực', correct: true},
+      { text: 'Tiêu cực', correct: false},
+      { text: 'Trung tính', correct: false},
+      { text: 'Không biết', correct: false}
+    ]
+  },
+  {
+    id: '7',
+    question: 'Chọn nhãn thích hợp cho đoạn hội thoại dưới:',
+    src: 'audio/audio_7.mp3',
+    answers: [
+      { text: 'Tích cực', correct: false},
+      { text: 'Tiêu cực', correct: false},
+      { text: 'Trung tính', correct: true},
+      { text: 'Không biết', correct: true}
+    ]
+  },
+  {
+    id: '8',
+    question: 'Chọn nhãn thích hợp cho đoạn hội thoại dưới:',
+    src: 'audio/audio_8.mp3',
+    answers: [
+      { text: 'Tích cực', correct: false},
+      { text: 'Tiêu cực', correct: false},
+      { text: 'Trung tính', correct: true},
+      { text: 'Không biết', correct: false}
+    ]
+  },
+  {
+    id: '9',
+    question: 'Chọn nhãn thích hợp cho đoạn hội thoại dưới:',
+    src: 'audio/audio_9.mp3',
+    answers: [
+      { text: 'Tích cực', correct: false},
+      { text: 'Tiêu cực', correct: false},
+      { text: 'Trung tính', correct: true},
+      { text: 'Không biết', correct: false}
+    ]
+  },
+  {
+    id: '10',
+    question: 'Chọn nhãn thích hợp cho đoạn hội thoại dưới:',
+    src: 'audio/audio_10.mp3',
     answers: [
       { text: 'Tích cực', correct: false},
       { text: 'Tiêu cực', correct: false},
       { text: 'Trung tính', correct: false},
       { text: 'Không biết', correct: true}
-    ]
-  },
-  {
-    id: '12203',
-    question: 'Cửa hàng này chán quá',
-    answers: [
-      { text: 'Tích cực', correct: false},
-      { text: 'Tiêu cực', correct: true},
-      { text: 'Trung tính', correct: false},
-      { text: 'Không biết', correct: false}
-    ]
-  },
-  {
-    id: '12203',
-    question: 'Cửa hàng này chán quá',
-    answers: [
-      { text: 'Tích cực', correct: false},
-      { text: 'Tiêu cực', correct: true},
-      { text: 'Trung tính', correct: false},
-      { text: 'Không biết', correct: false}
-    ]
-  },
-  {
-    id: '12203',
-    question: 'Cửa hàng này chán quá',
-    answers: [
-      { text: 'Tích cực', correct: false},
-      { text: 'Tiêu cực', correct: true},
-      { text: 'Trung tính', correct: false},
-      { text: 'Không biết', correct: false}
-    ]
-  },
-  {
-    id: '12203',
-    question: 'Cửa hàng này chán quá',
-    answers: [
-      { text: 'Tích cực', correct: false},
-      { text: 'Tiêu cực', correct: true},
-      { text: 'Trung tính', correct: false},
-      { text: 'Không biết', correct: false}
-    ]
-  },
-  {
-    id: '12203',
-    question: 'Cửa hàng này chán quá',
-    answers: [
-      { text: 'Tích cực', correct: false},
-      { text: 'Tiêu cực', correct: true},
-      { text: 'Trung tính', correct: false},
-      { text: 'Không biết', correct: false}
-    ]
-  },
-  {
-    id: '12203',
-    question: 'Cửa hàng này chán quá',
-    answers: [
-      { text: 'Tích cực', correct: false},
-      { text: 'Tiêu cực', correct: true},
-      { text: 'Trung tính', correct: false},
-      { text: 'Không biết', correct: false}
     ]
   }
 ]
