@@ -83,8 +83,12 @@ function selectAnswer(e) {
     if (shuffledQuestions.length > currentQuestionIndex + 1) {
       nextButton.classList.remove('hide')
     } else {
-      startButton.innerText = 'Restart'
+      startButton.innerText = 'Quay về trang chủ'
+      startButton.onclick = function() {
+        window.location = '/dashboard'
+      }
       startButton.classList.remove('hide')
+      resultElement.innerHTML = 'Chúc mừng bạn đã hoàn thành bài đầu tiên trong tổng số 2 bài thi để nhận chứng chỉ. Hệ thống sẽ tự động chuyển sang bài thi tiếp theo trong 10 giây'
     }
     
   }else{
@@ -151,6 +155,66 @@ const questions = [
       { text: 'Tiêu cực', correct: false},
       { text: 'Trung tính', correct: false},
       { text: 'Không biết', correct: true}
+    ]
+  },
+  {
+    id: '12207',
+    question: 'Hôm nay thời tiết thật là đẹp',
+    answers: [
+      { text: 'Tích cực', correct: true },
+      { text: 'Tiêu cực', correct: false },
+      { text: 'Trung tính', correct: false },
+      { text: 'Không biết', correct: false }
+    ]
+  },
+  {
+    id: '12208',
+    question: 'Hôm nay đen quá vừa bị mất ví trên xe bus',
+    answers: [
+      { text: 'Tích cực', correct: false },
+      { text: 'Tiêu cực', correct: true },
+      { text: 'Trung tính', correct: false },
+      { text: 'Không biết', correct: false }
+    ]
+  },
+  {
+    id: '12209',
+    question:'Học lực của cháu bình thường, không tốt cũng không kém',
+    answers: [
+      { text: 'Tích cực', correct: false },
+      { text: 'Tiêu cực', correct: false },
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: true}
+    ]
+  },
+  {
+    id: '12210',
+    question: 'Lê Lợi lên ngôi năm 1428',
+    answers: [
+      { text: 'Tích cực', correct: false },
+      { text: 'Tiêu cực', correct: false },
+      { text: 'Trung tính', correct: false },
+      { text: 'Không biết', correct: true }
+    ]
+  },
+  {
+    id: '12211',
+    question: 'Cảm ơn cậu vì đã giúp mình lúc nãy nhé',
+    answers: [
+      { text: 'Tích cực', correct: true },
+      { text: 'Tiêu cực', correct: false },
+      { text: 'Trung tính', correct: false },
+      { text: 'Không biết', correct: false }
+    ]
+  },
+  {
+    id: '12206',
+    question: '111111111111',
+    answers: [
+      { text: 'Tích cực', correct: false },
+      { text: 'Tiêu cực', correct: false },
+      { text: 'Trung tính', correct: false },
+      { text: 'Không biết', correct: true }
     ]
   }
 ]

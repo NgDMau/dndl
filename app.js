@@ -39,7 +39,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 //                                      saveUninitialized: false }));
 
 app.use(session({  
-    secret: 'woot',
+    secret: 'dndl',
     resave: false, 
     saveUninitialized: false}));
 
@@ -50,10 +50,12 @@ app.use(flash());
 
 app.use(passport.session());
 
-app.use(express.static('public'));
-app.use(express.static('view'));
-
 app.set('view engine', 'pug')
+
+
+app.use(express.static('public'));
+app.set('views', path.join(__dirname, 'views'));
+
 
 app.post('/login',
     passport.authenticate('local', { successRedirect: '/',
@@ -61,15 +63,20 @@ app.post('/login',
 
 app.get('/', function (req, res) {
     if (req.isAuthenticated()) {
-        res.sendFile(path.join(__dirname, '/views/', 'dashboard.html'));
+        //res.send(req.session.passport.user)
+        // res.sendFile(path.join(__dirname, '/views/', 'dashboard.html'));
+        res.render('dashboard', { username: req.session.passport.user, salary: '100.000', newjobs: "4", currentjobs:"5" })
     } else {
         res.redirect('/login')
+        //res.render('dashboard');
     }
 });
 
 app.get('/dashboard', function (req, res) {
     if (req.isAuthenticated()) {
+        
         res.sendFile(path.join(__dirname, '/views/', 'dashboard.html'));
+        // res.sendFile('dashboard.html');
     } else {
         res.redirect('/login')
     }
@@ -82,6 +89,11 @@ app.get('/index', function (req, res) {
         res.redirect('/login')
     }
 });
+
+app.get('/idk', function (req, res) {
+    res.sendFile(path.join(__dirname, '/views/', 'audio_sentiment.html'));
+    // res.render('dashboard', { title: 'Hey', message: 'Hello there!' })
+})
 
 app.get('/login', function (req, res, next) {
     res.sendFile(path.join(__dirname, '/views/', 'login.html'))
@@ -109,8 +121,8 @@ app.get('/signup', function (req, res) {
 
 
 
-// app.get('/demo', function(req, res) {
-//     res.render('demo');
-// });
+app.get('/demo', function(req, res) {
+    res.render('demo');
+});
 
 app.listen(port, () => { console.log(`Example app listening on port ${port}` )});
