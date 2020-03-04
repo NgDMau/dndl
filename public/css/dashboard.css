@@ -69,16 +69,16 @@ img{
   width: 50%;
   
 }
-.swiper-slide {
+.btn {
   
   width: auto;
   min-height: 150px;
-    min-width: 200px;
+  min-width: 200px;
   text-align: center;
   font-size: 18px;
   background: #fff;
   margin: 2em 1em;
-    border: 2px solid #434556;
+  border: 2px solid #434556;
 
   /* Center slide text vertically */
   
