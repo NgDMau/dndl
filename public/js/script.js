@@ -1,11 +1,13 @@
 const startButton = document.getElementById('start-btn')
 const nextButton = document.getElementById('next-btn')
+const nextLevelButton = document.getElementById('next-lvl-btn')
 const questionContainerElement = document.getElementById('question-container')
 const questionElement = document.getElementById('question')
 const answerButtonsElement = document.getElementById('answer-buttons')
 const titleElement = document.getElementById('title')
-const resultElement = document.getElementById('result')
 const labelElement = document.getElementById('label')
+const resultElement = document.getElementById('result')
+var score = 0;
 
 const status = {
   label_id: '',
@@ -21,7 +23,6 @@ startButton.addEventListener('click', start)
 nextButton.addEventListener('click', () => {
   currentQuestionIndex++
   currentField=0
-  resultElement.classList.add("hide");
   setNextQuestion()
   console.log(status)
 })
@@ -75,24 +76,15 @@ function selectAnswer(e) {
   status.label_id = shuffledQuestions[currentQuestionIndex].id
   status.time = new Date();
 
-  if (correct){
-    resultElement.style.backgroundColor = "lime";
-    resultElement.classList.remove("hide");
-    resultElement.getElementsByTagName("P")[0].innerHTML = 'Bạn đã lựa chọn đúng!'
-
-    if (shuffledQuestions.length > currentQuestionIndex + 1) {
-      nextButton.classList.remove('hide')
-    } else {
-      startButton.innerText = 'Restart'
-      startButton.classList.remove('hide')
-    }
-    
-  }else{
-    resultElement.style.backgroundColor = "rgb(255, 128, 128)";
-    resultElement.classList.remove("hide");
-    resultElement.getElementsByTagName("P")[0].innerHTML  = 'Bạn đã lựa chọn sai!'
+  if (correct=='true'){
+    score++;
+    selectedButton.dataset.correct = false;
   }
-
+  if (shuffledQuestions.length > currentQuestionIndex + 1) {
+    nextButton.classList.remove('hide')
+  } else {
+    result();
+  }   
   
 }
 
@@ -102,8 +94,20 @@ function setStatusClass(element, correct) {
   } else {
     element.classList.add('wrong')
   }
+}
 
-
+function result(){
+  if(score >= 7){
+    document.getElementById('content').classList.add('hide');
+    resultElement.classList.remove('hide');
+    
+  }else{
+    document.getElementById('content').classList.add('hide');
+    document.getElementById('result_content').innerText = "Bạn chưa đạt tiêu chuẩn rồi hãy làm lại nhé!"
+    document.getElementById('btn-next-lvl').classList.add('hide');
+    document.getElementById('btn-again').classList.remove('hide');
+    resultElement.classList.remove('hide');
+  }
 }
 
 function goto_label(){
@@ -151,6 +155,66 @@ const questions = [
       { text: 'Tiêu cực', correct: false},
       { text: 'Trung tính', correct: false},
       { text: 'Không biết', correct: true}
+    ]
+  },
+  {
+    id: '12203',
+    question: 'Cửa hàng này chán quá',
+    answers: [
+      { text: 'Tích cực', correct: false},
+      { text: 'Tiêu cực', correct: true},
+      { text: 'Trung tính', correct: false},
+      { text: 'Không biết', correct: false}
+    ]
+  },
+  {
+    id: '12203',
+    question: 'Cửa hàng này chán quá',
+    answers: [
+      { text: 'Tích cực', correct: false},
+      { text: 'Tiêu cực', correct: true},
+      { text: 'Trung tính', correct: false},
+      { text: 'Không biết', correct: false}
+    ]
+  },
+  {
+    id: '12203',
+    question: 'Cửa hàng này chán quá',
+    answers: [
+      { text: 'Tích cực', correct: false},
+      { text: 'Tiêu cực', correct: true},
+      { text: 'Trung tính', correct: false},
+      { text: 'Không biết', correct: false}
+    ]
+  },
+  {
+    id: '12203',
+    question: 'Cửa hàng này chán quá',
+    answers: [
+      { text: 'Tích cực', correct: false},
+      { text: 'Tiêu cực', correct: true},
+      { text: 'Trung tính', correct: false},
+      { text: 'Không biết', correct: false}
+    ]
+  },
+  {
+    id: '12203',
+    question: 'Cửa hàng này chán quá',
+    answers: [
+      { text: 'Tích cực', correct: false},
+      { text: 'Tiêu cực', correct: true},
+      { text: 'Trung tính', correct: false},
+      { text: 'Không biết', correct: false}
+    ]
+  },
+  {
+    id: '12203',
+    question: 'Cửa hàng này chán quá',
+    answers: [
+      { text: 'Tích cực', correct: false},
+      { text: 'Tiêu cực', correct: true},
+      { text: 'Trung tính', correct: false},
+      { text: 'Không biết', correct: false}
     ]
   }
 ]

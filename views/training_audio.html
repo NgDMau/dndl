@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/css/training_audio.css" rel="stylesheet">
+  <script defer src="/js/training_audio.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:400,600&display=swap" rel="stylesheet">
+  <title>Hướng dẫn</title>
+
+
+</head>
+<body>
+  <header class = "bar topbar" >          
+    <div class ="logo">
+      <img src="img/icon.png" alt="logo">
+    </div>
+    <div class = "dashboard">
+        Dashboard
+    </div>
+    <div class = "login">
+        <p>Xin chào, Thu | <a href="#">Đăng xuất</a></p>
+    </div>
+  </header>
+  <div id="content" clas="container">
+    <div class="flex-container">
+      <div class="empty">
+      </div>
+      <div class="title" id="title">Hướng dẫn</div>
+      <div id="question" class="data">
+        Bạn hãy chọn 1 trong bốn loại nhãn: Tích cực/ Tiêu cực/ Trung tính/ Không biết, tương ứng cho câu sau đây:
+      </div>
+      <audio id="src_audio" class="hide" controls>
+        <source src="audio/audio_1.mp3" type="audio/mp3">
+      </audio>
+      <div id="shortcut_label" class="shortcut_label hide">
+        <input id="sl_label" placeholder="Điền nhãn muốn chọn" type="text" >
+        <button onclick="goto_label()" class="btn">Chọn</button>
+      </div>
+      <div id="label" class="label hide">
+
+        <div id="answer-buttons" class="btn-grid">
+          <button  class="btn-answer">Answer 1</button>
+          <button  class="btn-answer">Answer 2</button>
+          <button  class="btn-answer">Answer 3</button>
+          <button  class="btn-answer">Answer 4</button>
+          <button  class="btn-answer">Answer 5</button>
+          <button  class="btn-answer">Answer 6</button>
+          <button  class="btn-answer">Answer 7</button>
+          <button  class="btn-answer">Answer 8</button>
+          <button  class="btn-answer">Answer 9</button>
+          <button  class="btn-answer">Answer 10</button>
+          <button  class="btn-answer">Answer 11</button>
+          <button  class="btn-answer">Answer 12</button>
+        </div>
+      </div>
+      <div class="empty hide">
+      </div>
+      <div class="controls">
+        <button id="start-btn" class="start-btn">Bắt đầu</button>
+        <button id="next-btn" class="next-btn btn hide">Tiếp tục</button>
+        <button id="next-lvl-btn" class="next-btn btn hide">Tiếp tục</button>
+      </div>
+  </div>
+</div>
+
+<div id="result" class="result hide">
+  <div class="empty"></div>
+  <div class="title">Kết quả</div>
+  <div id="result_content" class="data">
+    Chúc mừng bạn đã hoàn thành phần huấn luyện phân tích cảm xúc văn bản.
+  </div>
+  <a id="btn-next-lvl" style="width: 70%" class="" href="/training_audio"><button class='start-btn'>Tiếp tục</button></a>
+  <a id="btn-again" style="width: 70%" class="hide" href="/index"><button class='start-btn'>Làm lại</button></a>
+
+</div>
+
+<footer>
+  <div class = "bar lowbar">
+      <div class = lowbar-container>
+          <img src="img/icon.png" alt="logo">
+          <div class = "lowbar-content">                               
+              <a href="#">Về chúng tôi</a> | <a href="#">Quay lại đầu trang</a>
+          </div>
+      </div>
+  </div>
+</footer>
+</body>
+</html>
