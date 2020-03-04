@@ -34,9 +34,6 @@ passport.deserializeUser((username, done) => {
 });
 
 app.use(bodyParser.urlencoded({extended: true}));
-// app.use(require('express-session')({ secret: 'infore',
-//                                      resave: false,
-//                                      saveUninitialized: false }));
 
 app.use(session({  
     secret: 'dndl',
@@ -44,28 +41,44 @@ app.use(session({
     saveUninitialized: false}));
 
 app.use(passport.initialize()); 
-// app.use(passport.session());
-
-app.use(flash());
-
 app.use(passport.session());
+<<<<<<< HEAD
 
 app.set('view engine', 'pug')
 
 
 app.use(express.static('public'));
 app.set('views', path.join(__dirname, 'views'));
+=======
+app.use(express.static('public'));
+app.use(express.static('view'));
+app.use(flash());
+>>>>>>> 0c6ceb0a18d242bf9a117250cda74c2cebb946db
 
 
 app.post('/login',
     passport.authenticate('local', { successRedirect: '/',
                                      failureRedirect: '/login'}));
+var user_sample_data = {
+    username: "ngdmau",
+    current_income: 100000,
+    current_jobs: ['text_sentiment', 'text_topic', 'audio_sentiment'],
+    new_jobs: ['audio_topic', 'audio_gender'],
+    no_current_jobs: 3,
+    no_new_jobs: 2,
+}
+
 
 app.get('/', function (req, res) {
     if (req.isAuthenticated()) {
+<<<<<<< HEAD
         //res.send(req.session.passport.user)
         // res.sendFile(path.join(__dirname, '/views/', 'dashboard.html'));
         res.render('dashboard', { username: req.session.passport.user, salary: '100.000', newjobs: "4", currentjobs:"5" })
+=======
+        // res.sendFile(path.join(__dirname, '/views/', 'dashboard.html'));
+        res.render('dashboard', user_sample_data)
+>>>>>>> 0c6ceb0a18d242bf9a117250cda74c2cebb946db
     } else {
         res.redirect('/login')
         //res.render('dashboard');
@@ -90,6 +103,7 @@ app.get('/index', function (req, res) {
     }
 });
 
+<<<<<<< HEAD
 app.get('/idk', function (req, res) {
     res.sendFile(path.join(__dirname, '/views/', 'audio_sentiment.html'));
     // res.render('dashboard', { title: 'Hey', message: 'Hello there!' })
@@ -105,6 +119,15 @@ app.get('/login', function (req, res, next) {
     //         return res.redirect('/users/' + user.username);
     //     });
     // })(req, res, next);
+=======
+app.get('/login', function (req, res) {
+    if (req.isAuthenticated()) {
+        res.redirect('/')
+    } else {
+        res.sendFile(path.join(__dirname, '/views/', 'login.html'))
+    }
+    
+>>>>>>> 0c6ceb0a18d242bf9a117250cda74c2cebb946db
 });
 
 app.get('/about', function (req, res) {
@@ -119,10 +142,17 @@ app.get('/signup', function (req, res) {
     res.sendFile(path.join(__dirname, '/views/', 'signup.html'))
 });
 
+<<<<<<< HEAD
 
 
 app.get('/demo', function(req, res) {
     res.render('demo');
+=======
+app.get('/logout', function (req, res){
+    req.session.destroy(function (err) {
+      res.redirect('/'); //Inside a callback… bulletproof!
+    });
+>>>>>>> 0c6ceb0a18d242bf9a117250cda74c2cebb946db
 });
 
 app.listen(port, () => { console.log(`Example app listening on port ${port}` )});
