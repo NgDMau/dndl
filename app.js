@@ -7,6 +7,21 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 var passport = require('passport');
 var localStrategy = require('passport-local').Strategy;
+var pg = require('pg');
+var Pool = require('pg-pool')
+
+const config = {
+    user: 'vvdicwtmvinosq',
+    password: 'e9179f8811881a2e527c536030e0ac6d4c4eaee84cccbd35f1dd5d7c19769be8',
+    host: 'ec2-18-235-97-230.compute-1.amazonaws.com',
+    port: '5432',
+    database: 'd9p7d0hvpi42ri',
+    ssl: true
+  };
+  
+const pool = new Pool(config); 
+
+
 
 const app = express()
 const port = process.env.PORT || 8000;
@@ -102,14 +117,13 @@ app.get('/index', function (req, res) {
     }
 });
 
-app.get('/idk', function (req, res) {
-    res.sendFile(path.join(__dirname, '/views/', 'audio_sentiment.html'));
-    // res.render('dashboard', { title: 'Hey', message: 'Hello there!' })
-})
-
-app.get('/login', function (req, res, next) {
-    res.sendFile(path.join(__dirname, '/views/', 'login.html'))
-})
+app.get('/training_audio', function (req, res) {
+    if (req.isAuthenticated()) {
+        res.sendFile(path.join(__dirname, '/views/', 'training_audio.html'));
+    } else {
+        res.redirect('/login')
+    }
+});
 
 app.get('/login', function (req, res) {
     if (req.isAuthenticated()) {
