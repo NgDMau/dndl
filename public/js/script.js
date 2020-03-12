@@ -158,8 +158,77 @@ const questions = [
     ]
   },
   {
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+    id: '12207',
+    question: 'Hôm nay thời tiết thật là đẹp',
+    answers: [
+      { text: 'Tích cực', correct: true },
+      { text: 'Tiêu cực', correct: false },
+      { text: 'Trung tính', correct: false },
+      { text: 'Không biết', correct: false }
+    ]
+  },
+  {
+    id: '12208',
+    question: 'Hôm nay đen quá vừa bị mất ví trên xe bus',
+    answers: [
+      { text: 'Tích cực', correct: false },
+      { text: 'Tiêu cực', correct: true },
+      { text: 'Trung tính', correct: false },
+      { text: 'Không biết', correct: false }
+    ]
+  },
+  {
+    id: '12209',
+    question:'Học lực của cháu bình thường, không tốt cũng không kém',
+    answers: [
+      { text: 'Tích cực', correct: false },
+      { text: 'Tiêu cực', correct: false },
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: true}
+    ]
+  },
+  {
+    id: '12210',
+    question: 'Lê Lợi lên ngôi năm 1428',
+    answers: [
+      { text: 'Tích cực', correct: false },
+      { text: 'Tiêu cực', correct: false },
+      { text: 'Trung tính', correct: false },
+      { text: 'Không biết', correct: true }
+    ]
+  },
+  {
+    id: '12211',
+    question: 'Cảm ơn cậu vì đã giúp mình lúc nãy nhé',
+    answers: [
+      { text: 'Tích cực', correct: true },
+      { text: 'Tiêu cực', correct: false },
+      { text: 'Trung tính', correct: false },
+      { text: 'Không biết', correct: false }
+    ]
+  },
+  {
+    id: '12206',
+    question: '111111111111',
+    answers: [
+      { text: 'Tích cực', correct: false },
+      { text: 'Tiêu cực', correct: false },
+      { text: 'Trung tính', correct: false },
+      { text: 'Không biết', correct: true }
+=======
+    id: '12203',
+    question: 'Cửa hàng này chán quá',
+=======
     id: '5',
     question: 'Em làm chưa được tốt',
+>>>>>>> 7bbe26a1a5ec7489589232ab992195a4987f24d5
+=======
+    id: '5',
+    question: 'Em làm chưa được tốt',
+>>>>>>> a7df1b133c290be432a033f39e3144530719361c
     answers: [
       { text: 'Tích cực', correct: false},
       { text: 'Tiêu cực', correct: true},
@@ -215,6 +284,7 @@ const questions = [
       { text: 'Tiêu cực', correct: true},
       { text: 'Trung tính', correct: false},
       { text: 'Không biết', correct: false}
+>>>>>>> cd3dc082fb88866aceca9670e83b9b1e2d15b77b
     ]
   }
 ]
