@@ -1,6 +1,7 @@
 html{
   font-family: 'Barlow Condensed', sans-serif;
   color: #434556;
+  font-size: 15px;
 }
 
 a {
@@ -60,54 +61,40 @@ img{
   text-align: center;
 }
 
+/*slider*/
 
-@supports(display: grid) {
-
-.items {
-    position: relative;
-    width: 100%;
-    overflow-x: hidden;
-    overflow-y: hidden;
-    white-space: nowrap;
-    transition: all 0.2s;
-    transform: scale(0.98);
-    will-change: transform;
-    user-select: none;
-    cursor: pointer;
-  }
-  .items *{
-    margin: 5px;
-  }
-
-  .items.active {
-    background: rgba(255,255,255,0.3);
-    cursor: grabbing;
-    cursor: -webkit-grabbing;
-    transform: scale(1);
-  }
-
-  .item {
-    display: inline-block;
-    background: white;
-    min-height: 150px;
-    min-width: 200px;
-    margin: 2em 1em;
-    border: 2px solid #434556;
-    border-color: #434556;  
-  }
-  .items div:hover {
-      background: #434556;
-      color: white;
-   }
-  @media screen and (max-width: 500px) {
-      .item{
-    min-height: 200px;
-    min-width: 200px;
-        } 
-    }
+.swiper-container{
+  width: 100%;
 }
-.lowbar-container{
+.swiper-wrapper {
   display: flex;
-  justify-content: flex-start;
   align-items: center;
+  justify-content: center;
+}
+.btn {
+  
+  width: 200px;;
+  min-height: 150px;
+  min-width: 200px;
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  margin: 2em 1em;
+  border: 2px solid #434556;
+
+  /* Center slide text vertically */
+  
+}
+.swiper-wrapper div:hover {
+  background: #434556;
+  color: white;
+}
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding:10px;
+  background-color: #24252E;
+  
 }

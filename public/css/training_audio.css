@@ -57,6 +57,14 @@ html{
   .empty {
     height: 100px;
   }
+
+  .btn-play-stop {
+    border: none;
+    color: black;
+    padding: 12px 16px;
+    font-size: 16px;
+    cursor: pointer;
+  }
   
   #title {
     height: 50px;

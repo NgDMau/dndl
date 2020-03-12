@@ -76,32 +76,9 @@ function selectAnswer(e) {
   status.label_id = shuffledQuestions[currentQuestionIndex].id
   status.time = new Date();
 
-<<<<<<< HEAD
-  if (correct){
-    resultElement.style.backgroundColor = "lime";
-    resultElement.classList.remove("hide");
-    resultElement.getElementsByTagName("P")[0].innerHTML = 'Bạn đã lựa chọn đúng!'
-
-    if (shuffledQuestions.length > currentQuestionIndex + 1) {
-      nextButton.classList.remove('hide')
-    } else {
-      startButton.innerText = 'Quay về trang chủ'
-      startButton.onclick = function() {
-        window.location = '/dashboard'
-      }
-      startButton.classList.remove('hide')
-      resultElement.innerHTML = 'Chúc mừng bạn đã hoàn thành bài đầu tiên trong tổng số 2 bài thi để nhận chứng chỉ. Hệ thống sẽ tự động chuyển sang bài thi tiếp theo trong 10 giây'
-    }
-    
-  }else{
-    resultElement.style.backgroundColor = "rgb(255, 128, 128)";
-    resultElement.classList.remove("hide");
-    resultElement.getElementsByTagName("P")[0].innerHTML  = 'Bạn đã lựa chọn sai!'
-=======
   if (correct=='true'){
     score++;
     selectedButton.dataset.correct = false;
->>>>>>> cd3dc082fb88866aceca9670e83b9b1e2d15b77b
   }
   if (shuffledQuestions.length > currentQuestionIndex + 1) {
     nextButton.classList.remove('hide')
@@ -141,7 +118,7 @@ function goto_label(){
 
 const questions = [
   {
-    id: '12203',
+    id: '1',
     question: 'Cửa hàng này chán quá',
     answers: [
       { text: 'Tích cực', correct: false},
@@ -151,8 +128,8 @@ const questions = [
     ]
   },
   {
-    id: '12204',
-    question: 'Em đẹp lắm',
+    id: '2',
+    question: 'Thời tiêt thật đẹp',
     answers: [
       { text: 'Tích cực', correct: true},
       { text: 'Tiêu cực', correct: false},
@@ -161,7 +138,7 @@ const questions = [
     ]
   },
   {
-    id: '12205',
+    id: '3',
     question: 'Đi làm',
     answers: [
       { text: 'Tích cực', correct: false},
@@ -171,7 +148,7 @@ const questions = [
     ]
   },
   {
-    id: '12206',
+    id: '4',
     question: '111111111111',
     answers: [
       { text: 'Tích cực', correct: false},
@@ -181,6 +158,8 @@ const questions = [
     ]
   },
   {
+<<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< HEAD
     id: '12207',
     question: 'Hôm nay thời tiết thật là đẹp',
@@ -242,6 +221,14 @@ const questions = [
 =======
     id: '12203',
     question: 'Cửa hàng này chán quá',
+=======
+    id: '5',
+    question: 'Em làm chưa được tốt',
+>>>>>>> 7bbe26a1a5ec7489589232ab992195a4987f24d5
+=======
+    id: '5',
+    question: 'Em làm chưa được tốt',
+>>>>>>> a7df1b133c290be432a033f39e3144530719361c
     answers: [
       { text: 'Tích cực', correct: false},
       { text: 'Tiêu cực', correct: true},
@@ -250,8 +237,18 @@ const questions = [
     ]
   },
   {
-    id: '12203',
-    question: 'Cửa hàng này chán quá',
+    id: '6',
+    question: 'Đi đấu thế này ?',
+    answers: [
+      { text: 'Tích cực', correct: false},
+      { text: 'Tiêu cực', correct: false},
+      { text: 'Trung tính', correct: true},
+      { text: 'Không biết', correct: false}
+    ]
+  },
+  {
+    id: '7',
+    question: 'Việc làm thiếu trách nhiệm đã để lại nhiều hậu quả',
     answers: [
       { text: 'Tích cực', correct: false},
       { text: 'Tiêu cực', correct: true},
@@ -260,8 +257,8 @@ const questions = [
     ]
   },
   {
-    id: '12203',
-    question: 'Cửa hàng này chán quá',
+    id: '8',
+    question: 'Món này ngon quá',
     answers: [
       { text: 'Tích cực', correct: false},
       { text: 'Tiêu cực', correct: true},
@@ -270,27 +267,17 @@ const questions = [
     ]
   },
   {
-    id: '12203',
-    question: 'Cửa hàng này chán quá',
+    id: '9',
+    question: 'This branch has no conflicts with the base branch',
     answers: [
       { text: 'Tích cực', correct: false},
-      { text: 'Tiêu cực', correct: true},
+      { text: 'Tiêu cực', correct: false},
       { text: 'Trung tính', correct: false},
-      { text: 'Không biết', correct: false}
+      { text: 'Không biết', correct: true}
     ]
   },
   {
-    id: '12203',
-    question: 'Cửa hàng này chán quá',
-    answers: [
-      { text: 'Tích cực', correct: false},
-      { text: 'Tiêu cực', correct: true},
-      { text: 'Trung tính', correct: false},
-      { text: 'Không biết', correct: false}
-    ]
-  },
-  {
-    id: '12203',
+    id: '10',
     question: 'Cửa hàng này chán quá',
     answers: [
       { text: 'Tích cực', correct: false},

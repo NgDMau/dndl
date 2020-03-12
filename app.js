@@ -51,25 +51,17 @@ passport.deserializeUser((username, done) => {
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(session({  
-    secret: 'dndl',
+    secret: 'woot',
     resave: false, 
     saveUninitialized: false}));
 
 app.use(passport.initialize()); 
 app.use(passport.session());
-
-
-app.set('view engine', 'pug')
-
-
-
-app.use(express.static('public'));
-app.set('views', path.join(__dirname, 'views'));
 app.use(express.static('public'));
 app.use(express.static('view'));
 app.use(flash());
 
-
+app.set('view engine', 'pug')
 
 app.post('/login',
     passport.authenticate('local', { successRedirect: '/',
@@ -86,24 +78,16 @@ var user_sample_data = {
 
 app.get('/', function (req, res) {
     if (req.isAuthenticated()) {
-        //res.send(req.session.passport.user)
-        // res.sendFile(path.join(__dirname, '/views/', 'dashboard.html'));
-        res.render('dashboard', { username: req.session.passport.user, salary: '100.000', newjobs: "4", currentjobs:"5" })
-        // res.sendFile(path.join(__dirname, '/views/', 'dashboard.html'));
-        res.render('dashboard', user_sample_data)
-        // res.sendFile(path.join(__dirname, '/views/', 'dashboard.html'));
-        res.render('dashboard', user_sample_data)
+        res.sendFile(path.join(__dirname, '/views/', 'dashboard.html'));
+        //res.render('dashboard', user_sample_data)
     } else {
         res.redirect('/login')
-        //res.render('dashboard');
     }
 });
 
 app.get('/dashboard', function (req, res) {
     if (req.isAuthenticated()) {
-        
         res.sendFile(path.join(__dirname, '/views/', 'dashboard.html'));
-        // res.sendFile('dashboard.html');
     } else {
         res.redirect('/login')
     }
@@ -131,7 +115,8 @@ app.get('/login', function (req, res) {
     } else {
         res.sendFile(path.join(__dirname, '/views/', 'login.html'))
     }
-})
+    
+});
 
 app.get('/about', function (req, res) {
     res.sendFile(path.join(__dirname, '/views/', 'about.html'))
@@ -145,14 +130,10 @@ app.get('/signup', function (req, res) {
     res.sendFile(path.join(__dirname, '/views/', 'signup.html'))
 });
 
-app.get('/demo', function(req, res) {
-    res.render('demo');
-})
-
 app.get('/logout', function (req, res){
     req.session.destroy(function (err) {
       res.redirect('/'); //Inside a callback… bulletproof!
     });
 });
 
-app.listen(port, () => { console.log(`Example app listening on port ${port}` )})
+app.listen(port, () => { console.log(`Example app listening on port ${port}` )});
