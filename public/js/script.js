@@ -160,6 +160,7 @@ const questions = [
   {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     id: '12207',
     question: 'Hôm nay thời tiết thật là đẹp',
     answers: [
@@ -224,6 +225,10 @@ const questions = [
     id: '5',
     question: 'Em làm chưa được tốt',
 >>>>>>> 7bbe26a1a5ec7489589232ab992195a4987f24d5
+=======
+    id: '5',
+    question: 'Em làm chưa được tốt',
+>>>>>>> a7df1b133c290be432a033f39e3144530719361c
     answers: [
       { text: 'Tích cực', correct: false},
       { text: 'Tiêu cực', correct: true},
