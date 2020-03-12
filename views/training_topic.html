@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="/css/styles.css" rel="stylesheet">
+  <script defer src="/js/script.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:400,600&display=swap" rel="stylesheet">
+  <title>Hướng dẫn</title>
+
+
+</head>
+<body>
+  <!-- <header class = "bar topbar" >          
+    <div class ="logo">
+      <img src="img/icon.png" alt="logo">
+    </div>
+    <div class = "dashboard">
+        Training
+    </div>
+    <div class = "login">
+        <p>Xin chào, Thu | <a href="#">Đăng xuất</a></p>
+    </div>
+  </header> -->
+  <div id="content" clas="container">
+    <div class="flex-container">
+      <div class="empty">
+      </div>
+      <div class="title" id="title">Hướng dẫn</div>
+      <div id="question" class="data">
+        Bạn hãy chọn một trong bốn chủ đề sau: Sức khỏe/ Giáo dục/ Công nghệ/ Chỗ ở, tương ứng cho câu sau đây:
+      </div>
+      <!-- <div id="shortcut_label" class="shortcut_label hide">
+        <input id="sl_label" placeholder="Điền nhãn muốn chọn" type="text" >
+        <button onclick="goto_label()" class="btn">Chọn</button>
+      </div> -->
+      <div id="label" class="label hide">
+
+        <div id="answer-buttons" class="btn-grid">
+        </div>
+      </div>
+      <div class="empty hide">
+      </div>
+      <div class="controls">
+        <button id="start-btn" class="start-btn">Bắt đầu</button>
+        <button id="next-btn" class="next-btn btn hide">Tiếp tục</button>
+        <button id="next-lvl-btn" class="next-btn btn hide">Tiếp tục</button>
+      </div>
+  </div>
+</div>
+
+<div id="result" class="result hide">
+  <div class="empty"></div>
+  <div class="title">Kết quả</div>
+  <div id="result_content" class="data">
+    Chúc mừng bạn đã hoàn thành tất cả các phần đào tạo. Bạn đã đạt được chứng chỉ của cúng tôi. Từ giờ bạn có thể bắt đầu công việc.
+  </div>
+  <a id="btn-next-lvl" style="width: 70%" class="" href="/"><button class='start-btn'>Bắt đầu công việc</button></a>
+  <a id="btn-again" style="width: 70%" class="hide" href="/training_topic"><button class='start-btn'>Làm lại</button></a>
+
+</div>
+
+<!-- <footer>
+  <div class = "bar lowbar">
+      <div class = lowbar-container>
+          <img src="img/icon.png" alt="logo">
+          <div class = "lowbar-content">                               
+              <a href="#">Về chúng tôi</a> | <a href="#">Quay lại đầu trang</a>
+          </div>
+      </div>
+  </div>
+</footer> -->
+</body>
+<script>
+    var questions = [
+  {
+    id: '1',
+    question: 'Bây giờ có đến mấy bộ sách giáo khoa lận, không biết phải mua quyển nào cho con nó học đây',
+    answers: [
+      { text: 'Sức khỏe', correct: false},
+      { text: 'Giáo dục', correct: true},
+      { text: 'Công nghệ', correct: false},
+      { text: 'Chỗ ở', correct: false},
+      { text: 'Thuộc một chủ đề khác', correct: false}
+    ]
+  },
+  {
+    id: '2',
+    question: 'Tôi cần mua một bộ máy tính để bàn phục vụ công việc văn phòng, giá cả dưới 10 triệu ạ',
+    answers: [
+      { text: 'Sức khỏe', correct: false},
+      { text: 'Giáo dục', correct: false},
+      { text: 'Công nghệ', correct: true},
+      { text: 'Chỗ ở', correct: false},
+      { text: 'Thuộc một chủ đề khác', correct: false}
+    ]
+  },
+  {
+    id: '3',
+    question: 'có phòng trong công nghệ thông tin 1tr2 phòng như nhà nghỉ điều hoà nóng lạnh đầy đủ, bác chủ nhà trách nhiệm vui tính',
+    answers: [
+      { text: 'Sức khỏe', correct: false},
+      { text: 'Giáo dục', correct: false},
+      { text: 'Công nghệ', correct: false},
+      { text: 'Chỗ ở', correct: true},
+      { text: 'Thuộc một chủ đề khác', correct: false}
+    ]
+  },
+  {
+    id: '4',
+    question: 'Học trong 2-3 tháng, lịch học sau khai giảng sẽ thảo luận sao cho phù hợp nhất với điều kiện thực tế của học viên và giáo viên giảng dạ',
+    answers: [
+      { text: 'Sức khỏe', correct: false},
+      { text: 'Giáo dục', correct: true},
+      { text: 'Công nghệ', correct: false},
+      { text: 'Chỗ ở', correct: false},
+      { text: 'Thuộc một chủ đề khác', correct: false}
+    ]
+  },
+  {
+    id: '5',
+    question: 'Đã có ai bị như mình chưa ạ, mình bị trên lưng mấy năm nay rồi, cũng thường xuyên tắm lá chè xanh mà vẫn không bớt giảm gì cả. Mọi người cho mình vài góp ý với ạ.',
+    answers: [
+    { text: 'Sức khỏe', correct: true},
+      { text: 'Giáo dục', correct: false},
+      { text: 'Công nghệ', correct: false},
+      { text: 'Chỗ ở', correct: false},
+      { text: 'Thuộc một chủ đề khác', correct: false}
+    ]
+  },
+  {
+    id: '6',
+    question: 'Đúng là ở nhà vinhome thích thật sự, dịch vụ tiện ích đầy đủ, an toàn tiện lợi.',
+    answers: [
+    { text: 'Sức khỏe', correct: false},
+      { text: 'Giáo dục', correct: false},
+      { text: 'Công nghệ', correct: false},
+      { text: 'Chỗ ở', correct: true},
+      { text: 'Thuộc một chủ đề khác', correct: false}
+    ]
+  },
+  {
+    id: '7',
+    question: 'Người mệt mỏi, suy nhược, hay lo lắng thì nặng đầu thôi bạn, với lại nếu mắt đi bụi, cay mắt, hay mắt làm việc với cường độ cao thì có thể đỏ nhé.',
+    answers: [
+    { text: 'Sức khỏe', correct: true},
+      { text: 'Giáo dục', correct: false},
+      { text: 'Công nghệ', correct: false},
+      { text: 'Chỗ ở', correct: false},
+      { text: 'Thuộc một chủ đề khác', correct: false}
+    ]
+  },
+  {
+    id: '8',
+    question: 'từ cơ thể con người, các loài động vật cho đến cấu trúc động cơ máy, tất cả đều có thể được phân tích chi tiết sống động bằng chiếc máy tính xách tay áp dụng công nghệ thực tế ảo',
+    answers: [
+    { text: 'Sức khỏe', correct: false},
+      { text: 'Giáo dục', correct: false},
+      { text: 'Công nghệ', correct: true},
+      { text: 'Chỗ ở', correct: false},
+      { text: 'Thuộc một chủ đề khác', correct: false}
+    ]
+  },
+  {
+    id: '9',
+    question: 'Hiện nay, trên ảnh radar ở Đăk Lắk, Đắk Nông, Lâm Đồng đang có mây đối lưu phát triển gây mưa.',
+    answers: [
+    { text: 'Sức khỏe', correct: false},
+      { text: 'Giáo dục', correct: false},
+      { text: 'Công nghệ', correct: false},
+      { text: 'Chỗ ở', correct: false},
+      { text: 'Thuộc một chủ đề khác', correct: true}
+    ]
+  },
+  {
+    id: '10',
+    question: 'Cửa hàng này chán quá',
+    answers: [
+    { text: 'Sức khỏe', correct: false},
+      { text: 'Giáo dục', correct: false},
+      { text: 'Công nghệ', correct: false},
+      { text: 'Chỗ ở', correct: false},
+      { text: 'Thuộc một chủ đề khác', correct: true}
+    ]
+  }
+]
+</script>
+</html>

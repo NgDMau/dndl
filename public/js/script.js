@@ -34,7 +34,7 @@ function start() {
   currentField =0
   labelElement.classList.remove('hide')
   titleElement.innerText = 'Câu hỏi'
-  document.getElementById("shortcut_label").classList.remove('hide')
+  // document.getElementById("shortcut_label").classList.remove('hide')
 
   setNextQuestion()
 }
@@ -116,106 +116,106 @@ function goto_label(){
   document.getElementById(id_label).click();
 }
 
-const questions = [
-  {
-    id: '1',
-    question: 'Cửa hàng này chán quá',
-    answers: [
-      { text: 'Tích cực', correct: false},
-      { text: 'Tiêu cực', correct: true},
-      { text: 'Trung tính', correct: false},
-      { text: 'Không biết', correct: false}
-    ]
-  },
-  {
-    id: '2',
-    question: 'Thời tiêt thật đẹp',
-    answers: [
-      { text: 'Tích cực', correct: true},
-      { text: 'Tiêu cực', correct: false},
-      { text: 'Trung tính', correct: false},
-      { text: 'Không biết', correct: false}
-    ]
-  },
-  {
-    id: '3',
-    question: 'Đi làm',
-    answers: [
-      { text: 'Tích cực', correct: false},
-      { text: 'Tiêu cực', correct: false},
-      { text: 'Trung tính', correct: true},
-      { text: 'Không biết', correct: false}
-    ]
-  },
-  {
-    id: '4',
-    question: '111111111111',
-    answers: [
-      { text: 'Tích cực', correct: false},
-      { text: 'Tiêu cực', correct: false},
-      { text: 'Trung tính', correct: false},
-      { text: 'Không biết', correct: true}
-    ]
-  },
-  {
-    id: '5',
-    question: 'Em làm chưa được tốt',
-    answers: [
-      { text: 'Tích cực', correct: false},
-      { text: 'Tiêu cực', correct: true},
-      { text: 'Trung tính', correct: false},
-      { text: 'Không biết', correct: false}
-    ]
-  },
-  {
-    id: '6',
-    question: 'Đi đấu thế này ?',
-    answers: [
-      { text: 'Tích cực', correct: false},
-      { text: 'Tiêu cực', correct: false},
-      { text: 'Trung tính', correct: true},
-      { text: 'Không biết', correct: false}
-    ]
-  },
-  {
-    id: '7',
-    question: 'Việc làm thiếu trách nhiệm đã để lại nhiều hậu quả',
-    answers: [
-      { text: 'Tích cực', correct: false},
-      { text: 'Tiêu cực', correct: true},
-      { text: 'Trung tính', correct: false},
-      { text: 'Không biết', correct: false}
-    ]
-  },
-  {
-    id: '8',
-    question: 'Món này ngon quá',
-    answers: [
-      { text: 'Tích cực', correct: false},
-      { text: 'Tiêu cực', correct: true},
-      { text: 'Trung tính', correct: false},
-      { text: 'Không biết', correct: false}
-    ]
-  },
-  {
-    id: '9',
-    question: 'This branch has no conflicts with the base branch',
-    answers: [
-      { text: 'Tích cực', correct: false},
-      { text: 'Tiêu cực', correct: false},
-      { text: 'Trung tính', correct: false},
-      { text: 'Không biết', correct: true}
-    ]
-  },
-  {
-    id: '10',
-    question: 'Cửa hàng này chán quá',
-    answers: [
-      { text: 'Tích cực', correct: false},
-      { text: 'Tiêu cực', correct: true},
-      { text: 'Trung tính', correct: false},
-      { text: 'Không biết', correct: false}
-    ]
-  }
-]
+// const questions = [
+//   {
+//     id: '1',
+//     question: 'Cửa hàng này chán quá',
+//     answers: [
+//       { text: 'Tích cực', correct: false},
+//       { text: 'Tiêu cực', correct: true},
+//       { text: 'Trung tính', correct: false},
+//       { text: 'Không biết', correct: false}
+//     ]
+//   },
+//   {
+//     id: '2',
+//     question: 'Thời tiêt thật đẹp',
+//     answers: [
+//       { text: 'Tích cực', correct: true},
+//       { text: 'Tiêu cực', correct: false},
+//       { text: 'Trung tính', correct: false},
+//       { text: 'Không biết', correct: false}
+//     ]
+//   },
+//   {
+//     id: '3',
+//     question: 'Đi làm',
+//     answers: [
+//       { text: 'Tích cực', correct: false},
+//       { text: 'Tiêu cực', correct: false},
+//       { text: 'Trung tính', correct: true},
+//       { text: 'Không biết', correct: false}
+//     ]
+//   },
+//   {
+//     id: '4',
+//     question: '111111111111',
+//     answers: [
+//       { text: 'Tích cực', correct: false},
+//       { text: 'Tiêu cực', correct: false},
+//       { text: 'Trung tính', correct: false},
+//       { text: 'Không biết', correct: true}
+//     ]
+//   },
+//   {
+//     id: '5',
+//     question: 'Em làm chưa được tốt',
+//     answers: [
+//       { text: 'Tích cực', correct: false},
+//       { text: 'Tiêu cực', correct: true},
+//       { text: 'Trung tính', correct: false},
+//       { text: 'Không biết', correct: false}
+//     ]
+//   },
+//   {
+//     id: '6',
+//     question: 'Đi đấu thế này ?',
+//     answers: [
+//       { text: 'Tích cực', correct: false},
+//       { text: 'Tiêu cực', correct: false},
+//       { text: 'Trung tính', correct: true},
+//       { text: 'Không biết', correct: false}
+//     ]
+//   },
+//   {
+//     id: '7',
+//     question: 'Việc làm thiếu trách nhiệm đã để lại nhiều hậu quả',
+//     answers: [
+//       { text: 'Tích cực', correct: false},
+//       { text: 'Tiêu cực', correct: true},
+//       { text: 'Trung tính', correct: false},
+//       { text: 'Không biết', correct: false}
+//     ]
+//   },
+//   {
+//     id: '8',
+//     question: 'Món này ngon quá',
+//     answers: [
+//       { text: 'Tích cực', correct: false},
+//       { text: 'Tiêu cực', correct: true},
+//       { text: 'Trung tính', correct: false},
+//       { text: 'Không biết', correct: false}
+//     ]
+//   },
+//   {
+//     id: '9',
+//     question: 'This branch has no conflicts with the base branch',
+//     answers: [
+//       { text: 'Tích cực', correct: false},
+//       { text: 'Tiêu cực', correct: false},
+//       { text: 'Trung tính', correct: false},
+//       { text: 'Không biết', correct: true}
+//     ]
+//   },
+//   {
+//     id: '10',
+//     question: 'Cửa hàng này chán quá',
+//     answers: [
+//       { text: 'Tích cực', correct: false},
+//       { text: 'Tiêu cực', correct: true},
+//       { text: 'Trung tính', correct: false},
+//       { text: 'Không biết', correct: false}
+//     ]
+//   }
+// ]
 

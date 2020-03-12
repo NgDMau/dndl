@@ -32,25 +32,13 @@
       <div id="question" class="data">
         Bạn hãy chọn 1 trong bốn loại nhãn: Tích cực/ Tiêu cực/ Trung tính/ Không biết, tương ứng cho câu sau đây:
       </div>
-      <div id="shortcut_label" class="shortcut_label hide">
+      <!-- <div id="shortcut_label" class="shortcut_label hide">
         <input id="sl_label" placeholder="Điền nhãn muốn chọn" type="text" >
         <button onclick="goto_label()" class="btn">Chọn</button>
-      </div>
+      </div> -->
       <div id="label" class="label hide">
 
         <div id="answer-buttons" class="btn-grid">
-          <button  class="btn-answer">Answer 1</button>
-          <button  class="btn-answer">Answer 2</button>
-          <button  class="btn-answer">Answer 3</button>
-          <button  class="btn-answer">Answer 4</button>
-          <button  class="btn-answer">Answer 5</button>
-          <button  class="btn-answer">Answer 6</button>
-          <button  class="btn-answer">Answer 7</button>
-          <button  class="btn-answer">Answer 8</button>
-          <button  class="btn-answer">Answer 9</button>
-          <button  class="btn-answer">Answer 10</button>
-          <button  class="btn-answer">Answer 11</button>
-          <button  class="btn-answer">Answer 12</button>
         </div>
       </div>
       <div class="empty hide">
@@ -67,7 +55,7 @@
   <div class="empty"></div>
   <div class="title">Kết quả</div>
   <div id="result_content" class="data">
-    Chúc mừng bạn đã hoàn thành phần đào tạo phân tích cảm xúc văn bản.
+    Chúc mừng bạn đã hoàn thành phần đào tạo phân tích cảm xúc văn bản. Bây giờ hãy bắt đầu với phần đào tạo tiếp theo.
   </div>
   <a id="btn-next-lvl" style="width: 70%" class="" href="/training_audio"><button class='start-btn'>Tiếp tục</button></a>
   <a id="btn-again" style="width: 70%" class="hide" href="/index"><button class='start-btn'>Làm lại</button></a>
@@ -85,4 +73,110 @@
   </div>
 </footer> -->
 </body>
+<script>
+
+var questions = [
+  {
+    id: '1',
+    question: 'Cửa hàng này chán quá',
+    answers: [
+      { text: 'Tích cực', correct: false},
+      { text: 'Tiêu cực', correct: true},
+      { text: 'Trung tính', correct: false},
+      { text: 'Không biết', correct: false}
+    ]
+  },
+  {
+    id: '2',
+    question: 'Thời tiêt thật đẹp',
+    answers: [
+      { text: 'Tích cực', correct: true},
+      { text: 'Tiêu cực', correct: false},
+      { text: 'Trung tính', correct: false},
+      { text: 'Không biết', correct: false}
+    ]
+  },
+  {
+    id: '3',
+    question: 'Đi làm',
+    answers: [
+      { text: 'Tích cực', correct: false},
+      { text: 'Tiêu cực', correct: false},
+      { text: 'Trung tính', correct: true},
+      { text: 'Không biết', correct: false}
+    ]
+  },
+  {
+    id: '4',
+    question: '111111111111',
+    answers: [
+      { text: 'Tích cực', correct: false},
+      { text: 'Tiêu cực', correct: false},
+      { text: 'Trung tính', correct: false},
+      { text: 'Không biết', correct: true}
+    ]
+  },
+  {
+    id: '5',
+    question: 'Em làm chưa được tốt',
+    answers: [
+      { text: 'Tích cực', correct: false},
+      { text: 'Tiêu cực', correct: true},
+      { text: 'Trung tính', correct: false},
+      { text: 'Không biết', correct: false}
+    ]
+  },
+  {
+    id: '6',
+    question: 'Đi đấu thế này ?',
+    answers: [
+      { text: 'Tích cực', correct: false},
+      { text: 'Tiêu cực', correct: false},
+      { text: 'Trung tính', correct: true},
+      { text: 'Không biết', correct: false}
+    ]
+  },
+  {
+    id: '7',
+    question: 'Việc làm thiếu trách nhiệm đã để lại nhiều hậu quả',
+    answers: [
+      { text: 'Tích cực', correct: false},
+      { text: 'Tiêu cực', correct: true},
+      { text: 'Trung tính', correct: false},
+      { text: 'Không biết', correct: false}
+    ]
+  },
+  {
+    id: '8',
+    question: 'Món này ngon quá',
+    answers: [
+      { text: 'Tích cực', correct: false},
+      { text: 'Tiêu cực', correct: true},
+      { text: 'Trung tính', correct: false},
+      { text: 'Không biết', correct: false}
+    ]
+  },
+  {
+    id: '9',
+    question: 'This branch has no conflicts with the base branch',
+    answers: [
+      { text: 'Tích cực', correct: false},
+      { text: 'Tiêu cực', correct: false},
+      { text: 'Trung tính', correct: false},
+      { text: 'Không biết', correct: true}
+    ]
+  },
+  {
+    id: '10',
+    question: 'Cửa hàng này chán quá',
+    answers: [
+      { text: 'Tích cực', correct: false},
+      { text: 'Tiêu cực', correct: true},
+      { text: 'Trung tính', correct: false},
+      { text: 'Không biết', correct: false}
+    ]
+  }
+]
+
+</script>
 </html>
