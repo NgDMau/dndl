@@ -1,0 +1,57 @@
+
+
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://hammerjs.github.io/dist/hammer.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="/css/styles.css" rel="stylesheet">
+    <script defer src="/js/audio_script.js"></script>
+    <title>Hướng dẫn</title>
+
+
+</head>
+
+<body>
+    <div class="flex-container">
+        <div class="empty">
+        </div>
+        <div id="title">Hướng dẫn</div>
+        <div id="question" class="data">
+            Bạn hãy chọn 1 trong bốn loại nhãn: Tích cực/ Tiêu cực/ Trung tính/ Không biết, tương ứng cho đoạn âm thanh dưới đây:
+        </div>
+        <div id="shortcut_label" class="shortcut_label hide">
+            <input id="sl_label" placeholder="Điền nhãn muốn chọn" type="text">
+            <button onclick="goto_label()" class="btn">Chọn</button>
+        </div>
+        <div id="label" class="label hide">
+
+            <div id="answer-buttons" class="btn-grid">
+                <button class="btn-answer">Answer 1</button>
+                <button class="btn-answer">Answer 2</button>
+                <button class="btn-answer">Answer 3</button>
+                <button class="btn-answer">Answer 4</button>
+                <button class="btn-answer">Answer 5</button>
+                <button class="btn-answer">Answer 6</button>
+                <button class="btn-answer">Answer 7</button>
+                <button class="btn-answer">Answer 8</button>
+                <button class="btn-answer">Answer 9</button>
+                <button class="btn-answer">Answer 10</button>
+                <button class="btn-answer">Answer 11</button>
+                <button class="btn-answer">Answer 12</button>
+            </div>
+        </div>
+        <div id="result" class="result hide" style="text-align: center;">
+            <p>aaa</p>
+        </div>
+        <div class="controls">
+            <button id="start-btn" class="start-btn">Bắt đầu</button>
+            <button id="next-btn" class="next-btn btn hide">Next</button>
+        </div>
+    </div>
+</body>
+
+</html>

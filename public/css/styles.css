@@ -168,3 +168,7 @@ img{
 .hide {
   display: none;
 }
+
+.audio {
+  margin: auto;
+}

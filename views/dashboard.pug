@@ -1,4 +1,4 @@
-html(lang="vi")
+html(lang='vi')
   head
     meta(charset="UTF-8")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
@@ -11,13 +11,13 @@ html(lang="vi")
     .container
       header.bar.topbar
         .logo
-          img(src="logo.png" alt="logo")
+          img(src='logo.png', alt='logo')
         .dashboard
           | Dashboard
         .login
           p
-            | Xin chào, #{username} | 
-            a(href="/logout") Đăng xuất
+            | Xin chào, #{username} 
+            a(href='#') Đăng xuất
     .content
       .title
         h1 Tổng quan
@@ -25,15 +25,15 @@ html(lang="vi")
         .overview
           .detail-text
             span Bạn đã kiếm được
-            .detail-result #{current_income} đ
+            .detail-result #{salary} đ
           hr
           .detail
             span Công việc mới
-            .detail-result #{no_new_jobs}
+            .detail-result #{newjobs}
           hr
           .detail
             span Công việc đang làm
-            .detail-result #{no_current_jobs}
+            .detail-result #{currentjobs}
           hr
         .tasks
           .title
@@ -41,9 +41,9 @@ html(lang="vi")
           .title-status
             h2 Công việc đang làm
           .items
-            .item.item1(onclick="window.location='/index';")
+            .item.item1
               .item-project
-                | Dự án Sentiment
+                | Dự án A
               .item-title
                 | Dán nhãn dữ liệu âm thanh
               .item-cagotories
@@ -119,8 +119,8 @@ html(lang="vi")
         footer
           .bar.lowbar
             .lowbar-container
-              img(src="logo.png" alt="logo")
+              img(src='logo.png', alt='logo')
               .lowbar-content
-                a(href="/about") Về chúng tôi
-                |  | 
-                a(href="#") Quay lại đầu trang
+                a(href='#') Về chúng tôi
+                |  
+                a(href='#') Quay lại đầu trang

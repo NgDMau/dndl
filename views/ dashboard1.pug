@@ -1,0 +1,125 @@
+html(lang='vi')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet', type='text/css', href='/css/dashboard.css')
+    link(href='https://fonts.googleapis.com/css?family=Barlow+Condensed:400,600&display=swap', rel='stylesheet')
+    script(src='/js/dashboard.js')
+    title Dashboard
+  body
+    .container
+      header.bar.topbar
+        .logo
+          img(src='logo.png', alt='logo')
+        .dashboard
+          | Dashboard
+        .login
+          p
+            | Xin chào, #{username} 
+            a(href='#') Đăng xuất
+    .content
+      .title
+        h1 Tổng quan
+      main.main
+        .overview
+          .detail-text
+            span Bạn đã kiếm được
+            .detail-result #{salary} đ
+          hr
+          .detail
+            span Công việc mới
+            .detail-result #{newjobs}
+          hr
+          .detail
+            span Công việc đang làm
+            .detail-result #{currentjobs}
+          hr
+        .tasks
+          .title
+            h1 Danh sách công việc
+          .title-status
+            h2 Công việc đang làm
+          .items
+            .item.item1(onclick="javascript:window.location.href='/index'")
+              .item-project
+                | Dự án A
+              .item-title
+                | Dán nhãn dữ liệu âm thanh
+              .item-cagotories
+                | Khoa học
+              .price
+                | 100 đồng/ 1 nhãn
+            .item.item2
+              .item-project
+                | Dự án A
+              .item-title
+                | Dán nhãn dữ liệu âm thanh
+              .item-cagotories
+                | Khoa học
+              .price
+                | 100 đồng/ 1 nhãn
+            .item.item3
+              .item-project
+                | Dự án A
+              .item-title
+                | Dán nhãn dữ liệu âm thanh
+              .item-cagotories
+                | Khoa học
+              .price
+                | 100 đồng/ 1 nhãn
+            .item.item4
+              .item-project
+                | Dự án A
+              .item-title
+                | Dán nhãn dữ liệu âm thanh
+              .item-cagotories
+                | Khoa học
+              .price
+                | 100 đồng/ 1 nhãn
+          .title-status
+            h2 Công việc mới
+          .items
+            .item.item1
+              .item-project
+                | Dự án A
+              .item-title
+                | Dán nhãn dữ liệu âm thanh
+              .item-cagotories
+                | Khoa học
+              .price
+                | 100 đồng/ 1 nhãn
+            .item.item2
+              .item-project
+                | Dự án A
+              .item-title
+                | Dán nhãn dữ liệu âm thanh
+              .item-cagotories
+                | Khoa học
+              .price
+                | 100 đồng/ 1 nhãn
+            .item.item3
+              .item-project
+                | Dự án A
+              .item-title
+                | Dán nhãn dữ liệu âm thanh
+              .item-cagotories
+                | Khoa học
+              .price
+                | 100 đồng/ 1 nhãn
+            .item.item4
+              .item-project
+                | Dự án A
+              .item-title
+                | Dán nhãn dữ liệu âm thanh
+              .item-cagotories
+                | Khoa học
+              .price
+                | 100 đồng/ 1 nhãn
+        footer
+          .bar.lowbar
+            .lowbar-container
+              img(src='logo.png', alt='logo')
+              .lowbar-content
+                a(href='#') Về chúng tôi
+                |  
+                a(href='#') Quay lại đầu trang

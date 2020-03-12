@@ -137,6 +137,9 @@ app.get('/forgotpass', function (req, res) {
 app.get('/signup', function (req, res) {
     res.sendFile(path.join(__dirname, '/views/', 'signup.html'))
 });
+app.get('/login2', function (req, res) {
+    res.sendFile(path.join(__dirname, '/views/', 'login2.html'))
+});
 
 app.get('/logout', function (req, res){
     req.session.destroy(function (err) {
