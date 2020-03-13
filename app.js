@@ -109,6 +109,14 @@ app.get('/training_audio', function (req, res) {
     }
 });
 
+app.get('/training_topic', function (req, res) {
+    if (req.isAuthenticated()) {
+        res.sendFile(path.join(__dirname, '/views/', 'training_topic.html'));
+    } else {
+        res.redirect('/login')
+    }
+});
+
 app.get('/login', function (req, res) {
     if (req.isAuthenticated()) {
         res.redirect('/')
