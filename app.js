@@ -7,6 +7,8 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 var passport = require('passport');
 var localStrategy = require('passport-local').Strategy;
+var customStrategy = require('passport-custom').Strategy;
+
 var pg = require('pg');
 var Pool = require('pg-pool')
 
@@ -36,6 +38,17 @@ passport.use(new localStrategy(
         });
       }));
 
+passport.use('id-only', new customStrategy(
+    function(req, callback){
+        var id = req.body.username;
+        db.users.findByUsername(id, function(err, user){
+            if (err) {return callback(err)}
+            if (!user) {return callback(null, false)}
+            return callback(null, user);
+        })
+    }
+))
+
 passport.serializeUser((user, done) => {
     done(null, user.username);
 })
@@ -64,16 +77,17 @@ app.use(flash());
 app.set('view engine', 'pug')
 
 app.post('/login',
-    passport.authenticate('local', { successRedirect: '/',
+    passport.authenticate('id-only', { successRedirect: '/',
                                      failureRedirect: '/login'}));
-var user_sample_data = {
-    username: "ngdmau",
-    current_income: 100000,
-    current_jobs: ['text_sentiment', 'text_topic', 'audio_sentiment'],
-    new_jobs: ['audio_topic', 'audio_gender'],
-    no_current_jobs: 3,
-    no_new_jobs: 2,
-}
+
+// var user_sample_data = {
+//     username: "ngdmau",
+//     current_income: 100000,
+//     current_jobs: ['text_sentiment', 'text_topic', 'audio_sentiment'],
+//     new_jobs: ['audio_topic', 'audio_gender'],
+//     no_current_jobs: 3,
+//     no_new_jobs: 2,
+// }
 
 
 app.get('/', function (req, res) {
@@ -121,7 +135,7 @@ app.get('/login', function (req, res) {
     if (req.isAuthenticated()) {
         res.redirect('/')
     } else {
-        res.sendFile(path.join(__dirname, '/views/', 'login.html'))
+        res.sendFile(path.join(__dirname, '/views/', 'login2.html'))
     }
     
 });
