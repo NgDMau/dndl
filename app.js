@@ -135,7 +135,7 @@ app.get('/login', function (req, res) {
     if (req.isAuthenticated()) {
         res.redirect('/')
     } else {
-        res.sendFile(path.join(__dirname, '/views/', 'login2.html'))
+        res.sendFile(path.join(__dirname, '/views/', 'login.html'))
     }
     
 });
