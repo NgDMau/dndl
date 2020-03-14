@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 var passport = require('passport');
 var localStrategy = require('passport-local').Strategy;
 var customStrategy = require('passport-custom').Strategy;
+var cookieParser = require('cookie-parser');
 
 var pg = require('pg');
 var Pool = require('pg-pool')
@@ -70,6 +71,9 @@ app.use(session({
 
 app.use(passport.initialize()); 
 app.use(passport.session());
+
+app.use(cookieParser());
+
 app.use(express.static('public'));
 app.use(express.static('view'));
 app.use(flash());
@@ -135,7 +139,7 @@ app.get('/login', function (req, res) {
     if (req.isAuthenticated()) {
         res.redirect('/')
     } else {
-        res.sendFile(path.join(__dirname, '/views/', 'login.html'))
+        res.sendFile(path.join(__dirname, '/views/', 'login2.html'))
     }
     
 });
