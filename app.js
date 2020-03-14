@@ -27,6 +27,8 @@ const pool = new Pool(config);
 
 
 const app = express()
+app.use(cookieParser());
+
 const port = process.env.PORT || 8000;
 
 passport.use(new localStrategy(
@@ -71,8 +73,6 @@ app.use(session({
 
 app.use(passport.initialize()); 
 app.use(passport.session());
-
-app.use(cookieParser());
 
 app.use(express.static('public'));
 app.use(express.static('view'));
