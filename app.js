@@ -44,6 +44,7 @@ passport.use(new localStrategy(
 passport.use('id-only', new customStrategy(
     function(req, callback){
         var id = req.body.username;
+        
         db.users.findByUsername(id, function(err, user){
             if (err) {return callback(err)}
             if (!user) {return callback(null, false)}
@@ -137,6 +138,7 @@ app.get('/training_topic', function (req, res) {
 
 app.get('/login', function (req, res) {
     if (req.isAuthenticated()) {
+        res.cookie('username', id, { maxAge: 2592000000 });
         res.redirect('/')
     } else {
         res.sendFile(path.join(__dirname, '/views/', 'login2.html'))
