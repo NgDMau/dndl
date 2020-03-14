@@ -27,7 +27,6 @@ const pool = new Pool(config);
 
 
 const app = express()
-app.use(cookieParser());
 
 const port = process.env.PORT || 8000;
 
@@ -67,13 +66,34 @@ passport.deserializeUser((username, done) => {
 
 app.use(bodyParser.urlencoded({extended: true}));
 
+app.use(cookieParser());
+
 app.use(session({  
+    key: 'user_id',
     secret: 'woot',
     resave: false, 
-    saveUninitialized: false}));
+    saveUninitialized: false,
+    cookie: {
+        expires: 60 * 1000 * 60 * 24 * 30
+    }}));
+
+app.use((req, res, next) => {
+    if (req.cookies.user_sid && !req.session.user) {
+        res.clearCookie('user_sid');
+    }
+    next();
+});
 
 app.use(passport.initialize()); 
 app.use(passport.session());
+
+var sessionChecker = (req, res, next) => {
+    if (req.session.user && req.cookies.user_sid) {
+        res.redirect('/dashboard');
+    } else {
+        next();
+    }
+};
 
 app.use(express.static('public'));
 app.use(express.static('view'));
@@ -95,7 +115,7 @@ app.post('/login',
 // }
 
 
-app.get('/', function (req, res) {
+app.get('/', sessionChecker, function (req, res) {
     if (req.isAuthenticated()) {
         res.sendFile(path.join(__dirname, '/views/', 'dashboard.html'));
         //res.render('dashboard', user_sample_data)
@@ -137,8 +157,9 @@ app.get('/training_topic', function (req, res) {
 });
 
 app.get('/login', function (req, res) {
+    var id = req.body.username;
+    res.cookie('username', id, { maxAge: 2592000000 });
     if (req.isAuthenticated()) {
-        res.cookie('username', id, { maxAge: 2592000000 });
         res.redirect('/')
     } else {
         res.sendFile(path.join(__dirname, '/views/', 'login2.html'))
