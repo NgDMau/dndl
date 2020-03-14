@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/css/training_audio.css" rel="stylesheet">
+  <script defer src="/js/training_audio.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:400,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>Hướng dẫn</title>
+
+
+</head>
+<body>
+  <!-- <header class = "bar topbar" >          
+    <div class ="logo">
+      <img src="img/icon.png" alt="logo">
+    </div>
+    <div class = "dashboard">
+      Training
+    </div>
+    <div class = "login">
+        <p>Xin chào, Thu | <a href="#">Đăng xuất</a></p>
+    </div>
+  </header> -->
+  <div id="content" clas="container">
+    <div class="flex-container">
+      <div class="empty">
+      </div>
+      <div class="title" id="title">Hướng dẫn</div>
+      <div id="question" class="data">
+        Bạn hãy làm theo hướng dẫn và chọn các nhãn thích hợp cho các đoạn hội thoại sau đây:
+      </div>
+      <audio id="src_audio" class="hide" src="audio/audio_1.mp3" type="audio/mp3"> </audio>
+      <button id="btn_play" onclick="togglePlay()" class="btn-play-stop hide"><i class="fa fa-play"></i></button>
+
+      <div id="shortcut_label" class="shortcut_label hide">
+        <input id="sl_label" placeholder="Điền nhãn muốn chọn" type="text" >
+        <button onclick="goto_label()" class="btn">Chọn</button>
+      </div>
+      <div id="label" class="label hide">
+
+        <div id="answer-buttons" class="btn-grid">
+          <button  class="btn-answer">Answer 1</button>
+          <button  class="btn-answer">Answer 2</button>
+          <button  class="btn-answer">Answer 3</button>
+          <button  class="btn-answer">Answer 4</button>
+          <button  class="btn-answer">Answer 5</button>
+          <button  class="btn-answer">Answer 6</button>
+          <button  class="btn-answer">Answer 7</button>
+          <button  class="btn-answer">Answer 8</button>
+          <button  class="btn-answer">Answer 9</button>
+          <button  class="btn-answer">Answer 10</button>
+          <button  class="btn-answer">Answer 11</button>
+          <button  class="btn-answer">Answer 12</button>
+        </div>
+      </div>
+      <div class="empty hide">
+      </div>
+      <div class="controls">
+        <button id="start-btn" class="start-btn">Bắt đầu</button>
+        <button id="next-btn" onclick="end_audio()" class="next-btn btn hide">Tiếp tục</button>
+        <button id="next-lvl-btn" class="next-btn btn hide">Tiếp tục</button>
+      </div>
+  </div>
+</div>
+
+<div id="result" class="result hide">
+  <div class="empty"></div>
+  <div class="title">Kết quả</div>
+  <div id="result_content" class="data">
+    Chúc mừng bạn đã hoàn thành phần đào tạo phân tích cảm xúc đoạn âm thanh. Bây giờ hãy bắt đầu với phần đào tạo tiếp theo.
+  </div>
+  <a id="btn-next-lvl" style="width: 70%" class="" href="/training_topic"><button class='start-btn'>Tiếp tục</button></a>
+  <a id="btn-again" style="width: 70%" class="hide" href="/training_audio"><button class='start-btn'>Làm lại</button></a>
+
+</div>
+
+<!-- <footer>
+  <div class = "bar lowbar">
+      <div class = lowbar-container>
+          <img src="img/icon.png" alt="logo">
+          <div class = "lowbar-content">                               
+              <a href="#">Về chúng tôi</a> | <a href="#">Quay lại đầu trang</a>
+          </div>
+      </div>
+  </div>
+</footer> -->
+</body>
+
+<script>
+  var myAudio = document.getElementById("src_audio");
+  var isPlaying = false;
+  var playElement = document.getElementById("btn_play");
+
+  function togglePlay() {
+    if (isPlaying) {
+      myAudio.pause()
+      playElement.getElementsByTagName('i')[0].classList.remove('fa-pause')
+      playElement.getElementsByTagName('i')[0].classList.add('fa-play')
+
+    } else {
+      myAudio.play();
+      playElement.getElementsByTagName('i')[0].classList.remove('fa-play')
+      playElement.getElementsByTagName('i')[0].classList.add('fa-pause')
+    }
+  };
+
+  myAudio.onended = function() {
+    playElement.getElementsByTagName('i')[0].classList.remove('fa-pause')
+    playElement.getElementsByTagName('i')[0].classList.add('fa-play')
+  };
+
+  function end_audio(){
+    if (isPlaying) {
+      myAudio.pause()
+      playElement.getElementsByTagName('i')[0].classList.remove('fa-pause')
+      playElement.getElementsByTagName('i')[0].classList.add('fa-play')
+      isPlaying = false;
+    }
+  }
+
+  myAudio.onplaying = function() {
+    isPlaying = true;
+  };
+  myAudio.onpause = function() {
+    isPlaying = false;
+};
+</script>
+</html>

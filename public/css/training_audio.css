@@ -1,0 +1,178 @@
+html{
+    font-family: 'Barlow Condensed', sans-serif;
+    color: #434556;
+  }
+  
+  .bar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #434556;
+    position: fixed;
+    height: 70px;
+    width: 100%;
+    margin: 0;
+    left: 0px;
+    z-index: 10;
+    color: white;
+  
+  }
+  
+  .topbar{
+    top: 0;
+  }
+  
+  .lowbar{
+    bottom: 0;
+  }
+  .login{
+    padding-right : 20px;
+  }
+  .dashboard{
+    font-size: 32px;
+    font-weight: bold;
+    text-align-last: center;
+    bottom: 10px;
+  }
+  
+  img{
+    height: 50px;
+  }
+  
+  .flex-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+  }
+  .flex-container > div {
+    width: 90%;
+    font-size: 15px;
+    font-weight: bold;
+    color: black;
+  
+  }
+  
+  .empty {
+    height: 100px;
+  }
+
+  .btn-play-stop {
+    border: none;
+    color: black;
+    padding: 12px 16px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  #title {
+    height: 50px;
+    font-size: 30px;
+    font-weight: bold;
+    color: black;
+  }
+  
+  .title {
+    height: 50px;
+    font-size: 30px;
+    font-weight: bold;
+    color: black;
+  }
+  
+  .data {
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    height: 50px;
+    margin: 10px;
+    padding: 9px;
+  }
+  
+  .shortcut_label {
+    display: flex;
+    margin: 0 10px;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    margin: 20px 0;
+  }
+  .shortcut_label > input {
+    margin: 0 10px;
+    width: 70%;
+    height: 20px;
+    border-radius: 5px;
+    border: solid 1px;
+    padding: 5px;
+  
+  }
+  
+  .btn {
+    border-radius: 5px;
+    height: 30px;
+    font-size: 15px;
+    font-weight: bold;
+    color: black;
+  }
+  
+  .label {
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 5px;
+    overflow: auto;
+    height: 150px;
+  
+  }
+  
+  .btn-grid {
+    display: grid;
+    grid-template-columns: auto;
+    gap: 10px;
+    height: 50px;
+  }
+  
+  .btn-answer {
+    border-radius: 100px;
+    padding: 5px 10px;
+    outline: none;
+    height: 30px;
+    font-size: 15px;
+    font-weight: bold;
+    color: black;
+  
+  }
+  
+  .start-btn, .next-btn {
+    border-radius: 100px;
+    outline: none;
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 10px 20px;
+    width: 100%;
+    height: 50px;
+    margin-top: 10px;
+  
+  }
+  
+  .next-btn {
+    margin-top: 50px;
+  }
+  
+  .controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .result {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .hide {
+    display: none;
+  }

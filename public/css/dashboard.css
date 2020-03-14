@@ -1,0 +1,100 @@
+html{
+  font-family: 'Barlow Condensed', sans-serif;
+  color: #434556;
+  font-size: 15px;
+}
+
+a {
+  color: inherit; 
+  text-decoration: inherit; 
+}
+
+main{
+  padding: 10%;
+}
+.bar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #434556;
+  position: fixed;
+  height: 70px;
+  width: 100%;
+  margin: 0;
+  left: 0px;
+  z-index: 10;
+  color: white;
+
+}
+img{
+  height: 50px;
+}
+
+.topbar{
+  top: 0;
+}
+.lowbar{
+  bottom: 0;
+}
+.content{
+  padding-top: 58px;
+}
+.login{
+  padding-right : 20px;
+}
+.dashboard{
+  font-size: 2rem;
+  font-weight: bold;
+  text-align-last: center;
+  bottom: 10px;
+}
+
+.detail-result{
+  float: right;
+}
+
+.title{
+  text-align: center;
+  font-weight: bold;
+}
+.title-status{
+  text-align: center;
+}
+
+/*slider*/
+
+.swiper-container{
+  width: 100%;
+}
+.swiper-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn {
+  
+  width: 200px;;
+  min-height: 150px;
+  min-width: 200px;
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  margin: 2em 1em;
+  border: 2px solid #434556;
+
+  /* Center slide text vertically */
+  
+}
+.swiper-wrapper div:hover {
+  background: #434556;
+  color: white;
+}
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding:10px;
+  background-color: #24252E;
+  
+}

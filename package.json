@@ -5,13 +5,20 @@
   "main": "app.js",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.4",
     "db_module": "file:local_modules/db_module",
     "express": "^4.17.1",
+    "express-session": "^1.17.0",
     "hammerjs": "^2.0.8",
+    "jade": "^1.11.0",
+    "label-studio": "^0.4.0",
     "local_modules": "file:local_modules",
     "multer": "^1.4.2",
-    "pg": "^7.18.1",
+    "passport": "^0.4.1",
+    "passport-custom": "^1.1.1",
+    "passport-local": "^1.0.0",
+    "pg": "^7.18.2",
     "pug": "^2.0.4"
   },
   "engines": {
