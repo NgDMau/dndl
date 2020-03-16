@@ -19,7 +19,9 @@
     "passport-custom": "^1.1.1",
     "passport-local": "^1.0.0",
     "pg": "^7.18.2",
-    "pug": "^2.0.4"
+    "pug": "^2.0.4",
+    "request": "^2.88.2",
+    "path": "^0.12.7"
   },
   "engines": {
     "node": "13.7.0"

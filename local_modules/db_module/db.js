@@ -1,26 +1,23 @@
-async function getDB(query) {
-    const {
-        Pool,
-        Client
-    } = require('pg');
-    // let response
-    const pool = new Pool({
-        user: 'vvdicwtmvinosq',
-        host: 'ec2-18-235-97-230.compute-1.amazonaws.com',
-        database: 'd9p7d0hvpi42ri',
-        password: 'e9179f8811881a2e527c536030e0ac6d4c4eaee84cccbd35f1dd5d7c19769be8',
-        port: 5432,
-        ssl: true
-    })
-    let response = await pool.query(query);
-    end = await pool.end();
-    return response;
-}
+var Client  = require('pg');
+var Pool = require('pg-pool')
 
-exports.getRandomSentence = async function() {
-    var response = await getDB('SELECT * FROM sentiment');
-    highEnd = response.rows.length - 1;
-    lowEnd = 0;
-    randomIndex = Math.floor(Math.random() * (highEnd - lowEnd) + lowEnd);
-    return response.rows[randomIndex]
-  }
+const pool = new Pool({
+    user: 'mpndhiboquobry',
+    password: '92cf533ac275e9f7a116c6eb8e79477b3fa074679712bf8165a08f834db679f5',
+    host: 'ec2-3-229-210-93.compute-1.amazonaws.com',
+    port: '5432',
+    database: 'd5tabqes3975',
+    ssl: true
+});
+loginAttempt();
+	async function loginAttempt() {
+        const client = await pool.connect()
+                try{
+                    await client.query('BEGIN')
+                    var currentAccountsData = await JSON.stringify(client.query('SELECT "id", "username", "email", "address", "role" FROM "users" WHERE "username"=$1', ['guest'], function(err, result) {
+                        console.log(result.rows[0])
+                    }))
+                }
+                
+                catch(e){throw (e);}
+}
