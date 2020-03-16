@@ -1,15 +1,22 @@
 var express = require('express');
-var router = express.Router();
 var path = require('path');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  if (!req.body.username) {
-    res.redirect('/login')
-    res.sendFile(path.join(__dirname, '/../views/', 'login2.html'));
-  } else {
-    res.sendFile(path.join(__dirname, '/../views/', 'dashboard.html'));
-  }
-})
+module.exports = function ( app ) {
+  app.get('/', function (req, res) {
+    if (req.isAuthenticated()) {
+      res.sendFile(path.join(__dirname, '../views/', 'dashboard.html'));
+      //res.render('dashboard', user_sample_data)
+    } else {
+      res.redirect('/login')
+    }
+  });
 
-module.exports = router;
+  app.get('/index', function (req, res) {
+    if (req.isAuthenticated()) {
+      res.sendFile(path.join(__dirname, '../views/', 'index.html'));
+    } else {
+      res.redirect('/login')
+    }
+  });
+  
+}

@@ -40,9 +40,18 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
-require('./local_modules/routes.js')(app);
+// apply routes to the web
+require('./routes/index')(app);
+require('./routes/signup')(app);
+require('./routes/login')(app);
+require('./routes/forgotpass')(app);
+require('./routes/about')(app);
+require('./routes/dashboard')(app);
+require('./routes/training_topic')(app);
+require('./routes/training_audio')(app);
+require('./routes/logout')(app);
 
-app.set('view engine', 'pug')
+app.set('view engine', 'pug') 
 
 
 
