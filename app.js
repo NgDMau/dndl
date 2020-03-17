@@ -49,10 +49,9 @@ require('./routes/about')(app);
 require('./routes/dashboard')(app);
 require('./routes/training_topic')(app);
 require('./routes/training_audio')(app);
+require('./routes/certificate')(app);
 require('./routes/logout')(app);
 
 app.set('view engine', 'pug') 
-
-
 
 app.listen(port, () => { console.log(`Example app listening on port ${port}` )});

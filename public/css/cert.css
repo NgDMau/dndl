@@ -1,0 +1,81 @@
+body{
+    font-family: 'Playfair Display', serif;
+    color: white
+}
+.container{
+    background-color: #434556;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    position: fixed;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.firstframe{
+    width:400px;
+    height: 300px;
+    border-style: solid;
+    border-width: 5px;
+    border-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+}
+.secondframe{
+    width:370px;
+    height: 270px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: white;
+    display: flex;
+    align-items: center;
+    padding-top:5px;
+    flex-direction: column;
+}
+.logo{
+    font-family: 'Montserrat', sans-serif;
+    color: lightgray;
+    font-weight: bold;
+    margin-top: 10px;
+}
+.name{
+    border-bottom: 0.5px solid white; 
+    font-size: 30px; 
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    line-height: 2.05;
+    letter-spacing: 0.08px;
+    margin-top: 10px;
+}
+.label{
+    font-size: 20px; 
+    margin-top: 10px;
+    font-style: normal;
+    font-weight: bold;
+}
+.hiddenbox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+.start-btn{
+    border-radius: 100px;
+    outline: none;
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+    width: 400px;
+    height: 30px;
+    margin-top:30px;
+  }
+  .date{
+    font-size: small; 
+    margin-top: 20px;
+  }
