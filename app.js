@@ -154,6 +154,9 @@ app.get('/signup', function (req, res) {
 app.get('/login2', function (req, res) {
     res.sendFile(path.join(__dirname, '/views/', 'login2.html'))
 });
+app.get('/certificate', function (req, res) {
+    res.sendFile(path.join(__dirname, '/views/', 'certificate.html'))
+});
 
 app.get('/logout', function (req, res){
     req.session.destroy(function (err) {
