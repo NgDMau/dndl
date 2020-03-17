@@ -53,6 +53,16 @@ require('./routes/logout')(app);
 
 app.set('view engine', 'pug') 
 
+app.get('/signup', function (req, res) {
+    res.sendFile(path.join(__dirname, '/views/', 'signup.html'))
+});
+app.get('/login2', function (req, res) {
+    res.sendFile(path.join(__dirname, '/views/', 'login2.html'))
+});
+app.get('/certificate', function (req, res) {
+    res.sendFile(path.join(__dirname, '/views/', 'certificate.html'))
+});
+
 
 
 app.listen(port, () => { console.log(`Example app listening on port ${port}` )});
