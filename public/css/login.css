@@ -90,4 +90,11 @@ input[type=submit]:hover {
     flex-direction: row;
     justify-content: space-between;
 }
+.logo{
+    font-family: 'Montserrat', sans-serif;
+    color: lightgray;
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: 30px;
+}
 
