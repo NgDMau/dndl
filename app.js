@@ -51,6 +51,10 @@ require('./routes/training_topic')(app);
 require('./routes/training_audio')(app);
 require('./routes/certificate')(app);
 require('./routes/logout')(app);
+require('./routes/result')(app);
+require('./routes/result2')(app);
+
+
 
 app.set('view engine', 'pug') 
 
