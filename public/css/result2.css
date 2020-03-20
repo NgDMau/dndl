@@ -1,0 +1,66 @@
+html{
+    font-family: 'Barlow Condensed', sans-serif;
+    color: #434556;
+  }
+  
+  .flex-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+  }
+  .flex-container > div {
+    width: 90%;
+    font-size: 15px;
+    font-weight: bold;
+    color: black;
+  }
+  #title {
+    height: 50px;
+    font-size: 30px;
+    font-weight: bold;
+    color: orangered;
+    text-align: center;
+  }
+  
+  img{
+    height: 100px;
+    margin-top: 10px;
+
+  }
+  .next-btn {
+    border-radius: 100px;
+    outline: none;
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 10px 20px;
+    width: 100%;
+    height: 50px;
+    margin-top: 10px;
+  
+  }
+  
+  .next-btn {
+    margin-top: 50px;
+  }
+  .empty {
+    height: 100px;
+  }
+  #myProgress {
+    border-radius: 20px ;
+    margin-top: 50px;
+    width: 100%;
+    background-color: lightgrey;
+  }
+  
+  #myBar {
+    width: 1%;
+    border-radius: 20px ;
+    background-color: #4CAF50;
+    color: white;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+  }
