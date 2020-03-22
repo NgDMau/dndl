@@ -120,11 +120,7 @@ function selectAnswer(e) {
   if (shuffledQuestions.length > currentQuestionIndex + 1) {
     nextButton.classList.remove('hide')
   } else {
-    for (let i = 0; i < shuffledQuestions.length; i++) {
-      if(shuffledQuestions[i] == undefined){
-        shuffledQuestions.splice(i, 1);
-      }    
-    }
+
     resultButton.classList.remove('hide')
   }   
   
@@ -139,6 +135,11 @@ function setStatusClass(element, correct) {
 }
 
 function result(){
+  for (let i = 0; i < shuffledQuestions.length; i++) {
+    if(shuffledQuestions[i] == undefined){
+      shuffledQuestions.splice(i, 1);
+    }    
+  }
   if(score == 10){
     document.getElementById('content').classList.add('hide');
     resultElement.classList.remove('hide');
