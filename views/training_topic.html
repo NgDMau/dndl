@@ -46,7 +46,7 @@
       <div class="controls">
         <button id="start-btn" class="start-btn">Bắt đầu</button>
         <button id="next-btn" class="next-btn btn hide">Tiếp tục</button>
-        <button id="next-lvl-btn" class="next-btn btn hide">Tiếp tục</button>
+        <button id="result-btn" class="next-btn btn hide">Tiếp tục</button>
       </div>
   </div>
 </div>
@@ -80,7 +80,7 @@
     var questions = [
   {
     id: '1',
-    question: 'Bây giờ có đến mấy bộ sách giáo khoa lận, không biết phải mua quyển nào cho con nó học đây',
+    quest: 'Bây giờ có đến mấy bộ sách giáo khoa lận, không biết phải mua quyển nào cho con nó học đây',
     answers: [
       { text: 'Sức khỏe', correct: false},
       { text: 'Giáo dục', correct: true},
@@ -91,7 +91,7 @@
   },
   {
     id: '2',
-    question: 'Tôi cần mua một bộ máy tính để bàn phục vụ công việc văn phòng, giá cả dưới 10 triệu ạ',
+    quest: 'Tôi cần mua một bộ máy tính để bàn phục vụ công việc văn phòng, giá cả dưới 10 triệu ạ',
     answers: [
       { text: 'Sức khỏe', correct: false},
       { text: 'Giáo dục', correct: false},
@@ -102,7 +102,7 @@
   },
   {
     id: '3',
-    question: 'có phòng trong công nghệ thông tin 1tr2 phòng như nhà nghỉ điều hoà nóng lạnh đầy đủ, bác chủ nhà trách nhiệm vui tính',
+    quest: 'có phòng trong công nghệ thông tin 1tr2 phòng như nhà nghỉ điều hoà nóng lạnh đầy đủ, bác chủ nhà trách nhiệm vui tính',
     answers: [
       { text: 'Sức khỏe', correct: false},
       { text: 'Giáo dục', correct: false},
@@ -113,7 +113,7 @@
   },
   {
     id: '4',
-    question: 'Học trong 2-3 tháng, lịch học sau khai giảng sẽ thảo luận sao cho phù hợp nhất với điều kiện thực tế của học viên và giáo viên giảng dạ',
+    quest: 'Học trong 2-3 tháng, lịch học sau khai giảng sẽ thảo luận sao cho phù hợp nhất với điều kiện thực tế của học viên và giáo viên giảng dạ',
     answers: [
       { text: 'Sức khỏe', correct: false},
       { text: 'Giáo dục', correct: true},
@@ -124,7 +124,7 @@
   },
   {
     id: '5',
-    question: 'Đã có ai bị như mình chưa ạ, mình bị trên lưng mấy năm nay rồi, cũng thường xuyên tắm lá chè xanh mà vẫn không bớt giảm gì cả. Mọi người cho mình vài góp ý với ạ.',
+    quest: 'Đã có ai bị như mình chưa ạ, mình bị trên lưng mấy năm nay rồi, cũng thường xuyên tắm lá chè xanh mà vẫn không bớt giảm gì cả. Mọi người cho mình vài góp ý với ạ.',
     answers: [
     { text: 'Sức khỏe', correct: true},
       { text: 'Giáo dục', correct: false},
@@ -135,7 +135,7 @@
   },
   {
     id: '6',
-    question: 'Đúng là ở nhà vinhome thích thật sự, dịch vụ tiện ích đầy đủ, an toàn tiện lợi.',
+    quest: 'Đúng là ở nhà vinhome thích thật sự, dịch vụ tiện ích đầy đủ, an toàn tiện lợi.',
     answers: [
     { text: 'Sức khỏe', correct: false},
       { text: 'Giáo dục', correct: false},
@@ -146,7 +146,7 @@
   },
   {
     id: '7',
-    question: 'Người mệt mỏi, suy nhược, hay lo lắng thì nặng đầu thôi bạn, với lại nếu mắt đi bụi, cay mắt, hay mắt làm việc với cường độ cao thì có thể đỏ nhé.',
+    quest: 'Người mệt mỏi, suy nhược, hay lo lắng thì nặng đầu thôi bạn, với lại nếu mắt đi bụi, cay mắt, hay mắt làm việc với cường độ cao thì có thể đỏ nhé.',
     answers: [
     { text: 'Sức khỏe', correct: true},
       { text: 'Giáo dục', correct: false},
@@ -157,7 +157,7 @@
   },
   {
     id: '8',
-    question: 'từ cơ thể con người, các loài động vật cho đến cấu trúc động cơ máy, tất cả đều có thể được phân tích chi tiết sống động bằng chiếc máy tính xách tay áp dụng công nghệ thực tế ảo',
+    quest: 'từ cơ thể con người, các loài động vật cho đến cấu trúc động cơ máy, tất cả đều có thể được phân tích chi tiết sống động bằng chiếc máy tính xách tay áp dụng công nghệ thực tế ảo',
     answers: [
     { text: 'Sức khỏe', correct: false},
       { text: 'Giáo dục', correct: false},
@@ -168,7 +168,7 @@
   },
   {
     id: '9',
-    question: 'Hiện nay, trên ảnh radar ở Đăk Lắk, Đắk Nông, Lâm Đồng đang có mây đối lưu phát triển gây mưa.',
+    quest: 'Hiện nay, trên ảnh radar ở Đăk Lắk, Đắk Nông, Lâm Đồng đang có mây đối lưu phát triển gây mưa.',
     answers: [
     { text: 'Sức khỏe', correct: false},
       { text: 'Giáo dục', correct: false},
@@ -179,7 +179,7 @@
   },
   {
     id: '10',
-    question: 'Cửa hàng này chán quá',
+    quest: 'Cửa hàng này chán quá',
     answers: [
     { text: 'Sức khỏe', correct: false},
       { text: 'Giáo dục', correct: false},

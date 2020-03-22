@@ -45,8 +45,8 @@
       </div>
       <div class="controls">
         <button id="start-btn" class="start-btn">Bắt đầu</button>
-        <button id="next-btn" class="next-btn btn hide">Tiếp tục</button>
-        <button id="next-lvl-btn" class="next-btn btn hide">Tiếp tục</button>
+        <button id="next-btn" class="next-btn btn hide" data-correct="false">Tiếp tục</button>
+        <button id="result-btn" class="next-btn btn hide" data-correct="false"> Tiếp tục</button>
       </div>
   </div>
 </div>
@@ -58,7 +58,7 @@
     Chúc mừng bạn đã hoàn thành phần đào tạo phân tích cảm xúc văn bản. Bây giờ hãy bắt đầu với phần đào tạo tiếp theo.
   </div>
   <a id="btn-next-lvl" style="width: 70%" class="" href="/training_audio"><button class='start-btn'>Tiếp tục</button></a>
-  <a id="btn-again" style="width: 70%" class="hide" href="/index"><button class='start-btn'>Làm lại</button></a>
+  <a id="btn-again" style="width: 70%" class="hide"><button class='start-btn'>Làm lại</button></a>
 
 </div>
 
@@ -78,7 +78,7 @@
 var questions = [
   {
     id: '1',
-    question: 'Cửa hàng này chán quá',
+    quest: 'Cửa hàng này chán quá',
     answers: [
       { text: 'Tích cực', correct: false},
       { text: 'Tiêu cực', correct: true},
@@ -88,7 +88,7 @@ var questions = [
   },
   {
     id: '2',
-    question: 'Thời tiêt thật đẹp',
+    quest: 'Thời tiêt thật đẹp',
     answers: [
       { text: 'Tích cực', correct: true},
       { text: 'Tiêu cực', correct: false},
@@ -98,27 +98,27 @@ var questions = [
   },
   {
     id: '3',
-    question: 'Đi làm',
+    quest: 'Đi làm',
     answers: [
       { text: 'Tích cực', correct: false},
       { text: 'Tiêu cực', correct: false},
       { text: 'Trung tính', correct: true},
-      { text: 'Không biết', correct: true}
+      { text: 'Không biết', correct: false}
     ]
   },
   {
     id: '4',
-    question: '111111111111',
+    quest: '111111111111',
     answers: [
       { text: 'Tích cực', correct: false},
       { text: 'Tiêu cực', correct: false},
       { text: 'Trung tính', correct: true},
-      { text: 'Không biết', correct: true}
+      { text: 'Không biết', correct: false}
     ]
   },
   {
     id: '5',
-    question: 'Em làm chưa được tốt',
+    quest: 'Em làm chưa được tốt',
     answers: [
       { text: 'Tích cực', correct: false},
       { text: 'Tiêu cực', correct: true},
@@ -128,17 +128,17 @@ var questions = [
   },
   {
     id: '6',
-    question: 'Đi đấu thế này ?',
+    quest: 'Đi đấu thế này ?',
     answers: [
       { text: 'Tích cực', correct: false},
       { text: 'Tiêu cực', correct: false},
       { text: 'Trung tính', correct: true},
-      { text: 'Không biết', correct: true}
+      { text: 'Không biết', correct: false}
     ]
   },
   {
     id: '7',
-    question: 'Việc làm thiếu trách nhiệm đã để lại nhiều hậu quả',
+    quest: 'Việc làm thiếu trách nhiệm đã để lại nhiều hậu quả',
     answers: [
       { text: 'Tích cực', correct: false},
       { text: 'Tiêu cực', correct: true},
@@ -148,27 +148,27 @@ var questions = [
   },
   {
     id: '8',
-    question: 'Món này ngon quá',
+    quest: 'Món này ngon quá',
     answers: [
-      { text: 'Tích cực', correct: false},
-      { text: 'Tiêu cực', correct: true},
+      { text: 'Tích cực', correct: true},
+      { text: 'Tiêu cực', correct: false},
       { text: 'Trung tính', correct: false},
       { text: 'Không biết', correct: false}
     ]
   },
   {
     id: '9',
-    question: 'This branch has no conflicts with the base branch',
+    quest: 'This branch has no conflicts with the base branch',
     answers: [
       { text: 'Tích cực', correct: false},
       { text: 'Tiêu cực', correct: false},
       { text: 'Trung tính', correct: true},
-      { text: 'Không biết', correct: true}
+      { text: 'Không biết', correct: false}
     ]
   },
   {
     id: '10',
-    question: 'Cửa hàng này chán quá',
+    quest: 'Cửa hàng này chán quá',
     answers: [
       { text: 'Tích cực', correct: false},
       { text: 'Tiêu cực', correct: true},
