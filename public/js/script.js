@@ -7,33 +7,65 @@ const answerButtonsElement = document.getElementById('answer-buttons')
 const titleElement = document.getElementById('title')
 const labelElement = document.getElementById('label')
 const resultElement = document.getElementById('result')
+const resultButton = document.getElementById('result-btn')
+const resetButton = document.getElementById("btn-again")
 var score = 0;
 
-const status = {
-  label_id: '',
-  label_tapped: '',
-  work_id: '1',
-  time: ''
-}
 
-let shuffledQuestions, currentQuestionIndex
-let currentField=0,pre_currentField
+var shuffledQuestions, currentQuestionIndex
 
 startButton.addEventListener('click', start)
+resetButton.addEventListener('click',()=> {
+  reset()
+})
+
 nextButton.addEventListener('click', () => {
+  if(nextButton.dataset.correct=="true"){
+    delete shuffledQuestions[currentQuestionIndex];
+    score++
+  }
+  console.log(score)
   currentQuestionIndex++
-  currentField=0
   setNextQuestion()
-  console.log(status)
+})
+
+resultButton.addEventListener('click', () => {
+  if(resultButton.dataset.correct=="true"){
+    delete shuffledQuestions[currentQuestionIndex];
+    score++
+  }
+  console.log(score)
+  result()
 })
 
 function start() {
   startButton.classList.add('hide')
-  shuffledQuestions = questions.sort()
+  shuffledQuestions = questions
   currentQuestionIndex = 0
-  currentField =0
   labelElement.classList.remove('hide')
   titleElement.innerText = 'Câu hỏi'
+  // document.getElementById("shortcut_label").classList.remove('hide')
+
+  setNextQuestion()
+}
+
+function reset() {
+  document.getElementById('content').classList.remove('hide');
+  resultButton.classList.add('hide');;
+  startButton.classList.add('hide')
+  shuffledQuestions = questions
+  currentQuestionIndex = 0
+  labelElement.classList.remove('hide')
+  titleElement.innerText = 'Câu hỏi'
+  document.getElementById('result_content').innerText = "Chúc mừng bạn đã hoàn thành phần đào tạo phân tích cảm xúc văn bản. Bây giờ hãy bắt đầu với phần đào tạo tiếp theo."
+  document.getElementById('btn-next-lvl').classList.remove('hide');
+  resetButton.classList.add('hide');
+  resultElement.classList.add('hide');
+  for (let i = 0; i < shuffledQuestions.length; i++) {
+    if(shuffledQuestions[i] == undefined){
+      shuffledQuestions.splice(i, 1);
+    }    
+  }
   // document.getElementById("shortcut_label").classList.remove('hide')
 
   setNextQuestion()
@@ -45,7 +77,7 @@ function setNextQuestion() {
 }
 
 function showQuestion(question) {
-  questionElement.innerText = question.question
+  questionElement.innerText = question.quest
   index = 0
   question.answers.forEach(answer => {
     const button = document.createElement('button')
@@ -72,32 +104,28 @@ function selectAnswer(e) {
   const selectedButton = e.target
   const correct = selectedButton.dataset.correct
 
-  status.label_tapped = selectedButton.innerHTML
-  status.label_id = shuffledQuestions[currentQuestionIndex].id
-  status.time = new Date();
-
   if (correct=='true'){
-    score++;
-    selectedButton.dataset.correct = false;
+    nextButton.dataset.correct = true;
+    resultButton.dataset.correct = true;
+  }else{
+    nextButton.dataset.correct = false;
+    resultButton.dataset.correct = false;
   }
   if (shuffledQuestions.length > currentQuestionIndex + 1) {
     nextButton.classList.remove('hide')
   } else {
-    result();
+    for (let i = 0; i < shuffledQuestions.length; i++) {
+      if(shuffledQuestions[i] == undefined){
+        shuffledQuestions.splice(i, 1);
+      }    
+    }
+    resultButton.classList.remove('hide')
   }   
   
 }
 
-function setStatusClass(element, correct) {
-  if (correct) {
-    element.classList.add('correct')
-  } else {
-    element.classList.add('wrong')
-  }
-}
-
 function result(){
-  if(score >= 7){
+  if(score == 10){
     document.getElementById('content').classList.add('hide');
     resultElement.classList.remove('hide');
     
