@@ -214,8 +214,8 @@ const questions = [
     src: 'audio/audio_5.mp3',
     answers: [
       { text: 'Tích cực', correct: false},
-      { text: 'Tiêu cực', correct: true},
-      { text: 'Trung tính', correct: false},
+      { text: 'Tiêu cực', correct: false},
+      { text: 'Trung tính', correct: true},
       { text: 'Không biết', correct: false}
     ]
   },
@@ -258,8 +258,8 @@ const questions = [
     src: 'audio/audio_9.mp3',
     answers: [
       { text: 'Tích cực', correct: false},
-      { text: 'Tiêu cực', correct: false},
-      { text: 'Trung tính', correct: true},
+      { text: 'Tiêu cực', correct: true},
+      { text: 'Trung tính', correct: false},
       { text: 'Không biết', correct: false}
     ]
   },
