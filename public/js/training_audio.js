@@ -71,11 +71,9 @@ function reset() {
   document.getElementById('btn-next-lvl').classList.remove('hide');
   resetButton.classList.add('hide');
   resultElement.classList.add('hide');
-  for (let i = 0; i < shuffledQuestions.length; i++) {
-    if(shuffledQuestions[i] == undefined){
-      shuffledQuestions.splice(i, 1);
-    }    
-  }
+  shuffledQuestions = shuffledQuestions.filter(function (el) {
+    return el != null;
+  });
   // document.getElementById("shortcut_label").classList.remove('hide')
 
   setNextQuestion()
@@ -143,12 +141,7 @@ function setStatusClass(element, correct) {
 }
 
 function result(){
-  for (let i = 0; i < shuffledQuestions.length; i++) {
-    if(shuffledQuestions[i] == undefined){
-      shuffledQuestions.splice(i, 1);
-    }    
-  }
-  if(score >= 9){
+  if(score == 10){
     document.getElementById('content').classList.add('hide');
     resultElement.classList.remove('hide');
     
@@ -158,6 +151,9 @@ function result(){
     document.getElementById('btn-next-lvl').classList.add('hide');
     document.getElementById('btn-again').classList.remove('hide');
     resultElement.classList.remove('hide');
+    shuffledQuestions = shuffledQuestions.filter(function (el) {
+      return el != null;
+    });
   }
 }
 
