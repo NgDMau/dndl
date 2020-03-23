@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link href="/css/styles.css" rel="stylesheet">
-  <script defer src="/js/script.js"></script>
+  <script defer src="/js/text_sentiment.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:400,600&display=swap" rel="stylesheet">
   <title>Hướng dẫn</title>
 
@@ -43,6 +43,7 @@
       </div>
       <div class="empty hide">
       </div>
+      <p id="noti-selected-answer"></p>
       <div class="controls">
         <button id="start-btn" class="start-btn">Bắt đầu</button>
         <button id="next-btn" class="next-btn btn hide" data-correct="false">Tiếp tục</button>
@@ -78,7 +79,7 @@
 var questions = [
   {
     id: '1',
-    quest: 'Cửa hàng này chán quá',
+    quest: 'Shop làm ăn quá tắc trách',
     answers: [
       { text: 'Tích cực', correct: false},
       { text: 'Tiêu cực', correct: true},
@@ -88,7 +89,7 @@ var questions = [
   },
   {
     id: '2',
-    quest: 'Thời tiêt thật đẹp',
+    quest: 'Thời tiết này ra ngoài chơi thì thích lắm',
     answers: [
       { text: 'Tích cực', correct: true},
       { text: 'Tiêu cực', correct: false},
@@ -98,7 +99,7 @@ var questions = [
   },
   {
     id: '3',
-    quest: 'Đi làm',
+    quest: 'Hôm nay tôi đi làm ca sáng',
     answers: [
       { text: 'Tích cực', correct: false},
       { text: 'Tiêu cực', correct: false},
@@ -108,7 +109,7 @@ var questions = [
   },
   {
     id: '4',
-    quest: '111111111111',
+    quest: 'Cô giáo cầm sách đi lên bục giảng',
     answers: [
       { text: 'Tích cực', correct: false},
       { text: 'Tiêu cực', correct: false},
@@ -128,7 +129,7 @@ var questions = [
   },
   {
     id: '6',
-    quest: 'Đi đấu thế này ?',
+    quest: 'Đi đâu thế này ?',
     answers: [
       { text: 'Tích cực', correct: false},
       { text: 'Tiêu cực', correct: false},
@@ -148,7 +149,7 @@ var questions = [
   },
   {
     id: '8',
-    quest: 'Món này ngon quá',
+    quest: 'Món này ngon tuyệt cú mèo',
     answers: [
       { text: 'Tích cực', correct: true},
       { text: 'Tiêu cực', correct: false},
@@ -158,7 +159,7 @@ var questions = [
   },
   {
     id: '9',
-    quest: 'This branch has no conflicts with the base branch',
+    quest: 'Tôi thấy anh vừa đúng vừa sai' ,
     answers: [
       { text: 'Tích cực', correct: false},
       { text: 'Tiêu cực', correct: false},
@@ -168,7 +169,7 @@ var questions = [
   },
   {
     id: '10',
-    quest: 'Cửa hàng này chán quá',
+    quest: 'Phương án này sẽ thất bại sớm thôi',
     answers: [
       { text: 'Tích cực', correct: false},
       { text: 'Tiêu cực', correct: true},
