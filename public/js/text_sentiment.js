@@ -33,7 +33,6 @@ nextButton.addEventListener('click', () => {
   console.log(questions)
   currentQuestionIndex++
   setNextQuestion()
-  selectedAnswerNoti.style.visibility = 'none';
 })
 
 resultButton.addEventListener('click', () => {
@@ -114,7 +113,7 @@ function selectAnswer(e) {
   const selectedButton = e.target
   const correct = selectedButton.dataset.correct
 
-  selectedAnswerNoti.innerHTML = "Bạn đã chọn " + selectedButton.innerText;
+  selectedAnswerNoti.innerHTML = "Bạn đã chọn: " + selectedButton.innerText;
   selectedAnswerNoti.style.display = 'block';
 
   if (correct=='true'){
@@ -139,7 +138,7 @@ function result(){
       shuffledQuestions.splice(i, 1);
     }    
   }
-  if(score == 10){
+  if(score >= 9){
     document.getElementById('content').classList.add('hide');
     resultElement.classList.remove('hide');
     

@@ -11,6 +11,8 @@ const audioElement = document.getElementById('src_audio')
 const playButton = document.getElementById('btn_play')
 const resultButton = document.getElementById('result-btn')
 const resetButton = document.getElementById("btn-again")
+const selectedAnswerNoti = document.getElementById("noti-selected-answer")
+
 var score = 0;
 
 let shuffledQuestions, currentQuestionIndex
@@ -22,6 +24,9 @@ resetButton.addEventListener('click',()=> {
 })
 
 nextButton.addEventListener('click', () => {
+
+  selectedAnswerNoti.style.display = 'none';
+
   if(nextButton.dataset.correct=="true"){
     delete shuffledQuestions[currentQuestionIndex];
     score++
@@ -110,6 +115,9 @@ function selectAnswer(e) {
   const selectedButton = e.target
   const correct = selectedButton.dataset.correct
 
+  selectedAnswerNoti.innerHTML = "Bạn đã chọn: " + selectedButton.innerText;
+  selectedAnswerNoti.style.display = 'block';
+
   if (correct=='true'){
     nextButton.dataset.correct = true;
     resultButton.dataset.correct = true;
@@ -140,7 +148,7 @@ function result(){
       shuffledQuestions.splice(i, 1);
     }    
   }
-  if(score == 10){
+  if(score >= 9){
     document.getElementById('content').classList.add('hide');
     resultElement.classList.remove('hide');
     
