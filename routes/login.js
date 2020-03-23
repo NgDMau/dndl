@@ -24,7 +24,7 @@ module.exports = function (app) {
                 const client = await pool.connect()
                 try {
                     await client.query('BEGIN')
-                    await JSON.stringify(client.query('SELECT "id", "username", "email", "address", "role" FROM "users" WHERE "username"=$1', [id], function (err, result) {
+                    await JSON.stringify(client.query('SELECT "id", "username", "email", "address", "role", "full_name" FROM "users" WHERE "username"=$1', [id], function (err, result) {
                         if (err) {
                             return done(err)
                         }
