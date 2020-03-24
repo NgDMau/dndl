@@ -13,7 +13,7 @@ const selectedAnswerNoti = document.getElementById("noti-selected-answer")
 var score = 0;
 
 
-var shuffledQuestions, currentQuestionIndex
+var questions, currentQuestionIndex
 
 startButton.addEventListener('click', start)
 resetButton.addEventListener('click',()=> {
@@ -25,7 +25,7 @@ nextButton.addEventListener('click', () => {
   selectedAnswerNoti.style.display = 'none';
 
   if(nextButton.dataset.correct=="true"){
-    delete shuffledQuestions[currentQuestionIndex];
+    delete questions[currentQuestionIndex];
     score++
   }
 
@@ -37,7 +37,7 @@ nextButton.addEventListener('click', () => {
 
 resultButton.addEventListener('click', () => {
   if(resultButton.dataset.correct=="true"){
-    delete shuffledQuestions[currentQuestionIndex];
+    delete questions[currentQuestionIndex];
     score++
   }
      // HIDE the selected answer noti
@@ -48,7 +48,6 @@ resultButton.addEventListener('click', () => {
 
 function start() {
   startButton.classList.add('hide')
-  shuffledQuestions = questions
   currentQuestionIndex = 0
   labelElement.classList.remove('hide')
   titleElement.innerText = 'Câu hỏi'
@@ -61,7 +60,7 @@ function reset() {
   document.getElementById('content').classList.remove('hide');
   resultButton.classList.add('hide');;
   startButton.classList.add('hide')
-  shuffledQuestions = questions
+  questions = questions
   currentQuestionIndex = 0
   labelElement.classList.remove('hide')
   titleElement.innerText = 'Câu hỏi'
@@ -69,7 +68,7 @@ function reset() {
   document.getElementById('btn-next-lvl').classList.remove('hide');
   resetButton.classList.add('hide');
   resultElement.classList.add('hide');
-  shuffledQuestions = shuffledQuestions.filter(function (el) {
+  questions = questions.filter(function (el) {
     return el != null;
   });
   // document.getElementById("shortcut_label").classList.remove('hide')
@@ -79,7 +78,7 @@ function reset() {
 
 function setNextQuestion() {
   resetState()
-  showQuestion(shuffledQuestions[currentQuestionIndex])
+  showQuestion(questions[currentQuestionIndex])
 }
 
 function showQuestion(question) {
@@ -121,7 +120,7 @@ function selectAnswer(e) {
     nextButton.dataset.correct = false;
     resultButton.dataset.correct = false;
   }
-  if (shuffledQuestions.length > currentQuestionIndex + 1) {
+  if (questions.length > currentQuestionIndex + 1) {
     nextButton.classList.remove('hide')
   } else {
 
@@ -142,7 +141,7 @@ function result(){
     document.getElementById('btn-next-lvl').classList.add('hide');
     document.getElementById('btn-again').classList.remove('hide');
     resultElement.classList.remove('hide');
-    shuffledQuestions = shuffledQuestions.filter(function (el) {
+    questions = questions.filter(function (el) {
       return el != null;
     });
   }
