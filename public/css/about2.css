@@ -1,0 +1,156 @@
+
+html, body {
+    font-family: 'Montserrat', sans-serif;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+body:after{
+    content:"";
+    position:fixed; /* stretch a fixed position to the whole screen */
+    top:0;
+    left:0;
+    right:0;
+    z-index:-2; /* needed to keep in the background */
+    background: url('/img/bgabout.jpg') no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+
+}
+
+
+
+.logo{
+    object-fit: cover;
+    width:75px;
+    height:34px;
+}
+
+.first-part{
+   padding:20px;
+   z-index: 2;
+
+}
+.overlay{
+    background: rgba(0,0,0,0.5);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    z-index: -1;
+}
+a:hover { 
+    color: #F1DF64 !important; 
+}
+.heading{
+    font-size: 7vh;
+    color:white;
+    font-weight: 900;
+}
+.second-heading{
+    font-size: 4vh;
+    color:white;
+    font-weight: 500;
+}
+.header-box{
+    height:80vh;
+}
+.startbtn{
+    width: 20vh !important;
+    margin-top: 20px;
+}
+.btn{
+    -webkit-appearance: none !important;
+    -moz-appearance: none;
+    appearance: none;}
+.heading-text{
+    font-size: 35px;
+    color:white;
+    font-weight: 500;
+}
+.bg2{
+    background-color: rgba(0,0,0,1);
+    height: 80vh;  
+    z-index: 2;
+}
+.bg3{
+    height: 90vh;  
+}
+.bg4{
+    height: 90vh;  
+}
+.footer{
+    height: 8vh;  
+    background-color: rgba(0,0,0,0.8);
+}
+.content{
+    font-size: 15px;
+    font-weight: 300;
+    width: 70vw;
+}
+.vande-content{
+    width: 80vw;
+    height: 50vh;
+}
+.h2{
+    font-size: 30px;
+}
+.h3{
+    font-size: 15px;
+    font-weight: lighter;
+}
+.h4{
+    font-size: 12px;
+    font-weight: bold;
+}
+.image{
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+
+}
+.udu-content{
+    width: 90vw;
+    height: 40vh;
+}
+.text{
+    width: 70px;
+    height: 70px;
+    background-color: green;
+}
+
+
+@media screen and (min-width: 773px) {
+    .bg2{
+        height: 50vh;  
+    }
+    .bg3{
+        height: 70vh;  
+    }
+    .bg4{
+        height: 40vh;  
+    }
+    .content {
+      font-size: 15px;
+      width: 800px;
+    }
+    .h2{
+      font-size: 35px;
+    }
+    .h3{
+        font-size: 15px;
+    }
+    .h4{
+        font-size: 15px;
+        font-weight: bold;
+    }
+    .vande-content{
+        height: 50vh;
+        width: 60vw;
+    }
+
+}
+
