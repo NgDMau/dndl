@@ -12,5 +12,27 @@ module.exports = class User{
     isCustomer() {
         return this.role === 'customer';
     }
+
+    updateLastlogin() {
+        // Code here
+        return true
+    }
+
+    getScore() {
+        // Code here
+        return
+    }
+
+    setScore() {
+        // Code here
+        return
+    }
+
+    createProject() {
+        
+    }
+
+
+
     
 }
