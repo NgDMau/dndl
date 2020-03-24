@@ -24,7 +24,7 @@ module.exports = function (app) {
                 const client = await pool.connect()
                 try {
                     await client.query('BEGIN')
-                    await JSON.stringify(client.query('SELECT "id", "username", "email", "address", "role" FROM "users" WHERE "username"=$1', [id], function (err, result) {
+                    await JSON.stringify(client.query('SELECT "id", "username", "email", "address", "role", "full_name" FROM "users" WHERE "username"=$1', [id], function (err, result) {
                         if (err) {
                             return done(err)
                         }
@@ -32,6 +32,7 @@ module.exports = function (app) {
                             return done(null, false);
                         }
                         else {
+                            client.query("UPDATE users SET last_login=(SELECT now() ::timestamp AT TIME ZONE 'GMT+7') WHERE username=($1)", [result.rows[0].username])
                             return done(null, result.rows[0]);
                         }
                     }))

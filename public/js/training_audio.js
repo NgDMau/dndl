@@ -141,7 +141,7 @@ function setStatusClass(element, correct) {
 }
 
 function result(){
-  if(score == 10){
+  if(score >= 9){
     document.getElementById('content').classList.add('hide');
     resultElement.classList.remove('hide');
     
