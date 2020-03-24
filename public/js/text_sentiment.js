@@ -9,6 +9,7 @@ const labelElement = document.getElementById('label')
 const resultElement = document.getElementById('result')
 const resultButton = document.getElementById('result-btn')
 const resetButton = document.getElementById("btn-again")
+const selectedAnswerNoti = document.getElementById("noti-selected-answer")
 var score = 0;
 
 
@@ -20,10 +21,14 @@ resetButton.addEventListener('click',()=> {
 })
 
 nextButton.addEventListener('click', () => {
+
+  selectedAnswerNoti.style.display = 'none';
+
   if(nextButton.dataset.correct=="true"){
     delete shuffledQuestions[currentQuestionIndex];
     score++
   }
+
   console.log(score)
   console.log(questions)
   currentQuestionIndex++
@@ -35,6 +40,7 @@ resultButton.addEventListener('click', () => {
     delete shuffledQuestions[currentQuestionIndex];
     score++
   }
+     // HIDE the selected answer noti
   console.log(score)
   console.log(questions)
   result()
@@ -63,11 +69,9 @@ function reset() {
   document.getElementById('btn-next-lvl').classList.remove('hide');
   resetButton.classList.add('hide');
   resultElement.classList.add('hide');
-  for (let i = 0; i < shuffledQuestions.length; i++) {
-    if(shuffledQuestions[i] == undefined){
-      shuffledQuestions.splice(i, 1);
-    }    
-  }
+  shuffledQuestions = shuffledQuestions.filter(function (el) {
+    return el != null;
+  });
   // document.getElementById("shortcut_label").classList.remove('hide')
 
   setNextQuestion()
@@ -96,6 +100,7 @@ function showQuestion(question) {
 }
 
 function resetState() {
+  
   nextButton.classList.add('hide')
   while (answerButtonsElement.firstChild) {
     answerButtonsElement.removeChild(answerButtonsElement.firstChild)
@@ -105,6 +110,9 @@ function resetState() {
 function selectAnswer(e) {
   const selectedButton = e.target
   const correct = selectedButton.dataset.correct
+
+  selectedAnswerNoti.innerHTML = "Bạn đã chọn: " + selectedButton.innerText;
+  selectedAnswerNoti.style.display = 'block';
 
   if (correct=='true'){
     nextButton.dataset.correct = true;
@@ -123,11 +131,7 @@ function selectAnswer(e) {
 }
 
 function result(){
-  for (let i = 0; i < shuffledQuestions.length; i++) {
-    if(shuffledQuestions[i] == undefined){
-      shuffledQuestions.splice(i, 1);
-    }    
-  }
+  
   if(score == 10){
     document.getElementById('content').classList.add('hide');
     resultElement.classList.remove('hide');
@@ -138,115 +142,10 @@ function result(){
     document.getElementById('btn-next-lvl').classList.add('hide');
     document.getElementById('btn-again').classList.remove('hide');
     resultElement.classList.remove('hide');
+    shuffledQuestions = shuffledQuestions.filter(function (el) {
+      return el != null;
+    });
   }
 }
 
-function goto_label(){
-  index = parseInt(document.getElementById("sl_label").value) - 1;
-  const id_label = "btn_"+ index
-  document.getElementById(id_label).click();
-}
-
-// const questions = [
-//   {
-//     id: '1',
-//     question: 'Cửa hàng này chán quá',
-//     answers: [
-//       { text: 'Tích cực', correct: false},
-//       { text: 'Tiêu cực', correct: true},
-//       { text: 'Trung tính', correct: false},
-//       { text: 'Không biết', correct: false}
-//     ]
-//   },
-//   {
-//     id: '2',
-//     question: 'Thời tiêt thật đẹp',
-//     answers: [
-//       { text: 'Tích cực', correct: true},
-//       { text: 'Tiêu cực', correct: false},
-//       { text: 'Trung tính', correct: false},
-//       { text: 'Không biết', correct: false}
-//     ]
-//   },
-//   {
-//     id: '3',
-//     question: 'Đi làm',
-//     answers: [
-//       { text: 'Tích cực', correct: false},
-//       { text: 'Tiêu cực', correct: false},
-//       { text: 'Trung tính', correct: true},
-//       { text: 'Không biết', correct: false}
-//     ]
-//   },
-//   {
-//     id: '4',
-//     question: '111111111111',
-//     answers: [
-//       { text: 'Tích cực', correct: false},
-//       { text: 'Tiêu cực', correct: false},
-//       { text: 'Trung tính', correct: false},
-//       { text: 'Không biết', correct: true}
-//     ]
-//   },
-//   {
-//     id: '5',
-//     question: 'Em làm chưa được tốt',
-//     answers: [
-//       { text: 'Tích cực', correct: false},
-//       { text: 'Tiêu cực', correct: true},
-//       { text: 'Trung tính', correct: false},
-//       { text: 'Không biết', correct: false}
-//     ]
-//   },
-//   {
-//     id: '6',
-//     question: 'Đi đấu thế này ?',
-//     answers: [
-//       { text: 'Tích cực', correct: false},
-//       { text: 'Tiêu cực', correct: false},
-//       { text: 'Trung tính', correct: true},
-//       { text: 'Không biết', correct: false}
-//     ]
-//   },
-//   {
-//     id: '7',
-//     question: 'Việc làm thiếu trách nhiệm đã để lại nhiều hậu quả',
-//     answers: [
-//       { text: 'Tích cực', correct: false},
-//       { text: 'Tiêu cực', correct: true},
-//       { text: 'Trung tính', correct: false},
-//       { text: 'Không biết', correct: false}
-//     ]
-//   },
-//   {
-//     id: '8',
-//     question: 'Món này ngon quá',
-//     answers: [
-//       { text: 'Tích cực', correct: false},
-//       { text: 'Tiêu cực', correct: true},
-//       { text: 'Trung tính', correct: false},
-//       { text: 'Không biết', correct: false}
-//     ]
-//   },
-//   {
-//     id: '9',
-//     question: 'This branch has no conflicts with the base branch',
-//     answers: [
-//       { text: 'Tích cực', correct: false},
-//       { text: 'Tiêu cực', correct: false},
-//       { text: 'Trung tính', correct: false},
-//       { text: 'Không biết', correct: true}
-//     ]
-//   },
-//   {
-//     id: '10',
-//     question: 'Cửa hàng này chán quá',
-//     answers: [
-//       { text: 'Tích cực', correct: false},
-//       { text: 'Tiêu cực', correct: true},
-//       { text: 'Trung tính', correct: false},
-//       { text: 'Không biết', correct: false}
-//     ]
-//   }
-// ]
 

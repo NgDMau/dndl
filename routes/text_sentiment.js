@@ -10,9 +10,9 @@ module.exports = function ( app ) {
     }
   });
 
-  app.get('/index', function (req, res) {
+  app.get('/text_sentiment', function (req, res) {
     if (req.isAuthenticated()) {
-      res.sendFile(path.join(__dirname, '../views/', 'index.html'));
+      res.sendFile(path.join(__dirname, '../views/', 'text_sentiment.html'));
     } else {
       res.redirect('/login')
     }

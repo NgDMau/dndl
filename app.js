@@ -41,7 +41,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // apply routes to the web
-require('./routes/index')(app);
+require('./routes/text_sentiment')(app);
 require('./routes/signup')(app);
 require('./routes/login')(app);
 require('./routes/forgotpass')(app);
