@@ -15,8 +15,7 @@ const selectedAnswerNoti = document.getElementById("noti-selected-answer")
 
 var score = 0;
 
-let questions, currentQuestionIndex
-let currentField=0,pre_currentField
+var questions, currentQuestionIndex
 
 startButton.addEventListener('click', start)
 resetButton.addEventListener('click',()=> {
@@ -161,7 +160,7 @@ function goto_label(){
   document.getElementById(id_label).click();
 }
 
-const questions = [
+questions = [
   {
     id: '1',
     question: 'Chọn nhãn thích hợp cho đoạn hội thoại dưới:',
