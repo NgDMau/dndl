@@ -113,7 +113,7 @@
                 <div class="card">
                     <div class="card-header">
 						<h5 class ="d-flex justify-content-between align-items-center">Dự án hiện tại
-						<button id="myBtn" type="button" class="btn btn-outline-success btn-sm d-flex align-item-center">
+						<button id="addbtn" type="button" class="btn btn-outline-success btn-sm d-flex align-item-center">
 							<i class="material-icons" data-toggle="tooltip" title="Add" style="font-size: 20px; color: #9CCC65">add</i>
 							Thêm dự án mới</button>
 						</h5>
@@ -145,7 +145,7 @@
 										<td>3/5/2020</td>
 										<td>5/5/2020</td>
 										<td>8/10 đã hoàn thành</td>
-										<td><a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit" style="font-size: 20px; color: #FEC737">&#xE254;</i></a><a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons ml-2" data-toggle="tooltip" title="Delete" style="font-size: 20px; color: #F5584B">&#xE872;</i></a></td>
+										<td><a id="editbtn" href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit" style="font-size: 20px; color: #FEC737">&#xE254;</i></a><a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons ml-2" data-toggle="tooltip" title="Delete" style="font-size: 20px; color: #F5584B">&#xE872;</i></a></td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
@@ -156,7 +156,7 @@
 										<td>3/5/2020</td>
 										<td>5/5/2020</td>
 										<td>8/10 đã hoàn thành</td>
-										<td><a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit" style="font-size: 20px; color: #FEC737">&#xE254;</i></a><a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons ml-2" data-toggle="tooltip" title="Delete" style="font-size: 20px; color: #F5584B">&#xE872;</i></a></td>
+										<td><a id="editbtn" href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit" style="font-size: 20px; color: #FEC737">&#xE254;</i></a><a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons ml-2" data-toggle="tooltip" title="Delete" style="font-size: 20px; color: #F5584B">&#xE872;</i></a></td>
 
                                     </tr>
 
@@ -167,8 +167,8 @@
                 </div>
 			</div>
 			
-		<!-- The Modal -->
-		<div id="myModal" class="modal">
+		<!-- Tạo dự án mới -->
+		<div id="addNewProjectModal" class="modal">
 
 		<!-- Modal content -->
 			<div class="col-sm-8 modal-content bg-transparent border-0">
@@ -251,8 +251,93 @@
             </div>
 
 		</div>
-            <!-- [ sample-page ] end -->
-        </div>
+			</div>
+		</div>
+		
+		<!-- Edit dự án hiện có -->
+
+		<div id="editCurrProject" class="modal">
+
+			<!-- Modal content -->
+				<div class="col-sm-8 modal-content bg-transparent border-0">
+					<div class="card">
+						<div class="card-header">
+							<h5>Chỉnh sửa dự án</h5>
+						</div>
+						<div class="card-body">
+							<form>
+								<div class="row">
+									<div class="col-md-12">
+										<form>
+											<div class="form-group row">
+												<label for="inputEmail3" class="col-sm-3 col-form-label">Tên dự án</label>
+												<div class="col-sm-9">
+													<input type="name" class="form-control" id="inputName" placeholder="Tên dự án">
+												</div>
+											</div>
+											<div class="form-group row">
+												<label for="inputEmail3" class="col-sm-3 col-form-label">Loại dữ liệu</label>
+												<div class="col-sm-9">
+													<select class="custom-select" id="inputGroupSelect01">
+														<option selected>Chọn</option>
+														<option value="1">Text sentiment</option>
+														<option value="2">Text sentiment</option>
+														<option value="3">Text sentiment</option>
+													</select>
+												</div>
+	
+											</div>
+											<div class="form-group row">
+												<label for="inputEmail3" class="col-sm-3 col-form-label">Chủ đề</label>
+												<div class="col-sm-9">
+													<input type="name" class="form-control" id="inputName" placeholder="Chủ đề">
+												</div>
+											</div>
+											<div class="form-group row">
+												<label for="inputEmail3" class="col-sm-3 col-form-label">Số tiền/ 1 nhãn </label>
+												<div class="col-sm-4">
+													<div class="input-group">
+														<input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+														<div class="input-group-append">
+															<span class="input-group-text">vnd</span>
+														</div>
+													</div>											</div>
+											</div>
+	
+											<div class="form-group row">
+												<label for="inputEmail3" class="col-sm-3 col-form-label">Thời gian bắt đầu</label>
+												<div class="col-sm-9">
+													<input type="name" class="form-control" id="inputName" placeholder="Tên dự án">
+												</div>
+											</div>
+											<div class="form-group row">
+												<label for="inputEmail3" class="col-sm-3 col-form-label">Thời gian kết thúc</label>
+												<div class="col-sm-9">
+													<input type="name" class="form-control" id="inputName" placeholder="Tên dự án">
+												</div>
+											</div>
+											<div class="form-group row">
+												<label for="inputEmail3" class="col-sm-3 col-form-label">Upload dữ liệu</label>
+												<div class="col-sm-9">
+													<div class="custom-file">
+														<input type="file" class="custom-file-input" id="inputGroupFile01">
+														<label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+													</div>											
+												</div>
+											</div>
+	
+											<div class="form-group row">
+												<div class="col-sm-12 d-flex justify-content-center">
+													<button type="submit" class="btn d-flex justify-content-end btn-success">Save</button>
+												</div>
+											</div>
+										</form>
+									</div>
+							</form>
+						</div>
+					</div>
+				</div>
+	
         <!-- [ Main Content ] end -->
     </div>
 </div>
@@ -264,28 +349,39 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	<script>
 	// Get the modal
-var modal = document.getElementById("myModal");
+var addNewProjectModal = document.getElementById("addNewProjectModal");
+var editCurrProject = document.getElementById("editCurrProject");
+
 
 // Get the button that opens the modal
-var btn = document.getElementById("myBtn");
+var addbtn = document.getElementById("addbtn");
+var editbtn = document.getElementById("editbtn");
+
 
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks on the button, open the modal
-btn.onclick = function() {
-  modal.style.display = "block";
+addbtn.onclick = function() {
+	addNewProjectModal.style.display = "block";
+}
+editbtn.onclick = function() {
+	editCurrProject.style.display = "block";
 }
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
-  modal.style.display = "none";
+  addNewProjectModal.style.display = "none";
+  editCurrProject.style.display = "none";
 }
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
+  if (event.target == addNewProjectModal) {
+    addNewProjectModal.style.display = "none";
+  }
+  if (event.target == editCurrProject) {
+    editCurrProject.style.display = "none";
   }
 }</script>
 </body>
