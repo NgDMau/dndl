@@ -1,28 +1,67 @@
 
 module.exports = class Project {
+
     constructor (projectjson) {
-        this.project_name = projectjson.name;
-        this.project_type = projectjson.type
+        this.name = projectjson.name;
+        this.id = projectjson.id;
+        this.type = projectjson.type;
+        this.theme = projectjson.theme;
+        this.rate = projectjson.rate;
+        this. starttime = projectjson.starttime;
+        this.endtime = projectjson.endtime;
+        this.datafile = projectjson.datafile;
+        this.priority = projectjson.priority;
+        this.uploadtime = projectjson.uploadtime;
+        this.owner_id = projectjson.owner_id;
     }
 
-    // Other code is here
+    register() {
+        console.log('resigtering....')
+        var db = require('./db');
+        var values = [this.name, this.id, this.type, this.theme, this.rate, this.starttime, this.endtime, this.datafile, this.uploadtime, this.priority, this.owner_id];
 
-    async create() {
-        var client = require('./db');
-        
-        var text = 'CREATE TABLE ' + this.project_name + '() INHERITS (' + this.project_type +')';
-        console.log(text)
-        try {
-            (await client).query(text)
-        } catch(e) {
-            throw (e);
-        }
+        db.registerNewProject(values)
+        .then(console.log)
+        .catch (err => {
+            throw err
+        })
+        return
         
         
     }
 
-    printRes(res) {
-        console.log(res)
+    create() {
+        console.log("creating......")
+        var db = require('./db');
+        var child_table = this.id;
+        var parent_table = this.type;
+        var schema = 'projects';
+
+        db.createChildTableInSchema(child_table, schema, parent_table)
+        .then(console.log);
+        
+        return
+    }
+
+    async getData() {
+
+    }
+
+    async uploadData() {
+
+    }
+
+    destroy() {
+        var db = require('./db');
+        var drop_table = this.id;
+        var schema = 'projects';
+
+        db.dropTableInSchema(drop_table, schema)
+        .then(console.log)
+            .catch(err => {
+                throw err
+            })        
+        
     }
 
 }

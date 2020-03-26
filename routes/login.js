@@ -32,7 +32,8 @@ module.exports = function (app) {
                             return done(null, false);
                         }
                         else {
-                            client.query("UPDATE users SET last_login=(SELECT now() ::timestamp AT TIME ZONE 'GMT+7') WHERE username=($1)", [result.rows[0].username])
+                            let res = client.query("UPDATE users SET last_login=(SELECT now() ::timestamp AT TIME ZONE 'GMT+7') WHERE username=($1)", [result.rows[0]]);
+                            console.log(res);
                             return done(null, result.rows[0]);
                         }
                     }))

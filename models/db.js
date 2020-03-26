@@ -1,4 +1,5 @@
-var Pool = require('pg-pool');
+
+var Pool = require('pg-pool')    
 
 const pool = new Pool({
     user: 'mpndhiboquobry',
@@ -7,8 +8,46 @@ const pool = new Pool({
     port: '5432',
     database: 'd5tabqes3975',
     ssl: true
-})
+});
 
-const client = pool.connect();
+module.exports = {
 
-module.exports = client;
+    createChildTableInSchema: async function (child_table, schema, parent_table) {
+        var cmd = 'CREATE TABLE ' + schema + '.' + child_table + '() INHERITS (' + parent_table + ')';
+        console.log(cmd);
+        var client = await pool.connect()
+
+        try {
+            var res = await client.query(cmd);
+            return res;
+        } catch(e) {
+            return e;
+        }
+    },
+
+    dropTableInSchema: async function (table, schema) {
+        var cmd = 'DROP TABLE ' + schema + '.' + table;
+        console.log(cmd);
+        var client = await pool.connect()
+        try {
+            var res = await client.query(cmd);
+            return res;
+        } catch(e) {
+            return e;
+        }
+    },
+
+    registerNewProject: async function (values) {
+        var cmd = 'INSERT INTO projects_metadata VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)';
+        var client = await pool.connect()
+        try {
+            var res = await client.query(cmd, values);
+            return res;
+        } catch(e) {
+            return e;
+        }
+    }
+
+}
+
+//dropTableInSchema('xinchao', 'projects').then(console.log)
