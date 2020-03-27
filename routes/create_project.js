@@ -16,13 +16,13 @@ module.exports = function (app) {
                 type: 'sentiment',
                 owner_id: req.session.passport.user.username
             }
+            
             var new_project = new Project(project_config);
-            new_project.testFunction();
-            //new_project.register();
-            //new_project.create();
-            //window.location.href = '/dashboard'
-            res.redirect('/dashboard')
+
+            new_project.register();
+            new_project.create();
+            res.redirect('/dashboard');
+            
         }
-        
     });
 }
