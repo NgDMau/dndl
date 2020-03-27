@@ -46,7 +46,6 @@ require('./routes/signup')(app);
 require('./routes/login')(app);
 require('./routes/forgotpass')(app);
 require('./routes/about')(app);
-require('./routes/about2')(app);
 require('./routes/dashboard')(app);
 require('./routes/training_topic')(app);
 require('./routes/training_audio')(app);

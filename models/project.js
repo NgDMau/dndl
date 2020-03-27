@@ -7,7 +7,7 @@ module.exports = class Project {
         this.type = projectjson.type;
         this.theme = projectjson.theme;
         this.rate = projectjson.rate;
-        this. starttime = projectjson.starttime;
+        this.starttime = projectjson.starttime;
         this.endtime = projectjson.endtime;
         this.datafile = projectjson.datafile;
         this.priority = projectjson.priority;
@@ -62,6 +62,14 @@ module.exports = class Project {
                 throw err
             })        
         
+    }
+
+    testFunction() {
+        var db = require('./db');
+        console.log("testFunction")
+
+        db.testFunction()
+        .then(console.log)
     }
 
 }
