@@ -20,6 +20,7 @@ html(lang='vi')
             .main-menu-header
               .user-details
                 div Xin chào #{customerFullname}!
+                div(style="display:none") #{actionSuccess}
             #nav-user-link.collapse
               ul.list-unstyled
                 li.list-group-item
@@ -160,9 +161,9 @@ html(lang='vi')
                           .col-sm-9
                             select#inputGroupSelect01.custom-select
                               option(selected='') Chọn
-                              option(value='1') Text sentiment
-                              option(value='2') Text sentiment
-                              option(value='3') Text sentiment
+                              option(value='1') Phân loại sắc thái văn bản
+                              option(value='2') Phân loại sắc thái âm thanh
+                              option(value='3') Phân loại nội dung văn bản
                         .form-group.row
                           label.col-sm-3.col-form-label(for='inputEmail3') Chủ đề
                           .col-sm-9
@@ -177,11 +178,11 @@ html(lang='vi')
                         .form-group.row
                           label.col-sm-3.col-form-label(for='inputEmail3') Thời gian bắt đầu
                           .col-sm-9
-                            input#inputName.form-control(name='starttime' type='name', placeholder='Tên dự án')
+                            input#inputName.form-control(name='starttime' type='name', placeholder='Timestamp with timezone')
                         .form-group.row
                           label.col-sm-3.col-form-label(name='endtime' for='inputEmail3') Thời gian kết thúc
                           .col-sm-9
-                            input#inputName.form-control(name='endtime' type='name', placeholder='Tên dự án')
+                            input#inputName.form-control(name='endtime' type='name', placeholder='Timestamp with timezone')
                         .form-group.row
                           label.col-sm-3.col-form-label(for='inputEmail3') Upload dữ liệu
                           .col-sm-9
@@ -199,6 +200,15 @@ html(lang='vi')
             script(src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js', integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo', crossorigin='anonymous')
             script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js', integrity='sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6', crossorigin='anonymous')
             script.
+
+              var actionSuccess = "#{actionSuccess}" ;
+
+              if(actionSuccess == 'project_created') {
+                alert('Tạo dự án thành công');
+              }
+              if (actionSuccess == 'failed') {
+                alert('Rất tiếc, tạo dự án không thành công');
+              }
               // Get the modal
               var modal = document.getElementById("myModal");
               // Get the button that opens the modal
@@ -219,3 +229,8 @@ html(lang='vi')
               modal.style.display = "none";
               }
               }
+            
+
+            
+             
+             

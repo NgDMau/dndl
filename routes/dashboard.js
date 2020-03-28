@@ -30,7 +30,12 @@ module.exports = function (app) {
                 //new_project.register()
                 //new_project.create();
                 //new_project.destroy();
-                res.render('cus_dashboard', {customerFullname: user.fullname})
+                var render_info = {
+                    customerFullname: user.fullname,
+                    actionSuccess: req.query.action,
+                }
+
+                res.render('cus_dashboard', render_info)
             } else {
                 res.sendFile(path.join(__dirname, '../views/', 'dashboard.html'));
             }
