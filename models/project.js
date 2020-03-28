@@ -15,32 +15,47 @@ module.exports = class Project {
         this.owner_id = projectjson.owner_id;
     }
 
-    register() {
-        console.log('resigtering....')
+    async register() {
         var db = require('./db');
         var values = [this.name, this.id, this.type, this.theme, this.rate, this.starttime, this.endtime, this.datafile, this.uploadtime, this.priority, this.owner_id];
+        var result = false
 
-        db.registerNewProject(values)
-        .then(console.log)
-        .catch (err => {
-            throw err
+        await db.registerNewProject(values)
+        .then((res) => {
+            //console.log(typeof(res))
+            //console.log(res)
+           // console.log(res.name)
+            //console.log(res.detail)
+
+            result = res
+            
         })
-        return
-        
-        
+        .catch (err => {
+            console.error(err)
+            result = res
+        })
+
+        return result 
     }
 
-    create() {
-        console.log("creating......")
+    async create() {
         var db = require('./db');
         var child_table = this.id;
         var parent_table = this.type;
         var schema = 'projects';
+        var result = false;
 
-        db.createChildTableInSchema(child_table, schema, parent_table)
-        .then(console.log);
+        await db.createChildTableInSchema(child_table, schema, parent_table)
+        .then((res) => {
+            console.log("this is res ==============", res)
+            result = true;
+        })
+        .catch(err => {
+            console.error(err)
+            result = false;
+        });
         
-        return
+        return result;
     }
 
     async getData() {
@@ -51,25 +66,23 @@ module.exports = class Project {
 
     }
 
-    destroy() {
+    async destroy() {
         var db = require('./db');
         var drop_table = this.id;
         var schema = 'projects';
+        var result = false;
 
-        db.dropTableInSchema(drop_table, schema)
-        .then(console.log)
-            .catch(err => {
-                throw err
-            })        
+        await db.dropTableInSchema(drop_table, schema)
+        .then((res) => {
+            console.log("this is res ==============",res)
+            result = true;
+        })
+        .catch(err => {
+            console.error(err)
+            result = false;
+        });
         
-    }
-
-    testFunction() {
-        var db = require('./db');
-        console.log("testFunction")
-
-        db.testFunction()
-        .then(console.log)
+        return result;
     }
 
 }
