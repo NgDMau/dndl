@@ -120,7 +120,7 @@
 					</div>
                     <div class="card-body table-border-style">
                         <div class="table-responsive">
-                            <table class="table">
+                            <table class="table" id="rows">
                                 <thead>
                                     <tr>
                                         <th>STT</th>
@@ -129,15 +129,17 @@
 										<th>Chủ đề</th>
 										<th>Số tiền/ 1 nhãn</th>
 										<th>Thời gian bắt đầu</th>
-										<th>Thời gian bắt đầu</th>
+										<th>Thời gian kết thúc</th>
 										<th>Tình trạng</th>
 										<th>Action</th>
 
+
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
+								</thead>
+
+                                <tbody >
+                                    <tr style="display:none">
+                                        <td>STT</td>
                                         <td>Dự án A</td>
                                         <td>Text sentiment</td>
 										<td>Khoa học</td>
@@ -145,22 +147,10 @@
 										<td>3/5/2020</td>
 										<td>5/5/2020</td>
 										<td>8/10 đã hoàn thành</td>
-										<td><a id="editbtn" href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit" style="font-size: 20px; color: #FEC737">&#xE254;</i></a><a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons ml-2" data-toggle="tooltip" title="Delete" style="font-size: 20px; color: #F5584B">&#xE872;</i></a></td>
+										<td><button onclick='editbtn1()' id="editbtn" class='edit removeborder' data-toggle='modal'><i class='material-icons' data-toggle='tooltip' title='Edit' style='font-size: 20px; color: #FEC737'>&#xE254;</i></button><button class='delete removeborder' data-toggle='modal'><i class='material-icons ml-2' data-toggle='tooltip' title='Delete' style='font-size: 20px; color: #F5584B'>&#xE872;</i></button></td>
                                     </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Dự án A</td>
-                                        <td>Text sentiment</td>
-										<td>Khoa học</td>
-										<td>100vnd</td>
-										<td>3/5/2020</td>
-										<td>5/5/2020</td>
-										<td>8/10 đã hoàn thành</td>
-										<td><a id="editbtn" href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit" style="font-size: 20px; color: #FEC737">&#xE254;</i></a><a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons ml-2" data-toggle="tooltip" title="Delete" style="font-size: 20px; color: #F5584B">&#xE872;</i></a></td>
-
-                                    </tr>
-
-                                </tbody>
+								</tbody>
+							
                             </table>
                         </div>
                     </div>
@@ -352,7 +342,6 @@
 var addNewProjectModal = document.getElementById("addNewProjectModal");
 var editCurrProject = document.getElementById("editCurrProject");
 
-
 // Get the button that opens the modal
 var addbtn = document.getElementById("addbtn");
 var editbtn = document.getElementById("editbtn");
@@ -369,6 +358,7 @@ editbtn.onclick = function() {
 	editCurrProject.style.display = "block";
 }
 
+
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
   addNewProjectModal.style.display = "none";
@@ -383,7 +373,69 @@ window.onclick = function(event) {
   if (event.target == editCurrProject) {
     editCurrProject.style.display = "none";
   }
-}</script>
+}
+
+//fake data
+
+var list = [ {	stt:"1",
+				 name: "Dự án A",
+				type: "Text sentiment",
+				topic: "Khoa học",
+				price: "100",
+				timestart: "3/5/2020",
+				timeend: "5/5/2020",
+				status: "Done" },
+				{	stt:"2",
+				name: "Dự án A",
+				type: "Text sentiment",
+				topic: "Khoa học",
+				price: "100",
+				timestart: "3/5/2020",
+				timeend: "5/5/2020",
+				status: "In Progress" }]
+
+				
+	function getProject() { 
+		var cols = Headers(list);   
+			for (var i = 0; i < list.length; i++) { 
+				var newRow = document.createElement("tr");
+				for (var colIndex = 0; colIndex < cols.length; colIndex++) { 
+					var newCell = document.createElement("td");
+					var val = list[i][cols[colIndex]]; 
+					newCell.innerHTML = val;
+					newRow.append(newCell);
+				}
+				var newCell = document.createElement("td");
+				newCell.innerHTML = "<button onclick='editbtn1()' class='edit removeborder' data-toggle='modal'><i class='material-icons' data-toggle='tooltip' title='Edit' style='font-size: 20px; color: #FEC737'>&#xE254;</i></button><button class='delete removeborder' data-toggle='modal'><i class='material-icons ml-2' data-toggle='tooltip' title='Delete' style='font-size: 20px; color: #F5584B'>&#xE872;</i></button>";
+				newRow.append(newCell);
+				document.getElementById("rows").appendChild(newRow);			
+			} 
+	}
+
+	//tạo từng cột theo từng header
+	function Headers(list) { 
+            var columns = []; 
+        for (var i = 0; i < list.length; i++) { 
+                var row = list[i];  
+                for (var k in row) { 
+                    if ($.inArray(k, columns) == -1) { 
+                        columns.push(k); 
+                    } 
+                } 
+            } 
+                return columns; 
+		}  
+		
+	//ấn vào button sẽ ra edit form
+
+	function editbtn1() {
+		editCurrProject.style.display = "block";
+	}
+
+		 			
+getProject();
+
+</script>
 </body>
 
 </html>

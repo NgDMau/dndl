@@ -54,6 +54,8 @@ require('./routes/logout')(app);
 require('./routes/result')(app);
 require('./routes/result2')(app);
 require('./routes/create_project')(app);
+require('./routes/db-requester')(app);
+
 
 
 
