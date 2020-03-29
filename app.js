@@ -46,7 +46,6 @@ require('./routes/signup')(app);
 require('./routes/login')(app);
 require('./routes/forgotpass')(app);
 require('./routes/about')(app);
-require('./routes/about2')(app);
 require('./routes/dashboard')(app);
 require('./routes/training_topic')(app);
 require('./routes/training_audio')(app);
@@ -54,6 +53,10 @@ require('./routes/certificate')(app);
 require('./routes/logout')(app);
 require('./routes/result')(app);
 require('./routes/result2')(app);
+require('./routes/create_project')(app);
+require('./routes/db-requester')(app);
+
+
 
 
 

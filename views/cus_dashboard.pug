@@ -1,15 +1,236 @@
 doctype html
-html
-    head
+html(lang='vi')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='description', content='')
+    meta(name='keywords', content='')
+    meta(name='author', content='Phoenixcoded')
+    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css', integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T', crossorigin='anonymous')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
+    // vendor css
+    link(href='/css/db-requester.css', rel='stylesheet')
+  body
+    // [ navigation menu ] start
+    nav.pcoded-navbar.menu-light
+      .navbar-wrapper
+        .navbar-content.scroll-div
+          div
+            .main-menu-header
+              .user-details
+                div Xin chào #{customerFullname}!
+                div(style="display:none") #{actionSuccess}
+            #nav-user-link.collapse
+              ul.list-unstyled
+                li.list-group-item
+                  a(href='user-profile.html')
+                    i.feather.icon-user.m-r-5
+                    | View Profile
+                li.list-group-item
+                  a(href='#!')
+                    i.feather.icon-settings.m-r-5
+                    | Settings
+                li.list-group-item
+                  a(href='auth-normal-sign-in.html')
+                    i.feather.icon-log-out.m-r-5
+                    | Logout
+          ul.nav.pcoded-inner-navbar
+            //
+              <li class="nav-item pcoded-menu-caption">
+              <label>Navigation</label>
+              </li>
+            li.nav-item
+              a.nav-link(href='index.html')
+                span.pcoded-micon
+                  i.feather.icon-home
+                span.pcoded-mtext Dashboard
+            li.nav-item.pcoded-hasmenu
+              a.nav-link(href='#!')
+                span.pcoded-micon
+                  i.feather.icon-lock
+                span.pcoded-mtext Authentication
+              ul.pcoded-submenu
+                li
+                  a(href='auth-signup.html', target='_blank') Sign up
+                li
+                  a(href='auth-signin.html', target='_blank') Sign in
+    // [ navigation menu ] end
+    // [ Header ] start
+    header.navbar.pcoded-header.navbar-expand-lg.navbar-light.header-blue
+      .m-header
+        a#mobile-collapse.mobile-menu(href='#!')
+          span
+        a.b-brand(href='#!')
+          img.logo(src='/img/logo.png', alt='')
+          img.logo-thumb(src='/img/logo.png', alt='')
+        a.mob-toggler(href='#!')
+          i.feather.icon-more-vertical
+      .collapse.navbar-collapse
+        ul.navbar-nav.mr-auto
+          li.nav-item
+            a.pop-search(href='#!')
+              i.feather.icon-search
+            .search-bar
+              input.form-control.border-0.shadow-none(type='text', placeholder='Search hear')
+              button.close(type='button', aria-label='Close')
+                span(aria-hidden='true') ×
+    // [ Header ] end
+    // [ Main Content ] start
+    .pcoded-main-container
+      .pcoded-content
+        // [ breadcrumb ] start
+        .page-header
+          .page-block
+            .row.align-items-center
+              .col-md-12
+                .page-header-title
+                  h5.m-b-10 Requester
+        // [ breadcrumb ] end
+        // [ Main Content ] start
+        .row
+          // [ sample-page ] start
+          .col-sm-12
+            .card
+              .card-header
+                h5.d-flex.justify-content-between.align-items-center
+                  | Dự án hiện tại
+                  button#myBtn.btn.btn-outline-success.btn-sm.d-flex.align-item-center(type='button')
+                    i.material-icons(data-toggle='tooltip', title='Add', style='font-size: 20px; color: #9CCC65') add
+                    | 							Thêm dự án mới
+              .card-body.table-border-style
+                .table-responsive
+                  table.table
+                    thead
+                      tr
+                        th STT
+                        th Tên dự án
+                        th Loại dữ liệu
+                        th Chủ đề
+                        th Số tiền/ 1 nhãn
+                        th Thời gian bắt đầu
+                        th Thời gian bắt đầu
+                        th Tình trạng
+                        th Action
+                    tbody
+                      tr
+                        td 1
+                        td Dự án A
+                        td Text sentiment
+                        td Khoa học
+                        td 100vnd
+                        td 3/5/2020
+                        td 5/5/2020
+                        td 8/10 đã hoàn thành
+                        td
+                          a.edit(href='#editEmployeeModal', data-toggle='modal')
+                            i.material-icons(data-toggle='tooltip', title='Edit', style='font-size: 20px; color: #FEC737') 
+                          a.delete(href='#deleteEmployeeModal', data-toggle='modal')
+                            i.material-icons.ml-2(data-toggle='tooltip', title='Delete', style='font-size: 20px; color: #F5584B') 
+                      tr
+                        td 2
+                        td Dự án A
+                        td Text sentiment
+                        td Khoa học
+                        td 100vnd
+                        td 3/5/2020
+                        td 5/5/2020
+                        td 8/10 đã hoàn thành
+                        td
+                          a.edit(href='#editEmployeeModal', data-toggle='modal')
+                            i.material-icons(data-toggle='tooltip', title='Edit', style='font-size: 20px; color: #FEC737') 
+                          a.delete(href='#deleteEmployeeModal', data-toggle='modal')
+                            i.material-icons.ml-2(data-toggle='tooltip', title='Delete', style='font-size: 20px; color: #F5584B') 
+          // The Modal
+          #myModal.modal
+            // Modal content
+            .col-sm-8.modal-content.bg-transparent.border-0
+              .card
+                .card-header
+                  h5 Thêm dự án mới
+                .card-body
+                  form.inputform(method='post' action='/create_project')
+                    .row
+                      .col-md-12
+                        .form-group.row
+                          label.col-sm-3.col-form-label(for='inputEmail3') Tên dự án
+                          .col-sm-9
+                            input#inputName.form-control(name='name', placeholder='Tên dự án')
+                        .form-group.row
+                          label.col-sm-3.col-form-label(for='inputEmail3') Loại dữ liệu
+                          .col-sm-9
+                            select#inputGroupSelect01.custom-select
+                              option(selected='') Chọn
+                              option(value='1') Phân loại sắc thái văn bản
+                              option(value='2') Phân loại sắc thái âm thanh
+                              option(value='3') Phân loại nội dung văn bản
+                        .form-group.row
+                          label.col-sm-3.col-form-label(for='inputEmail3') Chủ đề
+                          .col-sm-9
+                            input#inputName.form-control(name='theme', placeholder='Chủ đề')
+                        .form-group.row
+                          label.col-sm-3.col-form-label(for='inputEmail3') Số tiền/ 1 nhãn 
+                          .col-sm-4
+                            .input-group
+                              input.form-control(name='rate' type='text', aria-label='Amount (to the nearest dollar)')
+                              .input-group-append
+                                span.input-group-text vnd
+                        .form-group.row
+                          label.col-sm-3.col-form-label(for='inputEmail3') Thời gian bắt đầu
+                          .col-sm-9
+                            input#inputName.form-control(name='starttime' type='name', placeholder='Timestamp with timezone')
+                        .form-group.row
+                          label.col-sm-3.col-form-label(name='endtime' for='inputEmail3') Thời gian kết thúc
+                          .col-sm-9
+                            input#inputName.form-control(name='endtime' type='name', placeholder='Timestamp with timezone')
+                        .form-group.row
+                          label.col-sm-3.col-form-label(for='inputEmail3') Upload dữ liệu
+                          .col-sm-9
+                            .custom-file
+                              input#inputGroupFile01.custom-file-input(type='file')
+                              label.custom-file-label(for='inputGroupFile01') Choose file
+                        .form-group.row
+                          .col-sm-12.d-flex.justify-content-center
+                            button.btn.d-flex.justify-content-end.btn-warning(type='submit') Submit
+            // [ sample-page ] end
+            // [ Main Content ] end
+            // [ Main Content ] end
+            // Required Js
+            script(src='https://code.jquery.com/jquery-3.4.1.slim.min.js', integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n', crossorigin='anonymous')
+            script(src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js', integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo', crossorigin='anonymous')
+            script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js', integrity='sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6', crossorigin='anonymous')
+            script.
 
+              var actionSuccess = "#{actionSuccess}" ;
 
+              if(actionSuccess == 'project_created') {
+                alert('Tạo dự án thành công');
+              }
+              if (actionSuccess == 'failed') {
+                alert('Rất tiếc, tạo dự án không thành công');
+              }
+              // Get the modal
+              var modal = document.getElementById("myModal");
+              // Get the button that opens the modal
+              var btn = document.getElementById("myBtn");
+              // Get the <span> element that closes the modal
+              var span = document.getElementsByClassName("close")[0];
+              // When the user clicks on the button, open the modal
+              btn.onclick = function() {
+              modal.style.display = "block";
+              }
+              // When the user clicks on <span> (x), close the modal
+              span.onclick = function() {
+              modal.style.display = "none";
+              }
+              // When the user clicks anywhere outside of the modal, close it
+              window.onclick = function(event) {
+              if (event.target == modal) {
+              modal.style.display = "none";
+              }
+              }
+            
 
-
-
-
-
-    body
-
-        div Customer: #{customerFullname}
-
-        div 
+            
+             
+             
