@@ -1,5 +1,5 @@
 doctype html
-html(lang='vi')
+html(lang='en')
   head
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui')
@@ -19,8 +19,7 @@ html(lang='vi')
           div
             .main-menu-header
               .user-details
-                div Xin chào #{customerFullname}!
-                div(style="display:none") #{actionSuccess}
+                div Xin chào InfoRe!
             #nav-user-link.collapse
               ul.list-unstyled
                 li.list-group-item
@@ -95,12 +94,12 @@ html(lang='vi')
               .card-header
                 h5.d-flex.justify-content-between.align-items-center
                   | Dự án hiện tại
-                  button#myBtn.btn.btn-outline-success.btn-sm.d-flex.align-item-center(type='button')
+                  button#addbtn.btn.btn-outline-success.btn-sm.d-flex.align-item-center(type='button')
                     i.material-icons(data-toggle='tooltip', title='Add', style='font-size: 20px; color: #9CCC65') add
                     | 							Thêm dự án mới
               .card-body.table-border-style
                 .table-responsive
-                  table.table
+                  table#rows.table
                     thead
                       tr
                         th STT
@@ -109,12 +108,12 @@ html(lang='vi')
                         th Chủ đề
                         th Số tiền/ 1 nhãn
                         th Thời gian bắt đầu
-                        th Thời gian bắt đầu
+                        th Thời gian kết thúc
                         th Tình trạng
                         th Action
                     tbody
-                      tr
-                        td 1
+                      tr(style='display:none')
+                        td STT
                         td Dự án A
                         td Text sentiment
                         td Khoa học
@@ -123,39 +122,25 @@ html(lang='vi')
                         td 5/5/2020
                         td 8/10 đã hoàn thành
                         td
-                          a.edit(href='#editEmployeeModal', data-toggle='modal')
+                          button#editbtn.edit.removeborder(onclick='editbtn1()', data-toggle='modal')
                             i.material-icons(data-toggle='tooltip', title='Edit', style='font-size: 20px; color: #FEC737') 
-                          a.delete(href='#deleteEmployeeModal', data-toggle='modal')
+                          button.delete.removeborder(data-toggle='modal')
                             i.material-icons.ml-2(data-toggle='tooltip', title='Delete', style='font-size: 20px; color: #F5584B') 
-                      tr
-                        td 2
-                        td Dự án A
-                        td Text sentiment
-                        td Khoa học
-                        td 100vnd
-                        td 3/5/2020
-                        td 5/5/2020
-                        td 8/10 đã hoàn thành
-                        td
-                          a.edit(href='#editEmployeeModal', data-toggle='modal')
-                            i.material-icons(data-toggle='tooltip', title='Edit', style='font-size: 20px; color: #FEC737') 
-                          a.delete(href='#deleteEmployeeModal', data-toggle='modal')
-                            i.material-icons.ml-2(data-toggle='tooltip', title='Delete', style='font-size: 20px; color: #F5584B') 
-          // The Modal
-          #myModal.modal
+          // Tạo dự án mới
+          #addNewProjectModal.modal
             // Modal content
             .col-sm-8.modal-content.bg-transparent.border-0
               .card
                 .card-header
                   h5 Thêm dự án mới
                 .card-body
-                  form.inputform(method='post' action='/create_project')
+                  form
                     .row
                       .col-md-12
                         .form-group.row
                           label.col-sm-3.col-form-label(for='inputEmail3') Tên dự án
                           .col-sm-9
-                            input#inputName.form-control(name='name', placeholder='Tên dự án')
+                            input#inputName.form-control(type='name', placeholder='Tên dự án')
                         .form-group.row
                           label.col-sm-3.col-form-label(for='inputEmail3') Loại dữ liệu
                           .col-sm-9
@@ -163,26 +148,26 @@ html(lang='vi')
                               option(selected='') Chọn
                               option(value='1') Phân loại sắc thái văn bản
                               option(value='2') Phân loại sắc thái âm thanh
-                              option(value='3') Phân loại nội dung văn bản
+                              option(value='3') Phân loại nội dun văn bản
                         .form-group.row
                           label.col-sm-3.col-form-label(for='inputEmail3') Chủ đề
                           .col-sm-9
-                            input#inputName.form-control(name='theme', placeholder='Chủ đề')
+                            input#inputName.form-control(type='name', placeholder='Chủ đề')
                         .form-group.row
                           label.col-sm-3.col-form-label(for='inputEmail3') Số tiền/ 1 nhãn 
                           .col-sm-4
                             .input-group
-                              input.form-control(name='rate' type='text', aria-label='Amount (to the nearest dollar)')
+                              input.form-control(type='text', aria-label='Amount (to the nearest dollar)')
                               .input-group-append
                                 span.input-group-text vnd
                         .form-group.row
                           label.col-sm-3.col-form-label(for='inputEmail3') Thời gian bắt đầu
                           .col-sm-9
-                            input#inputName.form-control(name='starttime' type='name', placeholder='Timestamp with timezone')
+                            input#inputName.form-control(type='name', placeholder='Tên dự án')
                         .form-group.row
-                          label.col-sm-3.col-form-label(name='endtime' for='inputEmail3') Thời gian kết thúc
+                          label.col-sm-3.col-form-label(for='inputEmail3') Thời gian kết thúc
                           .col-sm-9
-                            input#inputName.form-control(name='endtime' type='name', placeholder='Timestamp with timezone')
+                            input#inputName.form-control(type='name', placeholder='Tên dự án')
                         .form-group.row
                           label.col-sm-3.col-form-label(for='inputEmail3') Upload dữ liệu
                           .col-sm-9
@@ -192,15 +177,67 @@ html(lang='vi')
                         .form-group.row
                           .col-sm-12.d-flex.justify-content-center
                             button.btn.d-flex.justify-content-end.btn-warning(type='submit') Submit
-            // [ sample-page ] end
+        // Edit dự án hiện có
+        #editCurrProject.modal
+          // Modal content
+          .col-sm-8.modal-content.bg-transparent.border-0
+            .card
+              .card-header
+                h5 Chỉnh sửa dự án
+              .card-body
+                form
+                  .row
+                    .col-md-12
+                      .form-group.row
+                        label.col-sm-3.col-form-label(for='inputEmail3') Tên dự án
+                        .col-sm-9
+                          input#inputName.form-control(type='name', placeholder='Tên dự án')
+                      .form-group.row
+                        label.col-sm-3.col-form-label(for='inputEmail3') Loại dữ liệu
+                        .col-sm-9
+                          select#inputGroupSelect01.custom-select
+                            option(selected='') Chọn
+                            option(value='1') Phân loại sắc thái văn bản
+                            option(value='2') Phân loại sắc thái âm thanh
+                            option(value='3') Phân loại nội dun văn bản
+                      .form-group.row
+                        label.col-sm-3.col-form-label(for='inputEmail3') Chủ đề
+                        .col-sm-9
+                          input#inputName.form-control(type='name', placeholder='Chủ đề')
+                      .form-group.row
+                        label.col-sm-3.col-form-label(for='inputEmail3') Số tiền/ 1 nhãn 
+                        .col-sm-4
+                          .input-group
+                            input.form-control(type='text', aria-label='Amount (to the nearest dollar)')
+                            .input-group-append
+                              span.input-group-text vnd
+                      .form-group.row
+                        label.col-sm-3.col-form-label(for='inputEmail3') Thời gian bắt đầu
+                        .col-sm-9
+                          input#inputName.form-control(type='name', placeholder='Tên dự án')
+                      .form-group.row
+                        label.col-sm-3.col-form-label(for='inputEmail3') Thời gian kết thúc
+                        .col-sm-9
+                          input#inputName.form-control(type='name', placeholder='Tên dự án')
+                      .form-group.row
+                        label.col-sm-3.col-form-label(for='inputEmail3') Upload dữ liệu
+                        .col-sm-9
+                          .custom-file
+                            input#inputGroupFile01.custom-file-input(type='file')
+                            label.custom-file-label(for='inputGroupFile01') Choose file
+                      .form-group.row
+                        .col-sm-12.d-flex.justify-content-center
+                          button.btn.d-flex.justify-content-end.btn-success(type='submit') Save
             // [ Main Content ] end
             // [ Main Content ] end
             // Required Js
+            
             script(src='https://code.jquery.com/jquery-3.4.1.slim.min.js', integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n', crossorigin='anonymous')
             script(src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js', integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo', crossorigin='anonymous')
             script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js', integrity='sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6', crossorigin='anonymous')
             script.
-
+            
+              // Get projectAction
               var actionSuccess = "#{actionSuccess}" ;
 
               if(actionSuccess == 'project_created') {
@@ -210,27 +247,94 @@ html(lang='vi')
                 alert('Rất tiếc, tạo dự án không thành công');
               }
               // Get the modal
-              var modal = document.getElementById("myModal");
+              var addNewProjectModal = document.getElementById("addNewProjectModal");
+              var editCurrProject = document.getElementById("editCurrProject");
               // Get the button that opens the modal
-              var btn = document.getElementById("myBtn");
+              var addbtn = document.getElementById("addbtn");
+              var editbtn = document.getElementById("editbtn");
               // Get the <span> element that closes the modal
               var span = document.getElementsByClassName("close")[0];
               // When the user clicks on the button, open the modal
-              btn.onclick = function() {
-              modal.style.display = "block";
+              addbtn.onclick = function() {
+              addNewProjectModal.style.display = "block";
+              }
+              editbtn.onclick = function() {
+              editCurrProject.style.display = "block";
               }
               // When the user clicks on <span> (x), close the modal
               span.onclick = function() {
-              modal.style.display = "none";
+              addNewProjectModal.style.display = "none";
+              editCurrProject.style.display = "none";
               }
               // When the user clicks anywhere outside of the modal, close it
               window.onclick = function(event) {
-              if (event.target == modal) {
-              modal.style.display = "none";
+              if (event.target == addNewProjectModal) {
+              addNewProjectModal.style.display = "none";
+              }
+              if (event.target == editCurrProject) {
+              editCurrProject.style.display = "none";
               }
               }
-            
+              //fake data
+              var list = [
+            { name: 'DanNhanAmThanh',
+              id: 'bigbangtop',
+              type: 'sentiment',
+              theme: 'XaHoi',
+              rate: '12',
+              starttime: 2010-12-31T21:00:00.000Z,
+              endtime: 2010-12-31T21:00:00.000Z,
+              datafile: 'data.txt',
+              uploadtime: 2010-12-31T21:00:00.000Z,
+              priority: '0',
+              owner_id: 'tiendung' },
 
-            
-             
-             
+            { name: 'whynothim',
+              id: '_bigbangtop',
+              type: 'sentiment',
+              theme: 'dark',
+              rate: '12',
+              starttime: 2010-12-31T21:00:00.000Z,
+              endtime: 2010-12-31T21:00:00.000Z,
+              datafile: 'data.txt',
+              uploadtime: 2010-12-31T21:00:00.000Z,
+              priority: '0',
+              owner_id: 'tiendung' }
+              ]
+              
+              //var list = "#{userProjects}"
+              
+              function getProject() {
+              var cols = Headers(list);
+              for (var i = 0; i < list.length; i++) {
+              var newRow = document.createElement("tr");
+              for (var colIndex = 0; colIndex < cols.length; colIndex++) {
+              var newCell = document.createElement("td");
+              var val = list[i][cols[colIndex]];
+              newCell.innerHTML = val;
+              newRow.append(newCell);
+              }
+              var newCell = document.createElement("td");
+              newCell.innerHTML = "<button onclick='editbtn1()' class='edit removeborder' data-toggle='modal'><i class='material-icons' data-toggle='tooltip' title='Edit' style='font-size: 20px; color: #FEC737'>&#xE254;</i></button><button class='delete removeborder' data-toggle='modal'><i class='material-icons ml-2' data-toggle='tooltip' title='Delete' style='font-size: 20px; color: #F5584B'>&#xE872;</i></button>";
+              newRow.append(newCell);
+              document.getElementById("rows").appendChild(newRow);
+              }
+              }
+              //tạo từng cột theo từng header
+              function Headers(list) {
+              var columns = [];
+              for (var i = 0; i < list.length; i++) {
+              var row = list[i];
+              for (var k in row) {
+              if ($.inArray(k, columns) == -1) {
+              columns.push(k);
+              }
+              }
+              }
+              return columns;
+              }
+              //ấn vào button sẽ ra edit form
+              function editbtn1() {
+              editCurrProject.style.display = "block";
+              }
+              getProject();
