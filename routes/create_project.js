@@ -6,7 +6,7 @@ module.exports = function (app) {
     app.post('/create_project', function (req, res) {
         if (req.isAuthenticated()) {
 
-            var project_config;
+            
             utils.generateRandomProjectID()
             .then((projectID) => {
 

@@ -33,8 +33,8 @@ module.exports = function (app) {
                 console.log("username:   ",user.username)
                 user.getAllProjectsInfo(user.username)
                 .then((result) => {
-                    console.log('This is result', typeof(result))
-                    console.log(result.rows)
+                    console.log('This is result', (result.rows))
+                    //console.log(result.rows)
 
                     var render_info = {
                         customerFullname: user.fullname,

@@ -19,7 +19,7 @@ html(lang='en')
           div
             .main-menu-header
               .user-details
-                div Xin chào InfoRe!
+                div Xin chào #{customerFullname} !
             #nav-user-link.collapse
               ul.list-unstyled
                 li.list-group-item
@@ -40,7 +40,7 @@ html(lang='en')
               <label>Navigation</label>
               </li>
             li.nav-item
-              a.nav-link(href='index.html')
+              a.nav-link(href='/dashboard')
                 span.pcoded-micon
                   i.feather.icon-home
                 span.pcoded-mtext Dashboard
@@ -127,13 +127,13 @@ html(lang='en')
                 .card-header
                   h5 Thêm dự án mới
                 .card-body
-                  form
+                  form(method='post' action='/create_project')
                     .row
                       .col-md-12
                         .form-group.row
                           label.col-sm-3.col-form-label(for='inputEmail3') Tên dự án
                           .col-sm-9
-                            input#inputName.form-control(type='name', placeholder='Tên dự án')
+                            input#inputName.form-control(name='name' type='name', placeholder='Tên dự án')
                         .form-group.row
                           label.col-sm-3.col-form-label(for='inputEmail3') Loại dữ liệu
                           .col-sm-9
@@ -141,26 +141,26 @@ html(lang='en')
                               option(selected='') Chọn
                               option(value='1') Phân loại sắc thái văn bản
                               option(value='2') Phân loại sắc thái âm thanh
-                              option(value='3') Phân loại nội dun văn bản
+                              option(value='3') Phân loại nội dung văn bản
                         .form-group.row
-                          label.col-sm-3.col-form-label(for='inputEmail3') Chủ đề
+                          label.col-sm-3.col-form-label( for='inputEmail3') Chủ đề
                           .col-sm-9
-                            input#inputName.form-control(type='name', placeholder='Chủ đề')
+                            input#inputName.form-control(name='theme', type='name', placeholder='Chủ đề')
                         .form-group.row
                           label.col-sm-3.col-form-label(for='inputEmail3') Số tiền/ 1 nhãn 
                           .col-sm-4
                             .input-group
-                              input.form-control(type='text', aria-label='Amount (to the nearest dollar)')
+                              input.form-control(name='rate' type='text', aria-label='Amount (to the nearest dollar)')
                               .input-group-append
                                 span.input-group-text vnd
                         .form-group.row
                           label.col-sm-3.col-form-label(for='inputEmail3') Thời gian bắt đầu
                           .col-sm-9
-                            input#inputName.form-control(type='name', placeholder='Tên dự án')
+                            input#inputName.form-control(name='starttime' type='name', placeholder='Tên dự án')
                         .form-group.row
                           label.col-sm-3.col-form-label(for='inputEmail3') Thời gian kết thúc
                           .col-sm-9
-                            input#inputName.form-control(type='name', placeholder='Tên dự án')
+                            input#inputName.form-control(name='endtime' type='name', placeholder='Tên dự án')
                         .form-group.row
                           label.col-sm-3.col-form-label(for='inputEmail3') Upload dữ liệu
                           .col-sm-9
@@ -238,6 +238,18 @@ html(lang='en')
               if (actionSuccess == 'failed') {
                 alert('Rất tiếc, tạo dự án không thành công');
               }
+
+              //var list = "#{userProjects}";
+              
+              //console.log("world")
+
+              //- for (element in list) {
+              //-   element.starttime = element.starttime.toString();
+              //-   element.endtime = element.endtime.toString();
+              //-   element.uploadtime = element.uploadtime.toString();
+              //- }
+              //- console.log(list);
+
               // Get the modal
               var addNewProjectModal = document.getElementById("addNewProjectModal");
               var editCurrProject = document.getElementById("editCurrProject");
@@ -268,33 +280,94 @@ html(lang='en')
                 }
               }
               //fake data
-              var list = [
-              { 
-                name: 'DanNhanAmThanh',
-                id: 'bigbangtop',
-                type: 'sentiment',
-                theme: 'XaHoi',
-                rate: '12',
-                starttime: "2010-12-31",
-                endtime: "2010-12-31",
-                datafile: 'data.txt',
-                uploadtime: "2010-12-31",
-                priority: '0',
-                owner_id: 'tiendung' },
-              { name: 'whynothim',
-                id: '_bigbangtop',
-                type: 'sentiment',
-                theme: 'dark',
-                rate: '12',
-                starttime: "2010-12-31",
-                endtime: "2010-12-31",
-                datafile: 'data.txt',
-                uploadtime: "2010-12-31",
-                priority: '0',
-                owner_id: 'tiendung' }
-                ]
+              //- var list = [
+              //- { 
+              //-   name: 'DanNhanAmThanh',
+              //-   id: 'bigbangtop',
+              //-   type: 'sentiment',
+              //-   theme: 'XaHoi',
+              //-   rate: '12',
+              //-   starttime: "2010-12-31",
+              //-   endtime: "2010-12-31",
+              //-   datafile: 'data.txt',
+              //-   uploadtime: "2010-12-31",
+              //-   priority: '0',
+              //-   owner_id: 'tiendung' },
+              //- { name: 'whynothim',
+              //-   id: '_bigbangtop',
+              //-   type: 'sentiment',
+              //-   theme: 'dark',
+              //-   rate: '12',
+              //-   starttime: "2010-12-31",
+              //-   endtime: "2010-12-31",
+              //-   datafile: 'data.txt',
+              //-   uploadtime: "2010-12-31",
+              //-   priority: '0',
+              //-   owner_id: 'tiendung' }
+              //-   ]
               
-              //var list = "#{userProjects}"
+              
+              //- list = [ { name: 'viettrann',
+              //-               id: 'abcda',
+              //-               type: 'text',
+              //-               theme: 'sentiment',
+              //-               rate: '4',
+              //-               starttime: '2010-12-31T21:00:00.000Z',
+              //-               endtime: '2010-12-31T21:00:00.000Z',
+              //-               datafile: 'dataf.txt',
+              //-               uploadtime: '2010-12-31T21:00:00.000Z',
+              //-               priority: '3',
+              //-               owner_id: 'hathu' },
+              //-             { name: 'xinchao',
+              //-               id: 'another',
+              //-               type: 'sentiment',
+              //-               theme: 'dark',
+              //-               rate: '2',
+              //-               starttime: '2010-12-31T21:00:00.000Z',
+              //-               endtime: '2010-12-31T21:00:00.000Z',
+              //-               datafile: 'data.txt',
+              //-               uploadtime: '2010-12-31T21:00:00.000Z',
+              //-               priority: '0',
+              //-               owner_id: 'hathu' },
+              //-             { name: 'aaaaaa',
+              //-               id: 'idkwhy',
+              //-               type: 'sentiment',
+              //-               theme: 'sadasdasdas',
+              //-               rate: '12',
+              //-               starttime:' 2010-12-31T21:00:00.000Z',
+              //-               endtime: '2010-12-31T21:00:00.000Z',
+              //-               datafile: 'data.txt',
+              //-               uploadtime: '2010-12-31T21:00:00.000Z',
+              //-               priority: '0',
+              //-               owner_id: 'hathu' },
+              //-             { name: 'ahihi',
+              //-               id: 'okayfine',
+              //-               type: 'sentiment',
+              //-               theme: 'dark',
+              //-               rate: '2',
+              //-               starttime:' 2010-12-31T21:00:00.000Z',
+              //-               endtime: '2010-12-31T21:00:00.000Z',
+              //-               datafile: 'data.txt',
+              //-               uploadtime: '2010-12-31T21:00:00.000Z',
+              //-               priority: '0',
+              //-               owner_id: 'hathu' },
+              //-             { name: 'kimono',
+              //-               id: 'thenwhat',
+              //-               type: 'sentiment',
+              //-               theme: 'sadasdasdas',
+              //-               rate: '2',
+              //-               starttime: '2010-12-31T21:00:00.000Z',
+              //-               endtime: '2010-12-31T21:00:00.000Z',
+              //-               datafile: 'data.txt',
+              //-               uploadtime: '2010-12-31T21:00:00.000Z',
+              //-               priority: '0',
+              //-               owner_id: 'hathu' } ]
+
+              var list = JSON.parse('#{userProjects}'.replace(/&quot;/g, '"'));
+              //JSON.parse(list.replace(/&quot;/g,'"'));
+              //console.log("hello")
+              console.table(list);
+
               $(document).ready(function(){
                   $('[data-toggle="popover"]').popover();   
               });
