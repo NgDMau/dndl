@@ -56,6 +56,8 @@ require('./routes/result2')(app);
 require('./routes/create_project')(app);
 require('./routes/db-requester')(app);
 require('./routes/db-requester-info')(app);
+require('./routes/cus_dashboard_detail')(app);
+
 
 
 

@@ -96,31 +96,24 @@ html(lang='en')
                   | Dự án hiện tại
                   button#addbtn.btn.btn-outline-success.btn-sm.d-flex.align-item-center(type='button')
                     i.material-icons(data-toggle='tooltip', title='Add', style='font-size: 20px; color: #9CCC65') add
-                    | 							Thêm dự án mới
+                    | Thêm dự án mới
               .card-body.table-border-style
                 .table-responsive
                   table#rows.table
                     thead
                       tr
-                        th STT
                         th Tên dự án
                         th Loại dữ liệu
-                        th Chủ đề
-                        th Số tiền/ 1 nhãn
-                        th Thời gian bắt đầu
+                        th Thời gian đăng
                         th Thời gian kết thúc
-                        th Tình trạng
                         th Action
-                    tbody
+
+                    tbody#addhere
                       tr(style='display:none')
-                        td STT
                         td Dự án A
                         td Text sentiment
-                        td Khoa học
-                        td 100vnd
                         td 3/5/2020
                         td 5/5/2020
-                        td 8/10 đã hoàn thành
                         td
                           button#editbtn.edit.removeborder(onclick='editbtn1()', data-toggle='modal')
                             i.material-icons(data-toggle='tooltip', title='Edit', style='font-size: 20px; color: #FEC737') 
@@ -236,7 +229,6 @@ html(lang='en')
             script(src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js', integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo', crossorigin='anonymous')
             script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js', integrity='sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6', crossorigin='anonymous')
             script.
-            
               // Get projectAction
               var actionSuccess = "#{actionSuccess}" ;
 
@@ -256,85 +248,99 @@ html(lang='en')
               var span = document.getElementsByClassName("close")[0];
               // When the user clicks on the button, open the modal
               addbtn.onclick = function() {
-              addNewProjectModal.style.display = "block";
+                addNewProjectModal.style.display = "block";
               }
               editbtn.onclick = function() {
-              editCurrProject.style.display = "block";
+                editCurrProject.style.display = "block";
               }
               // When the user clicks on <span> (x), close the modal
               span.onclick = function() {
-              addNewProjectModal.style.display = "none";
-              editCurrProject.style.display = "none";
+                addNewProjectModal.style.display = "none";
+                editCurrProject.style.display = "none";
               }
               // When the user clicks anywhere outside of the modal, close it
               window.onclick = function(event) {
-              if (event.target == addNewProjectModal) {
-              addNewProjectModal.style.display = "none";
-              }
-              if (event.target == editCurrProject) {
-              editCurrProject.style.display = "none";
-              }
+                if (event.target == addNewProjectModal) {
+                addNewProjectModal.style.display = "none";
+                }
+                if (event.target == editCurrProject) {
+                editCurrProject.style.display = "none";
+                }
               }
               //fake data
               var list = [
-            { name: 'DanNhanAmThanh',
-              id: 'bigbangtop',
-              type: 'sentiment',
-              theme: 'XaHoi',
-              rate: '12',
-              starttime: 2010-12-31T21:00:00.000Z,
-              endtime: 2010-12-31T21:00:00.000Z,
-              datafile: 'data.txt',
-              uploadtime: 2010-12-31T21:00:00.000Z,
-              priority: '0',
-              owner_id: 'tiendung' },
-
-            { name: 'whynothim',
-              id: '_bigbangtop',
-              type: 'sentiment',
-              theme: 'dark',
-              rate: '12',
-              starttime: 2010-12-31T21:00:00.000Z,
-              endtime: 2010-12-31T21:00:00.000Z,
-              datafile: 'data.txt',
-              uploadtime: 2010-12-31T21:00:00.000Z,
-              priority: '0',
-              owner_id: 'tiendung' }
-              ]
+              { 
+                name: 'DanNhanAmThanh',
+                id: 'bigbangtop',
+                type: 'sentiment',
+                theme: 'XaHoi',
+                rate: '12',
+                starttime: "2010-12-31",
+                endtime: "2010-12-31",
+                datafile: 'data.txt',
+                uploadtime: "2010-12-31",
+                priority: '0',
+                owner_id: 'tiendung' },
+              { name: 'whynothim',
+                id: '_bigbangtop',
+                type: 'sentiment',
+                theme: 'dark',
+                rate: '12',
+                starttime: "2010-12-31",
+                endtime: "2010-12-31",
+                datafile: 'data.txt',
+                uploadtime: "2010-12-31",
+                priority: '0',
+                owner_id: 'tiendung' }
+                ]
               
               //var list = "#{userProjects}"
-              
+              $(document).ready(function(){
+                  $('[data-toggle="popover"]').popover();   
+              });
               function getProject() {
-              var cols = Headers(list);
-              for (var i = 0; i < list.length; i++) {
-              var newRow = document.createElement("tr");
-              for (var colIndex = 0; colIndex < cols.length; colIndex++) {
-              var newCell = document.createElement("td");
-              var val = list[i][cols[colIndex]];
-              newCell.innerHTML = val;
-              newRow.append(newCell);
+                var cols = ["name","type","uploadtime","endtime"];
+                for (var i = 0; i < list.length; i++) {
+                  var newRow = document.createElement("tr");
+                  newRow.setAttribute("onclick", "cus_info()");
+                  newRow.setAttribute("data-toggle","popover");
+                  newRow.setAttribute("data-trigger","hover");
+                  newRow.setAttribute("data-placement","top");
+                  newRow.setAttribute("title","Thông tin chi tiết");
+                    for (var colIndex = 0; colIndex < cols.length; colIndex++) {
+                      var newCell = document.createElement("td");
+                      var val = list[i][cols[colIndex]];
+                      newCell.innerHTML = val;
+                      newCell.style
+                      newRow.append(newCell);
+                     }
+                  var newCell = document.createElement("td");
+                  newCell.innerHTML = "<button onclick='editbtn1()' class='edit removeborder' data-toggle='modal'><i class='material-icons' data-toggle='tooltip' title='Edit' style='z-index:2; font-size: 20px; color: #FEC737'>&#xE254;</i></button><button class='delete removeborder' data-toggle='modal'><i class='material-icons ml-2' data-toggle='tooltip' title='Delete' style='z-index:2; font-size: 20px; color: #F5584B'>&#xE872;</i></button>";
+                  newRow.append(newCell);
+                  document.getElementById("addhere").appendChild(newRow);
+                  document.getElementById("rows").setAttribute("class", "table table-hover");
+
+                }
               }
-              var newCell = document.createElement("td");
-              newCell.innerHTML = "<button onclick='editbtn1()' class='edit removeborder' data-toggle='modal'><i class='material-icons' data-toggle='tooltip' title='Edit' style='font-size: 20px; color: #FEC737'>&#xE254;</i></button><button class='delete removeborder' data-toggle='modal'><i class='material-icons ml-2' data-toggle='tooltip' title='Delete' style='font-size: 20px; color: #F5584B'>&#xE872;</i></button>";
-              newRow.append(newCell);
-              document.getElementById("rows").appendChild(newRow);
-              }
+              //mở trang info
+              function cus_info(){
+                window.location = '/cus_dashboard_detail';
               }
               //tạo từng cột theo từng header
               function Headers(list) {
-              var columns = [];
-              for (var i = 0; i < list.length; i++) {
-              var row = list[i];
-              for (var k in row) {
-              if ($.inArray(k, columns) == -1) {
-              columns.push(k);
-              }
-              }
-              }
-              return columns;
+                var columns = [];
+                  for (var i = 0; i < list.length; i++) {
+                    var row = list[i];
+                    for (var k in row) {
+                      if ($.inArray(k, columns) == -1) {
+                        columns.push(k);
+                      }
+                      }
+                    }
+                return columns;
               }
               //ấn vào button sẽ ra edit form
               function editbtn1() {
-              editCurrProject.style.display = "block";
+                editCurrProject.style.display = "block";
               }
               getProject();
