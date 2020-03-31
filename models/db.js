@@ -69,8 +69,20 @@ module.exports = {
         } catch (e) {
             return e;
         }
-    }
+    },
 
+    getAllProjectsOf: async function (userid) {
+        var cmd = 'SELECT * FROM "projects_metadata" WHERE "owner_id"=$1'
+        var value = [userid]
+        var client = await pool.connect()
+
+        try{
+            var res = await client.query(cmd, value);
+            return res
+        } catch(e) {
+            return e;
+        }
+    }
 }
 
 //dropTableInSchema('xinchao', 'projects').then(console.log)

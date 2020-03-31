@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="">
+    <meta name="author" content="Phoenixcoded" />
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- vendor css -->
+    <link href="/css/db-requester.css" rel="stylesheet">
+
+</head>
+<body class="">
+
+	<!-- [ navigation menu ] start -->
+	<nav class="pcoded-navbar menu-light ">
+		<div class="navbar-wrapper  ">
+			<div class="navbar-content scroll-div " >
+				
+				<div class="">
+					<div class="main-menu-header">
+						<div class="user-details">
+							<div>Xin chào InfoRe!</div>
+						</div>
+					</div>
+					<div class="collapse" id="nav-user-link">
+						<ul class="list-unstyled">
+							<li class="list-group-item"><a href="user-profile.html"><i class="feather icon-user m-r-5"></i>View Profile</a></li>
+							<li class="list-group-item"><a href="#!"><i class="feather icon-settings m-r-5"></i>Settings</a></li>
+							<li class="list-group-item"><a href="auth-normal-sign-in.html"><i class="feather icon-log-out m-r-5"></i>Logout</a></li>
+						</ul>
+					</div>
+				</div>
+				
+				<ul class="nav pcoded-inner-navbar ">
+					<!--
+					<li class="nav-item pcoded-menu-caption">
+					    <label>Navigation</label>
+					</li>
+					-->
+					<li class="nav-item">
+					    <a href="index.html" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
+					</li>
+					<li class="nav-item pcoded-hasmenu">
+					    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-lock"></i></span><span class="pcoded-mtext">Authentication</span></a>
+					    <ul class="pcoded-submenu">
+					        <li><a href="auth-signup.html" target="_blank">Sign up</a></li>
+					        <li><a href="auth-signin.html" target="_blank">Sign in</a></li>
+					    </ul>
+					</li>
+				</ul>	
+			</div>
+		</div>
+	</nav>
+	<!-- [ navigation menu ] end -->
+	<!-- [ Header ] start -->
+	<header class="navbar pcoded-header navbar-expand-lg navbar-light header-blue">
+				<div class="m-header">
+					<a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
+					<a href="#!" class="b-brand">
+						<img src="/img/logo.png" alt="" class="logo">
+						<img src="/img/logo.png" alt="" class="logo-thumb">
+					</a>
+					<a href="#!" class="mob-toggler">
+						<i class="feather icon-more-vertical"></i>
+					</a>
+				</div>
+				<div class="collapse navbar-collapse">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item">
+							<a href="#!" class="pop-search"><i class="feather icon-search"></i></a>
+							<div class="search-bar">
+								<input type="text" class="form-control border-0 shadow-none" placeholder="Search hear">
+								<button type="button" class="close" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+						</li>
+					</ul>
+					
+				</div>
+				
+			
+	</header>
+	<!-- [ Header ] end -->
+
+<!-- [ Main Content ] start -->
+<div class="pcoded-main-container">
+    <div class="pcoded-content">
+        <!-- [ breadcrumb ] start -->
+		<div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">Requester</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="#!">Dự án A</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+    <div class="row">    
+        <div class="col-xl-6 col-md-12">
+            <div class="card">
+
+                <div class="card-header">
+                    <h5>Thông tin</h5>
+                    <div class="card-header-right">
+                        <button type="button" class="btn  btn-secondary btn-sm mt-2">Dừng dự án</button>
+                        <button type="button" class="btn btn-primary btn-sm mt-2"><i class="feather mr-2 icon-download"></i>Xuất kết quả tổng</button>
+                    </div>
+
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <h6 class="col">Status</h6>
+                        <div class="col">In Progress</div>
+                        <div class="w-100"></div>
+                        <h6 class="col">Loại dữ liệu</h6>
+                        <div class="col">Text sentiment</div>
+                        <div class="w-100"></div>
+                        <h6 class="col">File dữ liệu</h6>
+                        <div class="col">abc.csv</div>
+                        <div class="w-100"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-6 col-md-12">
+            <div class="card">
+
+                <div class="card-header">
+                    <h5>Chi phí</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <h6 class="col">Tổng số người đã được duyệt<nav></nav></h6>
+                        <div class="col">5</div>
+                        <div class="w-100"></div>
+                        <h6 class="col">Tổng số nhãn đã được dán</h6>
+                        <div class="col">150</div>
+                        <div class="w-100"></div>
+                        <h6 class="col">Tổng kinh phí</h6>
+                        <div class="col">1,500,000 vnd</div>
+                        <div class="w-100"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="col-md-12">
+            <div class="card table-card">
+                <div class="card-header">
+                    <h5>Duyệt kết quả</h5>
+                    <div class="card-header-right">
+                        <button type="button" class="btn  btn-secondary btn-sm mt-2">Xuất kết quả làm việc</button>
+                        <button type="button" class="btn btn-sm btn-success mt-2 btn-danger"><i class="feather mr-2 icon-slash"></i>Từ chối</button>
+                        <button type="button" class="btn btn-sm btn-success mt-2"><i class="feather mr-2 icon-check-circle"></i>Chấp nhận</button>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <div class="chk-option">
+                                            <label class="check-task custom-control custom-checkbox d-flex justify-content-center done-task">
+                                                <input type="checkbox" class="custom-control-input">
+                                                <span class="custom-control-label"></span>
+                                            </label>
+                                        </div>
+                                        Tên người dán
+                                    </th>
+                                    <th>Tỉ lệ được duyệt trong 30 ngày qua</th>
+                                    <th>Ngày hoàn thành</th>
+                                    <th class="text-right">Trạng thái</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="chk-option">
+                                            <label class="check-task custom-control custom-checkbox d-flex justify-content-center done-task">
+                                                <input type="checkbox" class="custom-control-input">
+                                                <span class="custom-control-label"></span>
+                                            </label>
+                                        </div>
+                                        <div class="d-inline-block align-middle">
+                                            <div class="d-inline-block">
+                                                <h6>Nguyễn Văn A</h6>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>80%</td>
+                                    <td>6/3/2020</td>
+                                    <td class="text-right"><label class="badge badge-light-warning">Chưa được duyệt</label></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="chk-option">
+                                            <label class="check-task custom-control custom-checkbox d-flex justify-content-center done-task">
+                                                <input type="checkbox" class="custom-control-input">
+                                                <span class="custom-control-label"></span>
+                                            </label>
+                                        </div>
+                                        <div class="d-inline-block align-middle">
+                                            <div class="d-inline-block">
+                                                <h6>Nguyễn Văn A</h6>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>80%</td>
+                                    <td>6/3/2020</td>
+                                    <td class="text-right"><label class="badge badge-light-success">Chấp nhận</label></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="chk-option">
+                                            <label class="check-task custom-control custom-checkbox d-flex justify-content-center done-task">
+                                                <input type="checkbox" class="custom-control-input">
+                                                <span class="custom-control-label"></span>
+                                            </label>
+                                        </div>
+                                        <div class="d-inline-block align-middle">
+                                            <div class="d-inline-block">
+                                                <h6>Nguyễn Văn A</h6>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>80%</td>
+                                    <td>6/3/2020</td>
+                                    <td class="text-right"><label class="badge badge-light-success">Chấp nhận</label></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="chk-option">
+                                            <label class="check-task custom-control custom-checkbox d-flex justify-content-center done-task">
+                                                <input type="checkbox" class="custom-control-input">
+                                                <span class="custom-control-label"></span>
+                                            </label>
+                                        </div>
+                                        <div class="d-inline-block align-middle">
+                                            <div class="d-inline-block">
+                                                <h6>Nguyễn Văn A</h6>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>80%</td>
+                                    <td>6/3/2020</td>
+                                    <td class="text-right"><label class="badge badge-light-danger">Từ chối</label></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+        <!-- [ Main Content ] end -->
+
+    </div>
+</div>
+<!-- [ Main Content ] end -->
+    
+	<!-- Required Js -->
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+	<script>
+
+</script>
+</body>
+
+</html>
