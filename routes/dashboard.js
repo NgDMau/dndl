@@ -30,12 +30,22 @@ module.exports = function (app) {
                 //new_project.register()
                 //new_project.create();
                 //new_project.destroy();
-                var render_info = {
-                    customerFullname: user.fullname,
-                    actionSuccess: req.query.action,
-                }
+                console.log("username:   ",user.username)
+                user.getAllProjectsInfo(user.username)
+                .then((result) => {
+                    console.log('This is result', (result.rows))
+                    //console.log(result.rows)
 
-                res.render('cus_dashboard', render_info)
+                    var render_info = {
+                        customerFullname: user.fullname,
+                        actionSuccess: req.query.action,
+                        userProjects: JSON.stringify(result.rows)
+                    }
+
+                    res.render('cus_dashboard', render_info)
+                })
+
+                
             } else {
                 res.sendFile(path.join(__dirname, '../views/', 'dashboard.html'));
             }

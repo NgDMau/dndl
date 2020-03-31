@@ -93,13 +93,16 @@
 <div class="pcoded-main-container">
     <div class="pcoded-content">
         <!-- [ breadcrumb ] start -->
-        <div class="page-header">
+		<div class="page-header">
             <div class="page-block">
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <div class="page-header-title">
                             <h5 class="m-b-10">Requester</h5>
                         </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -132,6 +135,8 @@
 										<th>Thời gian kết thúc</th>
 										<th>Tình trạng</th>
 										<th>Action</th>
+										<th>Action</th>
+										<th>Action</th>
 
 
                                     </tr>
@@ -146,6 +151,8 @@
 										<td>100vnd</td>
 										<td>3/5/2020</td>
 										<td>5/5/2020</td>
+										<td>8/10 đã hoàn thành</td>
+										<td>8/10 đã hoàn thành</td>
 										<td>8/10 đã hoàn thành</td>
 										<td><button onclick='editbtn1()' id="editbtn" class='edit removeborder' data-toggle='modal'><i class='material-icons' data-toggle='tooltip' title='Edit' style='font-size: 20px; color: #FEC737'>&#xE254;</i></button><button class='delete removeborder' data-toggle='modal'><i class='material-icons ml-2' data-toggle='tooltip' title='Delete' style='font-size: 20px; color: #F5584B'>&#xE872;</i></button></td>
                                     </tr>
@@ -377,22 +384,31 @@ window.onclick = function(event) {
 
 //fake data
 
-var list = [ {	stt:"1",
-				 name: "Dự án A",
-				type: "Text sentiment",
-				topic: "Khoa học",
-				price: "100",
-				timestart: "3/5/2020",
-				timeend: "5/5/2020",
-				status: "Done" },
-				{	stt:"2",
-				name: "Dự án A",
-				type: "Text sentiment",
-				topic: "Khoa học",
-				price: "100",
-				timestart: "3/5/2020",
-				timeend: "5/5/2020",
-				status: "In Progress" }]
+var list = [
+              { 
+                name: 'DanNhanAmThanh',
+                id: 'bigbangtop',
+                type: 'sentiment',
+                theme: 'XaHoi',
+                rate: '12',
+                starttime: 2010-12-31,
+                endtime: 2010-12-31,
+                datafile: 'data.txt',
+                uploadtime: 2010-12-31,
+                priority: '0',
+                owner_id: 'tiendung' },
+              { name: 'whynothim',
+                id: '_bigbangtop',
+                type: 'sentiment',
+                theme: 'dark',
+                rate: '12',
+                starttime: 2010-12-31,
+                endtime: 2010-12-31,
+                datafile: 'data.txt',
+                uploadtime: 2010-12-31,
+                priority: '0',
+                owner_id: 'tiendung' }
+                ]
 
 				
 	function getProject() { 
