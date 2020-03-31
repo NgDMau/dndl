@@ -47,6 +47,9 @@ module.exports = function (app) {
 
                 
             } else {
+                if(user.isMod()) {
+                    res.redirect('/user_management')
+                }
                 res.sendFile(path.join(__dirname, '../views/', 'dashboard.html'));
             }
             
