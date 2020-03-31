@@ -1,5 +1,6 @@
 const express = require('express')
 const path = require('path')
+var Pool = require('pg-pool');
 
 var flash=require("connect-flash");
 const session = require('express-session');
@@ -33,12 +34,23 @@ app.use(session({
         expires: 60 * 1000 * 60 * 24 * 30
     }}));
 
+    const pool = new Pool({
+        user: 'mpndhiboquobry',
+        password: '92cf533ac275e9f7a116c6eb8e79477b3fa074679712bf8165a08f834db679f5',
+        host: 'ec2-3-229-210-93.compute-1.amazonaws.com',
+        port: '5432',
+        database: 'd5tabqes3975',
+        ssl: true
+    });
+
 app.use(express.static('public'));
 app.use(express.static('view'));
 app.use(flash());
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+
 
 // apply routes to the web
 require('./routes/text_sentiment')(app);
@@ -55,6 +67,7 @@ require('./routes/result')(app);
 require('./routes/result2')(app);
 require('./routes/create_project')(app);
 require('./routes/db-requester')(app);
+require('./routes/user_management')(app);
 require('./routes/db-requester-info')(app);
 require('./routes/cus_dashboard_detail')(app);
 
@@ -62,8 +75,6 @@ require('./routes/cus_dashboard_detail')(app);
 
 
 
-
-
-app.set('view engine', 'pug') 
+app.set('view engine', 'ejs') 
 
 app.listen(port, () => { console.log(`Example app listening on port ${port}` )});

@@ -29,6 +29,10 @@ module.exports = class User{
         return this.role === 'customer';
     }
 
+    isAdmin() {
+        return this.role === 'admin';
+    }
+
     updateLastlogin() {
         // Code here
         return true
