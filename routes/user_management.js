@@ -1,7 +1,6 @@
 var path = require('path');
 var User = require('../models/user')
 var Pool = require('pg-pool')
-var path = require('path')
 
 const pool = new Pool({
     user: 'mpndhiboquobry',
@@ -27,7 +26,7 @@ module.exports = function ( app ) {
                         return console.error(err);
                     }
 
-                    client.query('SELECT * FROM users', function (err, result) {
+                    client.query('SELECT * FROM users WHERE role NOT LIKE $1',['admin'], function (err, result) {
                         if (err) {
                             return console.error(err);
                         }
@@ -65,7 +64,7 @@ module.exports = function ( app ) {
                         if (err) {
                             return console.error(err);
                         }
-                        client.query('SELECT * FROM users', function (err, result) {
+                        client.query('SELECT * FROM users WHERE role NOT LIKE $1',['admin'], function (err, result) {
                             if (err) {
                                 return console.error(err);
                             }
@@ -91,7 +90,7 @@ module.exports = function ( app ) {
                 return console.error(err);
             }
     
-            client.query('SELECT * FROM users', function (err, result) {
+            client.query('SELECT * FROM users WHERE role NOT LIKE $1',['admin'], function (err, result) {
                 if (err) {
                     return console.error(err);
                 }
@@ -121,7 +120,7 @@ module.exports = function ( app ) {
             
                     client.query('UPDATE users SET username = $1, full_name = $2, email = $3, address = $4, role = $5  WHERE id=$6',[username, full_name, email, address, role, id], function (err) {
             
-                        client.query('SELECT * FROM users', function (err, result) {
+                        client.query('SELECT * FROM users WHERE role NOT LIKE $1',['admin'], function (err, result) {
             
                             if (err) {
                                 return console.error(err);
@@ -153,7 +152,7 @@ module.exports = function ( app ) {
                         return console.error(err);
                     }
             
-                    client.query('SELECT * FROM users', function (err, result) {
+                    client.query('SELECT * FROM users WHERE role NOT LIKE $1',['admin'], function (err, result) {
                         if (err) {
                             return console.error(err);
                         }
@@ -183,7 +182,7 @@ module.exports = function ( app ) {
             
                     client.query('DELETE FROM users WHERE id=$1',[id], function (err) {
             
-                        client.query('SELECT * FROM users', function (err, result) {
+                        client.query('SELECT * FROM users WHERE role NOT LIKE $1',['admin'], function (err, result) {
             
                             if (err) {
                                 return console.error(err);
@@ -214,7 +213,71 @@ module.exports = function ( app ) {
                         return console.error(err);
                     }
             
-                    client.query('SELECT * FROM users', function (err, result) {
+                    client.query('SELECT * FROM users WHERE role NOT LIKE $1',['admin'], function (err, result) {
+                        if (err) {
+                            return console.error(err);
+                        }
+                        console.log(result)
+                        res.render("user_management.ejs", {list:result, username:req.session.passport.user.username})
+                    });
+                })
+            } else {
+                res.redirect('/login');
+            }
+            
+        } else {
+            res.redirect('/login')
+        }
+        
+    });
+
+    app.post('/user_management/find', function (req, res) {
+        if (req.isAuthenticated()) {
+
+            var user = new User(req.session.passport.user)
+            console.log(user)
+            if (user.isMod()) {
+                
+    
+                pool.connect(function (err, client, done) {
+                    var row = req.body.row || 'username';
+                    var search = req.body.search;
+                    
+                    const query = "SELECT * FROM users WHERE "+row+" LIKE \'%"+search+"%\'"
+            
+                    client.query(query, function (err,result) {
+
+                        if (err) {
+                            return console.error(err);
+                        }
+
+                        res.render("user_management.ejs", {list:result, username:req.session.passport.user.username})
+
+                    });
+                })
+            } else {
+                res.redirect('/login');
+            }
+            
+        } else {
+            res.redirect('/login')
+        }
+    });
+    
+    app.get('/user_management/find', function (req, res) {
+        if (req.isAuthenticated()) {
+
+            var user = new User(req.session.passport.user)
+            console.log(user)
+            if (user.isMod()) {
+                
+    
+                pool.connect(function (err, client, done) {
+                    if (err) {
+                        return console.error(err);
+                    }
+            
+                    client.query('SELECT * FROM users WHERE role NOT LIKE $1',['admin'], function (err, result) {
                         if (err) {
                             return console.error(err);
                         }

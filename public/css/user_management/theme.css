@@ -443,6 +443,8 @@ section {
 /*                   COMPONENTS                        */
 /*-----------------------------------------------------*/
 /* ----- Buttons----- */
+
+
 .au-btn {
     line-height: 45px;
     padding: 0 35px;
@@ -4595,6 +4597,10 @@ section {
 
 .table-data__tool-right {
     display: flex;
+}
+
+.au-select {
+    margin-right: 12px;
 }
 
 .table-data__tool .table-data__tool-right > button {

@@ -241,7 +241,15 @@
                                             </div>
                                             <div class="table-data__tool-right">
 
-                                                <form class="form-header" action="" method="POST">
+                                                <form class="form-header" action="/user_management/find" method="POST">
+                                                    <select class="au-select" name="row">
+                                                        <option value="username">Tìm kiếm theo</option>
+                                                        <option value="username">Tên tài khoản</option>
+                                                        <option value="full_name">Tên người dùng</option>
+                                                        <option value="email">Email</option>
+                                                        <option value="address">Address</option>
+                                                        <option value="role">Role</option>
+                                                    </select>
                                                     <input class="au-input" type="text" name="search" placeholder="Search" />
                                                     <button class="au-btn--submit" type="submit">
                                                         <i class="zmdi zmdi-search"></i>
