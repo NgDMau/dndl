@@ -49,8 +49,9 @@ module.exports = function (app) {
             } else {
                 if(user.isMod()) {
                     res.redirect('/user_management')
+                } else {
+                    res.sendFile(path.join(__dirname, '../views/', 'dashboard.html'));
                 }
-                res.sendFile(path.join(__dirname, '../views/', 'dashboard.html'));
             }
             
         } else {
