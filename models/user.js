@@ -33,6 +33,10 @@ module.exports = class User{
         return this.role === 'admin';
     }
 
+    isMod() {
+        return this.role === 'moderator'
+    }
+
     updateLastlogin() {
         // Code here
         return true

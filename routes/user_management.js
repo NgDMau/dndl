@@ -19,7 +19,7 @@ module.exports = function ( app ) {
 
             var user = new User(req.session.passport.user)
             console.log(user)
-            if (user.isAdmin()) {
+            if (user.isMod()) {
                 
     
                 pool.connect(function (err, client, done) {
@@ -49,7 +49,7 @@ module.exports = function ( app ) {
 
             var user = new User(req.session.passport.user)
             console.log(user)
-            if (user.isAdmin()) {  
+            if (user.isMod()) {  
                 pool.connect(function (err, client, done) {
                     var username = req.body.username;
                     var full_name = req.body.full_name;
@@ -106,7 +106,7 @@ module.exports = function ( app ) {
 
             var user = new User(req.session.passport.user)
             console.log(user)
-            if (user.isAdmin()) {
+            if (user.isMod()) {
                 pool.connect(function (err, client, done) {
                     var id = req.body.id;
                     var username = req.body.username;
@@ -145,7 +145,7 @@ module.exports = function ( app ) {
 
             var user = new User(req.session.passport.user)
             console.log(user)
-            if (user.isAdmin()) {
+            if (user.isMod()) {
                 
     
                 pool.connect(function (err, client, done) {
@@ -175,7 +175,7 @@ module.exports = function ( app ) {
 
             var user = new User(req.session.passport.user)
             console.log(user)
-            if (user.isAdmin()) {
+            if (user.isMod()) {
                 
     
                 pool.connect(function (err, client, done) {
@@ -206,7 +206,7 @@ module.exports = function ( app ) {
 
             var user = new User(req.session.passport.user)
             console.log(user)
-            if (user.isAdmin()) {
+            if (user.isMod()) {
                 
     
                 pool.connect(function (err, client, done) {
