@@ -61,7 +61,7 @@ module.exports = function (app) {
 
     app.get('/login', function (req, res) {
         if (req.isAuthenticated()) {
-            res.redirect('/dashbroad');
+            res.redirect('/dashboard');
         } else {
             res.sendFile(path.join(__dirname, '../views/', 'login.html'))
         }
