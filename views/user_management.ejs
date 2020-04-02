@@ -20,6 +20,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700&display=swap" rel="stylesheet">
 
     <!-- Bootstrap CSS-->
     <link href="/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
@@ -44,11 +45,12 @@
 
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar d-none d-lg-block">
-            <div class="logo">
-                <a href="/dashboard">
-                    INLAB
-                </a>
-            </div>
+            <div class = "logobox" aria-hidden="true">
+                <a href='/about'>
+                    <img src="/img/logo.png" alt="inlab logo" class="logo" href='/about'>
+           </a>
+                </div>
+    
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
@@ -56,6 +58,8 @@
                         <li class="active has-sub"> 
                             <a href="#">
                                 <i class="fas fa-users"></i>Quản lý người dùng</a>
+                            <a href="#">
+                                    <i class="fas fa-list"></i>Danh sách câu training</a>
                         </li>
                     </ul>
                 </nav>
@@ -250,7 +254,7 @@
                                                         <option value="address">Địa chỉ</option>
                                                         <option value="role">Quyền tài khoản</option>
                                                     </select>
-                                                    <input class="au-input" type="text" name="search" placeholder="Tìm kiếm"" />
+                                                    <input class="au-input" type="text" name="search" placeholder="Tìm kiếm" />
                                                     <button class="au-btn--submit" type="submit">
                                                         <i class="zmdi zmdi-search"></i>
                                                     </button>
