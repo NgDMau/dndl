@@ -54,7 +54,7 @@ input[type=text], input[type=password] {
     color: #2D333E;
     background-color: white; 
     border-color:white;
-    border-bottom: 2px solid #FFDF00;
+    border-bottom: 1px solid #FFDF00;
 
 }
 
