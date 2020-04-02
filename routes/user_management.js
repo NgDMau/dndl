@@ -28,8 +28,10 @@ module.exports = function ( app ) {
 
                     client.query('SELECT * FROM users WHERE role NOT LIKE $1',['admin'], function (err, result) {
                         if (err) {
+                            client.release();
                             return console.error(err);
                         }
+                        client.release();
                         console.log(result)
                         res.render("user_management.ejs", {list:result, username:req.session.passport.user.username})
                     });
@@ -62,12 +64,15 @@ module.exports = function ( app ) {
             
                     client.query('INSERT INTO users(username, full_name, email, address, role) VALUES($1, $2, $3, $4, $5)',[username, full_name, email, address, role], function (err) {
                         if (err) {
+                            client.release();
                             return console.error(err);
                         }
                         client.query('SELECT * FROM users WHERE role NOT LIKE $1',['admin'], function (err, result) {
                             if (err) {
+                                client.release();
                                 return console.error(err);
                             }
+                            client.release();
                             console.log(result)
                             res.render("user_management.ejs", {list:result, username:req.session.passport.user.username})
                         });
@@ -87,13 +92,16 @@ module.exports = function ( app ) {
     
         pool.connect(function (err, client, done) {
             if (err) {
+                client.release();
                 return console.error(err);
             }
     
             client.query('SELECT * FROM users WHERE role NOT LIKE $1',['admin'], function (err, result) {
                 if (err) {
+                    client.release();
                     return console.error(err);
                 }
+                client.release();
                 console.log(result)
                 res.render("user_management.ejs", {list:result, username:req.session.passport.user.username})
             });
@@ -123,8 +131,10 @@ module.exports = function ( app ) {
                         client.query('SELECT * FROM users WHERE role NOT LIKE $1',['admin'], function (err, result) {
             
                             if (err) {
+                                client.release();
                                 return console.error(err);
                             }
+                            client.release();
                             res.render("user_management.ejs", {list:result, username:req.session.passport.user.username})
                         });
                     });
@@ -149,14 +159,17 @@ module.exports = function ( app ) {
     
                 pool.connect(function (err, client, done) {
                     if (err) {
+                        client.release();
                         return console.error(err);
                     }
             
                     client.query('SELECT * FROM users WHERE role NOT LIKE $1',['admin'], function (err, result) {
                         if (err) {
+                            client.release();
                             return console.error(err);
                         }
                         console.log(result)
+                        client.release();
                         res.render("user_management.ejs", {list:result, username:req.session.passport.user.username})
                     });
                 })
@@ -185,8 +198,10 @@ module.exports = function ( app ) {
                         client.query('SELECT * FROM users WHERE role NOT LIKE $1',['admin'], function (err, result) {
             
                             if (err) {
+                                client.release();
                                 return console.error(err);
                             }
+                            client.release();
                             res.render("user_management.ejs", {list:result, username:req.session.passport.user.username})
                         });
                     });
@@ -215,8 +230,10 @@ module.exports = function ( app ) {
             
                     client.query('SELECT * FROM users WHERE role NOT LIKE $1',['admin'], function (err, result) {
                         if (err) {
+                            client.release();
                             return console.error(err);
                         }
+                        client.release();
                         console.log(result)
                         res.render("user_management.ejs", {list:result, username:req.session.passport.user.username})
                     });
@@ -248,9 +265,10 @@ module.exports = function ( app ) {
                     client.query(query, function (err,result) {
 
                         if (err) {
+                            client.release();
                             return console.error(err);
                         }
-
+                        client.release();
                         res.render("user_management.ejs", {list:result, username:req.session.passport.user.username})
 
                     });
@@ -279,8 +297,10 @@ module.exports = function ( app ) {
             
                     client.query('SELECT * FROM users WHERE role NOT LIKE $1',['admin'], function (err, result) {
                         if (err) {
+                            client.release();
                             return console.error(err);
                         }
+                        client.release();
                         console.log(result)
                         res.render("user_management.ejs", {list:result, username:req.session.passport.user.username})
                     });

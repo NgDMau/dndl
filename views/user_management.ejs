@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
 <head>
 
@@ -219,7 +219,7 @@
                                     <div class="col-md-12">
                                         <h3 class="title-5 m-b-35">Danh sách người dùng</h3>
                                         <div class="table-data__tool">
-                                            <div class="table-data__tool-left">
+                                            <!-- <div class="table-data__tool-left">
                                                 <div class="rs-select2--light rs-select2--md">
                                                     <select class="js-select2" name="property">
                                                         <option selected="selected">All Properties</option>
@@ -238,7 +238,7 @@
                                                 </div>
                                                 <button class="au-btn-filter">
                                                     <i class="zmdi zmdi-filter-list"></i>filters</button>
-                                            </div>
+                                            </div> -->
                                             <div class="table-data__tool-right">
 
                                                 <form class="form-header" action="/user_management/find" method="POST">
@@ -247,10 +247,10 @@
                                                         <option value="username">Tên tài khoản</option>
                                                         <option value="full_name">Tên người dùng</option>
                                                         <option value="email">Email</option>
-                                                        <option value="address">Address</option>
-                                                        <option value="role">Role</option>
+                                                        <option value="address">Địa chỉ</option>
+                                                        <option value="role">Quyền tài khoản</option>
                                                     </select>
-                                                    <input class="au-input" type="text" name="search" placeholder="Search" />
+                                                    <input class="au-input" type="text" name="search" placeholder="Tìm kiếm"" />
                                                     <button class="au-btn--submit" type="submit">
                                                         <i class="zmdi zmdi-search"></i>
                                                     </button>
@@ -519,8 +519,6 @@
             $('#email_delete').val($(value[3]).text());
             $('#address_delete').val($(value[4]).text());
             $('#role_delete').val($(value[5]).text());
-
-
         });
       </script>
 
