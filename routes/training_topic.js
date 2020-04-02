@@ -21,6 +21,7 @@ module.exports = function (app) {
 
     app.post('/training_topic', function (req, res) {
         if (req.isAuthenticated()) {
+            console.log(req.session.passport.user.role)
             if (req.session.passport.user.role == "beginner") {
                 pool.connect(function (err, client, done) {
                     if (err) {
@@ -35,9 +36,11 @@ module.exports = function (app) {
                         res.redirect('/')
                     });
                 })
+            } else {
+                res.redirect('/')
             }
         } else {
-            res.redirect('/login')
+            res.redirect('/')
         }
     });
 

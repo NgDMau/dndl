@@ -25,6 +25,10 @@ module.exports = class User{
         return result;
     }
 
+    isBeginner() {
+        return this.role === 'beginner() ';
+    }
+
     isCustomer() {
         return this.role === 'customer';
     }
