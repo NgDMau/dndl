@@ -49,7 +49,9 @@ Notes:	decreasing heading by 0.4em with every subsequent heading level
 ul {
     margin: 0;
 }
-
+.custom-select{
+    font-size:10px !important;
+}
 button,
 input[type='button'] {
     cursor: pointer;
