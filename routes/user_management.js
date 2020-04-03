@@ -57,6 +57,9 @@ module.exports = function ( app ) {
                     var email = req.body.email;
                     var address = req.body.address;
                     var role = req.body.role;
+                    if (role === 'admin') {
+                        role = 'moderator'
+                    }
                     
                     if (err) {
                         return console.error(err);
