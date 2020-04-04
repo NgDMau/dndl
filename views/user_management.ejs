@@ -58,7 +58,7 @@
                         <li class="active has-sub"> 
                             <a href="#">
                                 <i class="fas fa-users"></i>Quản lý người dùng</a>
-                            <a href="#">
+                            <a href="#" data-toggle="modal" data-target="#not_done">
                                     <i class="fas fa-list"></i>Dữ liệu đào tạo</a>
                         </li>
                     </ul>
@@ -334,6 +334,21 @@
 
     <!-- Main JS-->
     <script src="/js/user_management/main.js"></script>
+
+    <div class="modal fade" id="not_done" role="dialog">
+        <div class="modal-dialog">
+        
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+               <div>Tính năng vẫn đang trong quá trình hoàn thiện</div>
+          </div>
+          
+        </div>
+      </div>
 
     <div class="modal fade" id="add_user" role="dialog">
         <div class="modal-dialog">
