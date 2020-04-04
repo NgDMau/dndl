@@ -54,7 +54,7 @@ module.exports = function (app) {
     app.post('/login',
         passport.authenticate('id-only', {
             successRedirect: '/dashboard',
-            failureRedirect: '/login'
+            failureRedirect: '/login_fail'
         }), function (req, res) {
             req.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000; // Cookie expires after 30 days
         });
@@ -63,9 +63,16 @@ module.exports = function (app) {
         if (req.isAuthenticated()) {
             res.redirect('/dashboard');
         } else {
-            res.sendFile(path.join(__dirname, '../views/', 'login.html'))
+            const mess = req.flash('login_fail');
+            res.render('login.ejs', {mess:mess} )
         }
     });
+
+    app.get('/login_fail', function (req, res) {
+        const mess = req.flash('login_fail', 'Đăng nhập thất bại. Hãy kiểm tra lại tên đăng nhập.');
+        res.redirect('/login')
+    });
+    
 
 }
 

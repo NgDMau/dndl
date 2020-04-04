@@ -1,6 +1,7 @@
 var path = require('path');
 var User = require('../models/user')
 var Pool = require('pg-pool')
+const flash = require('connect-flash');
 
 const pool = new Pool({
     user: 'mpndhiboquobry',
@@ -12,12 +13,14 @@ const pool = new Pool({
 });
 
 module.exports = function ( app ) {
+
+    app.use(flash())
   
     app.get('/user_management', function (req, res) {
         if (req.isAuthenticated()) {
 
             var user = new User(req.session.passport.user)
-            console.log(user)
+            
             if (user.isMod()) {
                 
     
@@ -32,8 +35,9 @@ module.exports = function ( app ) {
                             return console.error(err);
                         }
                         client.release();
-                        console.log(result)
-                        res.render("user_management.ejs", {list:result, username:req.session.passport.user.username})
+                        const mess = req.flash('mess');
+                        console.log(mess)
+                        res.render("user_management", {list:result, username:req.session.passport.user.username, mess:mess })
                     });
                 })
             } else {
@@ -49,7 +53,7 @@ module.exports = function ( app ) {
         if (req.isAuthenticated()) {
 
             var user = new User(req.session.passport.user)
-            console.log(user)
+            
             if (user.isMod()) {  
                 pool.connect(function (err, client, done) {
                     var username = req.body.username;
@@ -76,8 +80,9 @@ module.exports = function ( app ) {
                                 return console.error(err);
                             }
                             client.release();
-                            console.log(result)
-                            res.render("user_management.ejs", {list:result, username:req.session.passport.user.username})
+                            req.flash('mess','Thêm tài khoản thành công')
+                            res.redirect('/user_management');
+
                         });
                     });
                 })
@@ -90,32 +95,11 @@ module.exports = function ( app ) {
         } 
     });
     
-    app.get('/user_management/add', function (req, res) {
-        
-    
-        pool.connect(function (err, client, done) {
-            if (err) {
-                client.release();
-                return console.error(err);
-            }
-    
-            client.query('SELECT * FROM users WHERE role NOT LIKE $1',['admin'], function (err, result) {
-                if (err) {
-                    client.release();
-                    return console.error(err);
-                }
-                client.release();
-                console.log(result)
-                res.render("user_management.ejs", {list:result, username:req.session.passport.user.username})
-            });
-        })
-    });
-    
     app.post('/user_management/edit', function (req, res) {
         if (req.isAuthenticated()) {
 
             var user = new User(req.session.passport.user)
-            console.log(user)
+            
             if (user.isMod()) {
                 pool.connect(function (err, client, done) {
                     var id = req.body.id;
@@ -138,16 +122,17 @@ module.exports = function ( app ) {
                                 return console.error(err);
                             }
                             client.release();
-                            res.render("user_management.ejs", {list:result, username:req.session.passport.user.username})
+                            req.flash('mess','Sửa thông tin tài khoản thành công')
+                            res.redirect('/user_management');
                         });
                     });
                 })
             } else {
-                res.redirect('/login');
+                res.redirect('/');
             }
             
         } else {
-            res.redirect('/login')
+            res.redirect('/')
         }
     
     });
@@ -156,32 +141,17 @@ module.exports = function ( app ) {
         if (req.isAuthenticated()) {
 
             var user = new User(req.session.passport.user)
-            console.log(user)
-            if (user.isMod()) {
-                
-    
-                pool.connect(function (err, client, done) {
-                    if (err) {
-                        client.release();
-                        return console.error(err);
-                    }
             
-                    client.query('SELECT * FROM users WHERE role NOT LIKE $1',['admin'], function (err, result) {
-                        if (err) {
-                            client.release();
-                            return console.error(err);
-                        }
-                        console.log(result)
-                        client.release();
-                        res.render("user_management.ejs", {list:result, username:req.session.passport.user.username})
-                    });
-                })
+            if (user.isMod()) {
+
+                res.redirect('/user_management');
+
             } else {
-                res.redirect('/login');
+                res.redirect('/');
             }
             
         } else {
-            res.redirect('/login')
+            res.redirect('/')
         }
     });
     
@@ -189,7 +159,7 @@ module.exports = function ( app ) {
         if (req.isAuthenticated()) {
 
             var user = new User(req.session.passport.user)
-            console.log(user)
+            
             if (user.isMod()) {
                 
     
@@ -205,7 +175,8 @@ module.exports = function ( app ) {
                                 return console.error(err);
                             }
                             client.release();
-                            res.render("user_management.ejs", {list:result, username:req.session.passport.user.username})
+                            req.flash('mess','Xóa thông tin tài khoản thành công')
+                            res.redirect('/user_management')
                         });
                     });
                 })
@@ -222,31 +193,17 @@ module.exports = function ( app ) {
         if (req.isAuthenticated()) {
 
             var user = new User(req.session.passport.user)
-            console.log(user)
-            if (user.isMod()) {
-                
-    
-                pool.connect(function (err, client, done) {
-                    if (err) {
-                        return console.error(err);
-                    }
             
-                    client.query('SELECT * FROM users WHERE role NOT LIKE $1',['admin'], function (err, result) {
-                        if (err) {
-                            client.release();
-                            return console.error(err);
-                        }
-                        client.release();
-                        console.log(result)
-                        res.render("user_management.ejs", {list:result, username:req.session.passport.user.username})
-                    });
-                })
+            if (user.isMod()) {
+
+                res.redirect('/user_management')
+
             } else {
-                res.redirect('/login');
+                res.redirect('/');
             }
             
         } else {
-            res.redirect('/login')
+            res.redirect('/')
         }
         
     });
@@ -255,7 +212,7 @@ module.exports = function ( app ) {
         if (req.isAuthenticated()) {
 
             var user = new User(req.session.passport.user)
-            console.log(user)
+            
             if (user.isMod()) {
                 
     
@@ -272,7 +229,7 @@ module.exports = function ( app ) {
                             return console.error(err);
                         }
                         client.release();
-                        res.render("user_management.ejs", {list:result, username:req.session.passport.user.username})
+                        res.render("user_management", {list:result, username:req.session.passport.user.username,mess:req.flash('mess') })
 
                     });
                 })
@@ -284,36 +241,22 @@ module.exports = function ( app ) {
             res.redirect('/login')
         }
     });
-    
+
     app.get('/user_management/find', function (req, res) {
         if (req.isAuthenticated()) {
 
             var user = new User(req.session.passport.user)
-            console.log(user)
-            if (user.isMod()) {
-                
-    
-                pool.connect(function (err, client, done) {
-                    if (err) {
-                        return console.error(err);
-                    }
             
-                    client.query('SELECT * FROM users WHERE role NOT LIKE $1',['admin'], function (err, result) {
-                        if (err) {
-                            client.release();
-                            return console.error(err);
-                        }
-                        client.release();
-                        console.log(result)
-                        res.render("user_management.ejs", {list:result, username:req.session.passport.user.username})
-                    });
-                })
+            if (user.isMod()) {
+
+                res.redirect('/user_management')
+
             } else {
-                res.redirect('/login');
+                res.redirect('/');
             }
             
         } else {
-            res.redirect('/login')
+            res.redirect('/')
         }
         
     });
