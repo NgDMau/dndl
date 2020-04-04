@@ -20,6 +20,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700&display=swap" rel="stylesheet">
 
     <!-- Bootstrap CSS-->
     <link href="/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
@@ -44,11 +45,12 @@
 
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar d-none d-lg-block">
-            <div class="logo">
-                <a href="/dashboard">
-                    INLAB
-                </a>
-            </div>
+            <div class = "logobox pt-5" aria-hidden="true">
+                <a href='/about'>
+                    <img src="/img/logo.png" alt="inlab logo" class="logo" href='/about'>
+           </a>
+                </div>
+    
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
@@ -56,6 +58,8 @@
                         <li class="active has-sub"> 
                             <a href="#">
                                 <i class="fas fa-users"></i>Quản lý người dùng</a>
+                            <a href="#">
+                                    <i class="fas fa-list"></i>Dữ liệu đào tạo</a>
                         </li>
                     </ul>
                 </nav>
@@ -71,7 +75,7 @@
                     <div class="container-fluid">
                         <div class="header-wrap">
                             <div class="header-button">
-                                <div class="noti-wrap">
+                                <!-- <div class="noti-wrap">
                                     <div class="noti__item js-item-menu">
                                         <i class="zmdi zmdi-comment-more"></i>
                                         <span class="quantity">1</span>
@@ -173,7 +177,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">                                   
                                         <div>
@@ -185,19 +189,19 @@
                                                     <a ><%= username %></a>
                                                 </h5>
                                             </div>
-                                            <div class="account-dropdown__body">
+                                            <!-- <div class="account-dropdown__body">
                                                 <div class="account-dropdown__item">
                                                     <a href="#">
-                                                        <i class="zmdi zmdi-account"></i>Account</a>
+                                                        <i class="zmdi zmdi-account"></i>Thông tin cá nhân</a>
                                                 </div>
                                                 <div class="account-dropdown__item">
                                                     <a href="#">
-                                                        <i class="zmdi zmdi-settings"></i>Setting</a>
+                                                        <i class="zmdi zmdi-settings"></i>Cài đặt</a>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                             <div class="account-dropdown__footer">
                                                 <a href="/logout">
-                                                    <i class="zmdi zmdi-power"></i>Logout</a>
+                                                    <i class="zmdi zmdi-power"></i>Đăng xuất</a>
                                             </div>
                                         </div>
                                     </div>
@@ -250,7 +254,7 @@
                                                         <option value="address">Địa chỉ</option>
                                                         <option value="role">Quyền tài khoản</option>
                                                     </select>
-                                                    <input class="au-input" type="text" name="search" placeholder="Tìm kiếm"" />
+                                                    <input class="au-input" type="text" name="search" placeholder="Tìm kiếm" />
                                                     <button class="au-btn--submit" type="submit">
                                                         <i class="zmdi zmdi-search"></i>
                                                     </button>
@@ -373,7 +377,7 @@
                                 <option selected>Chọn</option>
                                 <option value="beginner">Beginner</option>
                                 <option value="worker">Worker</option>
-                                <option value="admin">Admin</option>
+                                
                             </select>
                         </div>
 
@@ -386,9 +390,11 @@
                     </div>
                 </form>
             </div>
+            <!-- bo vi da co dau 'x' rui ah
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
+        -->
           </div>
           
         </div>
@@ -455,9 +461,13 @@
                     </div>
                 </form>
             </div>
+            <!-- bo vi da co dau 'x' rui ah
+
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
+
+        -->
           </div>
           
         </div>

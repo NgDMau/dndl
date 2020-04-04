@@ -49,7 +49,9 @@ Notes:	decreasing heading by 0.4em with every subsequent heading level
 ul {
     margin: 0;
 }
-
+.custom-select{
+    font-size:10px !important;
+}
 button,
 input[type='button'] {
     cursor: pointer;
@@ -97,7 +99,7 @@ p {
 
 /* ----- Typography ----- */
 body {
-    font-family: "Poppins", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 400;
     font-size: 16px;
     line-height: 1.625;
@@ -1587,10 +1589,16 @@ section {
     background: #434556;
     overflow-y: auto;
 }
+.logobox{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+}
 
 .menu-sidebar .logo {
-
-    height: 75px;
+    height: 50px;
+    object-fit: contain; 
     padding: 0 35px;
     display: -webkit-box;
     display: -webkit-flex;
@@ -1605,7 +1613,6 @@ section {
     -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
     box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
-    border-right: 1px solid #e5e5e5;
     position: relative;
     z-index: 3;
 }
@@ -1617,6 +1624,7 @@ section {
     margin-top: 10px;
     font-size: 30px;
 }
+
 
 .menu-sidebar .navbar__list .navbar__sub-list {
     display: none;
@@ -1651,11 +1659,11 @@ section {
 }
 
 .navbar-sidebar .navbar__list li a:hover {
-    color: #4272d7;
+    color: #FFDF00;
 }
 
 .navbar-sidebar .navbar__list li.active > a {
-    color: #4272d7;
+    color: #FFDF00;
 }
 
 .has-sub {
