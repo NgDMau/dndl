@@ -5,7 +5,7 @@ var Project = require('../models/project')
 
 
 module.exports = function (app) {
-    // app.set('view engine', 'pug');
+    app.set('view engine', 'pug');
 
     app.get('/dashboard', function (req, res) {
         if (req.isAuthenticated()) {
