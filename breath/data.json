@@ -1,0 +1,13 @@
+{ 
+    "test1.wav": {
+        "label": true,
+        "fullname": "Nguyen Dinh Dung"
+        },
+    "test2.wav": {
+            "label": true
+        },
+    "test3.wav": {
+        "label": false,
+        "address": "Cau Giay aHN"
+    }    
+}
