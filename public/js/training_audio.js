@@ -55,7 +55,7 @@ function start() {
   audioElement.classList.remove('hide')
   playButton.classList.remove('hide')
   titleElement.innerText = 'Câu hỏi'
-  document.getElementById("shortcut_label").classList.remove('hide')
+  // document.getElementById("shortcut_label").classList.remove('hide')
 
   setNextQuestion()
 }
