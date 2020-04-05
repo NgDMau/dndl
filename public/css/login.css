@@ -23,7 +23,7 @@ input {
 .box{
     padding: 10px;
 }
-.container{
+.main{
     height: 100%;
     width: 100%;
     left: 0;
