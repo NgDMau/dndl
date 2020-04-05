@@ -37,7 +37,7 @@ module.exports = function ( app ) {
                         client.release();
                         const mess = req.flash('mess');
                         console.log(mess)
-                        res.render("user_management", {list:result, username:req.session.passport.user.username, mess:mess })
+                        res.render("user_management.ejs", {list:result, username:req.session.passport.user.username, mess:mess })
                     });
                 })
             } else {

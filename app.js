@@ -51,6 +51,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.set('view engine', 'ejs') 
+app.set('view engine', 'pug') 
 
 
 // apply routes to the web
