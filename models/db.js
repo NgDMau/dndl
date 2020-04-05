@@ -19,8 +19,10 @@ module.exports = {
 
         try {
             var res = await client.query(cmd);
+            client.release();
             return res;
         } catch(e) {
+            client.release();
             return e;
         }
     },
@@ -30,10 +32,27 @@ module.exports = {
         var client = await pool.connect()
         try {
             var res = await client.query(cmd, values);
+            client.release();
             return res;
         } catch (e) {
+            client.release();
             return e;
         }
+    },
+
+    unregisterProject: async function (projectID) {
+        var cmd = 'DELETE FROM projects_metadata WHERE id=$1'
+        var values = [projectID]
+        var client = await pool.connect();
+        try {
+            var res = await client.query(cmd, values)
+            client.release();
+            return res;
+        } catch(e) {
+            client.release();
+            return e;
+        }
+
     },
 
     dropTableInSchema: async function (table, schema) {
@@ -42,8 +61,10 @@ module.exports = {
         var client = await pool.connect()
         try {
             var res = await client.query(cmd);
+            client.release();
             return res;
         } catch(e) {
+            client.release();
             return e;
         }
     },
@@ -65,8 +86,10 @@ module.exports = {
 
         try {
             var res = await client.query(cmd);
+            client.release();
             return res;
         } catch (e) {
+            client.release();
             return e;
         }
     },
@@ -78,8 +101,10 @@ module.exports = {
 
         try{
             var res = await client.query(cmd, value);
+            client.release()
             return res
         } catch(e) {
+            client.release();
             return e;
         }
     }

@@ -50,6 +50,8 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.set('view engine', 'ejs') 
+app.set('view engine', 'pug') 
 
 
 // apply routes to the web
@@ -68,11 +70,5 @@ require('./routes/result')(app);
 require('./routes/create_project')(app);
 require('./routes/db-requester')(app);
 require('./routes/user_management')(app);
-
-
-
-
-
-app.set('view engine', 'ejs') 
 
 app.listen(port, () => { console.log(`Example app listening on port ${port}` )});
