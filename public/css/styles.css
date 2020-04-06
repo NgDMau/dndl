@@ -172,3 +172,15 @@ img{
 .audio {
   margin: auto;
 }
+
+.home {
+  position: absolute;
+  top: 90%;
+}
+
+.logout {
+  position: absolute;
+  top: 90%;
+  right: 2%;
+
+}
