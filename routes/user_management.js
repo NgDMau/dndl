@@ -229,7 +229,7 @@ module.exports = function ( app ) {
                             return console.error(err);
                         }
                         client.release();
-                        res.render("user_management", {list:result, username:req.session.passport.user.username,mess:req.flash('mess') })
+                        res.render("user_management.ejs", {list:result, username:req.session.passport.user.username,mess:req.flash('mess') })
 
                     });
                 })

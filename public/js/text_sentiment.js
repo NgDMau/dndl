@@ -47,6 +47,11 @@ resultButton.addEventListener('click', () => {
 })
 
 function start() {
+  // check and add (if exists) saved-score in localStorage to current score
+  if (localStorage.savedscore) {
+    score += Number(localStorage.savedscore);
+  } 
+
   startButton.classList.add('hide')
   shuffledQuestions = questions.sort(() => Math.random() - .5)
   currentQuestionIndex = 0
