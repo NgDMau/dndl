@@ -4,12 +4,12 @@ var Pool = require('pg-pool')
 const flash = require('connect-flash');
 
 const pool = new Pool({
-    user: 'mpndhiboquobry',
-    password: '92cf533ac275e9f7a116c6eb8e79477b3fa074679712bf8165a08f834db679f5',
-    host: 'ec2-3-229-210-93.compute-1.amazonaws.com',
-    port: '5432',
-    database: 'd5tabqes3975',
-    ssl: true
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    database: process.env.DB_DATABASE,
+    ssl: process.env.DB_SSL
 });
 
 module.exports = function ( app ) {
@@ -68,22 +68,27 @@ module.exports = function ( app ) {
                     if (err) {
                         return console.error(err);
                     }
-            
-                    client.query('INSERT INTO users(username, full_name, email, address, role) VALUES($1, $2, $3, $4, $5)',[username, full_name, email, address, role], function (err) {
-                        if (err) {
-                            client.release();
-                            return console.error(err);
-                        }
-                        client.query('SELECT * FROM users WHERE role NOT LIKE $1',['admin'], function (err, result) {
-                            if (err) {
-                                client.release();
-                                return console.error(err);
-                            }
-                            client.release();
-                            req.flash('mess','Thêm tài khoản thành công')
-                            res.redirect('/user_management');
 
-                        });
+                    client.query('SELECT exists (SELECT 1 FROM users WHERE username = $1 LIMIT 1)',[username], function (err,result) {  
+                        console.log(result.rows[0].exists)                 
+                        if (result.rows[0].exists == true){
+                            req.flash('mess','Tên tài khoản đã tồn tại')
+                            res.redirect('/user_management');
+                        }else{
+                            client.query('INSERT INTO users(username, full_name, email, address, role) VALUES($1, $2, $3, $4, $5)',[username, full_name, email, address, role], function (err) {
+                                if (err) {
+                                    client.release();
+                                    return console.error(err);
+                                }
+                                
+                                    req.flash('mess','Thêm tài khoản thành công')
+                                    res.redirect('/user_management');
+        
+        
+                            });
+
+                        }
+
                     });
                 })
             } else {
@@ -112,20 +117,25 @@ module.exports = function ( app ) {
                     if (err) {
                         return console.error(err);
                     }
-            
-                    client.query('UPDATE users SET username = $1, full_name = $2, email = $3, address = $4, role = $5  WHERE id=$6',[username, full_name, email, address, role, id], function (err) {
-            
-                        client.query('SELECT * FROM users WHERE role NOT LIKE $1',['admin'], function (err, result) {
-            
-                            if (err) {
-                                client.release();
-                                return console.error(err);
-                            }
-                            client.release();
-                            req.flash('mess','Sửa thông tin tài khoản thành công')
+
+                    client.query('SELECT exists (SELECT 1 FROM users WHERE username = $1 and id != $2 LIMIT 1)',[username, id], function (err,result) {  
+                        console.log(result.rows[0].exists)                 
+                        if (result.rows[0].exists == true){
+                            req.flash('mess','Tên tài khoản đã tồn tại')
                             res.redirect('/user_management');
-                        });
+                        }else{
+                            client.query('UPDATE users SET username = $1, full_name = $2, email = $3, address = $4, role = $5  WHERE id=$6',[username, full_name, email, address, role, id], function (err) {
+
+                                client.release();
+                                req.flash('mess','Sửa thông tin tài khoản thành công')
+                                res.redirect('/user_management');
+    
+                            });
+
+                        }
+
                     });
+
                 })
             } else {
                 res.redirect('/');
@@ -168,16 +178,10 @@ module.exports = function ( app ) {
             
                     client.query('DELETE FROM users WHERE id=$1',[id], function (err) {
             
-                        client.query('SELECT * FROM users WHERE role NOT LIKE $1',['admin'], function (err, result) {
-            
-                            if (err) {
-                                client.release();
-                                return console.error(err);
-                            }
                             client.release();
                             req.flash('mess','Xóa thông tin tài khoản thành công')
                             res.redirect('/user_management')
-                        });
+
                     });
                 })
             } else {

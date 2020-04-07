@@ -217,9 +217,15 @@
             <div class="main-content">
 
                 <% if ( mess.length > 0 ) { %>
-                    <div class="alert alert-success">
-                        <%= mess %>
-                    </div>
+                    <% if ( mess == "Tên tài khoản đã tồn tại" ) { %>
+                        <div class="alert alert-danger">
+                            <%= mess %>
+                        </div>
+                    <% }else{ %>
+                        <div class="alert alert-success">
+                            <%= mess %>
+                        </div>
+                    <% } %>
                 <% } %>
 
                 <div class="section__content section__content--p30">
@@ -373,7 +379,7 @@
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-3 col-form-label">Tên tài khoản</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="username" name="username" placeholder="Tên tài khoản">
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Tên tài khoản" required="required" pattern="[a-z]{1,15}" title="Tên tài khoản phải không bao gồm dấu và ký tự đặc biệt.">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -397,10 +403,11 @@
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-3 col-form-label">Quyền</label>
                         <div class="col-sm-9">
-                            <select class="custom-select" id="role" name="role">
-                                <option selected>Chọn</option>
+                            <select class="custom-select" id="role" name="role" required="required">
+                                
                                 <option value="beginner">Beginner</option>
                                 <option value="worker">Worker</option>
+                                <option value="admin">Admin</option>
                                 
                             </select>
                         </div>
@@ -438,13 +445,13 @@
                     <div class="form-group row hide">
                         <label for="inputEmail3" class="col-sm-3 col-form-label">ID</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="id_edit" name="id" placeholder="ID">
+                            <input type="text" class="form-control" id="id_edit" name="id" placeholder="ID" >
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-3 col-form-label">Tên tài khoản</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="username_edit" name="username" placeholder="Tên tài khoản">
+                            <input type="text" class="form-control" id="username_edit" name="username" placeholder="Tên tài khoản" pattern="[a-z]{1,15}" title="Tên tài khoản phải không bao gồm dấu và ký tự đặc biệt.">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -469,7 +476,7 @@
                         <label for="inputEmail3" class="col-sm-3 col-form-label">Quyền</label>
                         <div class="col-sm-9">
                             <select class="custom-select" id="role_edit" name="role">
-                                <option selected>Chọn</option>
+                                
                                 <option value="beginner">Beginner</option>
                                 <option value="worker">Worker</option>
                                 <option value="admin">Admin</option>
@@ -555,6 +562,7 @@
             $('#role_delete').val($(value[5]).text());
         });
       </script>
+      
 
 </body>
 
