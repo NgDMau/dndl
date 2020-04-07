@@ -10,10 +10,11 @@ const pool = new Pool({
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     database: process.env.DB_DATABASE,
-    ssl: process.env.DB_SSL
+    ssl: false//(process.env.DB_SSL == 'true')
 });
 
 module.exports = function (app) {
+    
 
     passport.use('id-only', new customStrategy(
         function (req, done) {
@@ -34,6 +35,7 @@ module.exports = function (app) {
                         else {
                             let res = client.query("UPDATE users SET last_login=(SELECT now() ::timestamp AT TIME ZONE 'GMT+7') WHERE username=($1)", [result.rows[0]]);
                             console.log(res);
+                            client.release();
                             return done(null, result.rows[0]);
                         }
                     }))
@@ -60,6 +62,7 @@ module.exports = function (app) {
         });
 
     app.get('/login', function (req, res) {
+        console.log(pool)
         if (req.isAuthenticated()) {
             res.redirect('/dashboard');
         } else {

@@ -122,7 +122,7 @@ function selectAnswer(e) {
   if (correct=='true'){
     nextButton.dataset.correct = true;
     resultButton.dataset.correct = true;
-  }else{
+  } else {
     nextButton.dataset.correct = false;
     resultButton.dataset.correct = false;
   }
