@@ -30,8 +30,10 @@ module.exports = function (app) {
 
                     client.query('UPDATE users SET role=$1 WHERE username=$2', ['worker', req.session.passport.user.username], function (err, result) {
                         if (err) {
+                            client.release();
                             return console.error(err);
                         }
+                        client.release();
                         req.session.passport.user.role == "worker"
                         res.redirect('/')
                     });

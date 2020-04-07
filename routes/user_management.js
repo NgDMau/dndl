@@ -72,6 +72,7 @@ module.exports = function ( app ) {
                     client.query('SELECT exists (SELECT 1 FROM users WHERE username = $1 LIMIT 1)',[username], function (err,result) {  
                         console.log(result.rows[0].exists)                 
                         if (result.rows[0].exists == true){
+                            client.release();
                             req.flash('mess','Tên tài khoản đã tồn tại')
                             res.redirect('/user_management');
                         }else{
@@ -80,7 +81,7 @@ module.exports = function ( app ) {
                                     client.release();
                                     return console.error(err);
                                 }
-                                
+                                    client.release();
                                     req.flash('mess','Thêm tài khoản thành công')
                                     res.redirect('/user_management');
         
@@ -121,6 +122,7 @@ module.exports = function ( app ) {
                     client.query('SELECT exists (SELECT 1 FROM users WHERE username = $1 and id != $2 LIMIT 1)',[username, id], function (err,result) {  
                         console.log(result.rows[0].exists)                 
                         if (result.rows[0].exists == true){
+                            client.release();
                             req.flash('mess','Tên tài khoản đã tồn tại')
                             res.redirect('/user_management');
                         }else{

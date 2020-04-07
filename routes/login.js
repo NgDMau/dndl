@@ -27,9 +27,11 @@ module.exports = function (app) {
                     await client.query('BEGIN')
                     await JSON.stringify(client.query('SELECT "id", "username", "email", "address", "role", "full_name" FROM "users" WHERE "username"=$1', [id], function (err, result) {
                         if (err) {
+                            client.release();
                             return done(err)
                         }
                         if (result.rows[0] == null) {
+                            client.release();
                             return done(null, false);
                         }
                         else {
