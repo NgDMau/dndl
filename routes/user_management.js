@@ -118,15 +118,24 @@ module.exports = function ( app ) {
                         return console.error(err);
                     }
 
-
-            
-                    client.query('UPDATE users SET username = $1, full_name = $2, email = $3, address = $4, role = $5  WHERE id=$6',[username, full_name, email, address, role, id], function (err) {
-
-                            client.release();
-                            req.flash('mess','Sửa thông tin tài khoản thành công')
+                    client.query('SELECT exists (SELECT 1 FROM users WHERE username = $1 and id != $2 LIMIT 1)',[username, id], function (err,result) {  
+                        console.log(result.rows[0].exists)                 
+                        if (result.rows[0].exists == true){
+                            req.flash('mess','Tên tài khoản đã tồn tại')
                             res.redirect('/user_management');
+                        }else{
+                            client.query('UPDATE users SET username = $1, full_name = $2, email = $3, address = $4, role = $5  WHERE id=$6',[username, full_name, email, address, role, id], function (err) {
+
+                                client.release();
+                                req.flash('mess','Sửa thông tin tài khoản thành công')
+                                res.redirect('/user_management');
+    
+                            });
+
+                        }
 
                     });
+
                 })
             } else {
                 res.redirect('/');
