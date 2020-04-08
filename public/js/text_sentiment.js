@@ -116,7 +116,7 @@ function selectAnswer(e) {
   const selectedButton = e.target
   const correct = selectedButton.dataset.correct
   
-  selectedButton.innerText = `Bạn đã chọn: ${selectedButton.innerText}`;
+  selectedButton.innerText = `Bạn đã chọn: ${selectedButton.innerText}`; // thử xem có biến chính nút bấm thành thông báo được không
 
   selectedAnswerNoti.innerHTML = "Bạn đã chọn: " + selectedButton.innerText;
   selectedAnswerNoti.style.display = 'block';

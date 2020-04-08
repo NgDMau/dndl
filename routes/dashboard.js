@@ -37,7 +37,7 @@ module.exports = function (app) {
                 res.render('dashboard');
                 //res.sendFile(path.join(__dirname, '../views/', 'dashboard.html'));
             }
-            if(user.isCustomer()) {
+            if(user.isBeginner()) {
                 res.render('dashboard.ejs');
             }
             
