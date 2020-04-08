@@ -14,6 +14,8 @@ const resetButton = document.getElementById("btn-again")
 const selectedAnswerNoti = document.getElementById("noti-selected-answer")
 
 var score = 0;
+var audioright = new Audio('/audio/correct1.mp3');
+var audiowrong = new Audio('/audio/wrong1.mp3');
 
 var shuffledQuestions, currentQuestionIndex
 
@@ -145,8 +147,9 @@ function result(){
   if(score >= 9){
     document.getElementById('content').classList.add('hide');
     resultElement.classList.remove('hide');
-    
+    audioright.play();
   }else{
+    audiowrong.play();
     document.getElementById('content').classList.add('hide');
     document.getElementById('result_content').innerText = `Bạn đã làm đúng ${score} câu rồi đấy, cùng làm lại ${10-score} câu chưa hợp lý nhé!`
     document.getElementById('btn-next-lvl').classList.add('hide');
