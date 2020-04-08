@@ -115,6 +115,8 @@ function resetState() {
 function selectAnswer(e) {
   const selectedButton = e.target
   const correct = selectedButton.dataset.correct
+  
+  selectedButton.innerText = `Bạn đã chọn: ${selectedButton.innerText}`;
 
   selectedAnswerNoti.innerHTML = "Bạn đã chọn: " + selectedButton.innerText;
   selectedAnswerNoti.style.display = 'block';
