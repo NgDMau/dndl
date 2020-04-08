@@ -10,7 +10,7 @@ const pool = new Pool({
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     database: process.env.DB_DATABASE,
-    ssl: false//(process.env.DB_SSL == 'true')
+    ssl: true//(process.env.DB_SSL == 'true')
 });
 
 module.exports = function (app) {
@@ -64,7 +64,7 @@ module.exports = function (app) {
         });
 
     app.get('/login', function (req, res) {
-        console.log(pool)
+        //console.log(pool)
         if (req.isAuthenticated()) {
             res.redirect('/dashboard');
         } else {

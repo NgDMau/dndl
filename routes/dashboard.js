@@ -12,29 +12,11 @@ module.exports = function (app) {
 
             var user = new User(req.session.passport.user)
             console.log(user)
+
             if (user.isCustomer()) {
-                // var project_config = {
-                //     name: "viettrann",
-                //     id: "ahihi1",
-                //     theme: "sentiment",
-                //     rate: 4,
-                //     starttime: '2011-01-01 00:00:00 +03',
-                //     endtime: '2011-01-01 00:00:00 +03',
-                //     datafile: "dataf.txt",
-                //     priority: 3,
-                //     uploadtime: '2011-01-01 00:00:00 +03',
-                //     type: "text",
-                //     owner_id:"tiendung",
-                // }
-                //var new_project = new Project(project_config);
-                //new_project.register()
-                //new_project.create();
-                //new_project.destroy();
-                console.log("username:   ",user.username)
+
                 user.getAllProjectsInfo(user.username)
                 .then((result) => {
-                    console.log('This is result', (result.rows))
-                    //console.log(result.rows)
 
                     var render_info = {
                         customerFullname: user.fullname,
@@ -46,13 +28,19 @@ module.exports = function (app) {
                 })
 
                 
-            } else {
-                if(user.isMod()) {
-                    res.redirect('/user_management');
-                } else {
-                    res.sendFile(path.join(__dirname, '../views/', 'dashboard.html'));
-                }
+            } 
+
+            if(user.isMod()) {
+                res.redirect('/user_management');
+            } 
+            if(user.isWorker()) {
+                res.render('dashboard');
+                //res.sendFile(path.join(__dirname, '../views/', 'dashboard.html'));
             }
+            if(user.isCustomer()) {
+                res.render('dashboard.ejs');
+            }
+            
             
         } else {
             res.redirect('/login')
