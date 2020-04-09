@@ -26,7 +26,7 @@ module.exports = class User{
     }
 
     isBeginner() {
-        return this.role === 'beginner() ';
+        return this.role === 'beginner';
     }
 
     isCustomer() {
@@ -38,7 +38,11 @@ module.exports = class User{
     }
 
     isMod() {
-        return this.role === 'moderator'
+        return this.role === 'moderator';
+    }
+
+    isWorker() {
+        return this.role === 'worker';
     }
 
     updateLastlogin() {

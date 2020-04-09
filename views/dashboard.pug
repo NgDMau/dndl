@@ -11,13 +11,13 @@ html(lang='vi')
     .container
       header.bar.topbar
         .logo
-          img(src='logo.png', alt='logo')
+          img(src='./public/img/logo.png', alt='logo')
         .dashboard
           | Dashboard
         .login
           p
-            | Xin chào, #{username} 
-            a(href='#') Đăng xuất
+            | Xin chào, #{fullname} 
+            a(href='/logout') Đăng xuất
     .content
       .title
         h1 Tổng quan
@@ -38,88 +38,95 @@ html(lang='vi')
         .tasks
           .title
             h1 Danh sách công việc
-          .title-status
-            h2 Công việc đang làm
-          .items
-            .item.item1
-              .item-project
-                | Dự án A
-              .item-title
-                | Dán nhãn dữ liệu âm thanh
-              .item-cagotories
-                | Khoa học
-              .price
-                | 100 đồng/ 1 nhãn
-            .item.item2
-              .item-project
-                | Dự án A
-              .item-title
-                | Dán nhãn dữ liệu âm thanh
-              .item-cagotories
-                | Khoa học
-              .price
-                | 100 đồng/ 1 nhãn
-            .item.item3
-              .item-project
-                | Dự án A
-              .item-title
-                | Dán nhãn dữ liệu âm thanh
-              .item-cagotories
-                | Khoa học
-              .price
-                | 100 đồng/ 1 nhãn
-            .item.item4
-              .item-project
-                | Dự án A
-              .item-title
-                | Dán nhãn dữ liệu âm thanh
-              .item-cagotories
-                | Khoa học
-              .price
-                | 100 đồng/ 1 nhãn
-          .title-status
-            h2 Công việc mới
-          .items
-            .item.item1
-              .item-project
-                | Dự án A
-              .item-title
-                | Dán nhãn dữ liệu âm thanh
-              .item-cagotories
-                | Khoa học
-              .price
-                | 100 đồng/ 1 nhãn
-            .item.item2
-              .item-project
-                | Dự án A
-              .item-title
-                | Dán nhãn dữ liệu âm thanh
-              .item-cagotories
-                | Khoa học
-              .price
-                | 100 đồng/ 1 nhãn
-            .item.item3
-              .item-project
-                | Dự án A
-              .item-title
-                | Dán nhãn dữ liệu âm thanh
-              .item-cagotories
-                | Khoa học
-              .price
-                | 100 đồng/ 1 nhãn
-            .item.item4
-              .item-project
-                | Dự án A
-              .item-title
-                | Dán nhãn dữ liệu âm thanh
-              .item-cagotories
-                | Khoa học
-              .price
-                | 100 đồng/ 1 nhãn
+            h2 Hiện tại chưa có bất kì dự án nào.
+
+          .title-status 
+            a(href='/text_sentiment')
+              .btn Tham gia quá trình đào tạo.
+          //- .title-status
+          //-   h2 Công việc đang làm
+          //- .items
+          //-   p Danh sách trống
+            //- .item.item1
+            //-   .item-project
+            //-     | Dự án A
+            //-   .item-title
+            //-     | Dán nhãn dữ liệu âm thanh
+            //-   .item-cagotories
+            //-     | Khoa học
+            //-   .price
+            //-     | 100 đồng/ 1 nhãn
+            //- .item.item2
+            //-   .item-project
+            //-     | Dự án A
+            //-   .item-title
+            //-     | Dán nhãn dữ liệu âm thanh
+            //-   .item-cagotories
+            //-     | Khoa học
+            //-   .price
+            //-     | 100 đồng/ 1 nhãn
+            //- .item.item3
+            //-   .item-project
+            //-     | Dự án A
+            //-   .item-title
+            //-     | Dán nhãn dữ liệu âm thanh
+            //-   .item-cagotories
+            //-     | Khoa học
+            //-   .price
+            //-     | 100 đồng/ 1 nhãn
+            //- .item.item4
+            //-   .item-project
+            //-     | Dự án A
+            //-   .item-title
+            //-     | Dán nhãn dữ liệu âm thanh
+            //-   .item-cagotories
+            //-     | Khoa học
+            //-   .price
+            //-     | 100 đồng/ 1 nhãn
+          //- .title-status
+          //-   h2 Công việc mới
+          //- .items
+          //-   p Hiện tại chưa có dự án mới
+            //- .item.item1
+            //-   .item-project
+            //-     | Dự án A
+            //-   .item-title
+            //-     | Dán nhãn dữ liệu âm thanh
+            //-   .item-cagotories
+            //-     | Khoa học
+            //-   .price
+            //-     | 100 đồng/ 1 nhãn
+            //- .item.item2
+            //-   .item-project
+            //-     | Dự án A
+            //-   .item-title
+            //-     | Dán nhãn dữ liệu âm thanh
+            //-   .item-cagotories
+            //-     | Khoa học
+            //-   .price
+            //-     | 100 đồng/ 1 nhãn
+            //- .item.item3
+            //-   .item-project
+            //-     | Dự án A
+            //-   .item-title
+            //-     | Dán nhãn dữ liệu âm thanh
+            //-   .item-cagotories
+            //-     | Khoa học
+            //-   .price
+            //-     | 100 đồng/ 1 nhãn
+            //- .item.item4
+            //-   .item-project
+            //-     | Dự án A
+            //-   .item-title
+            //-     | Dán nhãn dữ liệu âm thanh
+            //-   .item-cagotories
+            //-     | Khoa học
+            //-   .price
+            //-     | 100 đồng/ 1 nhãn
         footer
           .bar.lowbar
             .lowbar-container
-              img(src='logo.png', alt='logo')
+              img(src='./public/img/logo.png', alt='logo')
               .lowbar-content
                 a(href='#') Về chúng tôi
                 |  

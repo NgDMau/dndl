@@ -70,7 +70,7 @@ function reset() {
   currentQuestionIndex = 0
   labelElement.classList.remove('hide')
   titleElement.innerText = 'Câu hỏi'
-  document.getElementById('result_content').innerText = "Chúc mừng bạn đã hoàn thành phần đào tạo phân tích cảm xúc văn bản. Bây giờ hãy bắt đầu với phần đào tạo tiếp theo."
+  document.getElementById('result_content').innerText = "Chúc mừng bạn đã hoàn thành phần đào tạo phân tích sắc thái văn bản. Bây giờ hãy bắt đầu với phần đào tạo tiếp theo."
   document.getElementById('btn-next-lvl').classList.remove('hide');
   resetButton.classList.add('hide');
   resultElement.classList.add('hide');
@@ -115,6 +115,8 @@ function resetState() {
 function selectAnswer(e) {
   const selectedButton = e.target
   const correct = selectedButton.dataset.correct
+  
+  selectedButton.innerText = `Bạn đã chọn: ${selectedButton.innerText}`; // thử xem có biến chính nút bấm thành thông báo được không
 
   selectedAnswerNoti.innerHTML = "Bạn đã chọn: " + selectedButton.innerText;
   selectedAnswerNoti.style.display = 'block';
@@ -122,7 +124,7 @@ function selectAnswer(e) {
   if (correct=='true'){
     nextButton.dataset.correct = true;
     resultButton.dataset.correct = true;
-  }else{
+  } else {
     nextButton.dataset.correct = false;
     resultButton.dataset.correct = false;
   }
@@ -143,8 +145,9 @@ function result(){
     
   }else{
     document.getElementById('content').classList.add('hide');
-    document.getElementById('result_content').innerText = "Bạn chưa đạt tiêu chuẩn rồi hãy làm lại nhé!"
+    document.getElementById('result_content').innerText = `Chà, bạn đã làm đúng ${score} câu rồi đấy, cùng làm lại ${10-score} câu chưa chính xác nhé!`
     document.getElementById('btn-next-lvl').classList.add('hide');
+    //document.getElementById('btn-again').innerHTML = 'Làm lại những câu sai';
     document.getElementById('btn-again').classList.remove('hide');
     resultElement.classList.remove('hide');
     shuffledQuestions = shuffledQuestions.filter(function (el) {
