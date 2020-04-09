@@ -28,7 +28,7 @@
             </div>
             
             <!-- Người mù nghe được -->
-            <button id="next-btn" class="next-btn btn">Tiếp tục</button>
+            <button id="next-btn" class="next-btn btn" onclick="nextTask();">Tiếp tục</button>
     </div>
     <script>
         var i = 0;
@@ -50,6 +50,10 @@
                 }
                 }
             }
+        }
+
+        function nextTask() {
+            window.location.href = '/training_audio';
         }
     </script>
 </body>
