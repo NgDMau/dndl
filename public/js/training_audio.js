@@ -146,9 +146,10 @@ function setStatusClass(element, correct) {
 
 function result(){
   if(score >= 9){
-    audioright.play();
-    document.getElementById('content').classList.add('hide');
-    resultElement.classList.remove('hide');
+    // audioright.play();
+    // document.getElementById('content').classList.add('hide');
+    // resultElement.classList.remove('hide');
+    window.location.href = '/2nd_result';
     
   }else{
     audiowrong.play();

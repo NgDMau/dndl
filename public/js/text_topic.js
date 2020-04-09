@@ -145,7 +145,7 @@ function result(){
     // audioright.play();
     // document.getElementById('content').classList.add('hide');
     // resultElement.classList.remove('hide');
-    window.location.href = '/1st_result'
+    window.location.href = '/3rd_result';
   }else{
     audiowrong.play();
     document.getElementById('content').classList.add('hide');
