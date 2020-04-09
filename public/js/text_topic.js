@@ -58,7 +58,7 @@ function start() {
   shuffledQuestions = questions.sort(() => Math.random() - .5)
   currentQuestionIndex = 0
   labelElement.classList.remove('hide')
-  titleElement.innerText = 'Câu hỏi'
+  titleElement.innerText = 'CÂU HỎI'
   // document.getElementById("shortcut_label").classList.remove('hide')
 
   setNextQuestion()
@@ -71,7 +71,7 @@ function reset() {
   shuffledQuestions = shuffledQuestions
   currentQuestionIndex = 0
   labelElement.classList.remove('hide')
-  titleElement.innerText = 'Câu hỏi'
+  titleElement.innerText = 'CÂU HỎI'
   document.getElementById('result_content').innerText = "Chúc mừng bạn đã hoàn thành phần đào tạo phân tích sắc thái văn bản. Bây giờ hãy bắt đầu với phần đào tạo tiếp theo."
   document.getElementById('btn-next-lvl').classList.remove('hide');
   resetButton.classList.add('hide');
