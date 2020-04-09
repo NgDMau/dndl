@@ -11,13 +11,13 @@ html(lang='vi')
     .container
       header.bar.topbar
         .logo
-          img(src='./public/img/logo.png', alt='logo')
+          img(src="/img/logo.png", alt='logo',class="logofit")
         .dashboard
           | Dashboard
         .login
           p
             | Xin chào, #{fullname} 
-            a(href='/logout') Đăng xuất
+            a(href='/logout') || Đăng xuất
     .content
       .title
         h1 Tổng quan
@@ -126,8 +126,7 @@ html(lang='vi')
         footer
           .bar.lowbar
             .lowbar-container
-              img(src='./public/img/logo.png', alt='logo')
               .lowbar-content
-                a(href='#') Về chúng tôi
+                a(href='/about', class='footer-content') Về chúng tôi
                 |  
                 a(href='#') Quay lại đầu trang
