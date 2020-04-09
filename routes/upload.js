@@ -5,7 +5,7 @@ var path = require('path');
 
 var storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null, path.join(__dirname, '../breath'))
+        cb(null, path.join(__dirname, '../breathe'))
     },
     filename: function(req, file, cb) {
         cb(null, file.fieldname + '-' + Date.now())
@@ -29,7 +29,7 @@ app.post('/upload', upload.single('file'), (req, res) => {
     data[key[1]] = {
         "label": req.body.check
     }
-    fs.appendFile(path.join(__dirname, '../breath/', '/data.json'), JSON.stringify(data), function(err) {
+    fs.appendFile(path.join(__dirname, '../breathe/', '/data.json'), JSON.stringify(data), function(err) {
         if (err)
             throw err;
         console.log('complete');
