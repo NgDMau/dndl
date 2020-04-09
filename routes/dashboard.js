@@ -34,11 +34,15 @@ module.exports = function (app) {
                 res.redirect('/user_management');
             } 
             if(user.isWorker()) {
-                res.render('dashboard',{fullname: user.fullname});
+                var name_array = user.fullname.split();
+                var name = name_array[name_array.length - 1]
+                res.render('dashboard',{name: name});
                 //res.sendFile(path.join(__dirname, '../views/', 'dashboard.html'));
             }
             if(user.isBeginner()) {
-                res.render('dashboard.ejs');
+                var name_array = user.fullname.split();
+                var name = name_array[name_array.length - 1]
+                res.render('dashboard.ejs', {name: name});
             }
             
         } else {
