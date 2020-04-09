@@ -34,13 +34,12 @@ module.exports = function (app) {
                 res.redirect('/user_management');
             } 
             if(user.isWorker()) {
-                res.render('dashboard');
+                res.render('dashboard',{fullname: user.fullname});
                 //res.sendFile(path.join(__dirname, '../views/', 'dashboard.html'));
             }
             if(user.isBeginner()) {
                 res.render('dashboard.ejs');
             }
-            
             
         } else {
             res.redirect('/login')
