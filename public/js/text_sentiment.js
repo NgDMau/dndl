@@ -10,6 +10,8 @@ const resultElement = document.getElementById('result')
 const resultButton = document.getElementById('result-btn')
 const resetButton = document.getElementById("btn-again")
 const selectedAnswerNoti = document.getElementById("noti-selected-answer")
+const emptyBox = document.getElementById("emptybox")
+
 var score = 0;
 
 var audioright = new Audio('/audio/correct1.mp3');
@@ -90,6 +92,8 @@ function setNextQuestion() {
 }
 
 function showQuestion(question) {
+
+
   questionElement.innerText = question.quest
   index = 0
   question.answers.forEach(answer => {

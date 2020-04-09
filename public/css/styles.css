@@ -135,7 +135,17 @@ img{
   background-color: white;
   border-radius: 5px;
   overflow: auto;
-  height: 210px;
+  height: 170px;
+
+}
+
+.label1 {
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 5px;
+  overflow: auto;
+  height: 200px;
 
 }
 
@@ -171,10 +181,7 @@ img{
 }
 
 
-.next-btn {
-  margin-top: 40px;
 
-}
 
 .controls {
   display: flex;

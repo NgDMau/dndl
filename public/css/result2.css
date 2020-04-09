@@ -2,13 +2,26 @@ html{
     font-family: 'Barlow Condensed', sans-serif;
     color: #434556;
   }
-  
   .flex-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 10px;
+    padding-left: 20px;   
+    padding-right: 20px;   
+  }
+
+  
+  @media (min-width: 600px) {
+    html{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .flex-container{
+      width: 600px;
+    }
+  
   }
   .flex-container > div {
     width: 90%;
@@ -18,7 +31,7 @@ html{
   }
   #title {
     height: 50px;
-    font-size: 30px;
+    font-size: 28px;
     font-weight: bold;
     color: orangered;
     text-align: center;
@@ -29,17 +42,18 @@ html{
     margin-top: 10px;
 
   }
-  .next-btn {
-    border-radius: 100px;
-    outline: none;
-    color: black;
-    font-size: 15px;
-    font-weight: bold;
-    padding: 10px 20px;
+  .start-btn, .btn, .next-btn{
+    height:52px;
     width: 100%;
-    height: 50px;
-    margin-top: 10px;
-  
+    text-align: center;
+    font-size: 15px;
+    background: #FBDF4B;
+    border-radius:5px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;   
   }
   
   .next-btn {
