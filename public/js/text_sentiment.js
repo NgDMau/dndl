@@ -10,6 +10,8 @@ const resultElement = document.getElementById('result')
 const resultButton = document.getElementById('result-btn')
 const resetButton = document.getElementById("btn-again")
 const selectedAnswerNoti = document.getElementById("noti-selected-answer")
+const emptyBox = document.getElementById("emptybox")
+
 var score = 0;
 
 var audioright = new Audio('/audio/correct1.mp3');
@@ -58,7 +60,7 @@ function start() {
   shuffledQuestions = questions.sort(() => Math.random() - .5)
   currentQuestionIndex = 0
   labelElement.classList.remove('hide')
-  titleElement.innerText = 'Câu hỏi'
+  titleElement.innerText = 'CÂU HỎI'
   // document.getElementById("shortcut_label").classList.remove('hide')
 
   setNextQuestion()
@@ -71,7 +73,7 @@ function reset() {
   shuffledQuestions = shuffledQuestions
   currentQuestionIndex = 0
   labelElement.classList.remove('hide')
-  titleElement.innerText = 'Câu hỏi'
+  titleElement.innerText = 'CÂU HỎI'
   document.getElementById('result_content').innerText = "Chúc mừng bạn đã hoàn thành phần đào tạo phân tích sắc thái văn bản. Bây giờ hãy bắt đầu với phần đào tạo tiếp theo."
   document.getElementById('btn-next-lvl').classList.remove('hide');
   resetButton.classList.add('hide');
@@ -90,6 +92,8 @@ function setNextQuestion() {
 }
 
 function showQuestion(question) {
+
+
   questionElement.innerText = question.quest
   index = 0
   question.answers.forEach(answer => {

@@ -1,15 +1,32 @@
 html{
-    font-family: 'Barlow Condensed', sans-serif;
-    color: #434556;
+    font-family: 'Montserrat', sans-serif;   
+    color: #434556 !important;
+  }
+  @media (min-width: 600px) {
+    html{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .flex-container{
+      width: 600px;
+    }
+  
+  }
+  a:visited{
+    color: white !important;
+  }
+  a:link {
+    text-decoration: none;
   }
   
   .bar{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     background-color: #434556;
     position: fixed;
-    height: 70px;
+    height: 30px;
     width: 100%;
     margin: 0;
     left: 0px;
@@ -17,7 +34,19 @@ html{
     color: white;
   
   }
-  
+  .lowbar{
+    bottom: 0;
+    font-size: small;
+  }
+  .content{
+    height:250px;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-bottom: 50px;
+    text-align: center;
+  }
   .topbar{
     top: 0;
   }
@@ -49,45 +78,37 @@ html{
   .flex-container > div {
     width: 90%;
     font-size: 15px;
-    font-weight: bold;
     color: black;
   
+  }
+  .emptytop {
+    height: 140px;
   }
   
   .empty {
     height: 100px;
   }
-
-  .btn-play-stop {
-    border: none;
-    color: black;
-    padding: 12px 16px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-bottom: 60px;
-  }
   
   #title {
-    height: 50px;
-    font-size: 30px;
     font-weight: bold;
-    color: black;
+    font-size: 26px;
+    text-align: center;
   }
   
   .title {
     height: 50px;
     font-size: 30px;
     font-weight: bold;
-    color: black;
   }
   
   .data {
+    display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
     border-radius: 5px;
-    height: 50px;
-    margin: 10px;
-    padding: 9px;
+    height: 70px;
+    margin-bottom: 10px;
   }
   
   .shortcut_label {
@@ -108,13 +129,7 @@ html{
   
   }
   
-  .btn {
-    border-radius: 5px;
-    height: 30px;
-    font-size: 15px;
-    font-weight: bold;
-    color: black;
-  }
+  
   
   .label {
     justify-content: center;
@@ -122,8 +137,8 @@ html{
     background-color: white;
     border-radius: 5px;
     overflow: auto;
-    height: 150px;
-  
+    height: 170px;
+    padding-top: 30px;
   }
   
   .btn-grid {
@@ -143,24 +158,22 @@ html{
     color: black;
   
   }
-  
-  .start-btn, .next-btn {
-    border-radius: 100px;
-    outline: none;
-    color: black;
-    font-size: 15px;
-    font-weight: bold;
-    padding: 10px 20px;
+  .start-btn, .btn, .next-btn{
+    height:52px;
     width: 100%;
-    height: 50px;
-    margin-top: 10px;
-  
+    text-align: center;
+    font-size: 15px;
+    background: #FBDF4B;
+    border-radius:5px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;   
   }
   
-  .next-btn {
-    margin-top: 50px;
-  }
   
+ 
   .controls {
     display: flex;
     justify-content: center;
@@ -172,12 +185,17 @@ html{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 10px;
   }
   
   .hide {
     display: none;
   }
-
+  
+  .audio {
+    margin: auto;
+  }
+  
   .home {
     position: absolute;
     top: 90%;
@@ -188,4 +206,22 @@ html{
     top: 90%;
     right: 2%;
   
+  }
+  footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding:10px;
+    background-color: #24252E;
+    color: white;
+    
+  }
+  .btn-play-stop {
+    border: none;
+    color: black;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;   
+
   }
