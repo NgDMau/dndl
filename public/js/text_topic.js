@@ -117,11 +117,13 @@ function resetState() {
 function selectAnswer(e) {
   const selectedButton = e.target
   const correct = selectedButton.dataset.correct
+<<<<<<< HEAD
   
   //selectedButton.innerText = `Bạn đã chọn: ${selectedButton.innerText}`; // thử xem có biến chính nút bấm thành thông báo được không
+=======
+>>>>>>> 5e0f9ab142e870aef4ba0305f1175a05059e246a
 
-  selectedAnswerNoti.innerHTML = "Bạn đã chọn: " + selectedButton.innerText;
-  selectedAnswerNoti.style.display = 'block';
+  responsiveVoice.speak("Bạn đã chọn: " + selectedButton.innerText,'Vietnamese Female');
 
   if (correct=='true'){
     nextButton.dataset.correct = true;
