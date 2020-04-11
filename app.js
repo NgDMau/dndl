@@ -66,6 +66,7 @@ require('./routes/create_project')(app);
 require('./routes/db-requester')(app);
 require('./routes/user_management')(app);
 require('./routes/upload')(app);
+require('./routes/uploadnew')(app);
 require('./routes/loginrequester')(app);
 
 
