@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link href="/css/styles.css" rel="stylesheet">
   <script defer src="/js/text_sentiment.js"></script>
-  <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:400,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400&display=swap" rel="stylesheet">
   <title>Hướng dẫn</title>
 
 
@@ -24,11 +24,11 @@
         <p>Xin chào, Thu | <a href="#">Đăng xuất</a></p>
     </div>
   </header> -->
-  <div id="content" clas="container">
+  <div id="content" class="container">
     <div class="flex-container">
-      <div class="empty">
+      <div id="emptybox" class="empty">
       </div>
-      <div class="title" id="title">Hướng dẫn</div>
+      <div class="title" id="title">HƯỚNG DẪN</div>
       <div id="question" class="data">
         Bạn hãy chọn 1 trong bốn loại nhãn: Tích cực/ Tiêu cực/ Trung tính/ Không biết, tương ứng cho câu sau đây:
       </div>
@@ -54,34 +54,30 @@
 
 <div id="result" class="result hide">
   <div class="empty"></div>
-  <div class="title">Kết quả</div>
+  <div class="title">KẾT QUẢ</div>
   <div id="result_content" class="data">
     Chúc mừng bạn đã hoàn thành phần đào tạo phân tích cảm xúc văn bản. Bây giờ hãy bắt đầu với phần đào tạo tiếp theo.
   </div>
-  <a id="btn-next-lvl" style="width: 70%" class="" href="/training_audio"><button class='start-btn'>Tiếp tục</button></a>
-  <a id="btn-again" style="width: 70%" class="hide"><button class='start-btn'>Làm lại</button></a>
+  <a id="btn-next-lvl" style="width: 100%" class="" href="/training_audio"><button class='start-btn'>Tiếp tục</button></a>
+  <a id="btn-again" style="width: 100%" class="hide"><button class='start-btn'>Làm lại</button></a>
 
 </div>
 
 
-<div class="home">
+<!--<div class="home">
   <a href="/dashboard">Trang chủ</a>
 </div>
 <div class="logout">
   <a href="/logout">Đăng xuất</a>
 </div>
+-->
 
-
-<!-- <footer>
-  <div class = "bar lowbar">
-      <div class = lowbar-container>
-          <img src="img/icon.png" alt="logo">
-          <div class = "lowbar-content">                               
-              <a href="#">Về chúng tôi</a> | <a href="#">Quay lại đầu trang</a>
-          </div>
-      </div>
-  </div>
-</footer> -->
+      <footer>
+        <div class = "bar lowbar">
+                  <a href="/dashboard">Quay lại trang chủ</a>
+                  <a href="/logout">Đăng xuất</a>
+        </div>
+      </footer> 
 </body>
 <script>
 

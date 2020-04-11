@@ -1,8 +1,12 @@
 html{
-  font-family: 'Barlow Condensed', sans-serif;
-  color: #434556;
+  font-family: 'Montserrat', sans-serif;   
   font-size: 15px;
+  height:100%;
+  width:100%;
+  display: flex;
+  justify-content: center;
 }
+
 
 a {
   color: inherit; 
@@ -10,7 +14,16 @@ a {
 }
 
 main{
-  padding: 10%;
+  /*padding-top: 10px;
+  padding-left:5%;
+  padding-right:5%;*/
+
+}
+.logofit{
+  object-fit: contain;
+  width:50px;
+  height:50px;
+  margin-left: 5px;
 }
 .bar{
   display: flex;
@@ -18,16 +31,30 @@ main{
   align-items: center;
   background-color: #434556;
   position: fixed;
-  height: 70px;
+  height: 30px;
   width: 100%;
   margin: 0;
   left: 0px;
   z-index: 10;
   color: white;
-
+  padding-left: 20px;
+  
+}
+.bardb{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #434556;
+  position: fixed;
+  height: 30px;
+  width: 100%;
+  margin: 0;
+  left: 0px;
+  z-index: 10;
+  color: white;
 }
 img{
-  height: 50px;
+  font-weight: bold;
 }
 
 .topbar{
@@ -35,9 +62,19 @@ img{
 }
 .lowbar{
   bottom: 0;
+  font-size: small;
 }
 .content{
-  padding-top: 58px;
+  height:230px;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 50px;
+  text-align: center;
+}
+.empty{
+  height:120px;
 }
 .login{
   padding-right : 20px;
@@ -54,15 +91,19 @@ img{
 }
 
 .title{
-  text-align: center;
   font-weight: bold;
+  font-size: small;
+text-align: center;
 }
 .title-status{
-  text-align: center;
+  /*display: flex;
+  justify-content: center;*/
 }
 
 /*slider*/
-
+.container{
+  padding: 20px;
+}
 .swiper-container{
   width: 100%;
 }
@@ -72,15 +113,17 @@ img{
   justify-content: center;
 }
 .btn {
-  
-  width: 200px;;
-  min-height: 150px;
-  min-width: 200px;
+  margin-top:20px;
+  height:52px;
+  width: 100%;
   text-align: center;
-  font-size: 18px;
-  background: #fff;
-  margin: 2em 1em;
-  border: 2px solid #434556;
+  font-size: 15px;
+  background: #FBDF4B;
+  border-radius:5px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   /* Center slide text vertically */
   
@@ -108,5 +151,10 @@ img{
   position: absolute;
   top: 90%;
   right: 2%;
-
+  padding-right: 20px;
+}
+.logoutdb {
+  position: absolute;
+  top: 95%;
+  right: 43%;
 }
