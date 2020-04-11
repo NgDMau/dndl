@@ -19,7 +19,8 @@ var tempSelectedAnswer = "";
 var audioright = new Audio('/audio/correct1.mp3');
 var audiowrong = new Audio('/audio/wrong1.mp3');
 
-var shuffledQuestions, currentQuestionIndex
+var listQuestion = [], currentQuestionIndex
+var numberQuestion = 10;
 
 startButton.addEventListener('click', start)
 resetButton.addEventListener('click',()=> {
@@ -31,24 +32,24 @@ nextButton.addEventListener('click', () => {
   selectedAnswerNoti.style.display = 'none';
 
   if(nextButton.dataset.correct=="true"){
-    delete shuffledQuestions[currentQuestionIndex];
+    delete listQuestion[currentQuestionIndex];
     score++
   }
 
   console.log(score)
-  console.log (shuffledQuestions)
+  console.log (listQuestion)
   currentQuestionIndex++
   setNextQuestion()
 })
 
 resultButton.addEventListener('click', () => {
   if(resultButton.dataset.correct=="true"){
-    delete shuffledQuestions[currentQuestionIndex];
+    delete listQuestion[currentQuestionIndex];
     score++
   }
      // HIDE the selected answer noti
   console.log(score)
-  console.log (shuffledQuestions)
+  console.log (listQuestion)
   result()
 })
 
@@ -59,7 +60,7 @@ function start() {
   } 
 
   startButton.classList.add('hide')
-  shuffledQuestions = questions.sort(() => Math.random() - .5)
+  shuffledQuestions(numberQuestion);
   currentQuestionIndex = 0
   labelElement.classList.remove('hide')
   titleElement.innerText = 'CÂU HỎI'
@@ -72,7 +73,6 @@ function reset() {
   document.getElementById('content').classList.remove('hide');
   resultButton.classList.add('hide');;
   startButton.classList.add('hide')
-  shuffledQuestions = shuffledQuestions
   currentQuestionIndex = 0
   labelElement.classList.remove('hide')
   titleElement.innerText = 'CÂU HỎI'
@@ -80,7 +80,7 @@ function reset() {
   document.getElementById('btn-next-lvl').classList.remove('hide');
   resetButton.classList.add('hide');
   resultElement.classList.add('hide');
-  shuffledQuestions = shuffledQuestions.filter(function (el) {
+  listQuestion = listQuestion.filter(function (el) {
     return el != null;
   });
   // document.getElementById("shortcut_label").classList.remove('hide')
@@ -90,7 +90,7 @@ function reset() {
 
 function setNextQuestion() {
   resetState()
-  showQuestion (shuffledQuestions[currentQuestionIndex])
+  showQuestion (listQuestion[currentQuestionIndex])
 }
 
 function showQuestion(question) {
@@ -132,7 +132,7 @@ function selectAnswer(e) {
     nextButton.dataset.correct = false;
     resultButton.dataset.correct = false;
   }
-  if  (shuffledQuestions.length > currentQuestionIndex + 1) {
+  if  (listQuestion.length > currentQuestionIndex + 1) {
     nextButton.classList.remove('hide')
   } else {
 
@@ -142,9 +142,16 @@ function selectAnswer(e) {
   
 }
 
+function shuffledQuestions(index) {
+  var shuffled = questions.sort(() => Math.random() - .5);
+  for (var i = 0; i < index; i++) {
+    listQuestion.push(shuffled[i]);
+  }
+}
+
 function result(){
   
-  if(score == 10){
+  if(score == numberQuestion){
     // audioright.play();
     // document.getElementById('content').classList.add('hide');
     // resultElement.classList.remove('hide');
@@ -152,12 +159,12 @@ function result(){
   }else{
     audiowrong.play();
     document.getElementById('content').classList.add('hide');
-    document.getElementById('result_content').innerText = `Chà, bạn đã làm đúng ${score} câu rồi đấy, cùng làm lại ${10-score} câu chưa chính xác nhé!`
+    document.getElementById('result_content').innerText = `Chà, bạn đã làm đúng ${score} câu rồi đấy, cùng làm lại ${numberQuestion-score} câu chưa chính xác nhé!`
     document.getElementById('btn-next-lvl').classList.add('hide');
     //document.getElementById('btn-again').innerHTML = 'Làm lại những câu sai';
     document.getElementById('btn-again').classList.remove('hide');
     resultElement.classList.remove('hide');
-    shuffledQuestions = shuffledQuestions.filter(function (el) {
+    listQuestion = listQuestion.filter(function (el) {
       return el != null;
     });
   }
