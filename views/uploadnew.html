@@ -89,20 +89,25 @@
           <div class="vande-content d-flex flex-column justify-content-center justify-content-around pt-5 align-items-center">
             <div class="heading-text text-dark pt-5 pb-3">ĐƠN ĐĂNG TẢI</div>
             <form action="/uploadnew" method="POST" enctype="multipart/form-data">
-              <label class="h4">Đăng tải file ghi âm</label><br>
-              <input type="file" name="file" class="input"></input><br>
+
+              <label class="h4">Đăng tải file ghi âm</label><br><br>
+              <div class="custom-file">
+                <input id="inputGroupFile01" type="file" name="file" class="input custom-file-input">
+                <label class="custom-file-label" for="inputGroupFile01">Chọn file</label>
+              </div>              
+              <br>  <br>            
               <br>
-              <label class = "h4">Trường hợp nào mô tả tình trạng của bạn rõ nhất?</label>
+              <label class = "h4">Trường hợp nào mô tả tình trạng của bạn rõ nhất?</label><br>
                 <br>
-                  <input name = "description" type="radio" value="true">Tôi đã được chẩn đoán mắc COVID19 trong vòng 14 ngày trở lại đây</input><br>
-                  <input name = "description" type="radio" value="true">Tôi đã được chẩn đoán mắc COVID19 trong hơn 14 ngày trước</input><br>
-                  <input name = "description" type="radio" value="true">Tôi có triệu chứng mắc COVID19 nhưng chưa được chẩn đoán</input><br>
-                  <input name = "description" type="radio" value="true">Tôi có triệu chứng mắc COVID19 hơn 14 ngày trước</input><br>
-                  <input name = "description" type="radio" name="check" value="true">Tôi cảm thấy hoàn toàn bình thường!</input><br><br>
-                  <label class = "h4">Tôi có các bệnh về đường hô hấp khác?</label>
+                  <input name = "description" type="radio" value="true">Tôi đã được chẩn đoán mắc COVID19 trong vòng 14 ngày trở lại đây</input><br><br>
+                  <input name = "description" type="radio" value="true">Tôi đã được chẩn đoán mắc COVID19 trong hơn 14 ngày trước</input><br><br>
+                  <input name = "description" type="radio" value="true">Tôi có triệu chứng mắc COVID19 nhưng chưa được chẩn đoán</input><br><br>
+                  <input name = "description" type="radio" value="true">Tôi có triệu chứng mắc COVID19 hơn 14 ngày trước</input><br><br>
+                  <input name = "description" type="radio" name="check" value="true">Tôi cảm thấy hoàn toàn bình thường!</input><br><br><br>
+                  <label class = "h4">Tôi có các bệnh về đường hô hấp khác?</label><br>
                   <br>
-                    <input name = "health"  type="radio" value="true">Đúng</input><br>
-                    <input name = "health" type="radio" name="check" value="true">Sai</input><br><br>
+                    <input name = "health"  type="radio" value="true">Đúng</input><br><br>
+                    <input name = "health" type="radio" name="check" value="true">Sai</input><br><br><br>
   
                 <label for="email" class="h4">Email của bạn (Chúng tôi sẽ gửi kết quả qua email)</label><br>
                       <input type="text" id="email" name="email" placeholder="Email.."><br><br>
@@ -131,6 +136,12 @@
 </body>
 
     <script>
+
+      $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+      });
+      
         $(document).on('click',function(){
         $('.collapse').collapse('hide');
         })

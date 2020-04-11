@@ -3,6 +3,9 @@ html, body {
     font-family: 'Montserrat', sans-serif;
     scroll-behavior: smooth;
     overflow-x: hidden;
+
+    font-size: 13px;
+    font-weight: 500;
 }
 
 body:after{
@@ -90,6 +93,7 @@ a:hover {
 }
 .vande-content{
     width: 80vw;
+
 }
 .h2{
     font-size: 20px;
@@ -102,6 +106,11 @@ a:hover {
     font-size: 15px;
     font-weight: bold;
 }
+
+.h5{
+    font-size: 10px;
+}
+
 .image{
     width: 70px;
     height: 70px;
@@ -128,6 +137,11 @@ input[type=text], select, textarea {
   
 
 @media screen and (min-width: 773px) {
+
+    html, body {
+        font-size: 15px;
+    }
+    
     .heading-text{
         margin-bottom: 20px;
         font-size:30px;
