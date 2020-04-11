@@ -13,6 +13,17 @@ const pool = new Pool({
     ssl: true//(process.env.DB_SSL == 'true')
 });
 
+function test() {
+    const testFolder = '../temp_data/';
+    const fs = require('fs');
+
+    fs.readdir(testFolder, (err, files) => {
+    files.forEach(file => {
+        console.log(file);
+    });
+    });
+}
+
 module.exports = function (app) {
     
 
@@ -64,6 +75,7 @@ module.exports = function (app) {
         });
 
     app.get('/login', function (req, res) {
+        
         //console.log(pool)
         if (req.isAuthenticated()) {
             res.redirect('/dashboard');

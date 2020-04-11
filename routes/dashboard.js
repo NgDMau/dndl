@@ -24,7 +24,7 @@ module.exports = function (app) {
                         userProjects: JSON.stringify(result.rows)
                     }
 
-                    res.render('cus_dashboard', render_info)
+                    res.render('customer_dashboard.ejs', render_info)
                 })
 
                 
@@ -36,7 +36,7 @@ module.exports = function (app) {
             if(user.isWorker()) {
                 var name_array = user.fullname.split();
                 var name = name_array[name_array.length - 1]
-                res.render('dashboard',{name: name});
+                res.render('dashboard.ejs', {name: name});
                 //res.sendFile(path.join(__dirname, '../views/', 'dashboard.html'));
             }
             if(user.isBeginner()) {

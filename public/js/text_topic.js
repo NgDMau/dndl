@@ -52,7 +52,7 @@ function start() {
   // check and add (if exists) saved-score in localStorage to current score
   if (localStorage.savedscore) {
     score += Number(localStorage.savedscore);
-  } 
+  }
 
   startButton.classList.add('hide')
   shuffledQuestions = questions.sort(() => Math.random() - .5)
@@ -118,10 +118,9 @@ function selectAnswer(e) {
   const selectedButton = e.target
   const correct = selectedButton.dataset.correct
   
-  selectedButton.innerText = `Bạn đã chọn: ${selectedButton.innerText}`; // thử xem có biến chính nút bấm thành thông báo được không
+  //selectedButton.innerText = `Bạn đã chọn: ${selectedButton.innerText}`; // thử xem có biến chính nút bấm thành thông báo được không
 
-  selectedAnswerNoti.innerHTML = "Bạn đã chọn: " + selectedButton.innerText;
-  selectedAnswerNoti.style.display = 'block';
+  responsiveVoice.speak("Bạn đã chọn: " + selectedButton.innerText,'Vietnamese Female');
 
   if (correct=='true'){
     nextButton.dataset.correct = true;
