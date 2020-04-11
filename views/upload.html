@@ -1,21 +1,45 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Upload File</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-  </head>
-<style type="text/css">
-</style>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script>
+      $(document).ready(function(){
+            $("button").click(function(){
+              if ($(".input").val() == ""){
+                alert("Bạn hãy tải file lên");
+              }
+              else {
+                if ($('#yes').prop("checked") == true && $('#no').prop("checked") == true){
+                  $("#span").html("Chỉ được chọn một nhãn");
+                }
+                else if ($('#yes').prop("checked") == true || $('#no').prop("checked") == true){
+                  $("#span").html("");
+                  alert("Đã tải lên thành công. Xin cảm ơn!");
+                }
+                else if($('#yes').prop("checked") == false && $('#no').prop("checked") == false){
+                  $("#span").html("Bạn hãy chọn nhãn");
+                }
+              }
+            })
+        ;})
+    </script>
+</head>
+
 <body>
-	<form action="/upload" method="POST" enctype="multipart/form-data">
-    	<label >Chọn file</label>
-    	<input type="file" name="file" class="input"></input><br>
-      <label class = "label">Bị Covid</label><br>
-       	<input type="checkbox" name="check" value="true">Có</input>
-    	<input type="checkbox" name="check" value="false">Không</input><br>
-        <button type="submit" >Submit</button>
-    </form>
-                    
+  <form action="/upload" method="POST" enctype="multipart/form-data">
+    <label id="noti"></label><br>
+    <label >Chọn file</label>
+      <input type="file" name="file" class="input"></input><br>
+    <label class = "label">Bị Covid</label><br>
+      <input type="checkbox" name="check" value="true" id="yes">Có</input>
+      <input type="checkbox" name="check" value="false" id="no">Không</input><br>
+      <span id="span"></span><br> 
+    <button type="submit">Submit</button>
+  </form>
+   
 </body>
 </html>
