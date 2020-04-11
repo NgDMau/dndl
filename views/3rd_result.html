@@ -6,17 +6,21 @@
     <link rel="stylesheet" href="/css/result2.css">
     <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:400,600&display=swap" rel="stylesheet">
     <title>Result</title>
+    <script>
+        var audioright = new Audio('/audio/correct1.mp3');
+        audioright.play();
+    </script>
 </head>
 <body onload="move()">
     <div id="content" clas="container">
             <!-- Người mù nghe được -->
-            <div style = "opacity: 0"> Bạn đã hoàn thành được 1/3 chăng đường rồi đó! Cố lên nhé </div>
+            <div style = "opacity: 0"> Bạn đã hoàn thành tất cả chăng đường rồi đó! Xin chúc mừng! </div>
             
             <!-- Người mù ko nghe được -->
             <div class="flex-container" aria-hidden = true >
                 <div class="empty">
                 </div>
-                <div id="title" >Bạn đang làm rất tốt, tiếp tục nhé!</div>
+                <div id="title" style="padding-bottom:25px;">Bạn đã trở thành thành viên chính thức</div>
                 <img src="/img/flag.png" >
                 <div id="myProgress">
                     <div id="myBar"></div>
@@ -24,8 +28,11 @@
             </div>
             
             <!-- Người mù nghe được -->
-            <button id="next-btn" class="next-btn btn">Tiếp tục</button>
-    </div>
+            <div class="flex-container" >
+            <button id="next-btn" class="next-btn btn" onclick="next();">Về trang chủ</button>
+        </div>
+
+        </div>
     <script>
         var i = 0;
         function move() {
@@ -36,7 +43,7 @@
                 var id = setInterval(frame, 10);
                 function frame() {
                 //tuỳ chặng sẽ đổi ở đây    
-                if (width >= 33) {
+                if (width >= 100) {
                     clearInterval(id);
                     i = 0;
                 } else {
@@ -46,6 +53,10 @@
                 }
                 }
             }
+        }
+
+        function next() {
+            window.location.href = '/dashboard'
         }
     </script>
 </body>

@@ -15,6 +15,9 @@ const selectedAnswerNoti = document.getElementById("noti-selected-answer")
 
 var score = 0;
 
+var audioright = new Audio('/audio/correct1.mp3');
+var audiowrong = new Audio('/audio/wrong1.mp3');
+
 var shuffledQuestions, currentQuestionIndex
 
 startButton.addEventListener('click', start)
@@ -54,7 +57,7 @@ function start() {
   labelElement.classList.remove('hide')
   audioElement.classList.remove('hide')
   playButton.classList.remove('hide')
-  titleElement.innerText = 'Câu hỏi'
+  titleElement.innerText = 'CÂU HỎI'
   // document.getElementById("shortcut_label").classList.remove('hide')
 
   setNextQuestion()
@@ -67,7 +70,7 @@ function reset() {
   shuffledQuestions = shuffledQuestions
   currentQuestionIndex = 0
   labelElement.classList.remove('hide')
-  titleElement.innerText = 'Câu hỏi'
+  titleElement.innerText = 'CÂU HỎI'
   document.getElementById('result_content').innerText = "Chúc mừng bạn đã hoàn thành phần đào tạo phân tích sắc thái hội thoại. Bây giờ hãy bắt đầu với phần đào tạo tiếp theo."
   document.getElementById('btn-next-lvl').classList.remove('hide');
   resetButton.classList.add('hide');
@@ -143,10 +146,13 @@ function setStatusClass(element, correct) {
 
 function result(){
   if(score >= 9){
-    document.getElementById('content').classList.add('hide');
-    resultElement.classList.remove('hide');
+    // audioright.play();
+    // document.getElementById('content').classList.add('hide');
+    // resultElement.classList.remove('hide');
+    window.location.href = '/2nd_result';
     
   }else{
+    audiowrong.play();
     document.getElementById('content').classList.add('hide');
     document.getElementById('result_content').innerText = `Bạn đã làm đúng ${score} câu rồi đấy, cùng làm lại ${10-score} câu chưa hợp lý nhé!`
     document.getElementById('btn-next-lvl').classList.add('hide');
