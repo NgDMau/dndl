@@ -33,6 +33,7 @@ module.exports = function (app) {
                             client.release();
                             return console.error(err);
                         }
+                        console.log("Updated to worker!")
                         client.release();
                         req.session.passport.user.role == "worker"
                         res.redirect('/')
