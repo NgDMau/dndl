@@ -25,8 +25,7 @@ app.post('/upload', upload.single('file'), (req, res) => {
         var key = req.file.path.split("/");
         var data = {
         };
-        console.log(key);
-        if (req.body.check != undefined) {
+        if (String(req.body.check) == 'true' || String(req.body.check) == 'false') {
             data[key[key.length - 1]] = {
                 "label": req.body.check
             }
@@ -35,15 +34,15 @@ app.post('/upload', upload.single('file'), (req, res) => {
                     throw err;
             }
             );
-            res.sendFile(__dirname, '../views/', '/success_upload.html');
+            res.sendFile(__dirname, '../views/', '/upload.html');
         } else {
             fs.unlinkSync(req.file.path);
-            res.sendFile(__dirname, '../views/', '/error_upload.html');
+            // res.sendFile(__dirname, '../views/', '/error_upload.html');
 
         }
 
     } catch ( error ) {
-        res.sendFile(__dirname, '../views/', '/error_upload.html');
+        res.sendFile(__dirname, '../views/', '/upload.html');
     }
 });
 }
