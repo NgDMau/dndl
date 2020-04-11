@@ -89,6 +89,7 @@
           <div class="vande-content d-flex flex-column justify-content-center justify-content-around pt-5 align-items-center">
             <div class="heading-text text-dark pt-5 pb-3">ĐƠN ĐĂNG TẢI</div>
             <form action="/uploadnew" method="POST" enctype="multipart/form-data">
+
               <label class="h4">Đăng tải file ghi âm</label><br><br>
               <div class="custom-file">
                 <input id="inputGroupFile01" type="file" name="file" class="input custom-file-input">
@@ -135,10 +136,12 @@
 </body>
 
     <script>
+
       $(".custom-file-input").on("change", function() {
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
       });
+      
         $(document).on('click',function(){
         $('.collapse').collapse('hide');
         })

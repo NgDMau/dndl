@@ -25,24 +25,27 @@ app.post('/upload', upload.single('file'), (req, res) => {
         var key = req.file.path.split("/");
         var data = {
         };
-        if (String(req.body.check) == 'true' || String(req.body.check) == 'false') {
+        console.log(req.body);
+        if (String(req.body.description) != undefined && String(req.body.health) != undefined && String(req.body.email) != "") {
             data[key[key.length - 1]] = {
-                "label": req.body.check
+                "description": req.body.description,
+                "health": req.body.health,
+                "email": req.body.email
+
             }
             fs.appendFile(path.join(__dirname, '../breathe/', '/data.json'), JSON.stringify(data), function(err) {
                 if (err)
                     throw err;
             }
             );
-            res.sendFile(__dirname, '../views/', '/upload.html');
+            res.sendFile(path.join(__dirname, '../views/', '/upload.html'));
         } else {
+            console.log(req.file.path);
             fs.unlinkSync(req.file.path);
-            // res.sendFile(__dirname, '../views/', '/error_upload.html');
-
         }
 
     } catch ( error ) {
-        res.sendFile(__dirname, '../views/', '/upload.html');
+        res.sendFile(path.join(__dirname, '../views/', '/upload.html'));
     }
 });
 }
