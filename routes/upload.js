@@ -10,7 +10,7 @@ var storage = multer.diskStorage({
     filename: function(req, file, cb) {
         var parts = file.originalname.split('.') || ['unknown','extension'];
         var extension = parts[parts.length - 1];
-        var filename = parts[0] + '-' + Date.now() + '.' + extension
+        var filename = parts[0] + '-' + Date.now() + '.' + extension;
         console.log('Saving file: ',filename);
         cb(null, filename);
     }
@@ -41,7 +41,7 @@ app.post('/upload', upload.single('file'), (req, res) => {
                     throw err;
             }
             );
-            res.redirect('/upload');
+            res.redirect('/uploadresult');
 
         } else {
             console.log(req.body)
