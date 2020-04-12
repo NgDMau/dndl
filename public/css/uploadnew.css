@@ -70,7 +70,7 @@ a:hover {
     font-weight: 500;
     font-size:20px;
     height: 70px;
-    pointer-events: none;
+    /* pointer-events: none; */
 }
 
 
