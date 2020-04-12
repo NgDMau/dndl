@@ -190,12 +190,13 @@ input[type="radio"] {
     background-color: grey;
   }
   
-  #myBar {
+  #progressBar {
     width: 0%;
     height: 30px;
     background-color: #4CAF50;
     text-align: center; /* To center it horizontally (if you want) */
     line-height: 30px; /* To center it vertically */
     color: white;
+    display: none;
   }
   

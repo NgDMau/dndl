@@ -15,42 +15,56 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <title>Đóng góp dữ liệu - Inlab</title>
     <link rel="shortcut icon" type="image/png" href="/img/logoInlabSquare.png">
+
     <script>
-      // $(document).ready(function() {
 
-        
+      $( document ).ready(function() {
+          
+        const uploadForm = document.getElementById('uploadForm');
+        const progressBar = document.getElementById("progressBar");
 
+        uploadForm.addEventListener("submit", uploadFile);
 
-        
-      // });
-      
-        
-        function move() {
-          var i = 0;
-          if (i == 0) {
-            i = 1;
-            var elem = document.getElementById("myBar");
-            var width = 1;
-            var id = setInterval(frame, 10);
-            function frame() {
-              if (width >= 100) {
-                clearInterval(id);
-                i = 0;
+        function uploadFile(e) {
+          e.preventDefault();
+
+          const xhr = new XMLHttpRequest();
+
+          xhr.open("POST", "/upload");
+          xhr.upload.addEventListener("progress", e => {
+            console.log(e);
+            const percent = e.lengthComputable ? (e.loaded / e.total) * 100 : 0;
+
+            progressBar.style.display = 'block';
+            progressBar.style.width = percent.toFixed(2) + '%';
+            progressBar.innerHTML = percent.toFixed(2) + '%';
+
+          });
+
+          xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+              var status = xhr.status;
+              if (status === 0 || (status >= 200 && status < 400)) {
+                console.log(xhr.responseText);
+                console.log(xhr.responseURL);
+                window.location.href = xhr.responseURL;
               } else {
-                width++;
-                elem.style.width = width + '%';
-                elem.innerHTML = width + "%";
+                window.location.href = '/error'
               }
             }
           }
-        }
 
+          xhr.send(new FormData(uploadForm));
+          }
+
+      });
 
     </script>
 
 
 </head>
 <body data-spy="scroll" data-target="#navbar-example">
+  
         <!-- First part -->
         <div class="overlay p-2" id="first">
                 <nav class="navbar navbar-expand-lg navbar-dark" id="navbar-example">
@@ -124,17 +138,14 @@
           <div class="vande-content d-flex flex-column justify-content-center justify-content-around pt-5 align-items-center">
             <div class="heading-text text-dark pt-5 pb-3">ĐƠN ĐĂNG TẢI</div>
 
-            <form id="myForm" action="/upload" method="POST" enctype="multipart/form-data">
+            <form id="uploadForm" action="/upload" method="POST" enctype="multipart/form-data">
               <label class="h4" id="thieu">Đăng tải file ghi âm *</label><br>
               <input type="file" name="file" class="input" accept="audio/*" required></input><br>
-              
               <br>
 
               <div id="myProgress">
-                <div id="myBar">0%</div>
+                <div id="progressBar">0%</div>
               </div>
-
-              <!-- <div onclick="move();">Percentage</div> -->
 
               
               <br>
