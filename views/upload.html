@@ -1,37 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
    
+    
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700&display=swap" rel="stylesheet">
     <link href="/css/uploadnew.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <title>Đóng góp dữ liệu - Inlab</title>
+    <link rel="shortcut icon" type="image/png" href="/img/logoInlabSquare.png">
+
     <script>
-      $(document).ready(function(){
-            $("#submit").click(function(){
-              if ($(".input").val() == ""){
-                alert("Hãy tải file lên");
+
+      $( document ).ready(function() {
+          
+        const uploadForm = document.getElementById('uploadForm');
+        const progressBar = document.getElementById("progressBar");
+
+        uploadForm.addEventListener("submit", uploadFile);
+
+        function uploadFile(e) {
+          e.preventDefault();
+
+          const xhr = new XMLHttpRequest();
+
+          xhr.open("POST", "/upload");
+          xhr.upload.addEventListener("progress", e => {
+            console.log(e);
+            const percent = e.lengthComputable ? (e.loaded / e.total) * 100 : 0;
+
+            progressBar.style.display = 'block';
+            progressBar.style.width = percent.toFixed(2) + '%';
+            progressBar.innerHTML = percent.toFixed(2) + '%';
+
+          });
+
+          xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+              var status = xhr.status;
+              if (status === 0 || (status >= 200 && status < 400)) {
+                console.log(xhr.responseText);
+                console.log(xhr.responseURL);
+                window.location.href = xhr.responseURL;
+              } else {
+                window.location.href = '/error'
               }
-              else {
-                if ($("input[name='description']:checked").val() == undefined || $("input[name='health']:checked").val() == undefined || $("input[name='email']").val() == "" ){
-                  $("#error").html("Xin mời nhập đầu đủ thông tin");
-                }
-                else {
-                  alert("Đã tải lên thành công. Xin cảm ơn!");
-                }
-              }
-            })
-        ;})
+            }
+          }
+
+          xhr.send(new FormData(uploadForm));
+          }
+
+      });
+
     </script>
 
 
 </head>
 <body data-spy="scroll" data-target="#navbar-example">
+  
         <!-- First part -->
         <div class="overlay p-2" id="first">
                 <nav class="navbar navbar-expand-lg navbar-dark" id="navbar-example">
@@ -104,29 +137,38 @@
         <div class="pb-5 bg-white d-flex flex-column align-items-center " id="third">
           <div class="vande-content d-flex flex-column justify-content-center justify-content-around pt-5 align-items-center">
             <div class="heading-text text-dark pt-5 pb-3">ĐƠN ĐĂNG TẢI</div>
-            <form action="/upload" method="POST" enctype="multipart/form-data">
-              <label class="h4" id="thieu">Đăng tải file ghi âm</label><br>
-              <input type="file" name="file" class="input" accept="audio/*"></input><br>
+
+            <form id="uploadForm" action="/upload" method="POST" enctype="multipart/form-data">
+              <label class="h4" id="thieu">Đăng tải file ghi âm *</label><br>
+              <input type="file" name="file" class="input" accept="audio/*" required></input><br>
               <br>
-              <label class = "h4">Trường hợp nào mô tả tình trạng của bạn rõ nhất?</label>
+
+              <div id="myProgress">
+                <div id="progressBar">0%</div>
+              </div>
+
+              
+              <br>
+              <label class = "h4">Trường hợp nào mô tả tình trạng của bạn rõ nhất? *</label>
               <br>
               <span id="span-description"></span>
                 <br>
-                  <input name = "description" type="radio" value="Tôi đã được chẩn đoán mắc COVID19 trong vòng 14 ngày trở lại đây">Tôi đã được chẩn đoán mắc COVID19 trong vòng 14 ngày trở lại đây</input><br>
+                  <input name = "description" type="radio" value="Tôi đã được chẩn đoán mắc COVID19 trong vòng 14 ngày trở lại đây" required>Tôi đã được chẩn đoán mắc COVID19 trong vòng 14 ngày trở lại đây</input><br>
                   <input name = "description" type="radio" value="Tôi đã được chẩn đoán mắc COVID19 trong hơn 14 ngày trước">Tôi đã được chẩn đoán mắc COVID19 trong hơn 14 ngày trước</input><br>
                   <input name = "description" type="radio" value="Tôi có triệu chứng mắc COVID19 nhưng chưa được chẩn đoán">Tôi có triệu chứng mắc COVID19 nhưng chưa được chẩn đoán</input><br>
                   <input name = "description" type="radio" value="Tôi có triệu chứng mắc COVID19 hơn 14 ngày trước">Tôi có triệu chứng mắc COVID19 hơn 14 ngày trước</input><br>
                   <input name = "description" type="radio" name="check" value="Tôi cảm thấy hoàn toàn bình thường!">Tôi cảm thấy hoàn toàn bình thường!</input><br><br>
-                  <label class = "h4">Tôi có các bệnh về đường hô hấp khác?</label>
+                  <label class = "h4">Tôi có các bệnh về đường hô hấp khác? *</label>
                   <br>
-                    <input name = "health"  type="radio" value="Đúng">Đúng</input><br>
+                    <input name = "health"  type="radio" value="Đúng" required>Đúng</input><br>
                     <input name = "health" type="radio" name="check" value="Sai">Sai</input><br><br>
   
-                <label for="email" class="h4">Email của bạn (Chúng tôi sẽ gửi kết quả qua email)</label><br>
+                <label for="email" class="h4">Email của bạn (Nếu có chúng tôi sẽ gửi kết quả qua email)</label><br>
                       <input type="text" id="email" name="email" placeholder="Email.."><br><br>
-                <button type="submit" id="submit">Submit</button><br><br>
+                <button type="submit" id="submit">Gửi dữ liệu</button><br><br>
                 <label id="error" class="h4"></label><br>
             </form>
+            
           </div> 
         </div>
 
@@ -154,5 +196,7 @@
         $('.collapse').collapse('hide');
         })
         AOS.init();
+
+        
     </script> 
 </html>

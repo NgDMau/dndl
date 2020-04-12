@@ -8,7 +8,11 @@ var storage = multer.diskStorage({
         cb(null, path.join(__dirname, '../breathe'))
     },
     filename: function(req, file, cb) {
-        cb(null, file.fieldname + '-' + Date.now())
+        var parts = file.originalname.split('.') || ['unknown','extension'];
+        var extension = parts[parts.length - 1];
+        var filename = parts[0] + '-' + Date.now() + '.' + extension
+        console.log('Saving file: ',filename);
+        cb(null, filename);
     }
 })
 
@@ -25,23 +29,25 @@ app.post('/upload', upload.single('file'), (req, res) => {
         var key = req.file.path.split("/");
         var data = {
         };
-        console.log(req.body);
-        if (String(req.body.description) != undefined && String(req.body.health) != undefined && String(req.body.email) != "") {
+        //console.log(req.body);
+        if (req.body) {
             data[key[key.length - 1]] = {
                 "description": req.body.description,
                 "health": req.body.health,
                 "email": req.body.email
-
             }
             fs.appendFile(path.join(__dirname, '../breathe/', '/data.json'), JSON.stringify(data), function(err) {
                 if (err)
                     throw err;
             }
             );
-            res.sendFile(path.join(__dirname, '../views/', '/upload.html'));
+            res.redirect('/upload');
+
         } else {
-            console.log(req.file.path);
+            console.log(req.body)
+            //console.log(req.file.path);
             fs.unlinkSync(req.file.path);
+            res.send("ERROR!!")
         }
 
     } catch ( error ) {
