@@ -28,8 +28,13 @@
             </div>
             
             <!-- Người mù nghe được -->
-            <div class="flex-container" >
-            <button id="next-btn" class="next-btn btn" onclick="next();">Về trang chủ</button>
+            <div class="flex-container" > 
+                <button type='submit' id="next-btn" class="next-btn btn" onclick="next();">Về trang chủ</button>
+               
+                <form id="btn-next-lvl" style="width: 70%" class="" action="/training_topic" method="POST">
+                    <!-- <input type="submit"  class='start-btn' value="Bắt đầu công việc"></input>  -->
+                </form>
+            <!-- <button id="next-btn" class="next-btn btn" onclick="next();">Về trang chủ</button> -->
         </div>
 
         </div>
@@ -56,7 +61,8 @@
         }
 
         function next() {
-            window.location.href = '/dashboard'
+            //window.location.href = '/dashboard';
+            document.forms["btn-next-lvl"].submit();
         }
     </script>
 </body>

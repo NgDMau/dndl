@@ -1,6 +1,23 @@
 var Project = require('../models/project')
 var utils = require('../models/utils')
 
+var multer = require('multer');
+var fs = require('fs');
+var path = require('path');
+
+var storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, path.join(__dirname, '../temp_data'));
+    },
+    filename: function(req, file, cb) {
+        cb(null, file.fieldname + '-' + Date.now());
+    }
+})
+
+var upload = multer({
+    storage: storage
+})
+
 
 module.exports = function (app) {
     app.post('/create_project', function (req, res) {
@@ -13,11 +30,11 @@ module.exports = function (app) {
                 var project_config = {
                     name: req.body.name,
                     id: projectID,
-                    theme: req.body.theme,
+                    theme: req.body.theme || 'Mặc định',
                     rate: req.body.rate,
                     starttime: req.body.starttime,
                     endtime: req.body.endtime,
-                    datafile: 'data.txt',
+                    datafile: req.body.datafile || 'data.txt', //req.body.datafile
                     priority: 0,
                     uploadtime: '2010-12-31 21:00:00 +00',
                     type: 'sentiment',

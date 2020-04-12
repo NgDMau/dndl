@@ -11,6 +11,8 @@ html(lang='en')
     link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
     // vendor css
     link(href='/css/db-requester.css', rel='stylesheet')
+    title Inlab - Dashboard
+    link(rel="shortcut icon" type="image/png" href="/img/logoInlabSquare.png")
   body
     // [ navigation menu ] start
     nav.pcoded-navbar.menu-light
@@ -139,9 +141,9 @@ html(lang='en')
                           .col-sm-9
                             select#inputGroupSelect01.custom-select
                               option(selected='') Chọn
-                              option(value='1') Phân loại sắc thái văn bản
-                              option(value='2') Phân loại sắc thái âm thanh
-                              option(value='3') Phân loại nội dung văn bản
+                              option(value='sentiment') Phân loại sắc thái văn bản
+                              option(value='audio') Phân loại sắc thái âm thanh
+                              option(value='topic') Phân loại nội dung văn bản
                         .form-group.row
                           label.col-sm-3.col-form-label( for='inputEmail3') Chủ đề
                           .col-sm-9
@@ -165,7 +167,7 @@ html(lang='en')
                           label.col-sm-3.col-form-label(for='inputEmail3') Upload dữ liệu
                           .col-sm-9
                             .custom-file
-                              input#inputGroupFile01.custom-file-input(type='file')
+                              input#inputGroupFile01.custom-file-input(name='datafile' type='file')
                               label.custom-file-label(for='inputGroupFile01') Choose file
                         .form-group.row
                           .col-sm-12.d-flex.justify-content-center
@@ -239,7 +241,7 @@ html(lang='en')
                 alert('Rất tiếc, tạo dự án không thành công');
               }
 
-              //var list = "#{userProjects}";
+              //var list = "#{userProjects}"
               
               //console.log("world")
 
@@ -366,7 +368,7 @@ html(lang='en')
               var list = JSON.parse('#{userProjects}'.replace(/&quot;/g, '"'));
               //JSON.parse(list.replace(/&quot;/g,'"'));
               //console.log("hello")
-              console.table(list);
+              //console.table(list);
 
               $(document).ready(function(){
                   $('[data-toggle="popover"]').popover();   

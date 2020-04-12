@@ -17,35 +17,33 @@ var upload = multer({
 })
 
 module.exports = function(app) {
-app.get('/upload', (req, res) => {
-    res.sendFile(path.join(__dirname, '../views/', '/upload.html'));
+app.get('/uploadnew', (req, res) => {
+    res.sendFile(path.join(__dirname, '../views/', '/uploadnew.html'));
 });
-app.post('/upload', upload.single('file'), (req, res) => {
+app.post('/uploadnew', upload.single('file'), (req, res) => {
     try {
         var key = req.file.path.split("/");
         var data = {
         };
-        console.log(req.body);
-        if (String(req.body.description) != undefined && String(req.body.health) != undefined && String(req.body.email) != "") {
+        console.log(key);
+        if (req.body.check != undefined) {
             data[key[key.length - 1]] = {
-                "description": req.body.description,
-                "health": req.body.health,
-                "email": req.body.email
-
+                "label": req.body.check
             }
             fs.appendFile(path.join(__dirname, '../breathe/', '/data.json'), JSON.stringify(data), function(err) {
                 if (err)
                     throw err;
             }
             );
-            res.sendFile(path.join(__dirname, '../views/', '/upload.html'));
+            res.sendFile(__dirname, '../views/', '/success_upload.html');
         } else {
-            console.log(req.file.path);
             fs.unlinkSync(req.file.path);
+            res.sendFile(__dirname, '../views/', '/error_upload.html');
+
         }
 
     } catch ( error ) {
-        res.sendFile(path.join(__dirname, '../views/', '/upload.html'));
+        res.sendFile(__dirname, '../views/', '/error_upload.html');
     }
 });
 }

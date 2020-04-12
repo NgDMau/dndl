@@ -9,25 +9,9 @@
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700&display=swap" rel="stylesheet">
     <link href="/css/uploadnew.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script>
-      $(document).ready(function(){
-            $("#submit").click(function(){
-              if ($(".input").val() == ""){
-                alert("Hãy tải file lên");
-              }
-              else {
-                if ($("input[name='description']:checked").val() == undefined || $("input[name='health']:checked").val() == undefined || $("input[name='email']").val() == "" ){
-                  $("#error").html("Xin mời nhập đầu đủ thông tin");
-                }
-                else {
-                  alert("Đã tải lên thành công. Xin cảm ơn!");
-                }
-              }
-            })
-        ;})
-    </script>
+
 
 
 </head>
@@ -51,8 +35,12 @@
                 
                 <div class="header-box d-flex justify-content-end flex-column ml-3 mb-3">
                     <div class="heading" data-aos="fade-up" data-aos-duration="1000">Hệ thống của chúng tôi phát hiện bệnh qua đường hô hấp nhờ khả năng nghe nhạy bén của người mù tại Việt Nam</div>
-                    <div class="second-heading" data-aos="fade-down" data-aos-duration="1000">Hãy gửi cho chúng tôi ghi âm tiếng hơi thở của bạn</div>
-                    <a type="button" href="#third" class="btn btn-outline-warning startbtn nav-item nav-link ">Gửi tiếng hơi thở</a>
+                    <div class="second-heading pt-3" data-aos="fade-down" data-aos-duration="1000">Hãy gửi cho chúng tôi ghi âm tiếng hơi thở của bạn</div>
+                    <div class="text-center pt-3"> 
+                     <a href="#third" class="noeff">
+                      <button href="#third" type="button" class="text-center btn btn-warning startbtn nav-item nav-link ">Gửi bản ghi âm tiếng thở</button>
+                    </a>
+                    </div>
                 </div>
                   
         </div>
@@ -104,28 +92,30 @@
         <div class="pb-5 bg-white d-flex flex-column align-items-center " id="third">
           <div class="vande-content d-flex flex-column justify-content-center justify-content-around pt-5 align-items-center">
             <div class="heading-text text-dark pt-5 pb-3">ĐƠN ĐĂNG TẢI</div>
-            <form action="/upload" method="POST" enctype="multipart/form-data">
-              <label class="h4" id="thieu">Đăng tải file ghi âm</label><br>
-              <input type="file" name="file" class="input" accept="audio/*"></input><br>
+            <form action="/uploadnew" method="POST" enctype="multipart/form-data">
+
+              <label class="h4">Đăng tải file ghi âm</label><br><br>
+              <div class="custom-file">
+                <input id="inputGroupFile01" type="file" name="file" class="input custom-file-input">
+                <label class="custom-file-label" for="inputGroupFile01">Chọn file</label>
+              </div>              
+              <br>  <br>            
               <br>
-              <label class = "h4">Trường hợp nào mô tả tình trạng của bạn rõ nhất?</label>
-              <br>
-              <span id="span-description"></span>
+              <label class = "h4">Trường hợp nào mô tả tình trạng của bạn rõ nhất?</label><br>
                 <br>
-                  <input name = "description" type="radio" value="Tôi đã được chẩn đoán mắc COVID19 trong vòng 14 ngày trở lại đây">Tôi đã được chẩn đoán mắc COVID19 trong vòng 14 ngày trở lại đây</input><br>
-                  <input name = "description" type="radio" value="Tôi đã được chẩn đoán mắc COVID19 trong hơn 14 ngày trước">Tôi đã được chẩn đoán mắc COVID19 trong hơn 14 ngày trước</input><br>
-                  <input name = "description" type="radio" value="Tôi có triệu chứng mắc COVID19 nhưng chưa được chẩn đoán">Tôi có triệu chứng mắc COVID19 nhưng chưa được chẩn đoán</input><br>
-                  <input name = "description" type="radio" value="Tôi có triệu chứng mắc COVID19 hơn 14 ngày trước">Tôi có triệu chứng mắc COVID19 hơn 14 ngày trước</input><br>
-                  <input name = "description" type="radio" name="check" value="Tôi cảm thấy hoàn toàn bình thường!">Tôi cảm thấy hoàn toàn bình thường!</input><br><br>
-                  <label class = "h4">Tôi có các bệnh về đường hô hấp khác?</label>
+                  <input name = "description" type="radio" value="true">Tôi đã được chẩn đoán mắc COVID19 trong vòng 14 ngày trở lại đây</input><br><br>
+                  <input name = "description" type="radio" value="true">Tôi đã được chẩn đoán mắc COVID19 trong hơn 14 ngày trước</input><br><br>
+                  <input name = "description" type="radio" value="true">Tôi có triệu chứng mắc COVID19 nhưng chưa được chẩn đoán</input><br><br>
+                  <input name = "description" type="radio" value="true">Tôi có triệu chứng mắc COVID19 hơn 14 ngày trước</input><br><br>
+                  <input name = "description" type="radio" name="check" value="true">Tôi cảm thấy hoàn toàn bình thường!</input><br><br><br>
+                  <label class = "h4">Tôi có các bệnh về đường hô hấp khác?</label><br>
                   <br>
-                    <input name = "health"  type="radio" value="Đúng">Đúng</input><br>
-                    <input name = "health" type="radio" name="check" value="Sai">Sai</input><br><br>
+                    <input name = "health"  type="radio" value="true">Đúng</input><br><br>
+                    <input name = "health" type="radio" name="check" value="true">Sai</input><br><br><br>
   
                 <label for="email" class="h4">Email của bạn (Chúng tôi sẽ gửi kết quả qua email)</label><br>
                       <input type="text" id="email" name="email" placeholder="Email.."><br><br>
-                <button type="submit" id="submit">Submit</button><br><br>
-                <label id="error" class="h4"></label><br>
+                <button type="submit" >Submit</button>
             </form>
           </div> 
         </div>
@@ -150,6 +140,12 @@
 </body>
 
     <script>
+
+      $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+      });
+      
         $(document).on('click',function(){
         $('.collapse').collapse('hide');
         })
