@@ -85,7 +85,8 @@
                 <div class="header-box d-flex justify-content-end flex-column ml-3 mb-3">
                     <div class="heading" data-aos="fade-up" data-aos-duration="1000">Hệ thống của chúng tôi phát hiện bệnh qua đường hô hấp nhờ khả năng nghe nhạy bén của người mù tại Việt Nam</div>
                     <div class="second-heading" data-aos="fade-down" data-aos-duration="1000">Hãy gửi cho chúng tôi ghi âm tiếng hơi thở của bạn</div>
-                    <a  href="#third" class="btn btn-outline-warning startbtn nav-item nav-link ">Gửi tiếng hơi thở</a>
+                    <a type="button" href="#third" class="btn btn-warning startbtn nav-item nav-link ">Gửi dữ liệu hơi thở</a>
+
                 </div>
                   
         </div>
@@ -140,7 +141,12 @@
 
             <form id="uploadForm" action="/upload" method="POST" enctype="multipart/form-data">
               <label class="h4" id="thieu">Đăng tải file ghi âm *</label><br>
-              <input type="file" name="file" class="input" accept="audio/*" required></input><br>
+              <div class="custom-file">
+                <input type="file" name="file" accept="audio/*" required class="custom-file-input" id="customFile">
+                <label class="custom-file-label" for="customFile">Chọn file</label>
+              </div>
+              
+              <br>
               <br>
 
               <div id="myProgress">
@@ -196,6 +202,11 @@
         $('.collapse').collapse('hide');
         })
         AOS.init();
+
+        $('input[type="file"]').change(function(e){
+        var fileName = e.target.files[0].name;
+        $('.custom-file-label').html(fileName);
+    });
 
         
     </script> 
