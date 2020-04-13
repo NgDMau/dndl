@@ -52,6 +52,7 @@ app.post('/upload', upload.single('file'), (req, res) => {
         }
 
     } catch ( error ) {
+        console.log("WRONGGGG")
         res.sendFile(path.join(__dirname, '../views/', '/upload.html'));
     }
 });
