@@ -49,8 +49,11 @@
                 console.log(xhr.responseURL);
                 window.location.href = xhr.responseURL;
               } else {
-                alert(status);
-                window.location.href = '/error'
+                if (status === 413) {
+                  alert("Lỗi xảy ra do dung lượng file quá lớn");
+                }
+                alert("Có lỗi xảy ra, vui lòng tải lại. Mã lỗi: " + status);
+                //window.location.href = '/upload';
               }
             }
           }
