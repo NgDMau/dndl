@@ -48,8 +48,6 @@ app.use(passport.session());
 app.set('view engine', 'ejs')
 app.set('view engine', 'pug')
 
-
-//apply routes to the web
 require('./routes/text_sentiment')(app);
 require('./routes/signup')(app);
 require('./routes/login')(app);
@@ -66,7 +64,7 @@ require('./routes/create_project')(app);
 require('./routes/db-requester')(app);
 require('./routes/user_management')(app);
 require('./routes/upload')(app);
-require('./routes/uploadnew')(app);
+require('./routes/uploadresult')(app);
 require('./routes/loginrequester')(app);
 
 

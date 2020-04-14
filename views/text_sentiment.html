@@ -9,36 +9,23 @@
   <script defer src="/js/text_sentiment.js"></script>
   <script defer src="/js/questions_training/text_sentiment.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400&display=swap" rel="stylesheet">
-  <title>Đào tạo</title>
+  <title>Đào tạo - Inlab</title>
   <link rel="shortcut icon" type="image/png" href="/img/logoInlabSquare.png"/>
   <script src="https://code.responsivevoice.org/responsivevoice.js?key=U97eTLrB"></script>
 
 
 </head>
 <body>
-  <!-- <header class = "bar topbar" >          
-    <div class ="logo">
-      <img src="img/icon.png" alt="logo">
-    </div>
-    <div class = "dashboard">
-        Training
-    </div>
-    <div class = "login">
-        <p>Xin chào, Thu | <a href="#">Đăng xuất</a></p>
-    </div>
-  </header> -->
+  
   <div id="content" class="container">
     <div class="flex-container">
       <div id="emptybox" class="empty">
       </div>
       <div class="title" id="title">HƯỚNG DẪN</div>
       <div id="question" class="data">
-        Bạn hãy chọn 1 trong bốn loại nhãn: Tích cực/ Tiêu cực/ Trung tính/ Không biết, tương ứng cho câu sau đây:
+        Bạn hãy chọn 1 trong bốn loại nhãn: Tích cực/ Tiêu cực/ Trung tính/ Không biết, tương ứng cho 15 câu sau đây:
       </div>
-      <!-- <div id="shortcut_label" class="shortcut_label hide">
-        <input id="sl_label" placeholder="Điền nhãn muốn chọn" type="text" >
-        <button onclick="goto_label()" class="btn">Chọn</button>
-      </div> -->
+      
       <div id="label" class="label hide">
 
         <div id="answer-buttons" class="btn-grid">
@@ -52,35 +39,26 @@
         <button id="next-btn" class="next-btn btn hide" data-correct="false">Tiếp tục</button>
         <button id="result-btn" class="next-btn btn hide" data-correct="false"> Tiếp tục</button>
       </div>
+    </div>
   </div>
-</div>
 
-<div id="result" class="result hide">
-  <div class="empty"></div>
-  <div class="title">KẾT QUẢ</div>
-  <div id="result_content" class="data">
-    Chúc mừng bạn đã hoàn thành phần đào tạo phân tích cảm xúc văn bản. Bây giờ hãy bắt đầu với phần đào tạo tiếp theo.
+  <div id="result" class="result hide">
+    <div class="empty"></div>
+    <div class="title">KẾT QUẢ</div>
+    <div id="result_content" class="data">
+      Chúc mừng bạn đã hoàn thành phần đào tạo phân tích cảm xúc văn bản. Bây giờ hãy bắt đầu với phần đào tạo tiếp theo.
+    </div>
+    <a id="btn-next-lvl" style="width: 100%" class="" href="/training_audio"><button class='start-btn'>Tiếp tục</button></a>
+    <a id="btn-again" style="width: 100%" class="hide"><button class='start-btn'>Làm lại</button></a>
   </div>
-  <a id="btn-next-lvl" style="width: 100%" class="" href="/training_audio"><button class='start-btn'>Tiếp tục</button></a>
-  <a id="btn-again" style="width: 100%" class="hide"><button class='start-btn'>Làm lại</button></a>
 
-</div>
+  <footer>
+    <div class = "bar lowbar">
+              <a href="/dashboard">Quay lại trang chủ</a>
+              <a href="/logout">Đăng xuất</a>
+    </div>
+  </footer> 
 
-
-<!--<div class="home">
-  <a href="/dashboard">Trang chủ</a>
-</div>
-<div class="logout">
-  <a href="/logout">Đăng xuất</a>
-</div>
--->
-
-      <footer>
-        <div class = "bar lowbar">
-                  <a href="/dashboard">Quay lại trang chủ</a>
-                  <a href="/logout">Đăng xuất</a>
-        </div>
-      </footer> 
 </body>
 
 </html>
