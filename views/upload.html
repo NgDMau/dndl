@@ -89,9 +89,7 @@
                 <div class="header-box d-flex justify-content-end flex-column ml-3 mb-3">
                     <div class="heading" data-aos="fade-up" data-aos-duration="1000">Hệ thống của chúng tôi phát hiện bệnh qua đường hô hấp nhờ khả năng nghe nhạy bén của người mù tại Việt Nam</div>
                     <div class="second-heading" data-aos="fade-down" data-aos-duration="1000">Hãy gửi cho chúng tôi ghi âm tiếng hơi thở của bạn</div>
-                    <a type="button" href="#second" class="btn btn-warning startbtn nav-item nav-link ">Hướng dẫn nhanh</a>
-                    <a type="button" href="#third" class="btn btn-warning startbtn nav-item nav-link ">Gửi dữ liệu hơi thở</a>
-
+                    <a type="button" href="#second" class="btn btn-warning startbtn nav-item nav-link ">Bắt đầu</a>
                 </div>
                   
         </div>
@@ -108,7 +106,8 @@
                       <div class="text-warning h2">BƯỚC 1</div>
                   </div>
                   <div class="col-8 d-flex align-items-center  ">
-                      <div class="h3 ">Vào mục ghi âm, hít sâu 3 lần</div>
+                      <div class="h3 ">Vào phần ghi âm
+                      </div>
                   </div>
               </div>
               <div class="row pt-5"  data-aos="fade-up" data-aos-duration="1200">
@@ -116,7 +115,8 @@
                       <div class="text-warning h2">BƯỚC 2</div>
                   </div>
                   <div class="col-8 d-flex align-items-center  ">
-                    <div class="h3">Mỗi hơi thở hít vào 4 giây, thở ra 4 giây</div>
+                    <div class="h3">Hít sâu trong 4 giây, tiếp tục thở ra trong 4 giây
+                    </div>
                   </div>
               </div>
             <div class="row pt-5"  data-aos="fade-up" data-aos-duration="1200">
@@ -124,7 +124,8 @@
                   <div class="text-warning h2">BƯỚC 3</div>
               </div>
               <div class="col-8 d-flex align-items-center  ">
-                  <div class="h3 ">Hoàn thành đơn bên dưới</div>
+                  <div class="h3 ">Lặp lại bước trên 3 lần
+                  </div>
               </div>
             </div>
             <div class="row pt-5"  data-aos="fade-up" data-aos-duration="1200">
@@ -132,7 +133,7 @@
                   <div class="text-warning h2">BƯỚC 4</div>
               </div>
               <div class="col-8 d-flex align-items-center  ">
-                  <div class="h3 ">Chọn file và đăng đoạn ghi âm lên</div>
+                  <div class="h3 ">Điền form, chọn đoạn ghi âm và ấn nút gửi</div>
               </div>
             </div>
           </div>
@@ -145,21 +146,7 @@
             <div class="heading-text text-dark pt-5 pb-3">ĐƠN ĐĂNG TẢI</div>
 
             <form id="uploadForm" action="/upload" method="POST" enctype="multipart/form-data">
-              <label class="h4" id="thieu">Đăng tải file ghi âm *</label><br><br>
-              <div class="custom-file">
-                <input type="file" name="file" accept="audio/*" required class="custom-file-input" id="customFile">
-                <label class="custom-file-label" for="customFile">Chọn file</label>
-              </div>
               
-              <br>
-              <br>
-
-              <div id="myProgress">
-                <div id="progressBar">0%</div>
-              </div>
-
-              
-              <br>
               <label class = "h4">Trường hợp nào mô tả tình trạng của bạn rõ nhất? *</label>
               <br>
               <span id="span-description"></span>
@@ -174,8 +161,21 @@
                     <input name = "health"  type="radio" value="Đúng" required>Đúng</input><br><br>
                     <input name = "health" type="radio" name="check" value="Sai">Sai</input><br><br><br>
   
-                <label for="email" class="h4">Email của bạn (Nếu có chúng tôi sẽ gửi kết quả qua email)</label><br>
-                      <input type="text" id="email" name="email" placeholder="Email.."><br><br>
+                <label for="email" class="h4">Email của bạn (Nếu có chúng tôi sẽ gửi kết quả qua email)</label><br><br>
+                      <input type="text" id="email" name="email" placeholder="Email.."><br><br><br>
+
+                <label class="h4" id="thieu">Đăng tải file ghi âm *</label><br><br>
+                  <div class="custom-file">
+                      <input type="file" name="file" accept="audio/*" required class="custom-file-input" id="customFile">
+                      <label class="custom-file-label" for="customFile">Chọn file</label>
+                  </div> 
+                  <br>
+                  <br> 
+                      <div id="myProgress">
+                        <div id="progressBar">0%</div>
+                      </div>
+
+                      <br>     
                 <button type="submit" id="submit">Gửi dữ liệu</button><br><br>
                 <label id="error" class="h4"></label><br>
             </form>
