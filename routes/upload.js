@@ -32,9 +32,11 @@ app.post('/upload', upload.single('file'), (req, res) => {
         //console.log(req.body);
         if (req.body) {
             data[key[key.length - 1]] = {
-                "description": req.body.description,
-                "health": req.body.health,
-                "email": req.body.email
+                description: req.body.description,
+                health: req.body.health,
+                email: req.body.email,
+                age: req.body.age,
+                gender: req.body.gender
             }
             fs.appendFile(path.join(__dirname, '../breathe/', '/data.json'), JSON.stringify(data), function(err) {
                 if (err)
