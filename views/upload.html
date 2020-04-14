@@ -1,37 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
    
+    
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700&display=swap" rel="stylesheet">
     <link href="/css/uploadnew.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <title>Đóng góp dữ liệu - Inlab</title>
+    <link rel="shortcut icon" type="image/png" href="/img/logoInlabSquare.png">
+
     <script>
-      $(document).ready(function(){
-            $("#submit").click(function(){
-              if ($(".input").val() == ""){
-                alert("Hãy tải file lên");
-              }
-              else {
-                if ($("input[name='description']:checked").val() == undefined || $("input[name='health']:checked").val() == undefined || $("input[name='email']").val() == "" ){
-                  $("#error").html("Xin mời nhập đầu đủ thông tin");
+
+      $( document ).ready(function() {
+          
+        const uploadForm = document.getElementById('uploadForm');
+        const progressBar = document.getElementById("progressBar");
+
+        uploadForm.addEventListener("submit", uploadFile);
+
+        function uploadFile(e) {
+          e.preventDefault();
+
+          const xhr = new XMLHttpRequest();
+
+          xhr.open("POST", "/upload");
+          xhr.upload.addEventListener("progress", e => {
+            console.log(e);
+            const percent = e.lengthComputable ? (e.loaded / e.total) * 100 : 0;
+
+            progressBar.style.display = 'block';
+            progressBar.style.width = percent.toFixed(2) + '%';
+            progressBar.innerHTML = percent.toFixed(2) + '%';
+
+          });
+
+          xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+              var status = xhr.status;
+              if (status === 0 || (status >= 200 && status < 400)) {
+                console.log(xhr.responseText);
+                console.log(xhr.responseURL);
+                window.location.href = xhr.responseURL;
+              } else {
+                if (status === 413) {
+                  alert("Lỗi xảy ra do dung lượng file quá lớn");
                 }
-                else {
-                  alert("Đã tải lên thành công. Xin cảm ơn!");
-                }
+                alert("Có lỗi xảy ra, vui lòng tải lại. Mã lỗi: " + status);
+                //window.location.href = '/upload';
               }
-            })
-        ;})
+            }
+          }
+
+          xhr.send(new FormData(uploadForm));
+          }
+
+      });
+
     </script>
 
 
 </head>
 <body data-spy="scroll" data-target="#navbar-example">
+  
         <!-- First part -->
         <div class="overlay p-2" id="first">
                 <nav class="navbar navbar-expand-lg navbar-dark" id="navbar-example">
@@ -50,9 +87,10 @@
                   </nav>
                 
                 <div class="header-box d-flex justify-content-end flex-column ml-3 mb-3">
-                    <div class="heading" data-aos="fade-up" data-aos-duration="1000">Hệ thống của chúng tôi phát hiện bệnh qua đường hô hấp nhờ khả năng nghe nhạy bén của người mù tại Việt Nam</div>
+                    <div class="heading" data-aos="fade-up" data-aos-duration="1000">Đây là một dự án thử nghiệm khả năng chẩn đoán covid19 thông qua việc phân tích tiếng hơi thở, nhờ vào thính giác nhạy bén của người khiếm thị</div>
+                    <!-- <div class="heading" data-aos="fade-up" data-aos-duration="1000">Hệ thống của chúng tôi phát hiện bệnh qua đường hô hấp nhờ khả năng nghe nhạy bén của người mù tại Việt Nam</div> -->
                     <div class="second-heading" data-aos="fade-down" data-aos-duration="1000">Hãy gửi cho chúng tôi ghi âm tiếng hơi thở của bạn</div>
-                    <a type="button" href="#third" class="btn btn-outline-warning startbtn nav-item nav-link ">Gửi tiếng hơi thở</a>
+                    <a type="button" href="#second" class="btn btn-warning startbtn nav-item nav-link ">Bắt đầu</a>
                 </div>
                   
         </div>
@@ -61,7 +99,7 @@
         <!-- Second part -->
 
         <div class="bg2 bg-white d-flex flex-column align-items-center justify-content-center " id="second">
-          <div class="heading-text text-dark pt-5" data-aos="fade-up" data-aos-duration="1200">CÁCH HOẠT ĐỘNG</div>
+          <div class="heading-text text-dark pt-5" data-aos="fade-up" data-aos-duration="1200">HƯỚNG DẪN GHI ÂM</div>
 
           <div class="vande-content d-flex flex-column justify-content-center justify-content-around pt-3">
               <div class="row" data-aos="fade-up" data-aos-duration="1200">
@@ -69,7 +107,8 @@
                       <div class="text-warning h2">BƯỚC 1</div>
                   </div>
                   <div class="col-8 d-flex align-items-center  ">
-                      <div class="h3 ">Vào mục ghi âm, hít sâu 3 lần</div>
+                      <div class="h3 ">Vào phần ghi âm trên điện thoại và nhấn nút bắt đầu ghi âm, lưu ý để điện thoại gần cơ thể để chất lượng ghi âm được tốt hơn.
+                      </div>
                   </div>
               </div>
               <div class="row pt-5"  data-aos="fade-up" data-aos-duration="1200">
@@ -77,7 +116,8 @@
                       <div class="text-warning h2">BƯỚC 2</div>
                   </div>
                   <div class="col-8 d-flex align-items-center  ">
-                    <div class="h3">Mỗi hơi thở hít vào 4 giây, thở ra 4 giây</div>
+                    <div class="h3">Mỗi lần hít sâu trong khoảng 4 giây, giữ lại 1 giây rồi tiếp tục thở ra trong 4 giây
+                    </div>
                   </div>
               </div>
             <div class="row pt-5"  data-aos="fade-up" data-aos-duration="1200">
@@ -85,7 +125,8 @@
                   <div class="text-warning h2">BƯỚC 3</div>
               </div>
               <div class="col-8 d-flex align-items-center  ">
-                  <div class="h3 ">Điền form</div>
+                  <div class="h3 ">Lặp lại bước trên 3 lần
+                  </div>
               </div>
             </div>
             <div class="row pt-5"  data-aos="fade-up" data-aos-duration="1200">
@@ -93,7 +134,7 @@
                   <div class="text-warning h2">BƯỚC 4</div>
               </div>
               <div class="col-8 d-flex align-items-center  ">
-                  <div class="h3 ">Chọn file và đăng đoạn ghi âm lên</div>
+                  <div class="h3 ">Kết thúc ghi âm, điền đơn bên dưới, chọn đoạn ghi âm vừa rồi và ấn nút gửi</div>
               </div>
             </div>
           </div>
@@ -104,29 +145,42 @@
         <div class="pb-5 bg-white d-flex flex-column align-items-center " id="third">
           <div class="vande-content d-flex flex-column justify-content-center justify-content-around pt-5 align-items-center">
             <div class="heading-text text-dark pt-5 pb-3">ĐƠN ĐĂNG TẢI</div>
-            <form action="/upload" method="POST" enctype="multipart/form-data">
-              <label class="h4" id="thieu">Đăng tải file ghi âm</label><br>
-              <input type="file" name="file" class="input" accept="audio/*"></input><br>
-              <br>
-              <label class = "h4">Trường hợp nào mô tả tình trạng của bạn rõ nhất?</label>
+
+            <form id="uploadForm" action="/upload" method="POST" enctype="multipart/form-data">
+              
+              <label class = "h4">Trường hợp nào mô tả tình trạng của bạn rõ nhất? *</label>
               <br>
               <span id="span-description"></span>
                 <br>
-                  <input name = "description" type="radio" value="Tôi đã được chẩn đoán mắc COVID19 trong vòng 14 ngày trở lại đây">Tôi đã được chẩn đoán mắc COVID19 trong vòng 14 ngày trở lại đây</input><br>
-                  <input name = "description" type="radio" value="Tôi đã được chẩn đoán mắc COVID19 trong hơn 14 ngày trước">Tôi đã được chẩn đoán mắc COVID19 trong hơn 14 ngày trước</input><br>
-                  <input name = "description" type="radio" value="Tôi có triệu chứng mắc COVID19 nhưng chưa được chẩn đoán">Tôi có triệu chứng mắc COVID19 nhưng chưa được chẩn đoán</input><br>
-                  <input name = "description" type="radio" value="Tôi có triệu chứng mắc COVID19 hơn 14 ngày trước">Tôi có triệu chứng mắc COVID19 hơn 14 ngày trước</input><br>
-                  <input name = "description" type="radio" name="check" value="Tôi cảm thấy hoàn toàn bình thường!">Tôi cảm thấy hoàn toàn bình thường!</input><br><br>
-                  <label class = "h4">Tôi có các bệnh về đường hô hấp khác?</label>
-                  <br>
-                    <input name = "health"  type="radio" value="Đúng">Đúng</input><br>
-                    <input name = "health" type="radio" name="check" value="Sai">Sai</input><br><br>
+                  <input name = "description" type="radio" value="Tôi đã được chẩn đoán mắc COVID19 trong vòng 14 ngày trở lại đây" required>Tôi đã được chẩn đoán mắc COVID19 trong vòng 14 ngày trở lại đây</input><br><br>
+                  <input name = "description" type="radio" value="Tôi đã được chẩn đoán mắc COVID19 trong hơn 14 ngày trước">Tôi đã được chẩn đoán mắc COVID19 trong hơn 14 ngày trước</input><br><br>
+                  <input name = "description" type="radio" value="Tôi có triệu chứng mắc COVID19 nhưng chưa được chẩn đoán">Tôi có triệu chứng mắc COVID19 nhưng chưa được chẩn đoán</input><br><br>
+                  <input name = "description" type="radio" value="Tôi có triệu chứng mắc COVID19 hơn 14 ngày trước">Tôi có triệu chứng mắc COVID19 hơn 14 ngày trước</input><br><br>
+                  <input name = "description" type="radio" name="check" value="Tôi cảm thấy hoàn toàn bình thường!">Tôi cảm thấy hoàn toàn bình thường!</input><br><br><br>
+                  <label class = "h4">Tôi có các bệnh về đường hô hấp khác? *</label>
+                  <br><br>
+                    <input name = "health"  type="radio" value="Đúng" required>Đúng</input><br><br>
+                    <input name = "health" type="radio" name="check" value="Sai">Sai</input><br><br><br>
   
-                <label for="email" class="h4">Email của bạn (Chúng tôi sẽ gửi kết quả qua email)</label><br>
-                      <input type="text" id="email" name="email" placeholder="Email.."><br><br>
-                <button type="submit" id="submit">Submit</button><br><br>
+                <label for="email" class="h4">Email của bạn (Nếu có chúng tôi sẽ gửi kết quả qua email)</label><br><br>
+                      <input type="text" id="email" name="email" placeholder="Email.."><br><br><br>
+
+                <label class="h4" id="thieu">Đăng tải file ghi âm *</label><br><br>
+                  <div class="custom-file">
+                      <input type="file" name="file" accept="audio/*" required class="custom-file-input" id="customFile">
+                      <label class="custom-file-label" for="customFile">Chọn file</label>
+                  </div> 
+                  <br>
+                  <br> 
+                      <div id="myProgress">
+                        <div id="progressBar">0%</div>
+                      </div>
+
+                      <br>     
+                <button type="submit" id="submit">Gửi dữ liệu</button><br><br>
                 <label id="error" class="h4"></label><br>
             </form>
+            
           </div> 
         </div>
 
@@ -154,5 +208,12 @@
         $('.collapse').collapse('hide');
         })
         AOS.init();
+
+        $('input[type="file"]').change(function(e){
+        var fileName = e.target.files[0].name;
+        $('.custom-file-label').html(fileName);
+    });
+
+        
     </script> 
 </html>

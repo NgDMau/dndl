@@ -70,7 +70,7 @@ a:hover {
     font-weight: 500;
     font-size:20px;
     height: 70px;
-    pointer-events: none;
+    padding:18px;
 }
 
 
@@ -180,6 +180,23 @@ input[type=text], select, textarea {
     }
 
 }
+
 input[type="radio"] {
     margin-right: 10px;
   }
+
+  #myProgress {
+    width: 100%;
+    background-color: grey;
+  }
+  
+  #progressBar {
+    width: 0%;
+    height: 30px;
+    background-color: #4CAF50;
+    text-align: center; /* To center it horizontally (if you want) */
+    line-height: 30px; /* To center it vertically */
+    color: white;
+    display: none;
+  }
+  
