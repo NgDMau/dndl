@@ -199,4 +199,8 @@ input[type="radio"] {
     color: white;
     display: none;
   }
+.btn-block{
+    width:60%;
+    height:50px;
+}
   
