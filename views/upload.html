@@ -152,25 +152,25 @@
               <br>
               <span id="span-description"></span>
                 <br>
-                  <input name = "description" type="radio" value="Tôi đã được chẩn đoán mắc COVID19 trong vòng 14 ngày trở lại đây" required>Tôi đã được chẩn đoán mắc COVID19 trong vòng 14 ngày trở lại đây</input><br><br>
-                  <input name = "description" type="radio" value="Tôi đã được chẩn đoán mắc COVID19 trong hơn 14 ngày trước">Tôi đã được chẩn đoán mắc COVID19 trong hơn 14 ngày trước</input><br><br>
-                  <input name = "description" type="radio" value="Tôi có triệu chứng mắc COVID19 nhưng chưa được chẩn đoán">Tôi có triệu chứng mắc COVID19 nhưng chưa được chẩn đoán</input><br><br>
-                  <input name = "description" type="radio" value="Tôi có triệu chứng mắc COVID19 hơn 14 ngày trước">Tôi có triệu chứng mắc COVID19 hơn 14 ngày trước</input><br><br>
-                  <input name = "description" type="radio" name="check" value="Tôi cảm thấy hoàn toàn bình thường!">Tôi cảm thấy hoàn toàn bình thường!</input><br><br><br>
+                  <input name = "description" type="radio" value="1" required>Tôi đã được chẩn đoán mắc COVID19 trong vòng 14 ngày trở lại đây</input><br><br>
+                  <input name = "description" type="radio" value="2">Tôi đã được chẩn đoán mắc COVID19 trong hơn 14 ngày trước</input><br><br>
+                  <input name = "description" type="radio" value="3">Tôi có triệu chứng mắc COVID19 nhưng chưa được chẩn đoán</input><br><br>
+                  <input name = "description" type="radio" value="4">Tôi có triệu chứng mắc COVID19 hơn 14 ngày trước</input><br><br>
+                  <input name = "description" type="radio" name="check" value="5">Tôi cảm thấy hoàn toàn bình thường!</input><br><br><br>
                   <label class = "h4">Tôi có các bệnh về đường hô hấp khác? *</label>
                   <br><br>
-                    <input name = "health"  type="radio" value="Đúng" required>Đúng</input><br><br>
-                    <input name = "health" type="radio" name="check" value="Sai">Sai</input><br><br><br>
+                    <input name = "health"  type="radio" value="yes" required>Đúng</input><br><br>
+                    <input name = "health" type="radio" name="check" value="no">Sai</input><br><br><br>
   
                 <label for="age" class="h4">Độ tuổi của bạn?</label><br><br>
-                    <input type="text" id="age" name="age" placeholder="Độ tuổi.."><br><br><br>    
+                    <input type="number" id="age" name="age" placeholder="Độ tuổi.." min="1" max="200"><br><br><br>    
                 <label for="email" class="h4">Email của bạn (Nếu có chúng tôi sẽ gửi kết quả qua email)</label><br><br>
-                      <input type="text" id="email" name="email" placeholder="Email.."><br><br><br>
+                      <input type="email" id="email" name="email" placeholder="Email.."><br><br><br>
                 <label class = "h4">Giới tính của bạn?</label>
                       <br><br>
-                        <input name = "gender"  type="radio" value="nam" >Nam</input><br><br>
-                        <input name = "gender" type="radio" value="nu">Nữ</input><br><br>
-                        <input name = "gender" type="radio" value="khac">Khác</input><br><br><br>
+                        <input name = "gender"  type="radio" value="male" >Nam</input><br><br>
+                        <input name = "gender" type="radio" value="female">Nữ</input><br><br>
+                        <input name = "gender" type="radio" value="others">Khác</input><br><br><br>
 
 
                 <label class="h4" id="thieu">Đăng tải file ghi âm *</label><br><br>
