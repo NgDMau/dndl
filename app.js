@@ -20,7 +20,7 @@ passport.deserializeUser(function(user, done) {
 
 const app = express()
 
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 8002;
 
 app.use(bodyParser.urlencoded({
     extended: true
