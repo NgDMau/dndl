@@ -1,0 +1,56 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Node.js CI
+
+on:
+  push:
+    branches: 
+      - master
+      - dev
+  pull_request:
+    branches: 
+      - dev
+
+jobs:
+  test01:
+     name: Test on hosting server
+     runs-on: ubuntu-latest
+     steps:
+       - name: Check environment variables
+         env:
+           DB_DATABASE: d1r7gpirn3t2e6
+           DB_USER: qrmmeltkivmkot
+           DB_HOST: sadasdsad
+           DB_PASSWORD: a3582d2e31948a9bdff3cd8e76c3824358a09d8fa2f9cb4d931bb5247f691f7e
+           DB_PORT: 5432
+           DB_SSL: true
+         run: |
+           echo $DB_DATABASE $DB_USER $DB_HOST $DB_PASSWORD $DB_PORT $DB_SSL.
+         shell: bash
+       - name: Install dependencies
+         run: |
+           npm ci
+           npm install
+         shell: bash            
+      
+  
+#   build:
+
+#     runs-on: ubuntu-latest
+
+#     strategy:
+#       matrix:
+#         node-version: [10.x, 12.x]
+
+#     steps:
+#     - uses: actions/checkout@v2
+#     - name: Use Node.js ${{ matrix.node-version }}
+#       uses: actions/setup-node@v1
+#       with:
+#         node-version: ${{ matrix.node-version }}
+#     - run: npm ci
+#     - run: npm run build --if-present
+#     - run: npm test
+#       env:
+#         CI: true
