@@ -99,7 +99,7 @@
         <!-- Second part -->
 
         <div class="bg2 bg-white d-flex flex-column align-items-center justify-content-center " id="second">
-          <div class="heading-text text-dark pt-5" data-aos="fade-up" data-aos-duration="1200">HƯỚNG DẪN GHI ÂM</div>
+          <div class="heading-text text-dark pt-5" data-aos="fade-up" data-aos-duration="1200">HƯỚNG DẪN</div>
 
           <div class="vande-content d-flex flex-column justify-content-center justify-content-around pt-3">
               <div class="row" data-aos="fade-up" data-aos-duration="1200">
@@ -162,8 +162,16 @@
                     <input name = "health"  type="radio" value="Đúng" required>Đúng</input><br><br>
                     <input name = "health" type="radio" name="check" value="Sai">Sai</input><br><br><br>
   
+                <label for="age" class="h4">Độ tuổi của bạn?</label><br><br>
+                    <input type="text" id="age" name="age" placeholder="Độ tuổi.."><br><br><br>    
                 <label for="email" class="h4">Email của bạn (Nếu có chúng tôi sẽ gửi kết quả qua email)</label><br><br>
                       <input type="text" id="email" name="email" placeholder="Email.."><br><br><br>
+                <label class = "h4">Giới tính của bạn?</label>
+                      <br><br>
+                        <input name = "gender"  type="radio" value="nam" >Nam</input><br><br>
+                        <input name = "gender" type="radio" value="nu">Nữ</input><br><br>
+                        <input name = "gender" type="radio" value="khac">Khác</input><br><br><br>
+
 
                 <label class="h4" id="thieu">Đăng tải file ghi âm *</label><br><br>
                   <div class="custom-file">
@@ -176,9 +184,11 @@
                         <div id="progressBar">0%</div>
                       </div>
 
-                      <br>     
-                <button type="submit" id="submit">Gửi dữ liệu</button><br><br>
-                <label id="error" class="h4"></label><br>
+                      <br> 
+                <div class ="justify-content-center d-flex">        
+                  <button type="submit" id="submit" class=" btn btn-warning btn-lg btn-block">Gửi dữ liệu</button><br><br>
+                </div>  
+                  <label id="error" class="h4"></label><br>
             </form>
             
           </div> 
