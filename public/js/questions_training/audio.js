@@ -113,7 +113,7 @@ questions = [
         id: '11',
         question: 'Chọn chủ đề thích hợp cho đoạn hội thoại dưới:',
         src: 'audio/audio_topic_1.mp3',
-        content: 'Bây giờ có đến mấy bộ sách giáo khoa lận, không biết phải mua quyển nào cho con nó học đây',
+        content: 'Học khu Mỹ không đánh rớt học sinh trong năm nay vì Covid-19',
         answers: [
           { text: 'Sức khỏe', correct: false},
           { text: 'Giáo dục', correct: true},
@@ -126,7 +126,7 @@ questions = [
         id: '12',
         question: 'Chọn chủ đề thích hợp cho đoạn hội thoại dưới:',
         src: 'audio/audio_topic_2.mp3',
-        content: 'Các bác cho em hỏi sao mà làm hồ sơ cho con vào trường công lập chuyên nhỉ',
+        content: 'Bí quyết ôn thi THPT quốc gia đạt điểm cao môn hóa: Câu hỏi thực nghiệm',
         answers: [
           { text: 'Sức khỏe', correct: false},
           { text: 'Giáo dục', correct: true},
@@ -139,7 +139,7 @@ questions = [
         id: '13',
         question: 'Chọn chủ đề thích hợp cho đoạn hội thoại dưới:',
         src: 'audio/audio_topic_3.mp3',
-        content: 'Tôi cần mua một bộ máy tính để bàn phục vụ công việc văn phòng, giá cả dưới 10 triệu ạ',
+        content: 'iPhone tiếp theo có thể trông như một chiếc iPad',
         answers: [
           { text: 'Sức khỏe', correct: false},
           { text: 'Giáo dục', correct: false},
@@ -152,7 +152,7 @@ questions = [
         id: '14',
         question: 'Chọn chủ đề thích hợp cho đoạn hội thoại dưới:',
         src: 'audio/audio_topic_4.mp3',
-        content: 'năm nay, một số loại máy tính mới được ra mắt',
+        content: 'LG vừa công bố thương hiệu smartphone mới của mình, Velvet. Dù không biết rõ thông số kỹ thuật nhưng đó là dòng sản phẩm dành cho phân khúc tầm trung',
         answers: [
             { text: 'Sức khỏe', correct: false},
             { text: 'Giáo dục', correct: false},
@@ -165,7 +165,7 @@ questions = [
         id: '15',
         question: 'Chọn chủ đề thích hợp cho đoạn hội thoại dưới:',
         src: 'audio/audio_topic_5.mp3',
-        content: 'Tôi dạo này hay bị ho nóng sốt, nhưng không muốn đi khám, không biết có thuốc nam nào hiệu qủa không',
+        content: 'Người tiếp xúc với bệnh nhân hoặc nghi nhiễm nCoV cần bảo hộ kỹ với nón đội đầu, găng tay,  khẩu trang, quần áo bảo hộ không thấm nước, bọc giày.',
         answers: [
           { text: 'Sức khỏe', correct: true},
           { text: 'Giáo dục', correct: false},
@@ -178,7 +178,7 @@ questions = [
         id: '16',
         question: 'Chọn chủ đề thích hợp cho đoạn hội thoại dưới:',
         src: 'audio/audio_topic_6.mp3',
-        content: 'Mưa nắng thất thường bạn nào hoặc có người thân hay bị đau đầu,đau mỏi vai gáy nhắn tin cho em nhé, không phải uống thuốc tây nha',
+        content: 'Các bệnh ung thư đều có những dấu hiệu chung như giảm cân đột ngột, mệt mỏi, đau đớn',
         answers: [
             { text: 'Sức khỏe', correct: true},
             { text: 'Giáo dục', correct: false},
@@ -191,7 +191,7 @@ questions = [
         id: '17',
         question: 'Chọn chủ đề thích hợp cho đoạn hội thoại dưới:',
         src: 'audio/audio_topic_7.mp3',
-        content: 'Chỗ tôi ở khá là chật, xa trung tâm thành phố',
+        content: 'Cho Thuê Nhà Riêng Nguyên Căn TP Hồ Chí Minh, Giá Rẻ, Vị Trí Đẹp',
         answers: [
             { text: 'Sức khỏe', correct: false},
             { text: 'Giáo dục', correct: false},
@@ -204,7 +204,7 @@ questions = [
         id: '18',
         question: 'Chọn chủ đề thích hợp cho đoạn hội thoại dưới:',
         src: 'audio/audio_topic_8.mp3',
-        content: 'Nước đang phát triển là quốc gia có mức sống còn khiêm tốn, có nền tảng công nghiệp chưa phát triển và có chỉ số phát triển con người không cao',
+        content: 'Bộ trưởng Đào Ngọc Dung: Hỗ trợ dân nghèo trong tháng 4',
         answers: [
             { text: 'Sức khỏe', correct: false},
             { text: 'Giáo dục', correct: false},
@@ -217,7 +217,7 @@ questions = [
         id: '19',
         question: 'Chọn chủ đề thích hợp cho đoạn hội thoại dưới:',
         src: 'audio/audio_topic_9.mp3',
-        content: 'Đầu tiên, để trở thành một doanh nhân, bạn phải liên tục học hỏi.',
+        content: 'Để giảm bớt gánh nặng cho những bếp ăn từ thiện, chị Trần Mỹ Hằng nảy ra ý tưởng làm “cái thùng tốt bụng”, đặt đồ ăn trước nhà tặng người nghèo.',
         answers: [
             { text: 'Sức khỏe', correct: false},
             { text: 'Giáo dục', correct: false},
