@@ -49,7 +49,7 @@ a:hover {
     color: #F1DF64 !important; 
 }
 .heading{
-    font-size: 30px;
+    font-size: 28px;
     color:white;
     font-weight: 900;
 }
@@ -59,9 +59,8 @@ a:hover {
     font-weight: 500;
 }
 .header-box{
-    height:80vh;
+    height:85vh;
     width:90%;
-    padding-bottom: 10px;
     font-size:15px;
 }
 .startbtn{
