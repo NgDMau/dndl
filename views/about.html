@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
    
     <!-- Font -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700&display=swap" rel="stylesheet">
     <link href="/css/about2.css" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -39,7 +41,7 @@
                 <div class="header-box d-flex justify-content-end flex-column ml-3 mb-3">
                     <div class="heading" data-aos="fade-up" data-aos-duration="1000">Chào mừng tới InLab!</div>
                     <div class="second-heading" data-aos="fade-down" data-aos-duration="1000"> Một nền tảng nguồn lực cộng đồng về dữ liệu tiên phong tại Việt Nam</div>
-                    <a type="button" href="#second" class="btn btn-outline-warning startbtn nav-item nav-link ">Bắt đầu!</a>
+                    <a type="button" href="#fifth" class="btn btn-outline-warning startbtn nav-item nav-link ">Bạn có dữ liệu cần được dán nhãn?</a>
                 </div>
                   
         </div>
@@ -92,25 +94,65 @@
         </div>
 
         <!-- Fourth part -->
-        <div  class="bg4  bg-white  d-flex flex-column align-items-center" id="fourth">
+        <div  class="bg4  bg-white  d-flex flex-column align-items-center pt-5" id="fourth">
             <div class="heading-text text-dark " data-aos="zoom-in" data-aos-duration="1200" >ỨNG DỤNG</div>
-            <div class="container d-flex justify-content-center align-items-center ">
+            <div class="container d-flex justify-content-center align-items-center pt-5">
                 <div class="row" >
-                  <div class="col-md d-flex flex-column align-items-center pt-5" data-aos="zoom-in" data-aos-duration="1200">
+                  <div class="col-md d-flex flex-column align-items-center pb-5" data-aos="zoom-in" data-aos-duration="1200">
                     <img src="/img/audio.png" class="image">
                     <div class="h3 text-center pt-3">Dán nhãn dữ liệu âm thanh</div>
                   </div>
-                  <div class="col-md d-flex flex-column align-items-center pt-5" data-aos="zoom-in" data-aos-duration="1200">
+                  <div class="col-md d-flex flex-column align-items-center pb-5" data-aos="zoom-in" data-aos-duration="1200">
                     <img src="/img/micro.png" class="image">
                     <div class="h3 text-center pt-3">Tạo dữ liệu âm thanh để tổng hợp giọng nói</div>
                   </div>
-                  <div class="col-md d-flex flex-column align-items-center pt-5" data-aos="zoom-in" data-aos-duration="1200">
+                  <div class="col-md d-flex flex-column align-items-center pb-5" data-aos="zoom-in" data-aos-duration="1200">
                     <img src="/img/speak.png" class="image">
                     <div class="h3 text-center pt-3">Tạo văn bản dạng hội thoại</div>
                   </div>
                 </div>
               </div>
         </div>
+        <!-- Fifth part -->
+        <div  class="bg5  bg-white  d-flex flex-column align-items-center pt-5" id="fifth">
+            <div class="heading-text text-warning " >LIÊN HỆ ĐỂ ĐẶT HÀNG</div>
+            <div class="h5 text-center pt-3 content">Hãy để lại thông tin để chúng tôi có thể trao đổi với bạn</div>
+            <form class="pt-3 form-width">
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Tên</label>
+                        <div class="d-flex align-items-center jsx-560990836 jsx-2177858300 input input--icon">
+                            <span class="material-icons">
+                                account_box
+                            </span>  
+                        <input class="ml-2"type="Name" name="phoneNumber" id="exampleFormControlInput1" required="" placeholder="Họ và tên" value="" style="width:100%;border: none; background-color: #F5F4F9;">                       
+                        </div>   
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Công ty</label>
+                        <div class="d-flex align-items-center jsx-560990836 jsx-2177858300 input input--icon">
+                            <span class="material-icons">
+                                work
+                                </span>  
+                        <input class="ml-2"type="Name" name="company" id="exampleFormControlInput1" placeholder="Tên công ty" value="" style="width:100%;border: none; background-color: #F5F4F9;">                       
+                        </div>   
+                    </div>
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Email</label>
+                  <div class="d-flex align-items-center jsx-560990836 jsx-2177858300 input input--icon">
+                    <span class="material-icons">
+                        email
+                        </span>  
+                <input class="ml-2"type="email" name="email" id="exampleFormControlInput1" placeholder="Email" value="" style="width:100%;border: none; background-color: #F5F4F9;">                       
+                </div>                  </div>
+                <div class="form-group">
+                  <label for="exampleFormControlTextarea1" >Nội dung</label>
+                   <textarea name="comment" class="jsx-2649193108" ></textarea></div>
+                <div class ="justify-content-center d-flex pb-5">        
+                    <button type="submit" id="submit" class="contact btn btn-warning btn-lg btn-block">Gửi yêu cầu</button><br><br>
+                  </div> 
+              </form>
+        </div>
+
         
         <!-- Footer -->
         <div class="footer d-flex align-items-center justify-content-center ">
