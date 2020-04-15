@@ -50,10 +50,9 @@
                 window.location.href = xhr.responseURL;
               } else {
                 if (status === 413) {
-                  alert("Lỗi xảy ra do dung lượng file quá lớn");
+                  alert("Tải lên thất bại do dung lượng file vượt quá 20MB");
                 }
-                alert("Có lỗi xảy ra, vui lòng tải lại. Mã lỗi: " + status);
-                //window.location.href = '/upload';
+                alert("Có lỗi xảy ra, vui lòng tải lại trang. Mã lỗi: " + status);
               }
             }
           }
@@ -87,9 +86,9 @@
                   </nav>
                 
                 <div class="header-box d-flex justify-content-end flex-column ml-3 mb-3 ">
-                    <div class="heading" data-aos="fade-up" data-aos-duration="1000">InLab đang thử nghiệm một dự án về khả năng chẩn đoán COVID-19 thông qua việc phân tích tiếng hơi thở, nhờ vào thính giác nhạy bén của người khiếm thị</div>
-                    <!-- <div class="heading" data-aos="fade-up" data-aos-duration="1000">Hệ thống của chúng tôi phát hiện bệnh qua đường hô hấp nhờ khả năng nghe nhạy bén của người mù tại Việt Nam</div> -->
-                    <div class="second-heading" data-aos="fade-down" data-aos-duration="1000">Hãy gửi cho chúng tôi ghi âm tiếng hơi thở của bạn</div>
+                    <div class="heading" data-aos="fade-up" data-aos-duration="1000">InLab đang thử nghiệm dự án phân loại ban đầu những người có dấu hiệu về bệnh đường thở dựa trên việc phân tích tiếng hơi thở của họ, hỗ trợ công tác phòng chống dịch covid19</div>
+
+                    <div class="second-heading" data-aos="fade-down" data-aos-duration="1000">Hãy gửi cho chúng tôi bản ghi âm tiếng hơi thở của bạn</div>
                     <a type="button" href="#second" class="btn btn-warning startbtn nav-item nav-link ">Bắt đầu</a>
                 </div>
                   
@@ -195,7 +194,8 @@
         </div>
 
         <!-- Fourth part -->
-        
+        <!-- <div class="footer text-white">Dự án Inlab được thực hiện bởi Viện Công nghiệp phần mềm và nội dung số Việt Nam phối hợp Hội người mù Việt Nam, Infore, HMD, các chuyên gia công nghệ nghiên cứu về trí tuệ nhân tạo, chuyên gia y tế nghiên cứu các bệnh hô hấp, các cộng tác viên đang học tập, nghiên cứu trong nước và quốc tế  </div> -->
+
 
         
         <!-- Footer -->
@@ -226,4 +226,4 @@
 
         
     </script> 
-</html>
+</html> 
