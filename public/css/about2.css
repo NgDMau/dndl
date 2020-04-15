@@ -59,7 +59,7 @@ a:hover {
     height:80vh;
 }
 .startbtn{
-    width: 20vh !important;
+    width: 60vh !important;
     margin-top: 20px;
 }
 .btn{
@@ -121,9 +121,76 @@ a:hover {
     height: 70px;
     background-color: green;
 }
-
+.form-width{
+    width:80%;
+}
+.contact{
+    width:100%;
+}
+.h5{
+    font-weight:bold;
+}
+.input--icon.jsx-2177858300 {
+    padding-left: 32px;
+    padding-right: 10px;
+}
+.input.jsx-2177858300 {
+    background-color: #f5f4f9;
+    color: hsl(214.60000000000002, 11.6%, 30.7%);
+    padding: 7px 10px 7px 14px;
+    border-radius: 8px;
+    width: 100%;
+    font-size: 14px;
+    font-family: var(--font-family);
+    border: 0;
+    box-sizing: border-box;
+    line-height: 22px;
+    -webkit-transition: 0.3s ease background-color,0.05s ease width;
+    -webkit-transition: 0.3s ease background-color,0.05s ease width;
+    transition: 0.3s ease background-color,0.05s ease width;
+}
+.textarea:focus, input:focus{
+    outline: none;
+}
+textarea {
+    background: #f5f4f9;
+    color: hsl(214.60000000000002,11.6%,30.7%);
+    font-family: var(--font-family);
+    font-size: 14px;
+    width: 100%;
+    height: 170px;
+    resize: none;
+    margin: 0;
+    padding: 14px 14px 14px 36px;
+    border-radius: 8px;
+    border: 0;
+    box-sizing: border-box;
+    display: block;
+    -webkit-transition: 0.3s ease all;
+    -webkit-transition: 0.3s ease all;
+    transition: 0.3s ease all;
+    -webkit-appearance: none;
+}
+.input-icon.jsx-2177858300 {
+    position: absolute;
+    left: 10px;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    top: calc(50% - 8px);
+}
 
 @media screen and (min-width: 773px) {
+    .second-heading{
+        width: 50vw;
+    }
+    .form-width{
+        width:50%;
+    }
     .bg2{
         height: 50vh;  
     }
@@ -150,6 +217,9 @@ a:hover {
     .vande-content{
         height: 50vh;
         width: 60vw;
+    }
+    .container{
+        margin-top:5px;
     }
 
 }
