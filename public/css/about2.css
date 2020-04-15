@@ -58,14 +58,15 @@ a:hover {
 .header-box{
     height:80vh;
 }
-.startbtn{
-    width: 60vh !important;
-    margin-top: 20px;
-}
+
 .btn{
     -webkit-appearance: none !important;
     -moz-appearance: none;
-    appearance: none;}
+    appearance: none;
+    width: 70%;
+    margin-top: 20px;
+
+}
 .heading-text{
     font-size: 35px;
     color:white;
@@ -220,6 +221,10 @@ textarea {
     }
     .container{
         margin-top:5px;
+    }
+    .btn{
+        width: 40%;
+        margin-top: 20px;
     }
 
 }
