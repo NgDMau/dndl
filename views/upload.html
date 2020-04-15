@@ -22,45 +22,54 @@
           
         const uploadForm = document.getElementById('uploadForm');
         const progressBar = document.getElementById("progressBar");
+        const uploadButton = document.getElementById("submit");
 
-        uploadForm.addEventListener("submit", uploadFile);
+        uploadButton.addEventListener("click", uploadFile);
 
         function uploadFile(e) {
-          e.preventDefault();
 
-          const xhr = new XMLHttpRequest();
+          if (!$("input[name='description']").is(':checked') || $("#email").val() === '' || $("#file").val() === '') {
+            alert('Hãy điền vào các trường được yêu cầu');
+          } else {
+            const xhr = new XMLHttpRequest();
 
-          xhr.open("POST", "/upload");
-          xhr.upload.addEventListener("progress", e => {
-            console.log(e);
-            const percent = e.lengthComputable ? (e.loaded / e.total) * 100 : 0;
+            xhr.open("POST", "/upload");
+            xhr.upload.addEventListener("progress", e => {
+              console.log(e);
+              const percent = e.lengthComputable ? (e.loaded / e.total) * 100 : 0;
 
-            progressBar.style.display = 'block';
-            progressBar.style.width = percent.toFixed(2) + '%';
-            progressBar.innerHTML = percent.toFixed(2) + '%';
+              progressBar.style.display = 'block';
+              progressBar.style.width = percent.toFixed(2) + '%';
+              progressBar.innerHTML = percent.toFixed(2) + '%';
 
-          });
+            });
 
-          xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-              var status = xhr.status;
-              if (status === 0 || (status >= 200 && status < 400)) {
-                console.log(xhr.responseText);
-                console.log(xhr.responseURL);
-                window.location.href = xhr.responseURL;
-              } else {
-                if (status === 413) {
-                  alert("Tải lên thất bại do dung lượng file vượt quá 20MB");
+            xhr.onreadystatechange = function() {
+              if (xhr.readyState === XMLHttpRequest.DONE) {
+                var status = xhr.status;
+                if (status === 0 || (status >= 200 && status < 400)) {
+                  console.log(xhr.responseText);
+                  console.log(xhr.responseURL);
+                  progressBar.style.display = 'none';
+                  progressBar.style.width = 0 + '%';
+                  progressBar.innerHTML = 0 + '%';
+                  $("#myModal").modal();
+                } else {
+                  if (status === 413) {
+                    alert("Lỗi xảy ra do dung lượng file quá lớn");
+                  }
+                  alert("Có lỗi xảy ra, vui lòng tải lại. Mã lỗi: " + status);
+                  //window.location.href = '/upload';
                 }
-                alert("Có lỗi xảy ra, vui lòng tải lại trang. Mã lỗi: " + status);
               }
             }
-          }
 
-          xhr.send(new FormData(uploadForm));
-          }
+            xhr.send(new FormData(uploadForm));
+            }
+        }
 
       });
+      
 
     </script>
 
@@ -145,7 +154,7 @@
           <div class="vande-content d-flex flex-column justify-content-center justify-content-around pt-5 align-items-center">
             <div class="heading-text text-dark pt-5 pb-3">ĐƠN ĐĂNG TẢI</div>
 
-            <form id="uploadForm" action="/upload" method="POST" enctype="multipart/form-data">
+            <form id="uploadForm">
               
               <label class = "h4">Trường hợp nào mô tả tình trạng của bạn rõ nhất? *</label>
               <br>
@@ -183,20 +192,34 @@
                         <div id="progressBar">0%</div>
                       </div>
 
-                      <br> 
-                <div class ="justify-content-center d-flex">        
-                  <button type="submit" id="submit" class=" btn btn-warning btn-lg btn-block">Gửi dữ liệu</button><br><br>
-                </div>  
-                  <label id="error" class="h4"></label><br>
+                      <br>     
+                <button type="button btn-warning btn-lg btn-block" id="submit">Gửi dữ liệu</button><br><br>
+                <label id="error" class="h4"></label><br>
             </form>
             
           </div> 
         </div>
 
         <!-- Fourth part -->
-        <!-- <div class="footer text-white">Dự án Inlab được thực hiện bởi Viện Công nghiệp phần mềm và nội dung số Việt Nam phối hợp Hội người mù Việt Nam, Infore, HMD, các chuyên gia công nghệ nghiên cứu về trí tuệ nhân tạo, chuyên gia y tế nghiên cứu các bệnh hô hấp, các cộng tác viên đang học tập, nghiên cứu trong nước và quốc tế  </div> -->
-        <!-- Footer -->
-<footer class="page-footer font-small bg-dark pt-4">
+
+        <div id="myModal" class="modal fade">
+          <div class="modal-dialog modal-confirm">
+            <div class="modal-content">
+              <div class="modal-header">
+                <img src="/img/tick.png" alt="icon" width="70" height="70">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              </div>
+              <div class="modal-body text-center">
+                <h3>File của bạn đã được tải lên thành công!</h3>	
+                <h2>Cảm ơn bạn rất nhiều</h2>
+                <p>Đóng góp của bạn là một sự giúp đỡ vô cùng lớn, không chỉ cho dự án này mà còn cho công cuộc đẩy lùi virus Covid19 tại Việt Nam
+                  Kết quả của dự án sẽ được gửi đến email của bạn trong thời gian sớm nhất.</p>
+                <button class="btn btn-success" data-dismiss="modal"><span>Tiếp tục</span> <i class="material-icons">&#xE5C8;</i></button>
+              </div>
+            </div>
+          </div>
+        </div>    
+        
 
   <!-- Footer Links -->
   <div class="container text-center text-md-left">
