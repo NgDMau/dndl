@@ -24,49 +24,48 @@
         const progressBar = document.getElementById("progressBar");
         const uploadButton = document.getElementById("submit");
 
-        uploadButton.addEventListener("click", uploadFile);
+        uploadForm.addEventListener("submit", uploadFile);
 
         function uploadFile(e) {
 
-          if (!$("input[name='description']").is(':checked') || $("#email").val() === '' || $("#file").val() === '') {
-            alert('Hãy điền vào các trường được yêu cầu');
-          } else {
-            const xhr = new XMLHttpRequest();
+          e.preventDefault() 
 
-            xhr.open("POST", "/upload");
-            xhr.upload.addEventListener("progress", e => {
-              console.log(e);
-              const percent = e.lengthComputable ? (e.loaded / e.total) * 100 : 0;
+          const xhr = new XMLHttpRequest();
 
-              progressBar.style.display = 'block';
-              progressBar.style.width = percent.toFixed(2) + '%';
-              progressBar.innerHTML = percent.toFixed(2) + '%';
+          xhr.open("POST", "/upload");
+          xhr.upload.addEventListener("progress", e => {
+            console.log(e);
+            const percent = e.lengthComputable ? (e.loaded / e.total) * 100 : 0;
 
-            });
+            progressBar.style.display = 'block';
+            progressBar.style.width = percent.toFixed(2) + '%';
+            progressBar.innerHTML = percent.toFixed(2) + '%';
 
-            xhr.onreadystatechange = function() {
-              if (xhr.readyState === XMLHttpRequest.DONE) {
-                var status = xhr.status;
-                if (status === 0 || (status >= 200 && status < 400)) {
-                  console.log(xhr.responseText);
-                  console.log(xhr.responseURL);
-                  progressBar.style.display = 'none';
-                  progressBar.style.width = 0 + '%';
-                  progressBar.innerHTML = 0 + '%';
-                  $("#myModal").modal();
-                } else {
-                  if (status === 413) {
-                    alert("Lỗi xảy ra do dung lượng file quá lớn");
-                  }
-                  alert("Có lỗi xảy ra, vui lòng tải lại. Mã lỗi: " + status);
-                  //window.location.href = '/upload';
+          });
+
+          xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+              var status = xhr.status;
+              if (status === 0 || (status >= 200 && status < 400)) {
+                console.log(xhr.responseText);
+                console.log(xhr.responseURL);
+                progressBar.style.display = 'none';
+                progressBar.style.width = 0 + '%';
+                progressBar.innerHTML = 0 + '%';
+                $("#myModal").modal();
+              } else {
+                if (status === 413) {
+                  alert("Lỗi xảy ra do dung lượng file quá lớn");
                 }
+                alert("Có lỗi xảy ra, vui lòng tải lại. Mã lỗi: " + status);
+                //window.location.href = '/upload';
               }
             }
+          }
 
-            xhr.send(new FormData(uploadForm));
-            }
-        }
+          xhr.send(new FormData(uploadForm));
+          }
+        
 
       });
       
@@ -154,7 +153,7 @@
           <div class="vande-content d-flex flex-column justify-content-center justify-content-around pt-5 align-items-center">
             <div class="heading-text text-dark pt-5 pb-3">ĐƠN ĐĂNG TẢI</div>
 
-            <form id="uploadForm">
+            <form id="uploadForm" action="/upload" method="POST">
               
               <label class = "h4">Trường hợp nào mô tả tình trạng của bạn rõ nhất? *</label>
               <br>
