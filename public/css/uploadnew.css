@@ -77,6 +77,11 @@ a:hover {
     -webkit-appearance: none !important;
     -moz-appearance: none;
     appearance: none;}
+.btn-block {
+    width:60%;
+    height:50px;
+}
+
 .heading-text{
     font-size: 25px;
     color:white;

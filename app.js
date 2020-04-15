@@ -70,6 +70,12 @@ require('./routes/loginrequester')(app);
 require('./routes/contact')(app);
 
 
+//The 404 Route (ALWAYS Keep this as the last route)
+app.get('*', function(req, res){
+    //res.status(404).sendFile('error404.html');
+    res.status(404).sendFile(path.join(__dirname, './views/', 'error404.html'))
+  });
+
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
