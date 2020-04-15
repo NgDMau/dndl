@@ -42,7 +42,6 @@ app.post('/upload', upload.single('file'), (req, res) => {
             }
             );
             console.log("UPLOADED SUCCESSFULLY");
-            res.redirect('/uploadresult');
 
         } else {
             console.log(req.body)
