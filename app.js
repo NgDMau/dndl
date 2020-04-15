@@ -66,6 +66,8 @@ require('./routes/user_management')(app);
 require('./routes/upload')(app);
 require('./routes/uploadresult')(app);
 require('./routes/loginrequester')(app);
+require('./routes/contact')(app);
+
 
 
 app.listen(port, () => {
