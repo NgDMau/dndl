@@ -12,49 +12,50 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700&display=swap" rel="stylesheet">
     <link href="/css/contact.css" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <title>Liên hệ - Inlab</title>
     <link rel="shortcut icon" type="image/png" href="/img/logoInlabSquare.png"/>
 
-  <script>
+    <script>
 
-    $(document).ready(function() {
-
-      const contactForm = document.getElementById("contactForm");
-
-      contactForm.addEventListener("submit", uploadContact);
-
-      function uploadContact(e) {
-        e.preventDefault();
-
-        const xhr = new XMLHttpRequest();
-
-        xhr.open("POST", "/contact");
-
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-              var status = xhr.status;
-              if (status === 0 || (status >= 200 && status < 400)) {
-                console.log(xhr.responseText);
-                console.log(xhr.responseURL);
-                alert("UPLOAD CASASAS");
-                window.location.href = xhr.responseURL;
-              } else {
-                if (status === 413) {
-                  alert("Tải lên thất bại do dung lượng file vượt quá 20MB");
+      $(document).ready(function() {
+  
+        const contactForm = document.getElementById("contactForm");
+  
+        contactForm.addEventListener("submit", uploadContact);
+  
+        function uploadContact(e) {
+          e.preventDefault();
+  
+          const xhr = new XMLHttpRequest();
+  
+          xhr.open("POST", "/contact");
+  
+          xhr.onreadystatechange = function() {
+              if (xhr.readyState === XMLHttpRequest.DONE) {
+                var status = xhr.status;
+                if (status === 0 || (status >= 200 && status < 400)) {
+                  console.log(xhr.responseText);
+                  console.log(xhr.responseURL);
+                  document.getElementById("form-group").style.display = "none";
+                  document.getElementsByClassName("message")[0].innerHTML = 'Chúng tôi đã nhận được tin nhắn của bạn và sẽ liên lạc lại với bạn trong thời gian ngắn nhất.'
+                } else {
+                  if (status === 413) {
+                    alert("Tải lên thất bại do dung lượng file vượt quá 20MB");
+                  }
+                  alert("Có lỗi xảy ra, vui lòng tải lại trang. Mã lỗi: " + status);
                 }
-                alert("Có lỗi xảy ra, vui lòng tải lại trang. Mã lỗi: " + status);
               }
             }
-          }
-
-          xhr.send(new FormData(uploadContact));
-          }
-      
-
-    })
-
-  </script>
+  
+            xhr.send(new FormData(contactForm));
+            }
+        
+  
+      })
+  
+    </script>
 
 </head>
 <body id ="bg-contact">
@@ -83,6 +84,8 @@
             <div class="heading-text text-warning text-center" >LIÊN HỆ VỚI CHÚNG TÔI</div>
             <div class="text-center pt-3 content">Hãy để lại thông tin để chúng tôi có thể trao đổi với bạn</div>
             <form class="pt-3 form-width" action="/contact" method="POST" id="contactForm">
+              <div class="text-center message"></div>
+              <div id="form-group">
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Tên</label>
                         <div class="d-flex align-items-center jsx-560990836 jsx-2177858300 input input--icon">
@@ -110,7 +113,7 @@
                         <input class="ml-2" type="Name" name="phone" id="exampleFormControlInput1" placeholder="Số điện thoại" value="" style="width:100%;border: none; background-color: #F5F4F9;" required>                       
                         </div>   
                     </div>
-                <div class="form-group">
+                    <div class="form-group">
                   <label for="exampleFormControlInput1">Email</label>
                   <div class="d-flex align-items-center jsx-560990836 jsx-2177858300 input input--icon">
                     <span class="material-icons">
@@ -195,17 +198,21 @@
                 <div class ="justify-content-center d-flex pb-5">        
                     <button type="submit" id="submit" class="contact btn btn-warning btn-lg btn-block">Gửi</button><br><br>
                   </div> 
+                </div>
               </form>
 
+
+                      <!-- Footer -->
+            <div class="footer d-flex align-items-center justify-content-center ">
+              <div class="h3 text-center  text-white">Copyright © 2020 InLab. All rights reserved.
+              </div>
+          </div>  
 
         </div>
 
         
-        <!-- Footer -->
-        <div class="footer d-flex align-items-center justify-content-center ">
-            <div class="h3 text-center  text-white">Copyright © 2020 InLab. All rights reserved.
-            </div>
-        </div>    
+
+        </div>  
 
 
 
