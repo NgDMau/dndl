@@ -7,50 +7,18 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
    
     <!-- Font -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700&display=swap" rel="stylesheet">
     <link href="/css/contact.css" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
+
+    <script src="/js/jquery/jquery.min.js"></script>
+
+
     <title>Liên hệ - Inlab</title>
     <link rel="shortcut icon" type="image/png" href="/img/logoInlabSquare.png"/>
-
-    <script>
-
-      $(document).ready(function() {
-  
-        const contactForm = document.getElementById("contactForm");
-        const submitButton = document.getElementById("submit");
-  
-        submitButton.addEventListener("click", uploadContact);
-
-        function uploadContact(e){
-          var newbody = new FormData(document.getElementById("contactForm"));
-          //alert(newbody);
-          e.preventDefault();
-          const url = "/contact";
-          fetch(url, {
-              method : "POST",
-              body: new FormData(document.getElementById("contactForm")),
-              // -- or --
-              // body : JSON.stringify({
-                  // user : document.getElementById('user').value,
-                  // ...
-              // })
-          }).then(
-          function(response) {
-            document.getElementById("form-group").style.display = "none";
-            document.getElementsByClassName("message")[0].innerHTML = 'Chúng tôi đã nhận được tin nhắn của bạn và sẽ liên lạc lại với bạn trong thời gian ngắn nhất.'
-          }
-        )
-        }
-        
-          
-              })
-  
-    </script>
 
 </head>
 <body id ="bg-contact">
@@ -205,12 +173,41 @@
             </div>
         </div>    
 
+        <script>
 
+          $('#contactForm').submit(function (e) {
+              //alert(newbody);
+              e.preventDefault();
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+              var interested = [];
+              $.each($("input[name='interested']:checked"), function(){
+                interested.push($(this).val());
+              });
+              
+              var $form = $( this ),
+              input_name = $form.find( "input[name='name']" ).val(),
+              input_company = $form.find( "input[name='company']" ).val(),
+              input_phone = $form.find( "input[name='phone']" ).val(),
+              input_email = $form.find( "input[name='email']" ).val(),
+              input_interested = interested,
+              input_content = $form.find( "input[name='content']" ).val(),
+    
+              url = $form.attr( "action" );
+    
+              var posting = $.post( url, { name: input_name, company: input_company, phone: input_phone, email: input_email, interested: input_interested, content: input_content } );
+              
+              posting.done(function (data) {
+                document.getElementById("form-group").style.display = "none";
+                document.getElementsByClassName("message")[0].innerHTML = 'Chúng tôi đã nhận được tin nhắn của bạn và sẽ liên lạc lại với bạn trong thời gian ngắn nhất.'
+              });
+    
+          })
+    
+        </script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
 </body>
 

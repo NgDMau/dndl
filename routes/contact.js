@@ -15,7 +15,7 @@ module.exports = function (app) {
         }
         console.log(`Got message: ${contact_info}`);
         try {
-            fs.appendFile(path.join(__dirname, '../contact/', 'contact.json'), JSON.stringify(contact_info), function(err){
+            fs.appendFile(path.join(__dirname, '../contact/', 'contact.json'), JSON.stringify(req.body), function(err){
                 if (err) {
                     res.write("Error");
                     throw err;
