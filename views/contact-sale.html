@@ -28,7 +28,7 @@
 
         function uploadContact(e){
           var newbody = new FormData(document.getElementById("contactForm"));
-          alert(newbody);
+          //alert(newbody);
           e.preventDefault();
           const url = "/contact";
           fetch(url, {
