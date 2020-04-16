@@ -4,6 +4,9 @@ html, body {
 
 
 }
+.info{
+    background-color: whitesmoke !important;
+}
 
 .logo{
     object-fit: cover;
