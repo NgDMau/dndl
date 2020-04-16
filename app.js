@@ -70,6 +70,8 @@ require('./routes/uploadresult')(app);
 require('./routes/loginrequester')(app);
 require('./routes/contact')(app);
 require('./routes/contactsale')(app);
+require('./routes/info')(app);
+
 
 
 

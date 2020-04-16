@@ -5,6 +5,7 @@ html, body {
     overflow-x: hidden;
 }
 
+
 body:after{
     content:"";
     position:fixed; /* stretch a fixed position to the whole screen */
@@ -92,6 +93,7 @@ a:hover {
     font-weight: 300;
     width: 70vw;
 }
+
 .vande-content{
     width: 80vw;
     height: 50vh;

@@ -4,13 +4,20 @@ html, body {
 
 
 }
+.info{
+    background-color: whitesmoke !important;
+}
 
 .logo{
     object-fit: cover;
     width:75px;
     height:34px;
 }
-
+.contentinfo{
+    font-size: 15px;
+    font-weight: 300;
+    width: 90vw;
+}
 .first-part{
    padding:20px;
    z-index: 2;
@@ -176,6 +183,12 @@ textarea {
 }
 
 @media screen and (min-width: 773px) {
+    .contentinfo{
+        font-size: 15px;
+        font-weight: 300;
+        width: 70vw;
+        color: black;
+    }
     .second-heading{
         width: 50vw;
     }
