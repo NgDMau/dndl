@@ -184,8 +184,22 @@ textarea {
     justify-content: center;
     top: calc(50% - 8px);
 }
+.btn-contact{
+    background-color: black;
+    color:white;
+}
+.btn-white{
+    background-color: white;
+}
+.contact{
+    width:80%;
+}
 
 @media screen and (min-width: 773px) {
+    .contact{
+        width:80%;
+        justify-content: center;
+    }
     .second-heading{
         width: 50vw;
     }
