@@ -9,6 +9,7 @@
     <!-- Font -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700&display=swap" rel="stylesheet">
     <link href="/css/contact.css" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -37,8 +38,9 @@
               if (status === 0 || (status >= 200 && status < 400)) {
                 console.log(xhr.responseText);
                 console.log(xhr.responseURL);
-                alert("UPLOAD CASASAS");
-                window.location.href = xhr.responseURL;
+                document.getElementById("form-group").style.display = "none";
+                document.getElementsByClassName("message")[0].innerHTML = 'Chúng tôi đã nhận được tin nhắn của bạn và sẽ liên lạc lại với bạn trong thời gian ngắn nhất.'
+
               } else {
                 if (status === 413) {
                   alert("Tải lên thất bại do dung lượng file vượt quá 20MB");
@@ -48,7 +50,7 @@
             }
           }
 
-          xhr.send(new FormData(uploadContact));
+          xhr.send(new FormData(contactForm));
           }
       
 
@@ -83,119 +85,122 @@
             <div class="heading-text text-warning text-center" >LIÊN HỆ VỚI CHÚNG TÔI</div>
             <div class="text-center pt-3 content">Hãy để lại thông tin để chúng tôi có thể trao đổi với bạn</div>
             <form class="pt-3 form-width" action="/contact" method="POST" id="contactForm">
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Tên</label>
-                        <div class="d-flex align-items-center jsx-560990836 jsx-2177858300 input input--icon">
-                            <span class="material-icons">
-                                account_box
-                            </span>  
-                        <input class="ml-2"type="Name" name="name" id="exampleFormControlInput1" required="" placeholder="Họ và tên" value="" style="width:100%;border: none; background-color: #F5F4F9;" required>                       
-                        </div>   
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Công ty</label>
-                        <div class="d-flex align-items-center jsx-560990836 jsx-2177858300 input input--icon">
-                            <span class="material-icons">
-                                work
-                                </span>  
-                        <input class="ml-2"type="Name" name="company" id="exampleFormControlInput1" placeholder="Tên công ty" value="" style="width:100%;border: none; background-color: #F5F4F9;" required>                       
-                        </div>   
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Số điện thoại</label>
-                        <div class="d-flex align-items-center jsx-560990836 jsx-2177858300 input input--icon">
-                            <span class="material-icons">
-                                phone
-                                </span>  
-                        <input class="ml-2" type="Name" name="phone" id="exampleFormControlInput1" placeholder="Số điện thoại" value="" style="width:100%;border: none; background-color: #F5F4F9;" required>                       
-                        </div>   
-                    </div>
+              <div class="text-center message"></div>
+              <div id="form-group">
                 <div class="form-group">
-                  <label for="exampleFormControlInput1">Email</label>
+                  <label for="exampleFormControlInput1">Tên</label>
                   <div class="d-flex align-items-center jsx-560990836 jsx-2177858300 input input--icon">
-                    <span class="material-icons">
-                        email
-                        </span>  
-                <input class="ml-2" type="email" name="email" id="exampleFormControlInput1" placeholder="Email" value="" style="width:100%;border: none; background-color: #F5F4F9;" required>                       
-                </div>                  
-            </div>
+                      <span class="material-icons">
+                          account_box
+                      </span>  
+                  <input class="ml-2"type="Name" name="name" id="exampleFormControlInput1" required="" placeholder="Họ và tên" value="" style="width:100%;border: none; background-color: #F5F4F9;" required>                       
+                  </div>   
+              </div>
+              <div class="form-group">
+                  <label for="exampleFormControlInput1">Công ty</label>
+                  <div class="d-flex align-items-center jsx-560990836 jsx-2177858300 input input--icon">
+                      <span class="material-icons">
+                          work
+                          </span>  
+                  <input class="ml-2"type="Name" name="company" id="exampleFormControlInput1" placeholder="Tên công ty" value="" style="width:100%;border: none; background-color: #F5F4F9;" required>                       
+                  </div>   
+              </div>
+              <div class="form-group">
+                  <label for="exampleFormControlInput1">Số điện thoại</label>
+                  <div class="d-flex align-items-center jsx-560990836 jsx-2177858300 input input--icon">
+                      <span class="material-icons">
+                          phone
+                          </span>  
+                  <input class="ml-2" type="Name" name="phone" id="exampleFormControlInput1" placeholder="Số điện thoại" value="" style="width:100%;border: none; background-color: #F5F4F9;" required>                       
+                  </div>   
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Email</label>
+                <div class="d-flex align-items-center jsx-560990836 jsx-2177858300 input input--icon">
+                  <span class="material-icons">
+                      email
+                      </span>  
+              <input class="ml-2" type="email" name="email" id="exampleFormControlInput1" placeholder="Email" value="" style="width:100%;border: none; background-color: #F5F4F9;" required>                       
+              </div>                  
+              </div>
 
-                <div class="pt-3">Chủ đề bạn quan tâm:</div>
-                <div class="container">
-                    <div class="row">
-                      <div class="col-sm">
+              <div class="pt-3">Loại dữ liệu cần được dán nhãn</div>
+              <div class="container">
+                  <div class="row">
+                    <div class="col-sm">
+                      <div class="form-check pt-3">
+                          <input type="checkbox" class="form-check-input" id="exampleCheck1" name="interested" value="image-classification">
+                          <label class="form-check-label" for="exampleCheck1">Image Classification</label>
+                        </div>
                         <div class="form-check pt-3">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1" name="interested" value="image-classification">
-                            <label class="form-check-label" for="exampleCheck1">Image Classification</label>
-                          </div>
-                          <div class="form-check pt-3">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1" name="interested" value="image-object-detection">
-                            <label class="form-check-label" for="exampleCheck1">Image Object Detection</label>
-                          </div>
-                          <div class="form-check pt-3">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1" name="interested" value="image-key-points">
-                            <label class="form-check-label" for="exampleCheck1">Image Key Points</label>
-                          </div>
-                          <div class="form-check pt-3">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1" name="interested" value="image-segmentation">
-                            <label class="form-check-label" for="exampleCheck1">Image segmentation</label>
-                          </div>
-                          <div class="form-check pt-3">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1" name="interested" value="image-ellipse">
-                            <label class="form-check-label" for="exampleCheck1">Image Ellipse</label>
-                          </div>
-                          <div class="form-check pt-3">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1" name="interested" value="image-polygons">
-                            <label class="form-check-label" for="exampleCheck1">Image Polygons</label>
-                          </div>
-                          <div class="form-check pt-3">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1" name="interested" value="text-named-entity-recognition">
-                            <label class="form-check-label" for="exampleCheck1">Text Named Entity Recognition</label>
-                          </div>
+                          <input type="checkbox" class="form-check-input" id="exampleCheck1" name="interested" value="image-object-detection">
+                          <label class="form-check-label" for="exampleCheck1">Image Object Detection</label>
+                        </div>
+                        <div class="form-check pt-3">
+                          <input type="checkbox" class="form-check-input" id="exampleCheck1" name="interested" value="image-key-points">
+                          <label class="form-check-label" for="exampleCheck1">Image Key Points</label>
+                        </div>
+                        <div class="form-check pt-3">
+                          <input type="checkbox" class="form-check-input" id="exampleCheck1" name="interested" value="image-segmentation">
+                          <label class="form-check-label" for="exampleCheck1">Image segmentation</label>
+                        </div>
+                        <div class="form-check pt-3">
+                          <input type="checkbox" class="form-check-input" id="exampleCheck1" name="interested" value="image-ellipse">
+                          <label class="form-check-label" for="exampleCheck1">Image Ellipse</label>
+                        </div>
+                        <div class="form-check pt-3">
+                          <input type="checkbox" class="form-check-input" id="exampleCheck1" name="interested" value="image-polygons">
+                          <label class="form-check-label" for="exampleCheck1">Image Polygons</label>
+                        </div>
+                        <div class="form-check pt-3">
+                          <input type="checkbox" class="form-check-input" id="exampleCheck1" name="interested" value="text-named-entity-recognition">
+                          <label class="form-check-label" for="exampleCheck1">Text Named Entity Recognition</label>
+                        </div>
 
-                      </div>
-                      <div class="col-sm">
+                    </div>
+                    <div class="col-sm">
+                      <div class="form-check pt-3">
+                          <input type="checkbox" class="form-check-input" id="exampleCheck1"  name="interested" value="text-sentiment-analysis">
+                          <label class="form-check-label" for="exampleCheck1">Text Sentiment Analysis</label>
+                        </div>
                         <div class="form-check pt-3">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1"  name="interested" value="text-sentiment-analysis">
-                            <label class="form-check-label" for="exampleCheck1">Text Sentiment Analysis</label>
-                          </div>
-                          <div class="form-check pt-3">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1"  name="interested" value="dialog-analysis">
-                            <label class="form-check-label" for="exampleCheck1">Dialogue Analysis</label>
-                          </div>
-                          <div class="form-check pt-3">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1"  name="interested" value="audio-transcription">
-                            <label class="form-check-label" for="exampleCheck1">Audio Transcription</label>
-                          </div>
-                          <div class="form-check pt-3">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1"  name="interested" value="audio-classification">
-                            <label class="form-check-label" for="exampleCheck1">Audio Classification</label>
-                          </div>
-                          <div class="form-check pt-3">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1"  name="interested" value="audio-regions">
-                            <label class="form-check-label" for="exampleCheck1">Audio Regions</label>
-                          </div>
-                          <div class="form-check pt-3">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1"  name="interested" value="video-classifier">
-                            <label class="form-check-label" for="exampleCheck1">Video Classifier</label>
-                          </div>
-                          <div class="form-check pt-3">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1"  name="interested" value="pairwise-comparison">
-                            <label class="form-check-label" for="exampleCheck1">Pairwise Comparison</label>
-                          </div>
-                      </div>
+                          <input type="checkbox" class="form-check-input" id="exampleCheck1"  name="interested" value="dialog-analysis">
+                          <label class="form-check-label" for="exampleCheck1">Dialogue Analysis</label>
+                        </div>
+                        <div class="form-check pt-3">
+                          <input type="checkbox" class="form-check-input" id="exampleCheck1"  name="interested" value="audio-transcription">
+                          <label class="form-check-label" for="exampleCheck1">Audio Transcription</label>
+                        </div>
+                        <div class="form-check pt-3">
+                          <input type="checkbox" class="form-check-input" id="exampleCheck1"  name="interested" value="audio-classification">
+                          <label class="form-check-label" for="exampleCheck1">Audio Classification</label>
+                        </div>
+                        <div class="form-check pt-3">
+                          <input type="checkbox" class="form-check-input" id="exampleCheck1"  name="interested" value="audio-regions">
+                          <label class="form-check-label" for="exampleCheck1">Audio Regions</label>
+                        </div>
+                        <div class="form-check pt-3">
+                          <input type="checkbox" class="form-check-input" id="exampleCheck1"  name="interested" value="video-classifier">
+                          <label class="form-check-label" for="exampleCheck1">Video Classifier</label>
+                        </div>
+                        <div class="form-check pt-3">
+                          <input type="checkbox" class="form-check-input" id="exampleCheck1"  name="interested" value="pairwise-comparison">
+                          <label class="form-check-label" for="exampleCheck1">Pairwise Comparison</label>
+                        </div>
                     </div>
                   </div>
+              </div>
 
-                <div class="form-group pt-5">
-                  <label for="exampleFormControlTextarea1" >Nội dung</label>
-                   <textarea name="content" class="jsx-2649193108" ></textarea></div>
+              <div class="form-group pt-5">
+                <label for="exampleFormControlTextarea1" >Nội dung</label>
+              <textarea name="content" class="jsx-2649193108" ></textarea></div>
 
 
-                <div class ="justify-content-center d-flex pb-5">        
-                    <button type="submit" id="submit" class="contact btn btn-warning btn-lg btn-block">Gửi</button><br><br>
-                  </div> 
-              </form>
+              <div class ="justify-content-center d-flex pb-5">        
+                  <button type="submit" id="submit" class="contact btn btn-warning btn-lg btn-block">Gửi yêu cầu</button><br><br>
+              </div> 
+              </div>
+            </form>
 
 
         </div>
