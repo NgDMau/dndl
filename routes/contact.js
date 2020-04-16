@@ -22,8 +22,8 @@ module.exports = function (app) {
 
                 }
             console.log(contact_info);
-            res.write("Message sent successfully!")
-            //res.redirect('/')
+            //res.write("Message sent successfully!")
+            res.send('/')
             });
         } catch(e) {
             console.log("Contact recording wrong!")
