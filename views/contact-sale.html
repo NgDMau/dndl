@@ -22,40 +22,33 @@
       $(document).ready(function() {
   
         const contactForm = document.getElementById("contactForm");
+        const submitButton = document.getElementById("submit");
   
-        // contactForm.addEventListener("submit", uploadContact);
-  
-        // function uploadContact(e) {
-        //   e.preventDefault();
-  
-        //   const xhr = new XMLHttpRequest();
-  
-        //   xhr.open("POST", "/contact");
-  
-        //   xhr.onreadystatechange = function() {
-        //       if (xhr.readyState === XMLHttpRequest.DONE) {
-        //         var status = xhr.status;
-        //         if (status === 0 || (status >= 200 && status < 400)) {
-        //           //console.log(xhr.responseText);
-        //           console.log(xhr.responseURL);
-        //           document.getElementById("form-group").style.display = "none";
-        //           document.getElementsByClassName("message")[0].innerHTML = 'Chúng tôi đã nhận được tin nhắn của bạn và sẽ liên lạc lại với bạn trong thời gian ngắn nhất.'
+        submitButton.addEventListener("click", uploadContact);
 
-        //         } else {
-        //           if (status === 413) {
-        //             alert("Tải lên thất bại do dung lượng file vượt quá 20MB");
-        //           }
-        //           alert("Có lỗi xảy ra, vui lòng tải lại trang. Mã lỗi: " + status);
-        //         }
-        //       }
-        //     }
-        //     xhr.setRequestHeader('Content-Type', 'application/json');
-
-        //     xhr.send(new FormData(contactForm));
-        //     }
+        function uploadContact(e){
+          var newbody = new FormData(document.getElementById("contactForm"));
+          alert(newbody);
+          e.preventDefault();
+          const url = "/contact";
+          fetch(url, {
+              method : "POST",
+              body: new FormData(document.getElementById("contactForm")),
+              // -- or --
+              // body : JSON.stringify({
+                  // user : document.getElementById('user').value,
+                  // ...
+              // })
+          }).then(
+          function(response) {
+            document.getElementById("form-group").style.display = "none";
+            document.getElementsByClassName("message")[0].innerHTML = 'Chúng tôi đã nhận được tin nhắn của bạn và sẽ liên lạc lại với bạn trong thời gian ngắn nhất.'
+          }
+        )
+        }
         
-  
-      })
+          
+              })
   
     </script>
 
