@@ -15,7 +15,7 @@ body:after{
     left:0;
     right:0;
     z-index:-2; /* needed to keep in the background */
-    background: url('/img/bgabout.jpg') no-repeat center center;
+    background: url('/img/3701192.jpg') no-repeat center center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -49,7 +49,7 @@ a:hover {
     color: #F1DF64 !important; 
 }
 .heading{
-    font-size: 28px;
+    font-size: 25px;
     color:white;
     font-weight: 900;
 }
