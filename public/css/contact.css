@@ -170,12 +170,18 @@ textarea {
     top: calc(50% - 8px);
 }
 
+.message {
+    margin-top: 40px;
+    font-size: 20px;
+}
+
 @media screen and (min-width: 773px) {
     .second-heading{
         width: 50vw;
     }
     .form-width{
         width:50%;
+        min-height: 773px;
     }
     .bg2{
         height: 50vh;  
