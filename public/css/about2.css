@@ -48,10 +48,7 @@ a:hover {
     color:white;
     font-weight: 500;
 }
-.header-box{
-    width:100vw;
-    height: 100vh;
-}
+
 .blindimg{
     object-fit: contain;
     width: 100vw;
@@ -98,6 +95,9 @@ a:hover {
 .vande-content{
     width: 80vw;
     height: 50vh;
+}
+.navbar-light .navbar-nav .nav-link {
+    color: black;
 }
 .h2{
     font-size: 30px;
@@ -197,14 +197,17 @@ textarea {
 .contact{
     width:80%;
 }
+.overlay{
+    height:120vh;
+}
 
 @media screen and (min-width: 773px) {
+    .overlay{
+        height:110vh;
+    }
     .heading-text{
         font-size: 30px;
 
-    }
-    .overlay{
-        height:100vh;
     }
     .contact{
         width:80%;
@@ -227,7 +230,7 @@ textarea {
     }
     .content {
       font-size: 15px;
-      width: 800px;
+      width: 500px;
     }
     .h2{
       font-size: 35px;
