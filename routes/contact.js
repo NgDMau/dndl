@@ -8,10 +8,12 @@ module.exports = function (app) {
         var contact_info = {
             name: req.body.name || "unknown",
             company: req.body.company || "unknown",
+            phone: req.body.phone || "unknown",
             email: req.body.email || "unknown@domain",
-            content: req.body.comment || "unknown"
+            interested: req.body.interested || ["unknown"],
+            content: req.body.comment || "unknown",
         }
-        console.log(`Got message from ${contact_info.name}`);
+        console.log(`Got message: ${contact_info}`);
         try {
             fs.appendFile(path.join(__dirname, '../contact/', 'contact.json'), JSON.stringify(contact_info), function(err){
                 if (err) {
@@ -19,8 +21,9 @@ module.exports = function (app) {
                     throw err;
 
                 }
-            //res.write("Message sent successfully!")
-            res.redirect('/')
+            console.log(contact_info);
+            res.write("Message sent successfully!")
+            //res.redirect('/')
             });
         } catch(e) {
             console.log("Contact recording wrong!")
