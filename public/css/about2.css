@@ -22,8 +22,6 @@ body:after{
 
 }
 
-
-
 .logo{
     object-fit: cover;
     width:75px;
@@ -46,12 +44,12 @@ a:hover {
     color: #F1DF64 !important; 
 }
 .heading{
-    font-size: 7vh;
+    font-size: 5vh;
     color:white;
     font-weight: 900;
 }
 .second-heading{
-    font-size: 4vh;
+    font-size: 3vh;
     color:white;
     font-weight: 500;
 }
@@ -59,16 +57,18 @@ a:hover {
     height:80vh;
 }
 
+
 .btn{
     -webkit-appearance: none !important;
     -moz-appearance: none;
     appearance: none;
     width: 70%;
     margin-top: 20px;
+    height:60px;
 
 }
 .heading-text{
-    font-size: 35px;
+    font-size: 24px;
     color:white;
     font-weight: 500;
 }
@@ -108,8 +108,8 @@ a:hover {
     font-weight: bold;
 }
 .image{
-    width: 70px;
-    height: 70px;
+    width: 50px;
+    height: 50px;
     object-fit: cover;
 
 }
@@ -184,8 +184,22 @@ textarea {
     justify-content: center;
     top: calc(50% - 8px);
 }
+.btn-contact{
+    background-color: black;
+    color:white;
+}
+.btn-white{
+    background-color: white;
+}
+.contact{
+    width:80%;
+}
 
 @media screen and (min-width: 773px) {
+    .contact{
+        width:80%;
+        justify-content: center;
+    }
     .second-heading{
         width: 50vw;
     }
@@ -223,9 +237,10 @@ textarea {
         margin-top:5px;
     }
     .btn{
-        width: 40%;
+        width: 30%;
         margin-top: 20px;
     }
+
 
 }
 

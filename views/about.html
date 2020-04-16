@@ -19,7 +19,7 @@
 </head>
 <body data-spy="scroll" data-target="#navbar-example">
         <!-- First part -->
-        <div class="overlay p-2" id="first">
+        <div class="overlay p-2" >
                 <nav class="navbar navbar-expand-lg navbar-dark" id="navbar-example">
                     <a class="navbar-brand" >
                         <img src="/img/logo.png" class="logo">
@@ -30,20 +30,18 @@
                     <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                       <div class="nav navbar-nav justify-content-between">
                         <a href="#first" class="nav-item nav-link pr-5">Tổng quan</a>               
-                        <a href="#second" class="nav-item nav-link pr-5" >Giới thiệu</a>
-                        <a href="#third" class="nav-item nav-link pr-5">Vấn đề</a>
-                        <a href="#fourth" class="nav-item nav-link pr-5">Ứng dụng</a>
-                        <a href="#fifth" class="nav-item nav-link pr-5">Tuyển dụng</a>
+                        <a href="#" class="nav-item nav-link pr-5" >Về chúng tôi</a>
+                        <a href="/contactsale" class="nav-item nav-link pr-5">Liên hệ</a>
                         <a href="/login" class="nav-item nav-link pr-5">Đăng nhập</a>
                       </div>
                     </div>
                   </nav>
                 
-                <div class="header-box d-flex justify-content-end flex-column ml-3 mb-3">
-                    <div class="heading" data-aos="fade-up" data-aos-duration="1000">Chào mừng tới InLab!</div>
-                    <div class="second-heading" data-aos="fade-down" data-aos-duration="1000"> Nền tảng nguồn lực cộng đồng về dữ liệu tiên phong tại Việt Nam</div>
-                    <a type="button" href="#fifth" class="btn btn-outline-warning startbtn nav-item nav-link ">Bạn có dữ liệu cần được dán nhãn?</a>
-                    <a type="button" href="/upload" class="btn btn-outline-warning startbtn nav-item nav-link ">Đóng góp dữ liệu hỗ trợ chống covid19</a>
+                <div class="header-box d-flex align-items-center justify-content-center flex-column ml-3 mb-3">
+                    <div class="heading text-center" data-aos="fade-up" data-aos-duration="1000">Chào mừng tới InLab!</div>
+                    <div class="second-heading text-center" data-aos="fade-down" data-aos-duration="1000"> Nền tảng nguồn lực cộng đồng về dữ liệu tiên phong tại Việt Nam</div>
+                    <a type="button" href="/contactsale" class="btn-warning btn startbtn nav-item nav-link text-center mt-3 d-flex justify-content-center align-items-center">Bạn có dữ liệu cần được dán nhãn?</a>
+                    <a type="button" href="/upload" class="btn btn-outline-warning startbtn nav-item nav-link d-flex justify-content-center align-items-center ">Đóng góp dữ liệu hỗ trợ chống covid19</a>
 
                 </div>
                   
@@ -116,45 +114,19 @@
                 </div>
               </div>
         </div>
-        <!-- Fifth part -->
-        <div  class="bg5  bg-white  d-flex flex-column align-items-center pt-5" id="fifth">
-            <div class="heading-text text-warning text-center" >LIÊN HỆ ĐỂ ĐẶT HÀNG</div>
-            <div class="h5 text-center pt-3 content">Hãy để lại thông tin để chúng tôi có thể trao đổi với bạn</div>
-            <form class="pt-3 form-width" action="/contact" method="POST">
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Tên</label>
-                        <div class="d-flex align-items-center jsx-560990836 jsx-2177858300 input input--icon">
-                            <span class="material-icons">
-                                account_box
-                            </span>  
-                        <input class="ml-2"type="Name" name="name" id="exampleFormControlInput1" required="" placeholder="Họ và tên" value="" style="width:100%;border: none; background-color: #F5F4F9;">                       
-                        </div>   
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Công ty</label>
-                        <div class="d-flex align-items-center jsx-560990836 jsx-2177858300 input input--icon">
-                            <span class="material-icons">
-                                work
-                                </span>  
-                        <input class="ml-2"type="Name" name="company" id="exampleFormControlInput1" placeholder="Tên công ty" value="" style="width:100%;border: none; background-color: #F5F4F9;">                       
-                        </div>   
-                    </div>
-                <div class="form-group">
-                  <label for="exampleFormControlInput1">Email</label>
-                  <div class="d-flex align-items-center jsx-560990836 jsx-2177858300 input input--icon">
-                    <span class="material-icons">
-                        email
-                        </span>  
-                <input class="ml-2"type="email" name="email" id="exampleFormControlInput1" placeholder="Email" value="" style="width:100%;border: none; background-color: #F5F4F9;">                       
-                </div>                  </div>
-                <div class="form-group">
-                  <label for="exampleFormControlTextarea1" >Nội dung</label>
-                   <textarea name="comment" class="jsx-2649193108" ></textarea></div>
-                <div class ="justify-content-center d-flex pb-5">        
-                    <button type="submit" id="submit" class="contact btn btn-warning btn-lg btn-block">Gửi yêu cầu</button><br><br>
-                  </div> 
+
+        <div  class="d-flex flex-column align-items-center pt-5 bg-warning">
+            <div class="heading-text text-center " >Bạn có dữ liệu cần dán nhãn?</div>
+                <div class ="d-flex pb-5 contact justify-content-center">        
+                    <a type="button" href="/contactsale" class="btn-contact btn nav-item nav-link text-center mt-3 d-flex justify-content-center align-items-center ">Liên hệ chúng tôi</a>
+                  <!--  <a type="button" href="/contactsale" class="btn-white btn nav-item nav-link text-center mt-3 d-flex justify-content-center align-items-center">Tạo tài khoản mới</a>
+  -->
+                </div> 
               </form>
+
+
         </div>
+
 
         
         <!-- Footer -->

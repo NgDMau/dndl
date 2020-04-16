@@ -22,13 +22,11 @@
           
         const uploadForm = document.getElementById('uploadForm');
         const progressBar = document.getElementById("progressBar");
-        const uploadButton = document.getElementById("submit");
 
         uploadForm.addEventListener("submit", uploadFile);
 
         function uploadFile(e) {
-
-          e.preventDefault() 
+          e.preventDefault();
 
           const xhr = new XMLHttpRequest();
 
@@ -49,26 +47,20 @@
               if (status === 0 || (status >= 200 && status < 400)) {
                 console.log(xhr.responseText);
                 console.log(xhr.responseURL);
-                progressBar.style.display = 'none';
-                progressBar.style.width = 0 + '%';
-                progressBar.innerHTML = 0 + '%';
-                $("#myModal").modal();
+                window.location.href = xhr.responseURL;
               } else {
                 if (status === 413) {
-                  alert("Lỗi xảy ra do dung lượng file quá lớn");
+                  alert("Tải lên thất bại do dung lượng file vượt quá 20MB");
                 }
-                alert("Có lỗi xảy ra, vui lòng tải lại. Mã lỗi: " + status);
-                //window.location.href = '/upload';
+                alert("Có lỗi xảy ra, vui lòng tải lại trang. Mã lỗi: " + status);
               }
             }
           }
 
           xhr.send(new FormData(uploadForm));
           }
-        
 
       });
-      
 
     </script>
 
@@ -153,7 +145,7 @@
           <div class="vande-content d-flex flex-column justify-content-center justify-content-around pt-5 align-items-center">
             <div class="heading-text text-dark pt-5 pb-3">ĐƠN ĐĂNG TẢI</div>
 
-            <form id="uploadForm" action="/upload" method="POST">
+            <form id="uploadForm" action="/upload" method="POST" enctype="multipart/form-data">
               
               <label class = "h4">Trường hợp nào mô tả tình trạng của bạn rõ nhất? *</label>
               <br>
@@ -192,69 +184,53 @@
                       </div>
 
                       <br> 
-                <div class="justify-content-center d-flex">
-                  <button type="submit" id="submit" class ="btn btn-warning btn-lg btn-block" id="submit">Gửi dữ liệu</button><br><br>
-                  <br>
-                </div>    
-                <label id="error" class="h4"></label><br>
+                <div class ="justify-content-center d-flex">        
+                  <button type="submit" id="submit" class=" btn btn-warning btn-lg btn-block">Gửi dữ liệu</button><br><br>
+                </div>  
+                  <label id="error" class="h4"></label><br>
             </form>
             
           </div> 
         </div>
 
         <!-- Fourth part -->
-
-        <div id="myModal" class="modal fade">
-          <div class="modal-dialog modal-confirm">
-            <div class="modal-content">
-              <div class="modal-header">
-                <img src="/img/tick.png" alt="icon" width="70" height="70">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-              </div>
-              <div class="modal-body text-center">
-                <h3>File của bạn đã được tải lên thành công!</h3>	
-                <h2>Cảm ơn bạn rất nhiều</h2>
-                <p>Đóng góp của bạn là một sự giúp đỡ vô cùng lớn, không chỉ cho dự án này mà còn cho công cuộc đẩy lùi virus Covid19 tại Việt Nam
-                  Kết quả của dự án sẽ được gửi đến email của bạn trong thời gian sớm nhất.</p>
-                <button class="btn btn-success" data-dismiss="modal"><span>Tiếp tục</span> <i class="material-icons">&#xE5C8;</i></button>
-              </div>
-            </div>
-          </div>
-        </div>    
-        
-
-        <footer class="page-footer font-small bg-dark pt-4">
-
-          <!-- Footer Links -->
-          <div class="container text-center text-md-left">
-        
-            <!-- Footer links -->
-            <div class="row text-center text-md-left mt-3 pb-3">
-        
-              <!-- Grid column -->
-              <div class="col-md-6 col-lg-6 col-xl-6 mx-auto mt-3">
-                <h6 class="text-uppercase mb-4 h3 text-center font-weight-bold text-warning">Về chúng tôi</h6>
-                <p class="text-light text-center">Dự án InLab được thực hiện bởi Viện Công nghiệp phần mềm và nội dung số Việt Nam phối hợp Hội người mù Việt Nam, InfoRe Technology, HMD, các chuyên gia công nghệ nghiên cứu về trí tuệ nhân tạo, chuyên gia y tế nghiên cứu về các bệnh hô hấp, các cộng tác viên đang học tập, nghiên cứu trong nước và quốc tế</p>
-              </div>
-              <!-- Grid column -->
-              </div>
-              <!-- Grid column -->
-        
-            </div>
-            <hr>
-        
-            </div>
-        
-          </div>
-                
-                <!-- Footer -->
-                <div class="footer d-flex align-items-center justify-content-center ">
-                  <div class="text-center  text-white">Copyright © 2020 InLab. All rights reserved.
-                  </div>
-              </div>    
-        </footer>
+        <!-- <div class="footer text-white">Dự án Inlab được thực hiện bởi Viện Công nghiệp phần mềm và nội dung số Việt Nam phối hợp Hội người mù Việt Nam, Infore, HMD, các chuyên gia công nghệ nghiên cứu về trí tuệ nhân tạo, chuyên gia y tế nghiên cứu các bệnh hô hấp, các cộng tác viên đang học tập, nghiên cứu trong nước và quốc tế  </div> -->
         <!-- Footer -->
+<footer class="page-footer font-small bg-dark pt-4">
+
+  <!-- Footer Links -->
+  <div class="container text-center text-md-left">
+
+    <!-- Footer links -->
+    <div class="row text-center text-md-left mt-3 pb-3">
+
+      <!-- Grid column -->
+      <div class="col-md-6 col-lg-6 col-xl-6 mx-auto mt-3">
+        <h6 class="text-uppercase mb-4 h3 text-center font-weight-bold text-warning">Về chúng tôi</h6>
+        <p class="text-light text-center">Dự án InLab được thực hiện bởi Viện Công nghiệp phần mềm và nội dung số Việt Nam phối hợp Hội người mù Việt Nam, InfoRe Technology, HMD, các chuyên gia công nghệ nghiên cứu về trí tuệ nhân tạo, chuyên gia y tế nghiên cứu về các bệnh hô hấp, các cộng tác viên đang học tập, nghiên cứu trong nước và quốc tế</p>
+      </div>
+      <!-- Grid column -->
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <hr>
+
+    </div>
+
+  </div>
+        
+        <!-- Footer -->
+        <div class="footer d-flex align-items-center justify-content-center ">
+          <div class="text-center  text-white">Copyright © 2020 InLab. All rights reserved.
+          </div>
+      </div>    
+</footer>
 <!-- Footer -->
+
+
+
+
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
