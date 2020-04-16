@@ -68,6 +68,8 @@ require('./routes/upload')(app);
 require('./routes/uploadresult')(app);
 require('./routes/loginrequester')(app);
 require('./routes/contact')(app);
+require('./routes/contactsale')(app);
+
 
 
 //The 404 Route (ALWAYS Keep this as the last route)
