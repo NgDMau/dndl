@@ -13,7 +13,7 @@
     <link href="/css/uploadnew.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <title>Đóng góp dữ liệu - Inlab</title>
+    <title>Đóng góp dữ liệu covid19 - Inlab</title>
     <link rel="shortcut icon" type="image/png" href="/img/logoInlabSquare.png">
 
     <script>
@@ -49,7 +49,10 @@
                 console.log(xhr.responseURL);
                 window.location.href = xhr.responseURL;
               } else {
-                window.location.href = '/error'
+                if (status === 413) {
+                  alert("Tải lên thất bại do dung lượng file vượt quá 20MB");
+                }
+                alert("Có lỗi xảy ra, vui lòng tải lại trang. Mã lỗi: " + status);
               }
             }
           }
@@ -66,8 +69,8 @@
 <body data-spy="scroll" data-target="#navbar-example">
   
         <!-- First part -->
-        <div class="overlay p-2" id="first">
-                <nav class="navbar navbar-expand-lg navbar-dark" id="navbar-example">
+        <div class="overlay " >
+            <nav class="navbar navbar-expand-lg navbar-dark mt-3" id="navbar-example">
                     <a class="navbar-brand" >
                         <img src="/img/logo.png" class="logo">
                     </a>
@@ -76,17 +79,17 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                       <div class="nav navbar-nav justify-content-between">
-                        <a href="/about" class="nav-item nav-link pr-5" >Về chúng tôi</a>
+                        <a href="/info" class="nav-item nav-link pr-5" >Về chúng tôi</a>
                         <a href="#third" class="nav-item nav-link pr-5" >Đăng hơi thở</a>
                       </div>
                     </div>
                   </nav>
                 
-                <div class="header-box d-flex justify-content-end flex-column ml-3 mb-3">
-                    <div class="heading" data-aos="fade-up" data-aos-duration="1000">Hệ thống của chúng tôi phát hiện bệnh qua đường hô hấp nhờ khả năng nghe nhạy bén của người mù tại Việt Nam</div>
-                    <div class="second-heading" data-aos="fade-down" data-aos-duration="1000">Hãy gửi cho chúng tôi ghi âm tiếng hơi thở của bạn</div>
-                    <a type="button" href="#third" class="btn btn-warning startbtn nav-item nav-link ">Gửi dữ liệu hơi thở</a>
+                <div class="header-box d-flex justify-content-end flex-column ml-3 mb-3 ">
+                    <div class="heading" data-aos="fade-up" data-aos-duration="1000">InLab đang thử nghiệm dự án phân loại ban đầu những người có dấu hiệu về bệnh đường thở dựa trên việc phân tích tiếng hơi thở của họ, hỗ trợ công tác phòng chống dịch covid19</div>
 
+                    <div class="second-heading" data-aos="fade-down" data-aos-duration="1000">Hãy gửi cho chúng tôi bản ghi âm tiếng hơi thở của bạn</div>
+                    <a type="button" href="#second" class="btn btn-warning startbtn nav-item nav-link ">Bắt đầu</a>
                 </div>
                   
         </div>
@@ -95,7 +98,7 @@
         <!-- Second part -->
 
         <div class="bg2 bg-white d-flex flex-column align-items-center justify-content-center " id="second">
-          <div class="heading-text text-dark pt-5" data-aos="fade-up" data-aos-duration="1200">CÁCH HOẠT ĐỘNG</div>
+          <div class="heading-text text-dark pt-5" data-aos="fade-up" data-aos-duration="1200">HƯỚNG DẪN</div>
 
           <div class="vande-content d-flex flex-column justify-content-center justify-content-around pt-3">
               <div class="row" data-aos="fade-up" data-aos-duration="1200">
@@ -103,7 +106,8 @@
                       <div class="text-warning h2">BƯỚC 1</div>
                   </div>
                   <div class="col-8 d-flex align-items-center  ">
-                      <div class="h3 ">Vào mục ghi âm, hít sâu 3 lần</div>
+                      <div class="h3 ">Vào phần ghi âm trên điện thoại và nhấn nút bắt đầu ghi âm, lưu ý để micro của điện thoại/máy tính gần cơ thể để chất lượng ghi âm được tốt hơn.
+                      </div>
                   </div>
               </div>
               <div class="row pt-5"  data-aos="fade-up" data-aos-duration="1200">
@@ -111,7 +115,8 @@
                       <div class="text-warning h2">BƯỚC 2</div>
                   </div>
                   <div class="col-8 d-flex align-items-center  ">
-                    <div class="h3">Mỗi hơi thở hít vào 4 giây, thở ra 4 giây</div>
+                    <div class="h3">Mỗi lần hít sâu trong khoảng 4 giây, giữ lại 1 giây rồi tiếp tục thở ra trong 4 giây
+                    </div>
                   </div>
               </div>
             <div class="row pt-5"  data-aos="fade-up" data-aos-duration="1200">
@@ -119,7 +124,8 @@
                   <div class="text-warning h2">BƯỚC 3</div>
               </div>
               <div class="col-8 d-flex align-items-center  ">
-                  <div class="h3 ">Điền form</div>
+                  <div class="h3 ">Lặp lại bước trên 3 lần
+                  </div>
               </div>
             </div>
             <div class="row pt-5"  data-aos="fade-up" data-aos-duration="1200">
@@ -127,7 +133,7 @@
                   <div class="text-warning h2">BƯỚC 4</div>
               </div>
               <div class="col-8 d-flex align-items-center  ">
-                  <div class="h3 ">Chọn file và đăng đoạn ghi âm lên</div>
+                  <div class="h3 ">Kết thúc ghi âm, điền đơn bên dưới, chọn đoạn ghi âm vừa rồi và ấn nút gửi</div>
               </div>
             </div>
           </div>
@@ -140,53 +146,89 @@
             <div class="heading-text text-dark pt-5 pb-3">ĐƠN ĐĂNG TẢI</div>
 
             <form id="uploadForm" action="/upload" method="POST" enctype="multipart/form-data">
-              <label class="h4" id="thieu">Đăng tải file ghi âm *</label><br><br>
-              <div class="custom-file">
-                <input type="file" name="file" accept="audio/*" required class="custom-file-input" id="customFile">
-                <label class="custom-file-label" for="customFile">Chọn file</label>
-              </div>
               
-              <br>
-              <br>
-
-              <div id="myProgress">
-                <div id="progressBar">0%</div>
-              </div>
-
-              
-              <br>
-              <label class = "h4">Trường hợp nào mô tả tình trạng của bạn rõ nhất? *</label>
+              <div class = "h4">Trường hợp nào mô tả tình trạng của bạn rõ nhất? *</div>
               <br>
               <span id="span-description"></span>
-                <br>
-                  <input name = "description" type="radio" value="Tôi đã được chẩn đoán mắc COVID19 trong vòng 14 ngày trở lại đây" required>Tôi đã được chẩn đoán mắc COVID19 trong vòng 14 ngày trở lại đây</input><br><br>
-                  <input name = "description" type="radio" value="Tôi đã được chẩn đoán mắc COVID19 trong hơn 14 ngày trước">Tôi đã được chẩn đoán mắc COVID19 trong hơn 14 ngày trước</input><br><br>
-                  <input name = "description" type="radio" value="Tôi có triệu chứng mắc COVID19 nhưng chưa được chẩn đoán">Tôi có triệu chứng mắc COVID19 nhưng chưa được chẩn đoán</input><br><br>
-                  <input name = "description" type="radio" value="Tôi có triệu chứng mắc COVID19 hơn 14 ngày trước">Tôi có triệu chứng mắc COVID19 hơn 14 ngày trước</input><br><br>
-                  <input name = "description" type="radio" name="check" value="Tôi cảm thấy hoàn toàn bình thường!">Tôi cảm thấy hoàn toàn bình thường!</input><br><br><br>
+                <br>                  
+                  <label><input id="symp1" name = "description" type="radio" value="1" required>Tôi đã được chẩn đoán mắc COVID19 trong vòng 14 ngày trở lại đây</label><br><br>
+                  <label><input name = "description" type="radio" value="2">Tôi đã được chẩn đoán mắc COVID19 trong hơn 14 ngày trước</label><br><br>
+                  <label><input name = "description" type="radio" value="3">Tôi có triệu chứng mắc COVID19 nhưng chưa được chẩn đoán</input></label><br><br>
+                  <label><input name = "description" type="radio" value="4">Tôi có triệu chứng mắc COVID19 hơn 14 ngày trước</input></label><br><br>
+                  <label><input name = "description" type="radio" name="check" value="5">Tôi cảm thấy hoàn toàn bình thường!</input></label><br><br><br>
                   <label class = "h4">Tôi có các bệnh về đường hô hấp khác? *</label>
                   <br><br>
-                    <input name = "health"  type="radio" value="Đúng" required>Đúng</input><br><br>
-                    <input name = "health" type="radio" name="check" value="Sai">Sai</input><br><br><br>
+                    <label><input name = "health"  type="radio" value="yes" required>Đúng</input></label><br><br>
+                    <label><input name = "health" type="radio" name="check" value="no">Sai</input></label><br><br><br>
   
-                <label for="email" class="h4">Email của bạn (Nếu có chúng tôi sẽ gửi kết quả qua email)</label><br>
-                      <input type="text" id="email" name="email" placeholder="Email.."><br><br>
-                <button type="submit" id="submit">Gửi dữ liệu</button><br><br>
-                <label id="error" class="h4"></label><br>
+                <label for="age" class="h4">Độ tuổi của bạn? *</label><br><br>
+                    <input type="number" id="age" name="age" min="1" max="200" required><br><br><br>    
+                <label for="email" class="h4">Email của bạn (Nếu có chúng tôi sẽ gửi kết quả qua email)</label><br><br>
+                      <input type="email" id="email" name="email" placeholder="Email.."><br><br><br>
+                <label class = "h4">Giới tính của bạn? *</label>
+                      <br><br>
+                        <label><input name = "gender"  type="radio" value="male" required>Nam</input></label><br><br>
+                        <label><input name = "gender" type="radio" value="female">Nữ</input></label><br><br>
+                        <label><input name = "gender" type="radio" value="others">Khác</input></label><br><br><br>
+
+
+                <label class="h4" id="thieu">Đăng tải file ghi âm *</label><br><br>
+                  <div class="custom-file">
+                      <input type="file" name="file"  required class="custom-file-input" id="customFile">
+                      <label class="custom-file-label" for="customFile">Chọn file</label>
+                  </div> 
+                  <br>
+                  <br> 
+                      <div id="myProgress">
+                        <div id="progressBar">0%</div>
+                      </div>
+
+                      <br> 
+                <div class ="justify-content-center d-flex">        
+                  <button type="submit" id="submit" class=" btn btn-warning btn-lg btn-block">Gửi dữ liệu</button><br><br>
+                </div>  
+                  <label id="error" class="h4"></label><br>
             </form>
             
           </div> 
         </div>
 
         <!-- Fourth part -->
-        
+        <!-- <div class="footer text-white">Dự án Inlab được thực hiện bởi Viện Công nghiệp phần mềm và nội dung số Việt Nam phối hợp Hội người mù Việt Nam, Infore, HMD, các chuyên gia công nghệ nghiên cứu về trí tuệ nhân tạo, chuyên gia y tế nghiên cứu các bệnh hô hấp, các cộng tác viên đang học tập, nghiên cứu trong nước và quốc tế  </div> -->
+        <!-- Footer -->
+<footer class="page-footer font-small bg-dark pt-4">
 
+  <!-- Footer Links -->
+  <div class="container text-center text-md-left">
+
+    <!-- Footer links -->
+    <div class="row text-center text-md-left mt-3 pb-3">
+
+      <!-- Grid column -->
+      <div class="col-md-6 col-lg-6 col-xl-6 mx-auto mt-3">
+        <h6 class="text-uppercase mb-4 h3 text-center font-weight-bold text-warning">Về chúng tôi</h6>
+        <p class="text-light text-center">Dự án InLab được thực hiện bởi Viện Công nghiệp phần mềm và nội dung số Việt Nam phối hợp Hội người mù Việt Nam, InfoRe Technology, HMD Technology, các chuyên gia công nghệ nghiên cứu về trí tuệ nhân tạo, chuyên gia y tế nghiên cứu về các bệnh hô hấp, các cộng tác viên đang học tập, nghiên cứu trong nước và quốc tế</p>
+      </div>
+      <!-- Grid column -->
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <hr>
+
+    </div>
+
+  </div>
         
         <!-- Footer -->
         <div class="footer d-flex align-items-center justify-content-center ">
-            <div class="text-center  text-white">Copyright © 2020 InLab. All rights reserved.
-            </div>
-        </div>    
+          <div class="text-center  text-white">Copyright © 2020 InLab. All rights reserved.
+          </div>
+      </div>    
+</footer>
+<!-- Footer -->
+
+
 
 
 
@@ -210,4 +252,4 @@
 
         
     </script> 
-</html>
+</html> 

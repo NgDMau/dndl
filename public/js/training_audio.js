@@ -19,7 +19,7 @@ var audioright = new Audio('/audio/correct1.mp3');
 var audiowrong = new Audio('/audio/wrong1.mp3');
 
 var listQuestion = [], currentQuestionIndex
-var numberQuestion = 10;
+var numberQuestion = 20;
 
 startButton.addEventListener('click', start)
 resetButton.addEventListener('click',()=> {
@@ -168,116 +168,5 @@ function goto_label(){
   document.getElementById(id_label).click();
 }
 
-questions = [
-  {
-    id: '1',
-    question: 'Chọn nhãn thích hợp cho đoạn hội thoại dưới:',
-    src: 'audio/audio_1.mp3',
-    answers: [
-      { text: 'Tích cực', correct: true},
-      { text: 'Tiêu cực', correct: false},
-      { text: 'Trung tính', correct: false},
-      { text: 'Không biết', correct: false}
-    ]
-  },
-  {
-    id: '2',
-    question: 'Chọn nhãn thích hợp cho đoạn hội thoại dưới:',
-    src: 'audio/audio_2.mp3',
-    answers: [
-      { text: 'Tích cực', correct: false},
-      { text: 'Tiêu cực', correct: true},
-      { text: 'Trung tính', correct: false},
-      { text: 'Không biết', correct: false}
-    ]
-  },
-  {
-    id: '3',
-    question: 'Chọn nhãn thích hợp cho đoạn hội thoại dưới:',
-    src: 'audio/audio_3.mp3',
-    answers: [
-      { text: 'Tích cực', correct: true},
-      { text: 'Tiêu cực', correct: false},
-      { text: 'Trung tính', correct: false},
-      { text: 'Không biết', correct: false}
-    ]
-  },
-  {
-    id: '4',
-    question: 'Chọn nhãn thích hợp cho đoạn hội thoại dưới:',
-    src: 'audio/audio_4.mp3',
-    answers: [
-      { text: 'Tích cực', correct: false},
-      { text: 'Tiêu cực', correct: false},
-      { text: 'Trung tính', correct: true},
-      { text: 'Không biết', correct: false}
-    ]
-  },
-  {
-    id: '5',
-    question: 'Chọn nhãn thích hợp cho đoạn hội thoại dưới:',
-    src: 'audio/audio_5.mp3',
-    answers: [
-      { text: 'Tích cực', correct: false},
-      { text: 'Tiêu cực', correct: false},
-      { text: 'Trung tính', correct: true},
-      { text: 'Không biết', correct: false}
-    ]
-  },
-  {
-    id: '6',
-    question: 'Chọn nhãn thích hợp cho đoạn hội thoại dưới:',
-    src: 'audio/audio_6.mp3',
-    answers: [
-      { text: 'Tích cực', correct: true},
-      { text: 'Tiêu cực', correct: false},
-      { text: 'Trung tính', correct: false},
-      { text: 'Không biết', correct: false}
-    ]
-  },
-  {
-    id: '7',
-    question: 'Chọn nhãn thích hợp cho đoạn hội thoại dưới:',
-    src: 'audio/audio_7.mp3',
-    answers: [
-      { text: 'Tích cực', correct: false},
-      { text: 'Tiêu cực', correct: false},
-      { text: 'Trung tính', correct: true},
-      { text: 'Không biết', correct: false}
-    ]
-  },
-  {
-    id: '8',
-    question: 'Chọn nhãn thích hợp cho đoạn hội thoại dưới:',
-    src: 'audio/audio_8.mp3',
-    answers: [
-      { text: 'Tích cực', correct: false},
-      { text: 'Tiêu cực', correct: false},
-      { text: 'Trung tính', correct: true},
-      { text: 'Không biết', correct: false}
-    ]
-  },
-  {
-    id: '9',
-    question: 'Chọn nhãn thích hợp cho đoạn hội thoại dưới:',
-    src: 'audio/audio_9.mp3',
-    answers: [
-      { text: 'Tích cực', correct: false},
-      { text: 'Tiêu cực', correct: true},
-      { text: 'Trung tính', correct: false},
-      { text: 'Không biết', correct: false}
-    ]
-  },
-  {
-    id: '10',
-    question: 'Chọn nhãn thích hợp cho đoạn hội thoại dưới:',
-    src: 'audio/audio_10.mp3',
-    answers: [
-      { text: 'Tích cực', correct: false},
-      { text: 'Tiêu cực', correct: false},
-      { text: 'Trung tính', correct: false},
-      { text: 'Không biết', correct: true}
-    ]
-  }
-]
+
 

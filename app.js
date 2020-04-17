@@ -20,11 +20,12 @@ passport.deserializeUser(function(user, done) {
 
 const app = express()
 
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 8002;
 
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+
 
 app.use(cookieParser());
 
@@ -48,6 +49,7 @@ app.use(passport.session());
 app.set('view engine', 'ejs')
 app.set('view engine', 'pug')
 
+require('./routes/index')(app);
 require('./routes/text_sentiment')(app);
 require('./routes/signup')(app);
 require('./routes/login')(app);
@@ -66,6 +68,18 @@ require('./routes/user_management')(app);
 require('./routes/upload')(app);
 require('./routes/uploadresult')(app);
 require('./routes/loginrequester')(app);
+require('./routes/contact')(app);
+require('./routes/contactsale')(app);
+require('./routes/info')(app);
+
+
+
+
+//The 404 Route (ALWAYS Keep this as the last route)
+app.get('*', function(req, res){
+    //res.status(404).sendFile('error404.html');
+    res.status(404).sendFile(path.join(__dirname, './views/', 'error404.html'))
+  });
 
 
 app.listen(port, () => {

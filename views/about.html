@@ -7,18 +7,21 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
    
     <!-- Font -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700&display=swap" rel="stylesheet">
     <link href="/css/about2.css" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-    <title>Inlab - Giới thiệu</title>
+    <title>Giới thiệu - Inlab</title>
     <link rel="shortcut icon" type="image/png" href="/img/logoInlabSquare.png"/>
 
 </head>
+
 <body data-spy="scroll" data-target="#navbar-example">
         <!-- First part -->
-        <div class="overlay p-2" id="first">
-                <nav class="navbar navbar-expand-lg navbar-dark" id="navbar-example">
+        <div class="overlay " >
+                <nav class="navbar navbar-expand-lg navbar-light mt-3"  id="navbar-example">
                     <a class="navbar-brand" >
                         <img src="/img/logo.png" class="logo">
                     </a>
@@ -27,31 +30,44 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                       <div class="nav navbar-nav justify-content-between">
-                        <a href="#first" class="nav-item nav-link pr-5">Tổng quan</a>                
-                        <a href="#second" class="nav-item nav-link pr-5" >Giới thiệu</a>
-                        <a href="#third" class="nav-item nav-link pr-5">Vấn đề</a>
-                        <a href="#fourth" class="nav-item nav-link pr-5">Ứng dụng</a>
+                        <a href="/" class="nav-item nav-link pr-5" >Trang chủ</a>
+                        <a href="/info" class="nav-item nav-link pr-5" >Về chúng tôi</a>
+                        <a href="/contactsale" class="nav-item nav-link pr-5">Liên hệ</a>
                         <a href="/login" class="nav-item nav-link pr-5">Đăng nhập</a>
                       </div>
                     </div>
                   </nav>
                 
-                <div class="header-box d-flex justify-content-end flex-column ml-3 mb-3">
-                    <div class="heading" data-aos="fade-up" data-aos-duration="1000">Welcome to InLab!</div>
-                    <div class="second-heading" data-aos="fade-down" data-aos-duration="1000">A data labeling platform for the blind</div>
-                    <a type="button" href="#second" class="btn btn-outline-warning startbtn nav-item nav-link ">Bắt đầu!</a>
+
+                <div class="container">
+                    <div class="row">
+                      <div class="col-sm">
+                        <div class="col-sm d-flex justify-content-center">
+                            <img class="blindimg" src="/img/undraw_pedestrian_crossing_l6jv.png"></img>
+                        </div>
+                            <div class="d-flex  d-flex flex-column justify-content-center align-items-center">
+                                <div class="heading text-dark text-center" data-aos="fade-up" data-aos-duration="1000">Chào mừng tới InLab!</div>
+                                <div class="second-heading text-dark text-center mt-3" > Nền tảng nguồn lực cộng đồng về dữ liệu tiên phong tại Việt Nam</div>
+                                    <a type="button" href="/contactsale" class="btn-warning btn startbtn nav-item nav-link text-center mt-4 d-flex justify-content-center align-items-center">Bạn có dữ liệu cần được dán nhãn?</a>
+                                    <a type="button" href="/upload" class="btn btn-dark startbtn nav-item nav-link d-flex justify-content-center align-items-center">Đóng góp dữ liệu hỗ trợ chống covid19</a>
+                
+                            </div>
+                         </div>
+
+                 </div>
                 </div>
+
                   
         </div>
 
 
         <!-- Second part -->
 
-        <div class="bg2 d-flex flex-column justify-content-center align-items-center " id="second">
+        <div class="bg2 d-flex flex-column justify-content-center align-items-center" id="second">
             <div class="heading-text text-warning " data-aos="fade-right" data-aos-duration="1200">GIỚI THIỆU</div>
-            <div class="content text-white text-wrap text-center pt-4  " data-aos="fade-left" data-aos-duration="1200">Một nền tảng crowdsourcing (nguồn lực cộng đồng) hỗ trợ các cá nhân, tổ chức, doanh nghiệp hoàn thành công việc, nhiệm vụ bằng cách cộng tác với lực lượng lao động bên ngoài. Ví dụ: dán nhãn dữ liệu, xác thực thông tin, khảo sát nhanh, content making, ...
+            <div class="content text-white text-wrap text-justify pt-4  " data-aos="fade-left" data-aos-duration="1200">    &emsp;&emsp;Nền tảng nguồn lực cộng đồng (Crowd Sourcing) là nền tảng hỗ trợ các cá nhân, tổ chức, doanh nghiệp hoàn thành công việc, nhiệm vụ bằng cách cộng tác với lực lượng lao động bên ngoài (ví dụ: dán nhãn dữ liệu, xác thực thông tin, khảo sát nhanh, ...)
                 <br>
-            Nền tảng này có thể trợ thành trợ thủ đắc lực cho các nhà phát triển, công ty, tổ chức cần nhiều dữ liệu trong việc nghiên cứu, thử nghiệm, áp dụng các mô hình học máy
+                &emsp;&emsp;Nền tảng này sẽ trở thành trợ thủ đắc lực cho các cá nhân, nhà phát triển, công ty, tổ chức cần nhiều dữ liệu để đẩy mạnh việc nghiên cứu, thử nghiệm và phát triển các mô hình học máy
             </div>
         </div>
 
@@ -63,54 +79,68 @@
             <div class="vande-content d-flex flex-column justify-content-center justify-content-around pt-5">
                 <div class="row"  data-aos="fade-up" data-aos-duration="1200">
                     <div class="col-4 d-flex flex-column justify-content-center align-items-center">
-                        <div class="text-warning h2"> 41.000</div>
-                        <div class="h4">người</div>
+                        <div class="text-warning h2"> 6.2</div>
+                        <div class="h4">triệu người</div>
                     </div>
                     <div class="col-8 d-flex align-items-center  ">
-                        <div class="h3 "> Mỗi năm Việt Nam có khoảng 41.000 trẻ bị dị tật bẩm sinh</div>
+                        <div class="h3 ">Theo báo cáo điều tra dân số của Tổng cục Thống kê công bố tháng 1 năm 2019, Việt Nam có 6.2 triệu người khuyết tật từ 2 tuổi trở lên, chiếm 7.06% tổng dân số</div>
                     </div>
                 </div>
                 <div class="row pt-5" data-aos="fade-up" data-aos-duration="1200">
                     <div class="col-4 d-flex flex-column justify-content-center align-items-center" >
-                        <div class="text-warning h2"> 12.1</div>
+                        <div class="text-warning h2"> 1.03</div>
                         <div class="h4">triệu người</div>
                     </div>
                     <div class="col-8 d-flex align-items-center  ">
-                        <div class="h3 "> Tại Việt Nam, theo kết quả Tổng điều tra dân số và nhà ở 2009, có khoảng 12,1 triệu người khuyết tật từ mức “khó khăn”, chiếm 15,5% dân số từ 5 tuổi trở lên</div>
+                        <div class="h3 "> Trong số những người khuyết tật kể trên, có 1.03 triệu người bị khuyết tật thị lực (khiếm thị)</div>
                     </div>
                 </div>
                 <div class="row pt-5"  data-aos="fade-up" data-aos-duration="1200">
                     <div class="col-4 d-flex flex-column justify-content-center align-items-center" >
-                        <div class="text-warning h2"> 574.000</div>
+                        <div class="text-warning h2"> 9.000</div>
                         <div class="h4">người</div>
                     </div>
                     <div class="col-8 d-flex align-items-center  ">
-                        <div class="h3 "> Trong đó có 574.000 người khuyết tật loại đặc biệt nặng (không thể nhìn, nghe, vận động hoặc ghi nhớ</div>
+                        <div class="h3 "> Tính đến thời điểm hiện tại, toàn quốc có 9.000 người khiếm thị biết sử dụng điện thoại thông minh và máy vi tính</div>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Fourth part -->
-        <div  class="bg4  bg-white  d-flex flex-column align-items-center" id="fourth">
+        <div  class="bg4  bg-white  d-flex flex-column align-items-center pt-5" id="fourth">
             <div class="heading-text text-dark " data-aos="zoom-in" data-aos-duration="1200" >ỨNG DỤNG</div>
-            <div class="container d-flex justify-content-center align-items-center ">
+            <div class="container d-flex justify-content-center align-items-center pt-5">
                 <div class="row" >
-                  <div class="col-md d-flex flex-column align-items-center pt-5" data-aos="zoom-in" data-aos-duration="1200">
+                  <div class="col-md d-flex flex-column align-items-center pb-5" data-aos="zoom-in" data-aos-duration="1200">
                     <img src="/img/audio.png" class="image">
                     <div class="h3 text-center pt-3">Dán nhãn dữ liệu âm thanh</div>
                   </div>
-                  <div class="col-md d-flex flex-column align-items-center pt-5" data-aos="zoom-in" data-aos-duration="1200">
+                  <div class="col-md d-flex flex-column align-items-center pb-5" data-aos="zoom-in" data-aos-duration="1200">
                     <img src="/img/micro.png" class="image">
                     <div class="h3 text-center pt-3">Tạo dữ liệu âm thanh để tổng hợp giọng nói</div>
                   </div>
-                  <div class="col-md d-flex flex-column align-items-center pt-5" data-aos="zoom-in" data-aos-duration="1200">
+                  <div class="col-md d-flex flex-column align-items-center pb-5" data-aos="zoom-in" data-aos-duration="1200">
                     <img src="/img/speak.png" class="image">
                     <div class="h3 text-center pt-3">Tạo văn bản dạng hội thoại</div>
                   </div>
                 </div>
               </div>
         </div>
+
+        <div  class="d-flex flex-column align-items-center pt-5 bg-warning">
+            <div class="heading-text text-center " >Bạn có dữ liệu cần dán nhãn?</div>
+                <div class ="d-flex pb-5 mt-3 contact justify-content-center">        
+                    <a type="button" href="/contactsale" class="btn-contact btn nav-item nav-link text-center mt-3 d-flex justify-content-center align-items-center ">Liên hệ chúng tôi</a>
+                  <!--  <a type="button" href="/contactsale" class="btn-white btn nav-item nav-link text-center mt-3 d-flex justify-content-center align-items-center">Tạo tài khoản mới</a>
+  -->
+                </div> 
+              </form>
+
+
+        </div>
+
+
         
         <!-- Footer -->
         <div class="footer d-flex align-items-center justify-content-center ">

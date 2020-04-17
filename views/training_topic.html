@@ -7,8 +7,9 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link href="/css/styles.css" rel="stylesheet">
   <script defer src="/js/text_topic.js"></script>
+  <script defer src="/js/questions_training/text_topic.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400&display=swap" rel="stylesheet">
-  <title>Đào tạo</title>
+  <title>Đào tạo - Inlab</title>
   <link rel="shortcut icon" type="image/png" href="/img/logoInlabSquare.png"/>
   <script src="https://code.responsivevoice.org/responsivevoice.js?key=U97eTLrB"></script>
 
@@ -32,7 +33,7 @@
       </div>
       <div class="title" id="title">Hướng dẫn</div>
       <div id="question" class="data">
-        Bạn hãy chọn một trong bốn chủ đề sau: Sức khỏe/ Giáo dục/ Công nghệ/ Chỗ ở, tương ứng cho câu sau đây:
+        Bạn hãy chọn một trong bốn chủ đề sau: Sức khỏe/ Giáo dục/ Công nghệ/ Chỗ ở, tương ứng cho 15 câu sau đây:
       </div>
       <!-- <div id="shortcut_label" class="shortcut_label hide">
         <input id="sl_label" placeholder="Điền nhãn muốn chọn" type="text" >
@@ -87,118 +88,4 @@
   </div>
 </footer> -->
 </body>
-<script>
-    var questions = [
-  {
-    id: '1',
-    quest: 'Bây giờ có đến mấy bộ sách giáo khoa lận, không biết phải mua quyển nào cho con nó học đây',
-    answers: [
-      { text: 'Sức khỏe', correct: false},
-      { text: 'Giáo dục', correct: true},
-      { text: 'Công nghệ', correct: false},
-      { text: 'Chỗ ở', correct: false},
-      { text: 'Thuộc một chủ đề khác', correct: false}
-    ]
-  },
-  {
-    id: '2',
-    quest: 'Tôi cần mua một bộ máy tính để bàn phục vụ công việc văn phòng, giá cả dưới 10 triệu ạ',
-    answers: [
-      { text: 'Sức khỏe', correct: false},
-      { text: 'Giáo dục', correct: false},
-      { text: 'Công nghệ', correct: true},
-      { text: 'Chỗ ở', correct: false},
-      { text: 'Thuộc một chủ đề khác', correct: false}
-    ]
-  },
-  {
-    id: '3',
-    quest: 'có phòng trong công nghệ thông tin 1tr2 phòng như nhà nghỉ điều hoà nóng lạnh đầy đủ, bác chủ nhà trách nhiệm vui tính',
-    answers: [
-      { text: 'Sức khỏe', correct: false},
-      { text: 'Giáo dục', correct: false},
-      { text: 'Công nghệ', correct: false},
-      { text: 'Chỗ ở', correct: true},
-      { text: 'Thuộc một chủ đề khác', correct: false}
-    ]
-  },
-  {
-    id: '4',
-    quest: 'Học trong 2-3 tháng, lịch học sau khai giảng sẽ thảo luận sao cho phù hợp nhất với điều kiện thực tế của học viên và giáo viên giảng dạ',
-    answers: [
-      { text: 'Sức khỏe', correct: false},
-      { text: 'Giáo dục', correct: true},
-      { text: 'Công nghệ', correct: false},
-      { text: 'Chỗ ở', correct: false},
-      { text: 'Thuộc một chủ đề khác', correct: false}
-    ]
-  },
-  {
-    id: '5',
-    quest: 'Đã có ai bị như mình chưa ạ, mình bị trên lưng mấy năm nay rồi, cũng thường xuyên tắm lá chè xanh mà vẫn không bớt giảm gì cả. Mọi người cho mình vài góp ý với ạ.',
-    answers: [
-    { text: 'Sức khỏe', correct: true},
-      { text: 'Giáo dục', correct: false},
-      { text: 'Công nghệ', correct: false},
-      { text: 'Chỗ ở', correct: false},
-      { text: 'Thuộc một chủ đề khác', correct: false}
-    ]
-  },
-  {
-    id: '6',
-    quest: 'Đúng là ở nhà vinhome thích thật sự, dịch vụ tiện ích đầy đủ, an toàn tiện lợi.',
-    answers: [
-    { text: 'Sức khỏe', correct: false},
-      { text: 'Giáo dục', correct: false},
-      { text: 'Công nghệ', correct: false},
-      { text: 'Chỗ ở', correct: true},
-      { text: 'Thuộc một chủ đề khác', correct: false}
-    ]
-  },
-  {
-    id: '7',
-    quest: 'Người mệt mỏi, suy nhược, hay lo lắng thì nặng đầu thôi bạn, với lại nếu mắt đi bụi, cay mắt, hay mắt làm việc với cường độ cao thì có thể đỏ nhé.',
-    answers: [
-    { text: 'Sức khỏe', correct: true},
-      { text: 'Giáo dục', correct: false},
-      { text: 'Công nghệ', correct: false},
-      { text: 'Chỗ ở', correct: false},
-      { text: 'Thuộc một chủ đề khác', correct: false}
-    ]
-  },
-  {
-    id: '8',
-    quest: 'từ cơ thể con người, các loài động vật cho đến cấu trúc động cơ máy, tất cả đều có thể được phân tích chi tiết sống động bằng chiếc máy tính xách tay áp dụng công nghệ thực tế ảo',
-    answers: [
-    { text: 'Sức khỏe', correct: false},
-      { text: 'Giáo dục', correct: false},
-      { text: 'Công nghệ', correct: true},
-      { text: 'Chỗ ở', correct: false},
-      { text: 'Thuộc một chủ đề khác', correct: false}
-    ]
-  },
-  {
-    id: '9',
-    quest: 'Hiện nay, trên ảnh radar ở Đăk Lắk, Đắk Nông, Lâm Đồng đang có mây đối lưu phát triển gây mưa.',
-    answers: [
-    { text: 'Sức khỏe', correct: false},
-      { text: 'Giáo dục', correct: false},
-      { text: 'Công nghệ', correct: false},
-      { text: 'Chỗ ở', correct: false},
-      { text: 'Thuộc một chủ đề khác', correct: true}
-    ]
-  },
-  {
-    id: '10',
-    quest: 'Cửa hàng này chán quá',
-    answers: [
-    { text: 'Sức khỏe', correct: false},
-      { text: 'Giáo dục', correct: false},
-      { text: 'Công nghệ', correct: false},
-      { text: 'Chỗ ở', correct: false},
-      { text: 'Thuộc một chủ đề khác', correct: true}
-    ]
-  }
-]
-</script>
 </html>

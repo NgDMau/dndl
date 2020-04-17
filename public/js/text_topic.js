@@ -10,13 +10,17 @@ const resultElement = document.getElementById('result')
 const resultButton = document.getElementById('result-btn')
 const resetButton = document.getElementById("btn-again")
 const selectedAnswerNoti = document.getElementById("noti-selected-answer")
+const emptyBox = document.getElementById("emptybox")
+
 var score = 0;
+
+var tempSelectedAnswer = "";
 
 var audioright = new Audio('/audio/correct1.mp3');
 var audiowrong = new Audio('/audio/wrong1.mp3');
 
 var listQuestion = [], currentQuestionIndex
-var numberQuestion = 10;
+var numberQuestion = 20;
 
 startButton.addEventListener('click', start)
 resetButton.addEventListener('click',()=> {
@@ -53,10 +57,10 @@ function start() {
   // check and add (if exists) saved-score in localStorage to current score
   if (localStorage.savedscore) {
     score += Number(localStorage.savedscore);
-  }
+  } 
 
   startButton.classList.add('hide')
-  shuffledQuestions(numberQuestion)
+  shuffledQuestions(numberQuestion);
   currentQuestionIndex = 0
   labelElement.classList.remove('hide')
   titleElement.innerText = 'CÂU HỎI'
@@ -90,6 +94,8 @@ function setNextQuestion() {
 }
 
 function showQuestion(question) {
+
+
   questionElement.innerText = question.quest
   index = 0
   question.answers.forEach(answer => {
@@ -117,9 +123,6 @@ function resetState() {
 function selectAnswer(e) {
   const selectedButton = e.target
   const correct = selectedButton.dataset.correct
-  
-  //selectedButton.innerText = `Bạn đã chọn: ${selectedButton.innerText}`; // thử xem có biến chính nút bấm thành thông báo được không
-
   responsiveVoice.speak("Bạn đã chọn: " + selectedButton.innerText,'Vietnamese Female');
 
   if (correct=='true'){
@@ -135,6 +138,7 @@ function selectAnswer(e) {
 
     resultButton.classList.remove('hide')
   }   
+
   
 }
 
@@ -151,7 +155,7 @@ function result(){
     // audioright.play();
     // document.getElementById('content').classList.add('hide');
     // resultElement.classList.remove('hide');
-    window.location.href = '/3rd_result';
+    window.location.href = '/3rd_result'
   }else{
     audiowrong.play();
     document.getElementById('content').classList.add('hide');

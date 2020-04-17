@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700&display=swap" rel="stylesheet">
+    <link href="/css/contact.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+
+    <script src="/js/jquery/jquery.min.js"></script>
+
+
+    <title>Liên hệ - Inlab</title>
+    <link rel="shortcut icon" type="image/png" href="/img/logoInlabSquare.png"/>
+
+</head>
+<body id ="bg-contact">
+        <!-- First part -->
+        <div class="overlay" >
+                <nav class="navbar navbar-expand-lg navbar-light mt-3"  id="navbar-example">
+                    <a class="navbar-brand" href="/about" >
+                        <img src="/img/logo.png" class="logo">
+                    </a>
+                    <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+                      <div class="nav navbar-nav justify-content-between">
+                        <a href="/" class="nav-item nav-link pr-5" >Trang chủ</a>
+                        <a href="/info" class="nav-item nav-link pr-5" >Về chúng tôi</a>
+                        <a href="/contactsale" class="nav-item nav-link pr-5">Liên hệ</a>
+                        <a href="/login" class="nav-item nav-link pr-5">Đăng nhập</a>
+                       </div>
+                    </div>
+                  </nav>
+                
+
+        <!-- Fifth part -->
+        <div  class="d-flex flex-column align-items-center pt-5">
+            <div class="heading-text text-warning text-center" >LIÊN HỆ VỚI CHÚNG TÔI</div>
+            <div class="text-center pt-3 content">Hãy để lại thông tin để chúng tôi có thể trao đổi với bạn</div>
+            <form class="pt-3 form-width" action="/contact" method="POST" id="contactForm">
+                <div class="text-center message"></div>
+                <div id="form-group">
+                  <div class="form-group">
+                    <label for="exampleFormControlInput1">Tên</label>
+                    <div class="d-flex align-items-center jsx-560990836 jsx-2177858300 input input--icon">
+                        <span class="material-icons">
+                            account_box
+                        </span>  
+                    <input class="ml-2"type="Name" name="name" id="exampleFormControlInput1" required="" placeholder="Họ và tên" value="" style="width:100%;border: none; background-color: #F5F4F9;" required>                       
+                    </div>   
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Công ty</label>
+                    <div class="d-flex align-items-center jsx-560990836 jsx-2177858300 input input--icon">
+                        <span class="material-icons">
+                            work
+                            </span>  
+                    <input class="ml-2"type="Name" name="company" id="exampleFormControlInput1" placeholder="Tên công ty" value="" style="width:100%;border: none; background-color: #F5F4F9;" required>                       
+                    </div>   
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Số điện thoại</label>
+                    <div class="d-flex align-items-center jsx-560990836 jsx-2177858300 input input--icon">
+                        <span class="material-icons">
+                            phone
+                            </span>  
+                    <input class="ml-2" type="Name" name="phone" id="exampleFormControlInput1" placeholder="Số điện thoại" value="" style="width:100%;border: none; background-color: #F5F4F9;" required>                       
+                    </div>   
+                </div>
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Email</label>
+              <div class="d-flex align-items-center jsx-560990836 jsx-2177858300 input input--icon">
+                <span class="material-icons">
+                    email
+                    </span>  
+            <input class="ml-2" type="email" name="email" id="exampleFormControlInput1" placeholder="Email" value="" style="width:100%;border: none; background-color: #F5F4F9;" required>                       
+            </div>                  
+        </div>
+
+            <div class="pt-3">Chủ đề bạn quan tâm:</div>
+            <div class="container">
+                <div class="row">
+                  <div class="col-sm">
+
+                      <div class="form-check pt-3">
+                        <label><input type="checkbox" class="form-check-input"  name="interested" value="image-classification">Image Classification</label>
+                      </div>
+
+                      <div class="form-check pt-3">
+                        <label><input type="checkbox" class="form-check-input"  name="interested" value="image-object-detection">Image Object Detection</label>
+                      </div>
+                      <div class="form-check pt-3">
+                        
+                        <label><input type="checkbox" class="form-check-input"  name="interested" value="image-key-points">Image Key Points</label>
+                      </div>
+                      <div class="form-check pt-3">
+                        
+                        <label><input type="checkbox" class="form-check-input"  name="interested" value="image-segmentation">Image segmentation</label>
+                      </div>
+                      <div class="form-check pt-3">
+                        
+                        <label><input type="checkbox" class="form-check-input"  name="interested" value="image-ellipse">Image Ellipse</label>
+                      </div>
+                      <div class="form-check pt-3">
+                        
+                        <label><input type="checkbox" class="form-check-input"  name="interested" value="image-polygons">Image Polygons</label>
+                      </div>
+                      <div class="form-check pt-3">
+                        
+                        <label><input type="checkbox" class="form-check-input"  name="interested" value="text-named-entity-recognition">Text Named Entity Recognition</label>
+                      </div>
+
+                  </div>
+                  <div class="col-sm">
+                    <div class="form-check pt-3">
+                        
+                        <label><input type="checkbox" class="form-check-input"   name="interested" value="text-sentiment-analysis">Text Sentiment Analysis</label>
+                      </div>
+                      <div class="form-check pt-3">
+                        
+                        <label><input type="checkbox" class="form-check-input"   name="interested" value="dialog-analysis">Dialogue Analysis</label>
+                      </div>
+                      <div class="form-check pt-3">
+                        
+                        <label><input type="checkbox" class="form-check-input"   name="interested" value="audio-transcription">Audio Transcription</label>
+                      </div>
+                      <div class="form-check pt-3">
+                        
+                        <label><input type="checkbox" class="form-check-input"   name="interested" value="audio-classification">Audio Classification</label>
+                      </div>
+                      <div class="form-check pt-3">
+                        
+                        <label><input type="checkbox" class="form-check-input"   name="interested" value="audio-regions">Audio Regions</label>
+                      </div>
+                      <div class="form-check pt-3">
+                        
+                        <label><input type="checkbox" class="form-check-input"   name="interested" value="video-classifier">Video Classifier</label>
+                      </div>
+                      <div class="form-check pt-3">
+                        
+                        <label><input type="checkbox" class="form-check-input"   name="interested" value="pairwise-comparison">Pairwise Comparison</label>
+                      </div>
+                  </div>
+                </div>
+              </div>
+
+            <div class="form-group pt-5">
+              <label for="exampleFormControlTextarea1" >Nội dung</label>
+               <textarea name="content" class="jsx-2649193108" ></textarea></div>
+
+
+            <div class ="justify-content-center d-flex pb-5">        
+                <button type="submit" id="submit" class="contact btn btn-warning btn-lg btn-block">Gửi</button><br><br>
+              </div> 
+                </div>
+              </form>
+
+
+        </div>
+
+        
+        <!-- Footer -->
+        <div class="footer d-flex align-items-center justify-content-center ">
+            <div class="h3 text-center  text-white">Copyright © 2020 InLab. All rights reserved.
+            </div>
+        </div>    
+
+        <script>
+
+          $('#contactForm').submit(function (e) {
+              //alert(newbody);
+              e.preventDefault();
+
+              var interested = [];
+              $.each($("input[name='interested']:checked"), function(){
+                interested.push($(this).val());
+              });
+              
+              var $form = $( this ),
+              input_name = $form.find( "input[name='name']" ).val(),
+              input_company = $form.find( "input[name='company']" ).val(),
+              input_phone = $form.find( "input[name='phone']" ).val(),
+              input_email = $form.find( "input[name='email']" ).val(),
+              input_interested = interested,
+              input_content = $form.find( "textarea[name='content']" ).val(),
+    
+              url = $form.attr( "action" );
+    
+              var posting = $.post( url, { name: input_name, company: input_company, phone: input_phone, email: input_email, interested: input_interested, content: input_content } );
+              
+              posting.done(function (data) {
+                document.getElementById("form-group").style.display = "none";
+                document.getElementsByClassName("message")[0].innerHTML = 'Chúng tôi đã nhận được tin nhắn của bạn và sẽ liên lạc lại với bạn trong thời gian ngắn nhất.'
+              });
+    
+          })
+    
+        </script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+</body>
+
+    <script>
+        $(document).on('click',function(){
+        $('.collapse').collapse('hide');
+        })
+        AOS.init();
+    </script> 
+</html>
