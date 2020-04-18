@@ -11,7 +11,7 @@ module.exports = function (app) {
             phone: req.body.phone || "unknown",
             email: req.body.email || "unknown@domain",
             interested: req.body.interested || ["unknown"],
-            content: req.body.comment || "unknown",
+            content: req.body.content || "unknown",
         }
         console.log(`Got message: ${contact_info}`);
         try {

@@ -147,19 +147,19 @@
 
             <form id="uploadForm" action="/upload" method="POST" enctype="multipart/form-data">
               
-              <label class = "h4">Trường hợp nào mô tả tình trạng của bạn rõ nhất? *</label>
+              <div class = "h4">Trường hợp nào mô tả tình trạng của bạn rõ nhất? *</div>
               <br>
               <span id="span-description"></span>
-                <br>
-                  <input name = "description" type="radio" value="1" required>Tôi đã được chẩn đoán mắc COVID19 trong vòng 14 ngày trở lại đây</input><br><br>
-                  <input name = "description" type="radio" value="2">Tôi đã được chẩn đoán mắc COVID19 trong hơn 14 ngày trước</input><br><br>
-                  <input name = "description" type="radio" value="3">Tôi có triệu chứng mắc COVID19 nhưng chưa được chẩn đoán</input><br><br>
-                  <input name = "description" type="radio" value="4">Tôi có triệu chứng mắc COVID19 hơn 14 ngày trước</input><br><br>
-                  <input name = "description" type="radio" name="check" value="5">Tôi cảm thấy hoàn toàn bình thường!</input><br><br><br>
+                <br>                  
+                  <label><input id="symp1" name = "description" type="radio" value="1" required>Tôi đã được chẩn đoán mắc COVID19 trong vòng 14 ngày trở lại đây</label><br><br>
+                  <label><input name = "description" type="radio" value="2">Tôi đã được chẩn đoán mắc COVID19 trong hơn 14 ngày trước</label><br><br>
+                  <label><input name = "description" type="radio" value="3">Tôi có triệu chứng mắc COVID19 nhưng chưa được chẩn đoán</input></label><br><br>
+                  <label><input name = "description" type="radio" value="4">Tôi có triệu chứng mắc COVID19 hơn 14 ngày trước</input></label><br><br>
+                  <label><input name = "description" type="radio" name="check" value="5">Tôi cảm thấy hoàn toàn bình thường!</input></label><br><br><br>
                   <label class = "h4">Tôi có các bệnh về đường hô hấp khác? *</label>
                   <br><br>
-                    <input name = "health"  type="radio" value="yes" required>Đúng</input><br><br>
-                    <input name = "health" type="radio" name="check" value="no">Sai</input><br><br><br>
+                    <label><input name = "health"  type="radio" value="yes" required>Đúng</input></label><br><br>
+                    <label><input name = "health" type="radio" name="check" value="no">Sai</input></label><br><br><br>
   
                 <label for="age" class="h4">Độ tuổi của bạn? *</label><br><br>
                     <input type="number" id="age" name="age" min="1" max="200" required><br><br><br>    
@@ -167,14 +167,14 @@
                       <input type="email" id="email" name="email" placeholder="Email.."><br><br><br>
                 <label class = "h4">Giới tính của bạn? *</label>
                       <br><br>
-                        <input name = "gender"  type="radio" value="male" required>Nam</input><br><br>
-                        <input name = "gender" type="radio" value="female">Nữ</input><br><br>
-                        <input name = "gender" type="radio" value="others">Khác</input><br><br><br>
+                        <label><input name = "gender"  type="radio" value="male" required>Nam</input></label><br><br>
+                        <label><input name = "gender" type="radio" value="female">Nữ</input></label><br><br>
+                        <label><input name = "gender" type="radio" value="others">Khác</input></label><br><br><br>
 
 
                 <label class="h4" id="thieu">Đăng tải file ghi âm *</label><br><br>
                   <div class="custom-file">
-                      <input type="file" name="file" accept="audio/*" required class="custom-file-input" id="customFile">
+                      <input type="file" name="file"  required class="custom-file-input" id="customFile">
                       <label class="custom-file-label" for="customFile">Chọn file</label>
                   </div> 
                   <br>
