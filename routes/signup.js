@@ -2,6 +2,6 @@ var path = require('path')
 
 module.exports = function (app) {
     app.get('/signup', function (req, res) {
-        res.sendFile(path.join(__dirname, '../views/', 'signup.html'))
+        res.render('signup.ejs')
     });
 }

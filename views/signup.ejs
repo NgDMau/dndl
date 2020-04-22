@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
     <meta charset=UTF-8">
-    <title>Đăng nhập - Inlab</title>
+    <title>Quên mật khẩu</title>
     <link rel="shortcut icon" type="image/png" href="/img/logoInlabSquare.png"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400&display=swap" rel="stylesheet">
@@ -17,14 +17,7 @@
 <body>
 
     <div class = "main"> 
-        <div class = "header" >
-            <div class = "subheader" >
-               <div class= "subheader-content">Muốn kiếm thêm thu nhập? <a class="link" href='/login'><span class="highlight" >Hãy đăng nhập để dán nhãn với InLab<span class="material-icons">
-                    arrow_right_alt
-                    </span> </a>  </span>        
-                </div>
-            </div>
-        </div>
+
         <div class = "logobox" aria-hidden="true"ç>
             <a href='/about'>
                 <img src="/img/logo.png" alt="inlab logo" class="logo" href='/about'>
@@ -33,14 +26,15 @@
         <div class="box">
 
         <div class="inputform-box"> 
-            <h2 class="header-text">Đăng nhập dành cho Đối Tác</h2>
+            <h2 class="header-text">Đăng kí dành cho Đối Tác</h2>
             <form class="inputform" action="/login" method="post" >
-                <input type="text" id="username" name="username" placeholder="Tên đăng nhập" >
-                <input type="password" id="password" name="password" placeholder="Mật khẩu" >
-                <input type="submit" value="Đăng nhập">  
+                <input type="email" id="email" name="email" placeholder="Email" >
+                <input type="text" id="name" name="company" placeholder="Tên công ty">
+                <input type="text" id="sdt" name="sdt" placeholder="Sdt">
+                <input type="password" id="pass" name="password" placeholder="Mật khẩu">
+                <input type="password" id="pass" name="password" placeholder="Nhập lại mật khẩu">
+                <input type="submit" value="Đăng kí">  
             </form>
-            <a href="/forgotpass" >Quên mật khẩu?</a>  
-            <a href="/signup" class="highlight"  >Tạo tài khoản mới</a>    
         </div>
         </div>
 
