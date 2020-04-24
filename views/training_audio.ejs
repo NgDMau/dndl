@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="/css/training_audio.css" rel="stylesheet">
   <script defer src="/js/training_audio.js"></script>
-  <script defer src="/js/questions_training/audio.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <title>Đào tạo - Inlab</title>
@@ -22,7 +21,7 @@
       </div>
       <div class="title" id="title">HƯỚNG DẪN</div>
       <div id="question" class="data">
-        Bạn hãy nghe và chọn các nhãn thích hợp cho 15 đoạn âm thanh sau đây:
+        Bạn hãy nghe và chọn các nhãn thích hợp cho 20 đoạn âm thanh sau đây:
       </div>
       <audio id="src_audio" class="hide" src="audio/audio_1.mp3" type="audio/mp3"></audio>
       <button id="btn_play" onclick="togglePlay()" class="btn-play-stop hide"><i class="fa fa-play"></i>   Nghe đoạn âm thanh</button>
@@ -128,5 +127,10 @@
   myAudio.onpause = function() {
     isPlaying = false;
 };
+
+</script>
+
+<script>
+  var questions = <%-JSON.stringify(list)%>;
 </script>
 </html>

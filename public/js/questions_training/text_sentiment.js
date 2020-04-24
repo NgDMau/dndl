@@ -531,7 +531,7 @@ var questions = [
   },
   {
     id: '54',
-    quest: 'Thanh xuân có bạn 2 bị tố cắt ghép bôi nhọ danh dự người khác',
+    quest: 'Thanh xuân có bạn bị tố cắt ghép bôi nhọ danh dự người khác',
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: true },
@@ -561,7 +561,7 @@ var questions = [
   },
   {
     id: '57',
-    quest: 'Hắn tưng sai người hãm hại cô ấy',
+    quest: 'Hắn từng sai người hãm hại cô ấy',
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: true },
@@ -631,7 +631,7 @@ var questions = [
   },
   {
     id: '64',
-    quest: 'Hiệu ứng nhà kính là mất trong số nhưng lý do gây  nên sự nóng nên toàn cầu',
+    quest: 'Hiệu ứng nhà kính là mất trong số nhưng lý do ảnh hưởng tiêu cực tới trái đất, gây nên sự nóng nên toàn cầu',
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: true },
@@ -651,7 +651,7 @@ var questions = [
   },
   {
     id: '66',
-    quest: 'Tai nạn đã cướp đi của anh ấy đứa con gái dua nhất',
+    quest: 'Tai nạn đã cướp đi của anh ấy đứa con gái duy nhất',
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: true },
@@ -1505,8 +1505,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1515,8 +1515,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1525,8 +1525,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1535,8 +1535,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1545,8 +1545,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1555,8 +1555,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1565,8 +1565,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1575,8 +1575,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1585,8 +1585,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1595,8 +1595,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1605,8 +1605,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1615,8 +1615,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1625,8 +1625,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1635,8 +1635,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1645,8 +1645,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1655,8 +1655,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1665,8 +1665,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1675,8 +1675,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1685,8 +1685,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1695,8 +1695,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1705,8 +1705,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1715,8 +1715,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1725,8 +1725,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1735,8 +1735,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1745,8 +1745,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1755,8 +1755,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1765,8 +1765,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1775,8 +1775,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1785,8 +1785,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1795,8 +1795,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1805,8 +1805,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1815,8 +1815,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1825,8 +1825,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1835,8 +1835,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1845,8 +1845,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1855,8 +1855,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1865,8 +1865,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1875,8 +1875,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1885,8 +1885,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1895,8 +1895,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1905,8 +1905,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1915,8 +1915,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1925,8 +1925,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1935,8 +1935,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1945,8 +1945,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1955,8 +1955,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1965,8 +1965,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1975,8 +1975,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1985,8 +1985,8 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   },
   {
@@ -1995,8 +1995,10 @@ var questions = [
     answers: [
       { text: 'Tích cực', correct: false },
       { text: 'Tiêu cực', correct: false },
-      { text: 'Trung tính', correct: false },
-      { text: 'Không biết', correct: true }
+      { text: 'Trung tính', correct: true },
+      { text: 'Không biết', correct: false }
     ]
   }
 ]
+
+module.exports = { questions }
