@@ -1,5 +1,6 @@
 var Pool = require('pg-pool');
 var CryptoJS = require("crypto-js");
+var path = require('path');
 
 const pool = new Pool({
     user: process.env.DB_USER,
@@ -21,6 +22,7 @@ app.get('/verify', (req, res) => {
             var hash = req.query.hash;
             console.log(hash);
             var username = decode(hash).split("_date_")[0];
+            console.log(username);
             verifyUser(username);
             async function verifyUser(hash) {
                 const client = await pool.connect();
@@ -30,10 +32,13 @@ app.get('/verify', (req, res) => {
                         if (err) {
                             client.release();
                         } else {
-                            res.send("Success verify");
+                            res.render(path.join(__dirname, '../views/', '/verify_success.ejs'));
                             client.release();
                         }
                     });
+                    await JSON.stringify(client.query('SELECT "id", "username", "email", "address", "role", "full_name","verify" FROM "users" WHERE "username"=$1', [username], function(err, result) {
+                        console.log(result);
+                    }))
 
                 } catch ( e ) {
                     throw (e);

@@ -6,7 +6,7 @@ function encode(username) {
     return encodeURIComponent(hash.toString());
 }
 
-module.exports = function(user, pass, email_to, username) {
+sen_email = function(user, pass, email_to, username) {
 
 var transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -33,4 +33,3 @@ transporter.sendMail(mailOptions, function(error, info) {
     }
 });
 }
-
