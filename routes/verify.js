@@ -36,9 +36,6 @@ app.get('/verify', (req, res) => {
                             client.release();
                         }
                     });
-                    await JSON.stringify(client.query('SELECT "id", "username", "email", "address", "role", "full_name","verify" FROM "users" WHERE "username"=$1', [username], function(err, result) {
-                        console.log(result);
-                    }))
 
                 } catch ( e ) {
                     throw (e);
