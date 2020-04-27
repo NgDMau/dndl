@@ -1,5 +1,12 @@
 var path = require('path');
 var Pool = require('pg-pool');
+var list = require('../public/js/questions_training/text_topic.js')
+
+var questions = list.questions
+
+var listQuestion = [], numberQuestion = 20;
+
+shuffledQuestions(numberQuestion);
 
 const pool = new Pool({
     user: process.env.DB_USER,
@@ -13,7 +20,7 @@ const pool = new Pool({
 module.exports = function (app) {
     app.get('/training_topic', function (req, res) {
         if (req.isAuthenticated()) {
-            res.sendFile(path.join(__dirname, '../views/', 'training_topic.html'));
+            res.render("training_topic.ejs", {list:listQuestion});
         } else {
             res.redirect('/login')
         }
@@ -47,4 +54,11 @@ module.exports = function (app) {
         }
     });
 
+}
+
+function shuffledQuestions(index) {
+    var shuffled = questions.sort(() => Math.random() - .5);
+    for (var i = 0; i < index; i++) {
+      listQuestion.push(shuffled[i]);
+    }
 }

@@ -23,6 +23,7 @@ module.exports = function(app) {
 app.get('/upload', (req, res) => {
     res.sendFile(path.join(__dirname, '../views/', '/upload.html'));
 });
+
 app.post('/upload', upload.single('file'), (req, res) => {
     try {
         var key = req.file.path.split("/");
