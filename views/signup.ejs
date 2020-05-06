@@ -12,7 +12,30 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        #check{
+            display:none;
+        }
+        .valid {
+            color: green;
+            }
 
+        .valid:before {
+            position: relative;
+            left: -35px;
+            content: "✔";
+            }
+
+            /* Add a red text color and an "x" when the requirements are wrong */
+        .invalid {
+            color: red;
+            }
+
+        .invalid:before {
+            position: relative;
+            left: -35px;
+            content: "✖";
+    </style>
 </head>
 <body>
 
@@ -27,12 +50,13 @@
 
         <div class="inputform-box"> 
             <h2 class="header-text">Đăng kí dành cho Đối Tác</h2>
-            <form class="inputform" action="/login" method="post" >
-                <input type="email" id="email" name="email" placeholder="Email" >
-                <input type="text" id="name" name="company" placeholder="Tên công ty">
-                <input type="text" id="sdt" name="sdt" placeholder="Sdt">
-                <input type="password" id="pass" name="password" placeholder="Mật khẩu">
-                <input type="password" id="pass" name="password" placeholder="Nhập lại mật khẩu">
+            <form class="inputform" action="/signup" method="post" >
+                <input type="email" id="email" name="email" placeholder="Email" required>
+                <input type="text" id="name" name="company" placeholder="Tên công ty" required>
+                <input type="text" id="sdt" name="sdt" placeholder="Sdt" required>
+                <input type="password" id="pass" name="password" placeholder="Mật khẩu" required>
+                <input type="password" id="pass_" name="password" placeholder="Nhập lại mật khẩu" required>
+                <p id="check" class="invalid">Nhập lại mật khẩu<b id="mess"> chưa đúng</b> </p>
                 <input type="submit" value="Đăng kí">  
             </form>
         </div>
@@ -44,4 +68,30 @@
 
     </div>
 </body>
+<script type="text/javascript">
+    var pass = document.getElementById("pass");
+    var pass_ = document.getElementById("pass_");
+    var check = document.getElementById("check");
+    var mess = document.getElementById("mess");
+    pass_.onfocus = function() {
+        check.style.display = "block";
+    }
+
+    pass_.onkeyup = function () {
+        value_pass = pass.value;
+        value_pass_ = pass_.value;
+        if(value_pass_ == value_pass){
+            check.classList.remove("invalid");
+            check.classList.add("valid");
+            mess.innerText = " đã đúng"
+        }
+        else{
+            check.classList.remove("valid");
+            check.classList.add("invalid");
+            mess.innerText = " chưa đúng"
+
+        }
+    }
+
+</script>>
 </html>
