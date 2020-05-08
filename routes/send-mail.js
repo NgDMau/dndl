@@ -1,6 +1,12 @@
 const nodemailer = require('nodemailer');
+var CryptoJS = require("crypto-js");
 
-module.exports = function(user, pass, hash, email_to) {
+function encode(username) {
+    var hash = CryptoJS.AES.encrypt(username + "_date_" + Date.now(), "inlabinfore");
+    return encodeURIComponent(hash.toString());
+}
+
+sen_email = function(user, pass, email_to, username) {
 
 var transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -10,12 +16,12 @@ var transporter = nodemailer.createTransport({
     }
 });
 
-var link = "http://http://inlab.nisci.gov.vn/verify?hash=" + hash;
+var link = "http://http://inlab.nisci.gov.vn/verify?hash=" + encode(username);
 
 var mailOptions = {
     from: user,
     to: email_to,
-    subject: 'Sending Email using Node.js',
+    subject: 'Inlab verify signup',
     html: "Hello,<br> Please Click on the link to verify your email.<br><a href=" + link + ">Click here to verify</a>"
 };
 
@@ -27,4 +33,3 @@ transporter.sendMail(mailOptions, function(error, info) {
     }
 });
 }
-

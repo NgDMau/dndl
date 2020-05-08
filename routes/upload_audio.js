@@ -2,7 +2,8 @@ var path = require('path')
 
 module.exports = function (app) {
     app.get('/upload_audio', function (req, res) {
-        res.sendFile(path.join(__dirname, '../views/', 'upload_audio.html'))
+        // res.sendFile(path.join(__dirname, '../views/', 'upload_audio.html'))
+        res.render("upload_audio.ejs")
     });
 
     app.post('/upload_audio', upload.single('file'), (req, res) => {
@@ -36,7 +37,8 @@ module.exports = function (app) {
     
         } catch ( error ) {
             console.log("WRONGGGG")
-            res.sendFile(path.join(__dirname, '../views/', '/upload.html'));
+            // res.sendFile(path.join(__dirname, '../views/', '/upload.html'));
+            res.render("upload.ejs")
         }
     });
 }

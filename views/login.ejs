@@ -1,61 +1,66 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset=UTF-8">
     <title>Đăng nhập - Inlab</title>
-    <link rel="shortcut icon" type="image/png" href="/img/logoInlabSquare.png"/>
+    <link rel="shortcut icon" type="image/png" href="/img/logoInlabSquare.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/css/login.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 </head>
+
 <body>
 
-    <div class = "main"> 
-        <div class = "header" aria-hidden="true">
-            <div class = "subheader" >
-               <div class= "subheader-content">Có dữ liệu cần được dán nhãn? <a class="link" href='/loginrequester'><span class="highlight" >Hãy đăng nhập vào tài khoản Đối Tác<span class="material-icons">
-                    arrow_right_alt
-                    </span> </a>  </span>        
+    <div class="main">
+        <div class="header" aria-hidden="true">
+            <div class="subheader">
+                <div class="subheader-content">Có dữ liệu cần được dán nhãn? <a class="link"
+                        href='/loginrequester'><span class="highlight">Hãy đăng nhập vào tài khoản Đối Tác<span
+                                class="material-icons">
+                                arrow_right_alt
+                            </span> </a> </span>
                 </div>
             </div>
         </div>
-        <div class = "logobox" aria-hidden="true">
+        <div class="logobox" aria-hidden="true">
             <a href='/about'>
                 <img src="/img/logo.png" alt="inlab logo" class="logo" href='/about'>
             </a>
         </div>
         <div class="box">
 
-        <% if ( mess.length > 0 ) { %>
+            <% if ( mess.length > 0 ) { %>
             <div class="alert alert-danger" style="margin-top: 15px;">
                 <%= mess %>
             </div>
-        <% } %>
+            <% } %>
 
-        <div class="inputform-box"> 
-            <h2 class="header-text">Đăng nhập</h2>
-            <p> Tài khoản trải nghiệm: xinchao</p>
-            <form class="inputform" action="/login" method="post" >
-                <input type="text" id="username" name="username" placeholder="Tên đăng nhập!" >                
-                <input type="submit" value="Đăng nhập">
-               <!--<a href="/forgotpass" ><h4>Quên mật khẩu</h4></a>  
+            <div class="inputform-box">
+                <h2 class="header-text">Đăng nhập</h2>
+                <p> Tài khoản trải nghiệm: xinchao</p>
+                <form class="inputform" action="/login" method="post">
+                    <input type="text" id="username" name="username" placeholder="Tên đăng nhập!">
+                    <input type="submit" value="Đăng nhập">
+                    <!--<a href="/forgotpass" ><h4>Quên mật khẩu</h4></a>  
                 <a href="/signup" class="signup" ><h3>Tạo tài khoản mới <span class="material-icons">
                     arrow_right_alt
-                    </span></h3></a>   -->         
-         
-            </form>
-        </div>
+                    </span></h3></a>   -->
+
+                </form>
+            </div>
         </div>
 
-        <div class="footer" aria-hidden="true">
-            Copyright © 2020 InLab. All rights reserved.
-        </div>   
+        <footer>
+            <%- include("footer.ejs") %>
+        </footer>
 
     </div>
 </body>
+
 </html>

@@ -21,7 +21,8 @@ var upload = multer({
 
 module.exports = function(app) {
 app.get('/upload', (req, res) => {
-    res.sendFile(path.join(__dirname, '../views/', '/upload.html'));
+    // res.sendFile(path.join(__dirname, '../views/', '/upload.html'));
+    res.render("upload.ejs")
 });
 
 app.post('/upload', upload.single('file'), (req, res) => {
@@ -55,7 +56,8 @@ app.post('/upload', upload.single('file'), (req, res) => {
 
     } catch ( error ) {
         console.log("WRONGGGG")
-        res.sendFile(path.join(__dirname, '../views/', '/upload.html'));
+        // res.sendFile(path.join(__dirname, '../views/', '/upload.html'));
+        res.render("upload.ejs")
     }
 });
 }
