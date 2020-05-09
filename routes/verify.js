@@ -23,24 +23,18 @@ app.get('/verify', (req, res) => {
             console.log(hash);
             var username = decode(hash).split("_date_")[0];
             console.log(username);
-            verifyUser(username);
-            async function verifyUser(hash) {
-                const client = await pool.connect();
-                try {
-                    await client.query('BEGIN');
-                    await client.query("UPDATE users SET verify=1 WHERE username=($1)", [username], function(err, result) {
-                        if (err) {
-                            client.release();
-                        } else {
-                            res.render(path.join(__dirname, '../views/', '/verify_success.ejs'));
-                            client.release();
-                        }
-                    });
 
-                } catch ( e ) {
-                    throw (e);
+
+            verifyUser(username)
+            .then(function(result){
+                console.log(result);
+                if (result.name !== 'error'){
+                    res.render('verify_success.ejs')
+                    return
                 }
-            }
+                res.send("Failed to verify!")
+            });
+            
 
         } catch ( e ) {
             throw (e);
@@ -51,4 +45,18 @@ app.get('/verify', (req, res) => {
     }
 
 })
+}
+
+async function verifyUser(username) {
+    const client = await pool.connect();
+    try {
+        var cmd = "UPDATE customers SET verify=1 WHERE username=($1)";
+        var values = [username];
+        var result = await client.query(cmd, values);
+        client.release();
+        return result;
+    } catch ( e ) {
+        client.release()
+        return e;
+    }
 }
