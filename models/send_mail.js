@@ -16,7 +16,7 @@ var transporter = nodemailer.createTransport({
     }
 });
 
-var link = "http://http://inlab.nisci.gov.vn/verify?hash=" + encode(username);
+var link = "http://inlab.nisci.gov.vn/verify?hash=" + encode(username);
 
 var mailOptions = {
     from: user,
