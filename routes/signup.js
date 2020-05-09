@@ -58,7 +58,7 @@ app.post('/signup', function(req, res) {
         async function create_new_customer() {
             const client = await pool.connect();
             try {
-                var cmd = 'INSERT INTO customer("username","email","password","company","phone") VALUES($1,$2,$3,$4,$5)';
+                var cmd = 'INSERT INTO customers("username","email","password","company","phone") VALUES($1,$2,$3,$4,$5)';
                 var values = [username, email, password, company, phone];
                 var result = await client.query(cmd, values);
                 client.release();
