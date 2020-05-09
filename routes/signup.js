@@ -34,7 +34,7 @@ app.post('/signup', function(req, res) {
             
             if (result.name === 'error') {
                 if (result.code === '23505') {
-                    description = `Rất tiếc, địa chỉ ${email} đã được đăng ký!`
+                    var description = `Rất tiếc, địa chỉ ${email} đã được đăng ký!`
                 }
                 res.render('signup.ejs', {notification: description});
                 return Promise.reject('The email address already exists.')
