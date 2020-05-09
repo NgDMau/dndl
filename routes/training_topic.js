@@ -4,10 +4,6 @@ var list = require('../public/js/questions_training/text_topic.js')
 
 var questions = list.questions
 
-var listQuestion = [], numberQuestion = 20;
-
-shuffledQuestions(numberQuestion);
-
 const pool = new Pool({
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
@@ -20,7 +16,23 @@ const pool = new Pool({
 module.exports = function (app) {
     app.get('/training_topic', function (req, res) {
         if (req.isAuthenticated()) {
-            res.render("training_topic.ejs", {list:listQuestion});
+
+            var listQuestion = [], numberQuestion = 20;
+            shuffledQuestions(numberQuestion).then( function() {
+                    res.render("training_topic.ejs", {list:listQuestion});
+                    console.log("aaaa")
+                    console.log(listQuestion)
+                }
+            );
+            async function shuffledQuestions(index){
+                // This async call may fail.
+                var shuffled = questions.sort(() => Math.random() - .5);
+                for (var i = 0; i < index; i++) {
+                  listQuestion.push(shuffled[i]);
+                }
+                console.log("1")
+            }
+
         } else {
             res.redirect('/login')
         }
@@ -54,11 +66,4 @@ module.exports = function (app) {
         }
     });
 
-}
-
-function shuffledQuestions(index) {
-    var shuffled = questions.sort(() => Math.random() - .5);
-    for (var i = 0; i < index; i++) {
-      listQuestion.push(shuffled[i]);
-    }
 }
