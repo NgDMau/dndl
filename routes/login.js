@@ -66,13 +66,22 @@ module.exports = function (app) {
         done(null, user);
     });	
 
-    app.post('/login',
+    app.post('/login/worker',
         passport.authenticate('id-only', {
             successRedirect: '/dashboard',
             failureRedirect: '/login_fail'
         }), function (req, res) {
             req.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000; // Cookie expires after 30 days
         });
+
+
+    app.post('/login/customer',
+    passport.authenticate('id-only', {
+        successRedirect: '/dashboard',
+        failureRedirect: '/login_fail'
+    }), function (req, res) {
+        req.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000; // Cookie expires after 30 days
+    });
 
     app.get('/login', function (req, res) {
         

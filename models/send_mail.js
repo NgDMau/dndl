@@ -6,7 +6,7 @@ function encode(username) {
     return encodeURIComponent(hash.toString());
 }
 
-sen_email = function(user, pass, email_to, username) {
+module.exports = function(user, pass, email_to, username) {
 
 var transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -16,7 +16,7 @@ var transporter = nodemailer.createTransport({
     }
 });
 
-var link = "http://http://inlab.nisci.gov.vn/verify?hash=" + encode(username);
+var link = "http://inlab.nisci.gov.vn/verify?hash=" + encode(username);
 
 var mailOptions = {
     from: user,
