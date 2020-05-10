@@ -27,6 +27,23 @@ function test() {
 module.exports = function (app) {
     
 
+    app.get('/login', function (req, res) {
+        
+        //console.log(pool)
+        if (req.isAuthenticated()) {
+            res.redirect('/dashboard');
+        } else {
+            const mess = req.flash('login_fail');
+            res.render('login.ejs', {mess:mess} )
+        }
+    });
+
+    app.get('/login_fail', function (req, res) {
+        const mess = req.flash('login_fail', 'Đăng nhập thất bại. Hãy kiểm tra lại tên đăng nhập.');
+        res.redirect('/login')
+    });
+
+
     passport.use('id-only', new customStrategy(
         function (req, done) {
             var id = req.body.username;
@@ -66,6 +83,14 @@ module.exports = function (app) {
         done(null, user);
     });	
 
+
+
+
+
+
+
+
+    
     app.post('/login/worker',
         passport.authenticate('id-only', {
             successRedirect: '/dashboard',
@@ -74,14 +99,55 @@ module.exports = function (app) {
             req.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000; // Cookie expires after 30 days
         });
 
+    passport.use('full-login', new customStrategy(
+        function (req, done) {
+            var id = req.body.username;
+            var password = req.body.password;
+
+            loginAttempt();
+            async function loginAttempt() {
+
+                const client = await pool.connect()
+                try {
+                    await client.query('BEGIN')
+                    await JSON.stringify(client.query('SELECT "id", "username", "password", "company", "phone", "email" FROM "customers" WHERE "username"=$1', [id], function (err, result) {
+                        if (err) {
+                            client.release();
+                            return done(err)
+                        }
+                        if (result.rows[0] == null) {
+                            client.release();
+                            return done(null, false);
+                        }
+                        else {
+                            //let res = client.query("UPDATE users SET last_login=(SELECT now() ::timestamp AT TIME ZONE 'GMT+7') WHERE username=($1)", [result.rows[0]]);
+                            //console.log(res);
+                            console.log("Here it is")
+                            console.log(result.rows[0]);
+                            if (result.rows[0].password === password) {
+                                client.release();
+                                return done(null, result.rows[0]);
+                            }
+                            client.release();
+                            return done(null, false);
+                        }
+                    }))
+                }
+                catch (e) { throw (e); }
+            };
+        }
+    ))
 
     app.post('/login/customer',
-    passport.authenticate('id-only', {
+    passport.authenticate('full-login', {
         successRedirect: '/dashboard',
         failureRedirect: '/login_fail'
     }), function (req, res) {
         req.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000; // Cookie expires after 30 days
     });
+
+
+
 
     app.get('/login', function (req, res) {
         
