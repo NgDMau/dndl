@@ -14,6 +14,24 @@
     <link href="/css/db-requester.css" rel="stylesheet">
     <title>Dashboard - Inlab</title>
     <link rel="shortcut icon" type="image/png" href="/img/logoInlabSquare.png">
+
+    <script>
+        $(document).ready(function() {
+            const createProjectForm = document.getElementById("create_project_form");
+            const progressBar = document.getElementById("progressBar");
+
+            uploadForm.addEventListener("submit", uploadFile);
+
+            function uploadFile(e) {
+                e.preventDefault();
+                const xhr = new XMLHttpRequest();
+
+            }
+            
+
+        })
+
+    </script>
 </head>
 
 <body>
@@ -41,10 +59,11 @@
 </li>-->
                     <li class="nav-item"><a class="nav-link" href="/dashboard"><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a></li>
                     <li class="nav-item pcoded-hasmenu"><a class="nav-link" href="#!"><span class="pcoded-micon"><i class="feather icon-lock"></i></span><span class="pcoded-mtext">Authentication</span></a>
-                        <ul class="pcoded-submenu">
+                    <li class="nav-item"><a class="nav-link" href="/logout"><span class="pcoded-micon"><i class="feather icon-logout"></i></span><span class="pcoded-mtext">Đăng xuất</span></a></li>
+                        <!-- <ul class="pcoded-submenu">
                             <li><a href="auth-signup.html" target="_blank">Sign up</a></li>
                             <li><a href="auth-signin.html" target="_blank">Sign in</a></li>
-                        </ul>
+                        </ul> -->
                     </li>
                 </ul>
             </div>
@@ -126,7 +145,7 @@
                                 <h5>Thêm dự án mới</h5>
                             </div>
                             <div class="card-body">
-                                <form method="post" action="/create_project">
+                                <form method="post" action="/create_project" id="create_project_form">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group row"><label class="col-sm-3 col-form-label" for="inputEmail3">Tên dự án</label>
@@ -204,6 +223,10 @@
                                         <div class="form-group row"><label class="col-sm-3 col-form-label" for="inputEmail3">Upload dữ liệu</label>
                                             <div class="col-sm-9">
                                                 <div class="custom-file"><input class="custom-file-input" id="inputGroupFile01" type="file"><label class="custom-file-label" for="inputGroupFile01">Choose file</label></div>
+                                            </div>
+                                            <br>
+                                            <div id="myProgress">
+                                                <div id="progressBar">0%</div>
                                             </div>
                                         </div>
                                         <div class="form-group row">

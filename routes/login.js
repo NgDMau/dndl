@@ -126,7 +126,15 @@ module.exports = function (app) {
                             console.log(result.rows[0]);
                             if (result.rows[0].password === password) {
                                 client.release();
-                                return done(null, result.rows[0]);
+                                var this_customer = {
+                                    username: result.rows[0].username,
+                                    email: result.rows[0].email,
+                                    address: result.rows[0].address || "Vietnam",
+                                    role: result.rows[0].role || "customer",
+                                    full_name: result.rows[0].fullname || "Unknown-name",
+                                    lastlogin: result.rows[0].lastlogin || "Unknown-time",
+                                }
+                                return done(null, this_customer);
                             }
                             client.release();
                             return done(null, false);

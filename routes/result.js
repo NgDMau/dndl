@@ -15,6 +15,6 @@ module.exports = function (app) {
     });
     app.get('/3rd_result', function (req, res) {
         // res.sendFile(path.join(__dirname, '../views/', '3rd_result.html'))
-        res.render("3st_result.ejs")
+        res.render("3rd_result.ejs")
     });
 }
