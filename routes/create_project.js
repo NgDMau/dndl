@@ -5,24 +5,48 @@ var multer = require('multer');
 var fs = require('fs');
 var path = require('path');
 
-var storage = multer.diskStorage({
-    destination: function(req, file, cb) {
-        cb(null, path.join(__dirname, '../temp_data'));
-    },
-    filename: function(req, file, cb) {
-        cb(null, file.fieldname + '-' + Date.now());
-    }
-})
-
-var upload = multer({
-    storage: storage
-})
-
 
 module.exports = function (app) {
     app.post('/create_project', function (req, res) {
         if (req.isAuthenticated()) {
+            
+            console.log("--------request body---")
+            console.log(req.body)
+            console.log("-----------------")
 
+            var user_dir = '../customers_data/' + req.session.passport.user.username;
+            user_dir = path.join(__dirname, user_dir)
+            if (!fs.existsSync(user_dir)){
+                fs.mkdirSync(user_dir);
+            }
+
+            var datafile = ""
+
+            var storage = multer.diskStorage({
+                destination: function(req, file, cb) {
+                    cb(null, path.join(__dirname, '../breathe'))
+                },
+                filename: function(req, file, cb) {
+                    var parts = file.originalname.split('.') || ['unknown','extension'];
+                    var extension = parts[parts.length - 1];
+                    if (["txt", "doc", "text", "csv", "json"].indexOf(extension) > -1) {
+                        //var filename = parts[0] + '-' + Date.now() + '.' + extension;
+                        //console.log('Saving file: ',filename);
+                        var filename = user_dir + '/' + file.originalname 
+                        datafile = filename;
+                        cb(null, filename);
+                    }
+                    res.send("Wrong file format!")
+                    return
+                    
+                }
+            })
+            
+            var upload = multer({
+                storage: storage
+            })
+
+            upload.single('file');
             
             utils.generateRandomProjectID()
             .then((projectID) => {
@@ -34,23 +58,12 @@ module.exports = function (app) {
                     rate: req.body.rate,
                     starttime: req.body.starttime,
                     endtime: req.body.endtime,
-                    datafile: req.body.datafile || 'data.txt', //req.body.datafile
+                    datafile: req.body.datafile || datafile || 'data.txt', //req.body.datafile
                     priority: 0,
                     uploadtime: '2010-12-31 21:00:00 +00',
                     type: 'sentiment',
                     owner_id: req.session.passport.user.username
                 }
-
-                var pool = {
-                    user: process.env.user,
-                    password: process.env.password,
-                    host: process.env.host,
-                    port: process.env.port,
-                    database: process.env.database,
-                    ssl: process.env.ssl
-                }
-
-                console.log(pool);
 
                 var new_project = new Project(project_config);
                 // console.log("====================")
