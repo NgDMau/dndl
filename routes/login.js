@@ -10,10 +10,10 @@ const pool = new Pool({
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     database: process.env.DB_DATABASE,
-    ssl: true//(process.env.DB_SSL == 'true')
+    ssl: {rejectUnauthorized: false}//(process.env.DB_SSL == 'true')
 });
 
-console.log(process.env.DB_HOST)
+console.log(process.env.DB_DATABASE)
 
 function test() {
     const testFolder = '../temp_data/';
