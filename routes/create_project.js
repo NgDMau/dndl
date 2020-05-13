@@ -1,52 +1,55 @@
 var Project = require('../models/project')
 var utils = require('../models/utils')
-
+var slash = require('slash');
 var multer = require('multer');
 var fs = require('fs');
 var path = require('path');
 
+var storage = multer.diskStorage({
+
+    destination: function(req, file, cb) {
+        var owner_dir = req.session.passport.user.username;
+        var dir = path.join(__dirname, '../rawdata/' + owner_dir)
+        
+        
+
+        if (!fs.existsSync(dir)){
+            fs.mkdirSync(dir);
+        }
+
+        cb(null, dir)
+    },
+
+    filename: function(req, file, cb) {
+        var parts = file.originalname.split('.') || ['unknown','extension'];
+        var extension = parts[parts.length - 1];
+        var filename = parts[0] + '-' + Date.now() + '.' + extension;
+        console.log('Saving file: ',filename);
+        cb(null, filename);
+    }
+})
+
+var upload = multer({
+    storage: storage
+})
+
 
 module.exports = function (app) {
-    app.post('/create_project', function (req, res) {
+    app.post('/create_project', upload.single('datafile'), function (req, res) {
         if (req.isAuthenticated()) {
+            console.log("--upload file--")
+
+            var dir_arr =  slash(req.file.path).split('/');
+            dir_arr = dir_arr.slice(1).slice(-3);
             
+            var filepath = '/' + dir_arr.join("/")
+            console.log("req.file.path: ", req.file.path)
+            console.log(typeof(req.file.path))
+            console.log("DIR ARR: ", dir_arr)
+            console.log("FILEPATH: ", filepath)
             console.log("--------request body---")
             console.log(req.body)
             console.log("-----------------")
-
-            var user_dir = '../customers_data/' + req.session.passport.user.username;
-            user_dir = path.join(__dirname, user_dir)
-            if (!fs.existsSync(user_dir)){
-                fs.mkdirSync(user_dir);
-            }
-
-            var datafile = ""
-
-            var storage = multer.diskStorage({
-                destination: function(req, file, cb) {
-                    cb(null, path.join(__dirname, '../breathe'))
-                },
-                filename: function(req, file, cb) {
-                    var parts = file.originalname.split('.') || ['unknown','extension'];
-                    var extension = parts[parts.length - 1];
-                    if (["txt", "doc", "text", "csv", "json"].indexOf(extension) > -1) {
-                        //var filename = parts[0] + '-' + Date.now() + '.' + extension;
-                        //console.log('Saving file: ',filename);
-                        var filename = user_dir + '/' + file.originalname 
-                        datafile = filename;
-                        cb(null, filename);
-                    }
-                    res.send("Wrong file format!")
-                    return
-                    
-                }
-            })
-            
-            var upload = multer({
-                storage: storage
-            })
-
-            upload.single('file');
             
             utils.generateRandomProjectID()
             .then((projectID) => {
@@ -58,7 +61,7 @@ module.exports = function (app) {
                     rate: req.body.rate,
                     starttime: req.body.starttime,
                     endtime: req.body.endtime,
-                    datafile: req.body.datafile || datafile || 'data.txt', //req.body.datafile
+                    datafile: filepath || 'data.txt', //req.body.datafile
                     priority: 0,
                     uploadtime: '2010-12-31 21:00:00 +00',
                     type: 'sentiment',
@@ -66,17 +69,14 @@ module.exports = function (app) {
                 }
 
                 var new_project = new Project(project_config);
-                // console.log("====================")
-                // //console.log(cre)
-                // //console.log("====================")
-
-                //res.redirect('/dashboard');
+                
                 new_project.register()
                     .then((registered) => {
                         if (checkForSuccess(registered)) {
                             new_project.create()
                                 .then((created) => {
                                     if (checkForSuccess(created)) {
+                                      
                                         notiProjectCreated(res, true)
                                     } else {
                                         notiProjectCreated(res, false)
