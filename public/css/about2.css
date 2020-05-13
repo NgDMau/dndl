@@ -35,8 +35,15 @@ body:after{
 }
 
 
-a:hover { 
-    color: #F1DF64 !important; 
+#data_contribute{
+    color: #ffc107;
+}
+
+#contact{
+    color: white;
+}
+#contact:hover{
+    color: black;
 }
 .heading{
     font-size: 5vh;
