@@ -17,67 +17,6 @@
     <link rel="shortcut icon" type="image/png" href="/img/logoInlabSquare.png">
     
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-
-    <script>
-        $( document ).ready(function() {
-            const createProjectForm = document.getElementById("create_project_form");
-            const progressBar = document.getElementById("progressBar");
-
-            createProjectForm.addEventListener("submit", uploadFile);
-
-            function uploadFile(e) {
-                e.preventDefault();
-                const xhr = new XMLHttpRequest();
-
-                var projectData = new FormData();
-
-                projectData.append("name", document.getElementById("projectName").value)
-                projectData.append("type", document.getElementById("projectType").value)
-                projectData.append("theme", document.getElementById("projectTheme").value)
-                projectData.append("rate", document.getElementById("projectRate").value)
-                projectData.append("starttime", document.getElementById("projectStarttime").value)
-                projectData.append("endtime", document.getElementById("projectEndtime").value)
-                projectData.append("datafile", document.getElementById("projectDatafile").value)
-                
-                var name = document.getElementById("inputName").value;
-                console.log(name);
-                console.log("----")
-                console.log(projectData.entries())
-                console.log("aaaaa")
-
-                xhr.open("POST", "/create_project");
-                xhr.upload.addEventListener("progress", e => {
-                    console.log(e)
-                    const percent = e.lengthComputable ? (e.loaded / e.total) * 100 : 0;
-
-                    
-                    progressBar.style.display = 'block';
-                    progressBar.style.width = percent.toFixed(2) + '%';
-                    progressBar.innerHTML = percent.toFixed(2) + '%';
-                });
-
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState === XMLHttpRequest.DONE) {
-                    var status = xhr.status;
-                    if (status === 0 || (status >= 200 && status < 400)) {
-                        console.log(xhr.responseText);
-                        console.log(xhr.responseURL);
-                        //window.location.href = xhr.responseURL;
-                    } else {
-                        if (status === 413) {
-                        alert("Tải lên thất bại do dung lượng file vượt quá 20MB");
-                        }
-                        alert("Có lỗi xảy ra, vui lòng tải lại trang. Mã lỗi: " + status);
-                    }
-                    }
-                }
-
-                xhr.send(projectData);
-            }
-            
-        });
-
-    </script>
 </head>
 
 <body>
