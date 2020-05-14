@@ -5,13 +5,15 @@ var customStrategy = require('passport-custom').Strategy;
 
 // var app = express();
 const pool = new Pool({
-    user: process.env.DB_USER,
+    user: process.env.DB_USER ,
     password: process.env.DB_PASSWORD,
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     database: process.env.DB_DATABASE,
-    ssl: true//(process.env.DB_SSL == 'true')
+    ssl: {rejectUnauthorized: false}//(process.env.DB_SSL == 'true')
 });
+
+console.log(process.env.DB_DATABASE)
 
 function test() {
     const testFolder = '../temp_data/';

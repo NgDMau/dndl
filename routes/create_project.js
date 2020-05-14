@@ -25,6 +25,9 @@ var storage = multer.diskStorage({
         var extension = parts[parts.length - 1];
         var filename = parts[0] + '-' + Date.now() + '.' + extension;
         console.log('Saving file: ',filename);
+        //var owner_dir = req.session.passport.user.username;
+        //var dir = path.join(__dirname, '../rawdata/' + owner_dir)
+        //filename = dir + "/" + filename;
         cb(null, filename);
     }
 })
@@ -50,6 +53,9 @@ module.exports = function (app) {
             console.log("--------request body---")
             console.log(req.body)
             console.log("-----------------")
+
+            var owner_dir = req.session.passport.user.username;
+            var dir = path.join(__dirname, '../rawdata/' + owner_dir)
             
             utils.generateRandomProjectID()
             .then((projectID) => {
@@ -61,7 +67,7 @@ module.exports = function (app) {
                     rate: req.body.rate,
                     starttime: req.body.starttime,
                     endtime: req.body.endtime,
-                    datafile: filepath || 'data.txt', //req.body.datafile
+                    datafile: slash(req.file.path) || 'data.txt', //req.body.datafile
                     priority: 0,
                     uploadtime: '2010-12-31 21:00:00 +00',
                     type: 'sentiment',
@@ -76,8 +82,8 @@ module.exports = function (app) {
                             new_project.create()
                                 .then((created) => {
                                     if (checkForSuccess(created)) {
-                                      
-                                        notiProjectCreated(res, true)
+                                        new_project.importRawFileToTable()
+                                        .then(notiProjectCreated(res, true))
                                     } else {
                                         notiProjectCreated(res, false)
                                     }
