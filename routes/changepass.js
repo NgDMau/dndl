@@ -14,8 +14,8 @@ const pool = new Pool({
 module.exports = function(app) {
 var username = '';
 app.get('/changepass', function(req, res) {
-    res.render('changepass.ejs');
     if (req.query.hash) {
+        res.render('changepass.ejs');
         var result_decode = decode.decode(req.query.hash);
         username = result_decode.split('_date_')[0];
         console.log(username);
