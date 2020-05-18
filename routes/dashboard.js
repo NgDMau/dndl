@@ -23,7 +23,9 @@ module.exports = function (app) {
         if (req.isAuthenticated()) {
 
             var user = new User(req.session.passport.user)
+            console.log("user here")
             console.log(user)
+            console.log("---------")
 
             if (user.isCustomer()) {
 

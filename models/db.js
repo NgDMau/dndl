@@ -107,6 +107,19 @@ module.exports = {
             client.release();
             return e;
         }
+    },
+
+    getClient: async function () {
+        try {
+            var client = await pool.connect();
+            return client;
+        } catch (e) {
+            return e;
+        }
+    },
+
+    getPool: function () {
+        return pool;
     }
 }
 

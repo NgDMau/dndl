@@ -34,7 +34,7 @@
 
         <div class="inputform-box"> 
             <h2 class="header-text">Đăng nhập dành cho Đối Tác</h2>
-            <form class="inputform" action="/login" method="post" >
+            <form class="inputform" action="/login/customer" method="post" >
                 <input type="text" id="username" name="username" placeholder="Tên đăng nhập" >
                 <input type="password" id="password" name="password" placeholder="Mật khẩu" >
                 <input type="submit" value="Đăng nhập">  
@@ -42,12 +42,12 @@
             <a href="/forgotpass" >Quên mật khẩu?</a>  
             <a href="/signup" class="highlight"  >Tạo tài khoản mới</a>    
         </div>
-        </div>
-
-        <div class="footer">
-            Copyright © 2020 InLab. All rights reserved.
-        </div>   
 
     </div>
+    </div>
+    <footer>
+        <%- include("footer.ejs") %>
+    </footer>
+    
 </body>
 </html>

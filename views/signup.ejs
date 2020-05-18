@@ -29,8 +29,6 @@
             <h2 class="header-text">Đăng kí dành cho Đối Tác</h2>
             <form class="inputform" action="/login" method="post" >
                 <input type="email" id="email" name="email" placeholder="Email" >
-                <input type="text" id="name" name="company" placeholder="Tên công ty">
-                <input type="text" id="sdt" name="sdt" placeholder="Sdt">
                 <input type="password" id="pass" name="password" placeholder="Mật khẩu">
                 <input type="password" id="pass" name="password" placeholder="Nhập lại mật khẩu">
                 <input type="submit" value="Đăng kí">  
@@ -38,9 +36,9 @@
         </div>
         </div>
 
-        <div class="footer">
-            Copyright © 2020 InLab. All rights reserved.
-        </div>   
+        <footer>
+            <%- include("footer.ejs") %>
+        </footer>
 
     </div>
 </body>

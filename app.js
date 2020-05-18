@@ -69,6 +69,7 @@ require('./routes/upload')(app);
 require('./routes/uploadresult')(app);
 require('./routes/loginrequester')(app);
 require('./routes/contact')(app);
+require('./routes/changepass')(app);
 require('./routes/contactsale')(app);
 require('./routes/verify')(app);
 require('./routes/info')(app);
