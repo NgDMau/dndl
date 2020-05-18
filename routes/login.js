@@ -10,7 +10,7 @@ const pool = new Pool({
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     database: process.env.DB_DATABASE,
-    ssl: {rejectUnauthorized: false}//(process.env.DB_SSL == 'true')
+    ssl: { rejectUnauthorized: false }
 });
 
 console.log(process.env.DB_DATABASE)
@@ -85,14 +85,6 @@ module.exports = function (app) {
         done(null, user);
     });	
 
-
-
-
-
-
-
-
-    
     app.post('/login/worker',
         passport.authenticate('id-only', {
             successRedirect: '/dashboard',
@@ -151,7 +143,7 @@ module.exports = function (app) {
     app.post('/login/customer',
     passport.authenticate('full-login', {
         successRedirect: '/dashboard',
-        failureRedirect: '/login_fail'
+        failureRedirect: '/loginrequester_fail'
     }), function (req, res) {
         req.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000; // Cookie expires after 30 days
     });
@@ -170,9 +162,9 @@ module.exports = function (app) {
         }
     });
 
-    app.get('/login_fail', function (req, res) {
+    app.get('/loginrequester_fail', function (req, res) {
         const mess = req.flash('login_fail', 'Đăng nhập thất bại. Hãy kiểm tra lại tên đăng nhập.');
-        res.redirect('/login')
+        res.redirect('/loginrequester')
     });
     
 
