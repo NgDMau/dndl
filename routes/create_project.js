@@ -71,7 +71,7 @@ module.exports = function (app) {
                     datafile: slash(req.file.path) || 'data.txt', //req.body.datafile
                     priority: 0,
                     uploadtime: '2010-12-31 21:00:00 +00',
-                    type: 'sentiment',
+                    type: req.body.type || 'sentiment',
                     owner_id: req.session.passport.user.username
                 }
 

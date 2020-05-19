@@ -41,7 +41,7 @@ module.exports = class Project {
     async create() {
         var db = require('./db');
         var child_table = this.id;
-        var parent_table = this.type;
+        var parent_table =  this.type;
         var schema = 'projects';
         var result = false;
 
@@ -74,7 +74,7 @@ module.exports = class Project {
         fs.readFile(rawfile, async function(err, data) {
             if(err) throw err;
             var array = data.toString().split('\n');
-            
+            array.pop();
             console.log(array)
             var cmd = "INSERT INTO projects." + tablename + "(content, labeled_workers, labeled_values, labeled_time)" + " VALUES($1, $2, $3, $4)";
             var final_result = []
