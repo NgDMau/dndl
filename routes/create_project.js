@@ -15,6 +15,7 @@ var storage = multer.diskStorage({
 
         if (!fs.existsSync(dir)){
             fs.mkdirSync(dir);
+            console.log("Dir created!")
         }
 
         cb(null, dir)

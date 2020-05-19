@@ -11,7 +11,7 @@ const connection = new Pool({
     // host: process.env.host || 'ec2-3-229-210-93.compute-1.amazonaws.com',
     // port: process.env.port || '5432',
     // database: process.env.database || 'd5tabqes3975',
-    ssl: true
+    ssl: { rejectUnauthorized: false }
 });
 
 
