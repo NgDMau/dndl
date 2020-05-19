@@ -3,8 +3,12 @@ html{
   font-size: 15px;
   height:100%;
   width:100%;
+}
+
+.content {
   display: flex;
   justify-content: center;
+  margin-top: 5%;
 }
 
 
@@ -19,11 +23,10 @@ main{
   padding-right:5%;*/
 
 }
-.logofit{
-  object-fit: contain;
-  width:50px;
-  height:50px;
-  margin-left: 5px;
+.logo {
+  object-fit: cover;
+  width: 75px;
+  height: 34px;
 }
 .logo{
   object-fit: contain;
@@ -91,18 +94,26 @@ img{
   bottom: 10px;
 }
 
-.detail-result{
-  float: right;
+.detail > span {
+  display: grid;
 }
+
+.list-work {
+  margin: 5%;
+  margin-bottom: 10%;
+}
+
+.list-work > div:last-child{
+  display: flex;
+  justify-content: flex-end;
+}
+
+
 
 .title{
   font-weight: bold;
   font-size: small;
-text-align: center;
-}
-.title-status{
-  /*display: flex;
-  justify-content: center;*/
+  text-align: center;
 }
 
 /*slider*/
@@ -110,14 +121,7 @@ text-align: center;
   margin-top: 100px;
   padding: 20px;
 }
-.swiper-container{
-  width: 100%;
-}
-.swiper-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+
 .btn {
   margin-top:20px;
   height:52px;
@@ -135,10 +139,7 @@ text-align: center;
   /* Center slide text vertically */
   
 }
-.swiper-wrapper div:hover {
-  background: #434556;
-  color: white;
-}
+
 .footer {
   position: fixed;
   left: 0;
