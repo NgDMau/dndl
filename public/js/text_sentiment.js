@@ -152,10 +152,10 @@ function shuffledQuestions(index) {
 function result(){
   
   if(score == numberQuestion){
-    // audioright.play();
-    // document.getElementById('content').classList.add('hide');
-    // resultElement.classList.remove('hide');
-    window.location.href = '/1st_result'
+    audioright.play();
+    document.getElementById('content').classList.add('hide');
+    resultElement.classList.remove('hide');
+
   }else{
     audiowrong.play();
     document.getElementById('content').classList.add('hide');
@@ -168,6 +168,20 @@ function result(){
       return el != null;
     });
   }
+}
+
+function nextLvl(){
+  var formData = new FormData();
+    $.ajax({
+        type: "POST",
+        url: "/text_sentiment",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (data) {
+          location.href="/dashboard"
+        }
+    });
 }
 
 

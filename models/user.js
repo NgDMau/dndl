@@ -45,6 +45,10 @@ module.exports = class User{
         return this.role === 'worker';
     }
 
+    isNewbie() {
+        return (this.role).split('_')[0] === 'level';
+    }
+
     updateLastlogin() {
         // Code here
         return true
