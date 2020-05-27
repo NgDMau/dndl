@@ -144,10 +144,9 @@ function shuffledQuestions(index) {
 
 function result(){
   if(score == numberQuestion){
-    // audioright.play();
-    // document.getElementById('content').classList.add('hide');
-    // resultElement.classList.remove('hide');
-    window.location.href = '/2nd_result';
+    audioright.play();
+    document.getElementById('content').classList.add('hide');
+    resultElement.classList.remove('hide');
     
   }else{
     audiowrong.play();
@@ -168,5 +167,18 @@ function goto_label(){
   document.getElementById(id_label).click();
 }
 
+function nextLvl(){
+  var formData = new FormData();
+    $.ajax({
+        type: "POST",
+        url: "/training_audio",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (data) {
+          location.href="/dashboard"
+        }
+    });
+}
 
 

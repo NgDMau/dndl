@@ -152,10 +152,13 @@ function shuffledQuestions(index) {
 function result(){
   
   if(score == numberQuestion){
-    // audioright.play();
-    // document.getElementById('content').classList.add('hide');
-    // resultElement.classList.remove('hide');
-    window.location.href = '/3rd_result'
+
+
+    audioright.play();
+    document.getElementById('content').classList.add('hide');
+    resultElement.classList.remove('hide');
+
+    // window.location.href = '/3rd_result'
   }else{
     audiowrong.play();
     document.getElementById('content').classList.add('hide');
@@ -168,6 +171,20 @@ function result(){
       return el != null;
     });
   }
+}
+
+function nextLvl(){
+  var formData = new FormData();
+    $.ajax({
+        type: "POST",
+        url: "/training_topic",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (data) {
+          location.href="/dashboard"
+        }
+    });
 }
 
 

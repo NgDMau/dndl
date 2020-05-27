@@ -1,8 +1,10 @@
 var path = require('path');
 var Pool = require('pg-pool');
-var list = require('../public/js/questions_training/text_topic.js')
+var list = require('../public/js/questions_training/question_test.js')
+var User = require('../models/user')
 
 var questions = list.questions
+console.log(questions)
 
 const pool = new Pool({
     user: process.env.DB_USER,
@@ -16,7 +18,8 @@ const pool = new Pool({
 module.exports = function (app) {
     app.get('/final_test', function (req, res) {
         if (req.isAuthenticated()) {
-            if (req.session.passport.user.role == "worker") {
+            var user = new User(req.session.passport.user)
+            if (user.role == "beginner" || user.role == "worker") {
 
                 var listQuestion = [], numberQuestion = 10;
                 shuffledQuestions(numberQuestion).then(function () {
@@ -43,9 +46,23 @@ module.exports = function (app) {
 
     app.post('/final_test', function (req, res) {
         if (req.isAuthenticated()) {
-            console.log(req.session.passport.user.role)
-            if (req.session.passport.user.role == "worker") {
+            var user = new User(req.session.passport.user)
+            if (user.role == "beginner") {
+                pool.connect(function (err, client, done) {
+                    if (err) {
+                        return console.error(err);
+                    }
 
+                    client.query('UPDATE users SET role=$1 WHERE username=$2', ['worker', user.username], function (err, result) {
+                        if (err) {
+                            client.release();
+                            return console.error(err);
+                        }
+                        client.release();
+                        req.session.passport.user.role == "worker"
+                        res.redirect('/dashboard')
+                    });
+                })
             } else {
                 res.redirect('/')
             }

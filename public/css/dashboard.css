@@ -120,6 +120,7 @@ img{
 .container{
   margin-top: 100px;
   padding: 20px;
+  width:600px;
 }
 
 .btn {

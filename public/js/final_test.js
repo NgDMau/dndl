@@ -20,12 +20,9 @@ var audioright = new Audio('/audio/correct1.mp3');
 var audiowrong = new Audio('/audio/wrong1.mp3');
 
 var listQuestion = [], currentQuestionIndex
-var numberQuestion = 20;
+var numberQuestion = 10;
 
 startButton.addEventListener('click', start)
-resetButton.addEventListener('click',()=> {
-  reset()
-})
 
 nextButton.addEventListener('click', () => {
 
@@ -65,24 +62,6 @@ function start() {
   setNextQuestion()
 }
 
-function reset() {
-  document.getElementById('content').classList.remove('hide');
-  resultButton.classList.add('hide');;
-  startButton.classList.add('hide')
-  currentQuestionIndex = 0
-  labelElement.classList.remove('hide')
-  titleElement.innerText = 'CÂU HỎI'
-  document.getElementById('result_content').innerText = "Chúc mừng bạn đã hoàn thành phần đào tạo phân tích sắc thái văn bản. Bây giờ hãy bắt đầu với phần đào tạo tiếp theo."
-  document.getElementById('btn-next-lvl').classList.remove('hide');
-  resetButton.classList.add('hide');
-  resultElement.classList.add('hide');
-  listQuestion = listQuestion.filter(function (el) {
-    return el != null;
-  });
-  // document.getElementById("shortcut_label").classList.remove('hide')
-
-  setNextQuestion()
-}
 
 function setNextQuestion() {
   resetState()
@@ -146,16 +125,6 @@ function shuffledQuestions(index) {
 }
 
 function result(){
-
-    var formData = new FormData();
-    formData.append('score', score);
-    $.ajax({
-        type: "POST",
-        url: "/final_test",
-        data: formData,
-        processData: false,
-        contentType: false,
-    });
   
   if(score == numberQuestion){
       
@@ -166,7 +135,7 @@ function result(){
   }else{
     audiowrong.play();
     document.getElementById('content').classList.add('hide');
-    document.getElementById('result_content').innerText = `Chà, bạn đã làm đúng ${score} câu rồi đấy, cùng làm lại ${numberQuestion-score} câu chưa chính xác nhé!`
+    document.getElementById('result_content').innerText = `Bạn đã làm đúng ${score} câu trong số ${numberQuestion}, hay làm lại phần đào tạo và thực hiện bài kiểm tra này một lần nữa.`
     document.getElementById('btn-next-lvl').classList.add('hide');
     //document.getElementById('btn-again').innerHTML = 'Làm lại những câu sai';
     document.getElementById('btn-again').classList.remove('hide');
@@ -176,5 +145,20 @@ function result(){
     });
   }
 }
+
+function nextLvl(){
+  var formData = new FormData();
+    $.ajax({
+        type: "POST",
+        url: "/training_topic",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (data) {
+          location.href="/dashboard"
+        }
+    });
+}
+
 
 

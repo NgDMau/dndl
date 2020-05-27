@@ -1,6 +1,8 @@
 var path = require('path')
 var User = require('../models/user')
 var Project = require('../models/project')
+var passport = require('passport');
+const session = require('express-session');
 // var express = require('express')
 
 var Pool = require('pg-pool')
@@ -17,7 +19,11 @@ const pool = new Pool({
 
 
 module.exports = function (app) {
-    app.set('view engine', 'pug');
+
+    passport.serializeUser(function(user, done) { done(null, user); });
+    passport.deserializeUser(function(obj, done) { done(null, obj); });
+
+    app.set('view engine', 'ejs');
 
     app.get('/dashboard', function (req, res) {
         if (req.isAuthenticated()) {
@@ -47,6 +53,7 @@ module.exports = function (app) {
             if(user.isMod()) {
                 res.redirect('/user_management');
             } 
+
             if(user.isWorker()) {
                 var name_array = user.fullname.split();
                 var name = name_array[name_array.length - 1]
@@ -66,10 +73,17 @@ module.exports = function (app) {
                 })
                 // res.sendFile(path.join(__dirname, '../views/', 'worker_dashboard.html'));
             }
-            if(user.isBeginner()) {
-                var name_array = user.fullname.split();
-                var name = name_array[name_array.length - 1]
-                res.render('dashboard.ejs', {name: name});
+
+            // if(user.isBeginner()) {
+            //     var name_array = user.fullname.split(" ");
+            //     var name = name_array[name_array.length - 1]
+            //     res.render('dashboard.ejs', {name: name});
+            // }
+            
+            if(user.isNewbie() || user.isBeginner()) {
+                user = new User(req.session.passport.user)
+                console.log(user);
+                res.render('dashboard.ejs', {name: name, level: user.role});
             }
             
         } else {
