@@ -11,6 +11,7 @@
   <title>Đào tạo - Inlab</title>
   <link rel="shortcut icon" type="image/png" href="/img/logoInlabSquare.png"/>
   <script src="https://code.responsivevoice.org/responsivevoice.js?key=U97eTLrB"></script>
+  <script src="/js/jquery/jquery.js"></script>
 
 
 </head>
@@ -61,10 +62,8 @@
   <div id="result_content" class="data">
     Chúc mừng bạn đã hoàn thành tất cả các phần đào tạo. Bạn đã đạt được chứng chỉ của cúng tôi. Từ giờ bạn có thể bắt đầu công việc.
   </div>
-
-  <form id="btn-next-lvl" style="width: 70%" class="" action="/training_topic" method="POST">
-    <input type="submit"  class='start-btn' value="Bắt đầu công việc"></input>
-  </form>
+  
+  <a id="btn-next-lvl" style="width: 70%" class="" onclick="nextLvl()"><button class='start-btn'>Tiếp tục</button></a>
   <a id="btn-again" style="width: 70%" class="hide"><button class='start-btn'>Làm lại</button></a>
 
 </div>
