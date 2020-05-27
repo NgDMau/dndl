@@ -15,16 +15,16 @@ const pool = new Pool({
 
 console.log(process.env.DB_DATABASE)
 
-function test() {
-    const testFolder = '../temp_data/';
-    const fs = require('fs');
+// function test() {
+//     const testFolder = '../temp_data/';
+//     const fs = require('fs');
 
-    fs.readdir(testFolder, (err, files) => {
-    files.forEach(file => {
-        console.log(file);
-    });
-    });
-}
+//     fs.readdir(testFolder, (err, files) => {
+//     files.forEach(file => {
+//         console.log(file);
+//     });
+//     });
+// }
 
 module.exports = function (app) {
     
@@ -146,20 +146,6 @@ module.exports = function (app) {
         failureRedirect: '/loginrequester_fail'
     }), function (req, res) {
         req.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000; // Cookie expires after 30 days
-    });
-
-
-
-
-    app.get('/login', function (req, res) {
-        
-        //console.log(pool)
-        if (req.isAuthenticated()) {
-            res.redirect('/dashboard');
-        } else {
-            const mess = req.flash('login_fail');
-            res.render('login.ejs', {mess:mess} )
-        }
     });
 
     app.get('/loginrequester_fail', function (req, res) {
