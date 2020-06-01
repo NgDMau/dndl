@@ -63,6 +63,7 @@
             <thead>
               <tr>
                 <th scope="col">Tên</th>
+                <th scope="col>">ID</th>
                 <th scope="col">Mô tả chung</th>
                 <th scope="col">Tiền công</th>
               </tr>
@@ -71,8 +72,10 @@
                 <tbody>
                     <tr class="item">
                       <td ><%= item.name %></td>
+                      <td ><%= item.id %></td>
                       <td ><%= item.type %></td>
                       <td ><%= item.rate %></td>
+                    
                     </tr>
                   </tbody>
             <% }); %>
@@ -89,7 +92,7 @@
     </footer> 
 
     <form action="/work" method="GET">
-        <input type="hidden" id="name" name="name" ><br>
+        <input type="hidden" id="id" name="id" ><br>
     </form>
 </body>
 
@@ -97,7 +100,8 @@
 
     $(document).on("click", ".item", function(){
         var ele = this;
-        $('#name').val($(ele).find("td:first").text());
+        $('#id').val($(ele).find("td:nth-child(2)").text());
+        //alert($('#id').val($(ele).find("td:first").text()))
         read_selected(ele).then(function() {
             $("form").submit();
         })

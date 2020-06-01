@@ -1,3 +1,4 @@
+const db = require('./db');
 
 module.exports = class User{
     constructor(userjson) {
@@ -10,7 +11,6 @@ module.exports = class User{
     }
 
     async getAllProjectsInfo() {
-        var db = require('./db');
         var result;
         await db.getAllProjectsOf(this.username)
         .then((res) => {
@@ -23,6 +23,13 @@ module.exports = class User{
         })
 
         return result;
+    }
+
+    async owns(project_id) {
+        await db.getAllProjectsOf(this.username)
+        .then((res) => {
+            console.log(res);
+        })
     }
 
     isBeginner() {
