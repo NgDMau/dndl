@@ -10,11 +10,8 @@ const resultElement = document.getElementById('result')
 const resultButton = document.getElementById('result-btn')
 const resetButton = document.getElementById("btn-again")
 const selectedAnswerNoti = document.getElementById("noti-selected-answer")
-const emptyBox = document.getElementById("emptybox")
 
 var score = 0;
-
-var tempSelectedAnswer = "";
 
 var audioright = new Audio('/audio/correct1.mp3');
 var audiowrong = new Audio('/audio/wrong1.mp3');
@@ -54,10 +51,6 @@ resultButton.addEventListener('click', () => {
 })
 
 function start() {
-  // check and add (if exists) saved-score in localStorage to current score
-  if (localStorage.savedscore) {
-    score += Number(localStorage.savedscore);
-  } 
 
   startButton.classList.add('hide')
   shuffledQuestions(numberQuestion);
@@ -94,8 +87,6 @@ function setNextQuestion() {
 }
 
 function showQuestion(question) {
-
-
   questionElement.innerText = question.quest
   index = 0
   question.answers.forEach(answer => {

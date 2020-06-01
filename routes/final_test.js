@@ -1,6 +1,6 @@
 var path = require('path');
 var Pool = require('pg-pool');
-var list = require('../public/js/questions_training/question_test.js')
+var list = require('../public/js/questions_training/final_test.js')
 var User = require('../models/user')
 
 var questions = list.questions
