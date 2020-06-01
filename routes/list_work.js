@@ -16,7 +16,8 @@ const pool = new Pool({
 });
 
 module.exports = function (app) {
-    app.get('/work', function (req, res) {       
+    app.get('/work', function (req, res) {
+        console.log(req.param('name'))       
         res.render("about.ejs")
     });
 
