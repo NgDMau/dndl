@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:400,600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/dashboard.css">
+    <script src="https://code.responsivevoice.org/responsivevoice.js?key=U97eTLrB"></script>
+    <link rel="stylesheet" type="text/css" href="css/menu_training.css">
     <title>Dashboard</title>
+    <link rel="shortcut icon" type="image/png" href="/img/logoInlabSquare.png">
 </head>
+
 <body>
-    <div class = "container">
+    <div class="container">
         <!-- <header class = "bar topbar" >
             
             <div class ="logo">
@@ -22,45 +26,89 @@
             </div>
         </div>
         </header> -->
-        <div class = "content">
+        <div class="content">
 
-            <div class = "title">
-              <h1>Tổng quan</h1>
+            <div class="title">
+                <h1>Tổng quan</h1>
             </div>
 
             <div style="text-align: center;">
-              <a>Chào mừng bạn <% name %> đến với chương trình đào tạo chứng chỉ dán nhãn trực tuyến</a>
+                <a>Chào mừng bạn <%= name %> đến với chương trình đào tạo chứng chỉ dán nhãn trực tuyến</a>
             </div>
 
-            <main class = "main">
-                
-              <div class = "tasks">
-                  <hr>
-              </div>
+            <main class="main">
 
-              <div class = "title-status">
-                  <a href="/text_sentiment">
-                  <button class="btn">
-                      Bắt đầu quá trình đào tạo
-                  </button>
-                  </a>
-              </div>
-               
-              <!-- <a href="/dashboard">Trang chủ</a>
+                <hr>
+
+
+                <div class="title-status">
+                    <a id="level_1" href="/training_audio">
+                        <button class="btn">
+                            Mức đào tạo một
+                        </button>
+                    </a>
+                    <a id="level_2" onclick="lock()">
+                        <button class="btn">
+                            Mức đào tạo hai
+                        </button>
+                    </a>
+                    <a id="level_3" onclick="lock()">
+                        <button class="btn">
+                            Mức đào tạo ba
+                        </button>
+                    </a>
+                    <a id="final_test" onclick="lock()">
+                        <button class="btn">
+                            Bài kiểm tra
+                        </button>
+                    </a>
+                </div>
+
+                <!-- <a href="/dashboard">Trang chủ</a>
               <a href="/logout">Đăng xuất</a> -->
 
-              <footer>
-                <div class = "bardb lowbar">
-                          <a href="/logout">Đăng xuất</a>
-                </div>
-              </footer> 
+                <footer>
+                    <div class="bardb lowbar">
+                        <a href="/logout">Đăng xuất</a>
+                    </div>
+                </footer>
 
             </main>
         </div>
     </div>
 
-      
+
 </body>
+
+<script>
+     var level = <%- JSON.stringify(level) %>;
+     
+     if (level == "level_2") {
+        add_level("level_2", "/training_topic")
+     }
+     if (level=="level_3") {
+        add_level("level_2", "/training_topic");
+        add_level("level_3", "/text_sentiment")
+     }
+     if (level=="beginner") {
+        add_level("level_2", "/training_topic");
+        add_level("level_3", "/text_sentiment");
+        add_level("final_test", "/final_test")
+     }
+
+     function add_level(level, link) {
+        var ele =  document.getElementById(level);
+        var att = document.createAttribute("href");
+        att.value = link;
+        ele.setAttributeNode(att);
+        ele.removeAttribute("onclick");
+     }
+
+     function lock() {
+        responsiveVoice.speak("Phần bài tập này đang bị khóa. Hãy hoàn thành các phần bài tập trên để mở khóa nó",'Vietnamese Female');
+     }
+
+</script>
 
 
 </html>

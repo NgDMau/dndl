@@ -1,5 +1,9 @@
 var path = require('path');
 var Pool = require('pg-pool');
+var list = require('../public/js/questions_training/text_topic.js')
+var User = require('../models/user')
+
+var questions = list.questions
 
 const pool = new Pool({
     user: process.env.DB_USER,
@@ -13,30 +17,50 @@ const pool = new Pool({
 module.exports = function (app) {
     app.get('/training_topic', function (req, res) {
         if (req.isAuthenticated()) {
-            res.sendFile(path.join(__dirname, '../views/', 'training_topic.html'));
+            var user = new User(req.session.passport.user)
+            if ( (user.role).split('_')[0] > "1" || user.role == "beginner" || user.role == "worker" ) {
+                var listQuestion = [], numberQuestion = 20;
+                shuffledQuestions(numberQuestion).then(function () {
+                    res.render("training_topic.ejs", { list: listQuestion });
+                    console.log("aaaa")
+                    console.log(listQuestion)
+                }
+                );
+                async function shuffledQuestions(index) {
+                    // This async call may fail.
+                    var shuffled = questions.sort(() => Math.random() - .5);
+                    for (var i = 0; i < index; i++) {
+                        listQuestion.push(shuffled[i]);
+                    }
+                }
+            } else {
+                res.redirect('/')
+            }
+
+            
+
         } else {
-            res.redirect('/login')
+            res.redirect('/')
         }
     });
 
     app.post('/training_topic', function (req, res) {
         if (req.isAuthenticated()) {
-            console.log(req.session.passport.user.role)
-            if (req.session.passport.user.role == "beginner") {
+            var user = new User(req.session.passport.user)
+            if (user.role == "level_2") {
                 pool.connect(function (err, client, done) {
                     if (err) {
                         return console.error(err);
                     }
 
-                    client.query('UPDATE users SET role=$1 WHERE username=$2', ['worker', req.session.passport.user.username], function (err, result) {
+                    client.query('UPDATE users SET role=$1 WHERE username=$2', ['level_3', user.username], function (err, result) {
                         if (err) {
                             client.release();
                             return console.error(err);
                         }
-                        console.log("Updated to worker!")
                         client.release();
-                        req.session.passport.user.role == "worker"
-                        res.redirect('/')
+                        req.session.passport.user.role = "level_3"
+                        res.redirect('/dashboard')
                     });
                 })
             } else {

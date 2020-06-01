@@ -7,7 +7,7 @@ const pool = new Pool({
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     database: process.env.DB_DATABASE,
-    ssl: true//(process.env.DB_SSL == 'true')
+    ssl: { rejectUnauthorized: false }//(process.env.DB_SSL == 'true')
 });
 
 module.exports = {
@@ -107,6 +107,34 @@ module.exports = {
             client.release();
             return e;
         }
+    },
+
+    updateRoleOfUserById: async function (role, id) {
+        var cmd = 'UPDATE users SET role = $1 WHERE id = $2';
+        var values = [role, id];
+        var client = await pool.connect()
+
+        try {
+            var res = await client.query(cmd);
+            client.release();
+            return res;
+        } catch (e) {
+            client.release();
+            return e;
+        }
+    },
+
+    getClient: async function () {
+        try {
+            var client = await pool.connect();
+            return client;
+        } catch (e) {
+            return e;
+        }
+    },
+
+    getPool: function () {
+        return pool;
     }
 }
 

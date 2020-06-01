@@ -5,15 +5,20 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <meta name="author" content="Phoenixcoded">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/
+    /4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!-- vendor css-->
     <link href="/css/db-requester.css" rel="stylesheet">
-    <title>Inlab - Dashboard</title>
+    <title>Dashboard - Inlab</title>
     <link rel="shortcut icon" type="image/png" href="/img/logoInlabSquare.png">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <style>
+        .label-span {
+            border: #F5584B;
+            border-radius: 25%;
+        }
+    </style>
 </head>
 
 <body>
@@ -41,10 +46,11 @@
 </li>-->
                     <li class="nav-item"><a class="nav-link" href="/dashboard"><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a></li>
                     <li class="nav-item pcoded-hasmenu"><a class="nav-link" href="#!"><span class="pcoded-micon"><i class="feather icon-lock"></i></span><span class="pcoded-mtext">Authentication</span></a>
-                        <ul class="pcoded-submenu">
+                    <li class="nav-item"><a class="nav-link" href="/logout"><span class="pcoded-micon"><i class="feather icon-logout"></i></span><span class="pcoded-mtext">Đăng xuất</span></a></li>
+                        <!-- <ul class="pcoded-submenu">
                             <li><a href="auth-signup.html" target="_blank">Sign up</a></li>
                             <li><a href="auth-signin.html" target="_blank">Sign in</a></li>
-                        </ul>
+                        </ul> -->
                     </li>
                 </ul>
             </div>
@@ -126,38 +132,52 @@
                                 <h5>Thêm dự án mới</h5>
                             </div>
                             <div class="card-body">
-                                <form method="post" action="/create_project">
+                                <form enctype="multipart/form-data" method="POST" action="/create_project" id="create_project_form">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group row"><label class="col-sm-3 col-form-label" for="inputEmail3">Tên dự án</label>
-                                                <div class="col-sm-9"><input class="form-control" id="inputName" name="name" type="name" placeholder="Tên dự án"></div>
+                                                <div class="col-sm-9"><input class="form-control" id="projectName" name="name" type="name" placeholder="Tên dự án"></div>
                                             </div>
-                                            <div class="form-group row"><label class="col-sm-3 col-form-label" for="inputEmail3">Loại dữ liệu</label>
-                                                <div class="col-sm-9"><select class="custom-select" id="inputGroupSelect01"><option selected="">Chọn</option><option value="sentiment">Phân loại sắc thái văn bản</option><option value="audio">Phân loại sắc thái âm thanh</option><option value="topic">Phân loại nội dung văn bản</option></select></div>
+                                            <div class="form-group row"><label class="col-sm-3 col-form-label" for="inputEmail3">Loại công việc</label>
+                                                <div class="col-sm-9"><select class="custom-select" id="projectType" name="type"><option value="audio">Phân loại sắc thái âm thanh</option><option value="sentiment">Phân loại sắc thái văn bản</option><option value="topic">Phân loại nội dung văn bản</option></select></div>
                                             </div>
-                                            <div class="form-group row"><label class="col-sm-3 col-form-label" for="inputEmail3">Chủ đề</label>
-                                                <div class="col-sm-9"><input class="form-control" id="inputName" name="theme" type="name" placeholder="Chủ đề"></div>
+                                            <div class="form-group row"><label class="col-sm-3 col-form-label" for="inputEmail3">Mô tả công việc</label>
+                                                <div class="col-sm-9"><input class="form-control" id="projectTheme" name="theme" type="name" placeholder="Mô tả"></div>
+                                            </div>
+                                            <div class="form-group row"><label class="col-sm-3 col-form-label" for="inputEmail3">Nhãn dán</label>
+                                                <div class="col-sm-4" id = "labels-holder">
+                                                    <div class="input-group"><input class="form-control" id="projectLabels" name="labels" type="text">
+                                                    <div class="input-group-append"><button type="button" onclick="moreLabels();">Thêm nhãn</button></div>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="form-group row"><label class="col-sm-3 col-form-label" for="inputEmail3">Số tiền/ 1 nhãn </label>
                                                 <div class="col-sm-4">
-                                                    <div class="input-group"><input class="form-control" name="rate" type="text" aria-label="Amount (to the nearest dollar)">
+                                                    <div class="input-group"><input class="form-control" id="projectRate" name="rate" type="text" aria-label="Amount (to the nearest dollar)">
                                                         <div class="input-group-append"><span class="input-group-text">vnd</span></div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group row"><label class="col-sm-3 col-form-label" for="inputEmail3">Thời gian bắt đầu</label>
-                                                <div class="col-sm-9"><input class="form-control" id="inputName" name="starttime" type="name" placeholder="Tên dự án"></div>
+                                                <div class="col-sm-9"><input class="form-control" id="projectStarttime" name="starttime" type="name" placeholder="Thoi gian bat dau"></div>
                                             </div>
                                             <div class="form-group row"><label class="col-sm-3 col-form-label" for="inputEmail3">Thời gian kết thúc</label>
-                                                <div class="col-sm-9"><input class="form-control" id="inputName" name="endtime" type="name" placeholder="Tên dự án"></div>
-                                            </div>
+                                                <!-- <label class="col-sm-3 col-form-label" for="inputEmail3">Thời gian bắt đầu</label> -->
+                                                <div class="col-sm-9"><input class="form-control" id="projectEndtime" name="endtime" type="name" placeholder="Thoi gian ket thuc"></div>                                            </div>
                                             <div class="form-group row"><label class="col-sm-3 col-form-label" for="inputEmail3">Upload dữ liệu</label>
                                                 <div class="col-sm-9">
-                                                    <div class="custom-file"><input class="custom-file-input" id="inputGroupFile01" name="datafile" type="file"><label class="custom-file-label" for="inputGroupFile01">Choose file</label></div>
+                                                    <div class="custom-file"><input id="projectDatafile" name="datafile" type="file"><label class="custom-file-label" for="projectDatafile">Choose file</label></div>
+                                                    <br>
+                                                    <!-- <br>
+                                                    <br> -->
+                                                    <!-- <div id="myProgress">
+                                                        <div id="progressBar">0%</div>
+                                                    </div> -->
                                                 </div>
+                                                
                                             </div>
                                             <div class="form-group row">
-                                                <div class="col-sm-12 d-flex justify-content-center"><button class="btn d-flex justify-content-end btn-warning" type="submit">Submit</button></div>
+                                                <div class="col-sm-12 d-flex justify-content-center"><button id = "submit_button" class="btn d-flex justify-content-end btn-warning" type="submit">Submit</button></div>
                                             </div>
                                         </div>
                                     </div>
@@ -185,7 +205,7 @@
                                         <div class="form-group row"><label class="col-sm-3 col-form-label" for="inputEmail3">Loại dữ liệu</label>
                                             <div class="col-sm-9"><select class="custom-select" id="inputGroupSelect01"><option selected="">Chọn</option><option value="1">Phân loại sắc thái văn bản</option><option value="2">Phân loại sắc thái âm thanh</option><option value="3">Phân loại nội dun văn bản</option></select></div>
                                         </div>
-                                        <div class="form-group row"><label class="col-sm-3 col-form-label" for="inputEmail3">Chủ đề</label>
+                                        <div class="form-group row"><label class="col-sm-3 col-form-label" for="inputEmail3">Mô tả công việc</label>
                                             <div class="col-sm-9"><input class="form-control" id="inputName" type="name" placeholder="Chủ đề"></div>
                                         </div>
                                         <div class="form-group row"><label class="col-sm-3 col-form-label" for="inputEmail3">Số tiền/ 1 nhãn </label>
@@ -205,6 +225,8 @@
                                             <div class="col-sm-9">
                                                 <div class="custom-file"><input class="custom-file-input" id="inputGroupFile01" type="file"><label class="custom-file-label" for="inputGroupFile01">Choose file</label></div>
                                             </div>
+                                            <br>
+                                            
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-sm-12 d-flex justify-content-center"><button class="btn d-flex justify-content-end btn-success" type="submit">Save</button></div>
@@ -221,6 +243,39 @@
                     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
                     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
                     <script>
+
+                        $(document).ready(function () {
+                            $("#create_project_form").submit(function () {
+                                $("#submit_button").attr("disabled", true);
+                                return true;
+                            });
+
+                            $('#projectDatafile').on('change',function(){
+                                //get the file name
+                                var filePath = $(this).val();
+                                var fileName = filePath.replace(/^.*\\/, "");
+
+                                //replace the "Choose a file" label
+                                $(this).next('.custom-file-label').html(fileName);
+                            })
+                        });
+
+                        function moreLabels() {
+                            //alert("Hello World")
+                            var labels_holder = document.getElementById("labels-holder");
+                            var labels_input = document.getElementById("projectLabels");
+                            var temp_label = labels_input.value();
+                            
+                            console.log("temp_span", temp_span)
+
+                            var temp_span = document.createElement('span')
+                            temp_span.innerHTML = temp_label;
+                            temp_span.classList.add('label-span');
+
+                            labels_holder.appendChild(temp_span);
+                            return
+                        }
+
                         // Get projectAction
                         var actionSuccess = "";
 

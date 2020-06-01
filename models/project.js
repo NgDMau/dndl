@@ -41,7 +41,7 @@ module.exports = class Project {
     async create() {
         var db = require('./db');
         var child_table = this.id;
-        var parent_table = this.type;
+        var parent_table =  this.type;
         var schema = 'projects';
         var result = false;
 
@@ -57,6 +57,62 @@ module.exports = class Project {
         
         return result;
     }
+
+    async importRawFileToTable() {
+
+        var db = require('./db');
+        var pool = db.getPool();
+        var client = await pool.connect();
+
+        var rawfile = this.datafile;
+        var tablename = this.id;
+        var labels = this.labels || ["Tích cực", "tiêu cực", "trung tính"]
+
+        //var sentences = this.readlines(rawfile);
+
+        var fs = require('fs');
+        fs.readFile(rawfile, async function(err, data) {
+            if(err) throw err;
+            var array = data.toString().split('\n');
+            array.pop();
+            console.log(array)
+            var cmd = "INSERT INTO projects." + tablename + "(content, labeled_workers, labeled_values, labeled_time)" + " VALUES($1, $2, $3, $4)";
+            var final_result = []
+
+            try {
+                for (var index in array) {
+                    console.log(array[index])
+                    var values = [array[index], [], [], []]
+                    var result = await client.query(cmd, values);
+                }
+                client.release();
+                final_result.push(result);
+                return final_result;
+            } catch (e) {
+                console.log(e)
+                client.release();
+                final_result.push(e);
+                return final_result;
+            }
+
+        });
+
+
+
+        
+    
+    }
+
+    readlines(filepath) {
+        var fs = require('fs');
+        fs.readFile(filepath, function(err, data) {
+            if(err) throw err;
+            var array = data.toString().split('\n');
+            console.log(array);
+            return array
+        });
+    }
+    
 
     async getData() {
 

@@ -81,10 +81,12 @@ img{
   color: black;
 
 }
-
+.emptytop {
+  height: 140px;
+}
 
 .empty {
-  height: 140px;
+  height: 100px;
 }
 
 #title {
@@ -105,7 +107,7 @@ img{
   align-items: center;
   text-align: center;
   border-radius: 5px;
-  height: 80px;
+  height: 70px;
   margin-bottom: 10px;
 }
 
@@ -134,19 +136,8 @@ img{
   align-items: center;
   background-color: white;
   border-radius: 5px;
-  overflow: auto;
-  height: 170px;
-
-}
-
-.label1 {
-  justify-content: center;
-  align-items: center;
-  background-color: white;
-  border-radius: 5px;
-  overflow: auto;
   height: 200px;
-
+  padding-top: 30px;
 }
 
 .btn-grid {
@@ -179,7 +170,6 @@ img{
   align-items: center;
   font-family: 'Montserrat', sans-serif;   
 }
-
 
 
 
@@ -225,4 +215,12 @@ footer {
   background-color: #24252E;
   color: white;
   
+}
+.btn-play-stop {
+  border: none;
+  color: black;
+  font-size: 16px;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;   
+
 }
