@@ -109,6 +109,21 @@ module.exports = {
         }
     },
 
+    updateRoleOfUserById: async function (role, id) {
+        var cmd = 'UPDATE users SET role = $1 WHERE id = $2';
+        var values = [role, id];
+        var client = await pool.connect()
+
+        try {
+            var res = await client.query(cmd);
+            client.release();
+            return res;
+        } catch (e) {
+            client.release();
+            return e;
+        }
+    },
+
     getClient: async function () {
         try {
             var client = await pool.connect();

@@ -90,7 +90,6 @@ function setNextQuestion() {
 function showQuestion(question) {
   questionElement.innerText = question.question;
   audioElement.setAttribute("src", question.src);
-
   index = 0
   question.answers.forEach(answer => {
     const button = document.createElement('button')
