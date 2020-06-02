@@ -12,6 +12,10 @@ const pool = new Pool({
 
 module.exports = {
 
+    getPgPool: function() {
+        return pool;
+    },
+
     createChildTableInSchema: async function (child_table, schema, parent_table) {
         var cmd = 'CREATE TABLE ' + schema + '.' + child_table + '() INHERITS (' + parent_table + ')';
         console.log(cmd);

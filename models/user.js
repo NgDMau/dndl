@@ -32,6 +32,38 @@ module.exports = class User{
         })
     }
 
+    async getScore() {
+        let cmd = "SELECT score FROM public.score WHERE username=$1";
+        let values = [this.username];
+        let pool = db.getPgPool();
+        let client = await pool.connect();
+        try{
+            let result = await client.query(cmd, values);
+            client.release();
+            return result.rows[0].score;
+        } catch(e) {
+            client.release();
+            return e;
+        }
+    }
+
+    async incrementScore(increment) {
+        let current_score = await this.getScore();
+        let new_score = current_score + increment;
+        let cmd = "UPDATE public.score SET score=$1 WHERE username=$2";
+        let values = [new_score, this.username];
+        let pool = db.getPgPool();
+        let client = await pool.connect();
+        try {
+            let result = await client.query(cmd, values);
+            client.release();
+            return result;
+        } catch(e) {
+            client.release();
+            return e;
+        }
+    }
+
     isBeginner() {
         return this.role === 'beginner';
     }
@@ -59,11 +91,6 @@ module.exports = class User{
     updateLastlogin() {
         // Code here
         return true
-    }
-
-    getScore() {
-        // Code here
-        return
     }
 
     setScore() {
