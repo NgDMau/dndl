@@ -36,8 +36,27 @@
             </a>
         </nav>
     </header>
+    <div class="content">
+        <div class="title">
+            <h1>Mô tả chung</h1>
+        </div>
+        <div class="main">
+            <div class="overview">
+                <div class="detail">
+                    <span>Bạn đã kiếm được</span>
+
+                </div>
+                <hr />
+                <div class="detail">
+                    <span>Công việc đang làm</span>
+
+                </div>
+                <hr />
+            </div>
+        </div>
+    </div>
     <div class="title">
-        <h2>Danh sách công việc</h2>
+        <h4>Danh sách công việc</h4>
     </div>
     <div class="list-work">
         <table class="table">
@@ -58,6 +77,9 @@
                   </tbody>
             <% }); %>
           </table>
+          <div>
+            <a href="/work/list">Xem thêm</a>
+          </div>
           
     </div>
     <footer>
@@ -66,7 +88,7 @@
         </div>
     </footer> 
 
-    <form action="/work/:name" method="GET">
+    <form action="/work" method="GET">
         <input type="hidden" id="name" name="name" ><br>
     </form>
 </body>

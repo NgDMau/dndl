@@ -59,7 +59,7 @@ module.exports = function (app) {
                             return console.error(err);
                         }
                         client.release();
-                        req.session.passport.user.role == "worker"
+                        req.session.passport.user.role = "worker"
                         res.redirect('/dashboard')
                     });
                 })

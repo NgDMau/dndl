@@ -62,24 +62,6 @@ function start() {
   setNextQuestion()
 }
 
-function reset() {
-  document.getElementById('content').classList.remove('hide');
-  resultButton.classList.add('hide');;
-  startButton.classList.add('hide')
-  currentQuestionIndex = 0
-  labelElement.classList.remove('hide')
-  titleElement.innerText = 'CÂU HỎI'
-  document.getElementById('result_content').innerText = "Chúc mừng bạn đã hoàn thành phần đào tạo phân tích sắc thái hội thoại. Bây giờ hãy bắt đầu với phần đào tạo tiếp theo."
-  document.getElementById('btn-next-lvl').classList.remove('hide');
-  resetButton.classList.add('hide');
-  resultElement.classList.add('hide');
-  listQuestion = listQuestion.filter(function (el) {
-    return el != null;
-  });
-  // document.getElementById("shortcut_label").classList.remove('hide')
-
-  setNextQuestion()
-}
 function setNextQuestion() {
   resetState()
   showQuestion (listQuestion[currentQuestionIndex])
@@ -156,7 +138,7 @@ function result(){
   }else{
     audiowrong.play();
     document.getElementById('content').classList.add('hide');
-    document.getElementById('result_content').innerText = `Bạn đã làm đúng ${score} câu rồi đấy, cùng làm lại ${numberQuestion-score} câu chưa hợp lý nhé!`
+    document.getElementById('result_content').innerText = `Bạn đã không hoàn thành được bài kiểm tra. Hãy làm lại phần đào tạo và bài kiểm tra một lần nữa.`
     document.getElementById('btn-next-lvl').classList.add('hide');
     document.getElementById('btn-again').classList.remove('hide');
     resultElement.classList.remove('hide');
@@ -176,7 +158,7 @@ function nextLvl(){
   var formData = new FormData();
     $.ajax({
         type: "POST",
-        url: "/training_audio",
+        url: "/final_test",
         data: formData,
         processData: false,
         contentType: false,
