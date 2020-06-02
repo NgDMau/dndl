@@ -16,9 +16,15 @@ const pool = new Pool({
 });
 
 module.exports = function (app) {
-    app.get('/work', function (req, res) {
-        console.log(req.param('name'))       
-        res.render("about.ejs")
+    app.get('/work', function (req, res) {     
+        if(req.isAuthenticated()) {
+            if (req.body.id) {
+                const project_id = req.body.id;
+                const user = new User(req.session.passport.user);
+
+            } 
+        }
+        res.render("about.ejs")  
     });
 
     app.get('/work/list', function (req, res) {    

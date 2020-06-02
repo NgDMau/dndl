@@ -1,3 +1,4 @@
+const db = require('./db');
 
 module.exports = class User{
     constructor(userjson) {
@@ -10,7 +11,6 @@ module.exports = class User{
     }
 
     async getAllProjectsInfo() {
-        var db = require('./db');
         var result;
         await db.getAllProjectsOf(this.username)
         .then((res) => {
@@ -23,6 +23,45 @@ module.exports = class User{
         })
 
         return result;
+    }
+
+    async owns(project_id) {
+        await db.getAllProjectsOf(this.username)
+        .then((res) => {
+            console.log(res);
+        })
+    }
+
+    async getScore() {
+        let cmd = "SELECT score FROM public.score WHERE username=$1";
+        let values = [this.username];
+        let pool = db.getPgPool();
+        let client = await pool.connect();
+        try{
+            let result = await client.query(cmd, values);
+            client.release();
+            return result.rows[0].score;
+        } catch(e) {
+            client.release();
+            return e;
+        }
+    }
+
+    async incrementScore(increment) {
+        let current_score = await this.getScore();
+        let new_score = current_score + increment;
+        let cmd = "UPDATE public.score SET score=$1 WHERE username=$2";
+        let values = [new_score, this.username];
+        let pool = db.getPgPool();
+        let client = await pool.connect();
+        try {
+            let result = await client.query(cmd, values);
+            client.release();
+            return result;
+        } catch(e) {
+            client.release();
+            return e;
+        }
     }
 
     isBeginner() {
@@ -52,11 +91,6 @@ module.exports = class User{
     updateLastlogin() {
         // Code here
         return true
-    }
-
-    getScore() {
-        // Code here
-        return
     }
 
     setScore() {

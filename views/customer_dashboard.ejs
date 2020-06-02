@@ -15,8 +15,30 @@
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <style>
         .label-span {
-            border: #F5584B;
+            margin-right: 15px;
+            color: black;
+            background-color: cadetblue;
+            font-size: 12px;
             border-radius: 25%;
+        }
+
+        .container4 {
+            position: relative;
+        }
+
+        .container4 p {
+            margin: 0;
+            background: yellow;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-right: -50%;
+            transform:  translate(-50%, 50%);
+        }
+
+        #labels-holder {    
+            width: fit-content;
+
         }
     </style>
 </head>
@@ -131,48 +153,53 @@
                             <div class="card-header">
                                 <h5>Thêm dự án mới</h5>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body container4">
+                                <p>COMEONNNNNNNNNNNN</p>
                                 <form enctype="multipart/form-data" method="POST" action="/create_project" id="create_project_form">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group row"><label class="col-sm-3 col-form-label" for="inputEmail3">Tên dự án</label>
-                                                <div class="col-sm-9"><input class="form-control" id="projectName" name="name" type="name" placeholder="Tên dự án"></div>
+                                                <div class="col-sm-9"><input class="form-control" id="projectName" name="name" type="name" placeholder="Tên dự án" required></div>
                                             </div>
                                             <div class="form-group row"><label class="col-sm-3 col-form-label" for="inputEmail3">Loại công việc</label>
-                                                <div class="col-sm-9"><select class="custom-select" id="projectType" name="type"><option value="audio">Phân loại sắc thái âm thanh</option><option value="sentiment">Phân loại sắc thái văn bản</option><option value="topic">Phân loại nội dung văn bản</option></select></div>
+                                                <div class="col-sm-9"><select class="custom-select" id="projectType" name="type" required><option value="audio">Phân loại sắc thái âm thanh</option><option value="sentiment">Phân loại sắc thái văn bản</option><option value="topic">Phân loại nội dung văn bản</option></select></div>
                                             </div>
                                             <div class="form-group row"><label class="col-sm-3 col-form-label" for="inputEmail3">Mô tả công việc</label>
                                                 <div class="col-sm-9"><input class="form-control" id="projectTheme" name="theme" type="name" placeholder="Mô tả"></div>
                                             </div>
-                                            <div class="form-group row"><label class="col-sm-3 col-form-label" for="inputEmail3">Nhãn dán</label>
+                                            <!-- <div class="form-group row"><label class="col-sm-3 col-form-label" for="inputEmail3">Nhãn dán</label>
                                                 <div class="col-sm-4" id = "labels-holder">
-                                                    <div class="input-group"><input class="form-control" id="projectLabels" name="labels" type="text">
+                                                    <div class="input-group"><input class="form-control" id="projectLabels" name="labels[]" type="text" required>
                                                     <div class="input-group-append"><button type="button" onclick="moreLabels();">Thêm nhãn</button></div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                             <div class="form-group row"><label class="col-sm-3 col-form-label" for="inputEmail3">Số tiền/ 1 nhãn </label>
                                                 <div class="col-sm-4">
-                                                    <div class="input-group"><input class="form-control" id="projectRate" name="rate" type="text" aria-label="Amount (to the nearest dollar)">
-                                                        <div class="input-group-append"><span class="input-group-text">vnd</span></div>
+                                                    <div class="input-group"><input class="form-control" id="projectRate" name="rate" type="number" min="150" step="50" aria-label="Amount (to the nearest dollar)" required>
+                                                        <div class="input-group-append"><span class="input-group-text">VNĐ</span></div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group row"><label class="col-sm-3 col-form-label" for="inputEmail3">Thời gian bắt đầu</label>
-                                                <div class="col-sm-9"><input class="form-control" id="projectStarttime" name="starttime" type="name" placeholder="Thoi gian bat dau"></div>
+                                                <div class="col-sm-9"><input class="form-control" id="projectStarttime" name="starttime" type="datetime-local" placeholder="Thoi gian bat dau" required></div>
                                             </div>
                                             <div class="form-group row"><label class="col-sm-3 col-form-label" for="inputEmail3">Thời gian kết thúc</label>
                                                 <!-- <label class="col-sm-3 col-form-label" for="inputEmail3">Thời gian bắt đầu</label> -->
-                                                <div class="col-sm-9"><input class="form-control" id="projectEndtime" name="endtime" type="name" placeholder="Thoi gian ket thuc"></div>                                            </div>
+                                                <div class="col-sm-9"><input class="form-control" id="projectEndtime" name="endtime" type="datetime-local" placeholder="Thoi gian ket thuc" required></div>                                            </div>
                                             <div class="form-group row"><label class="col-sm-3 col-form-label" for="inputEmail3">Upload dữ liệu</label>
                                                 <div class="col-sm-9">
-                                                    <div class="custom-file"><input id="projectDatafile" name="datafile" type="file"><label class="custom-file-label" for="projectDatafile">Choose file</label></div>
+                                                    <div class="custom-file"><input id="projectDatafile" name="datafile" type="file" required><label class="custom-file-label" for="projectDatafile" >Choose file</label></div>
                                                     <br>
                                                     <!-- <br>
                                                     <br> -->
                                                     <!-- <div id="myProgress">
                                                         <div id="progressBar">0%</div>
                                                     </div> -->
+                                                </div>
+                                            
+                                                <div class="form-group row"><label class="col-sm-3 col-form-label" for="inputEmail3">Thời gian bắt đầuddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd</label>
+                                                    <div class="col-sm-9">comeonnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn</div>
                                                 </div>
                                                 
                                             </div>
@@ -264,15 +291,21 @@
                             //alert("Hello World")
                             var labels_holder = document.getElementById("labels-holder");
                             var labels_input = document.getElementById("projectLabels");
-                            var temp_label = labels_input.value();
+                            var temp_label = labels_input.value;
                             
-                            console.log("temp_span", temp_span)
+                            console.log("temp_span", temp_label);
 
                             var temp_span = document.createElement('span')
                             temp_span.innerHTML = temp_label;
                             temp_span.classList.add('label-span');
 
+                            var temp_br = document.createElement('br')
                             labels_holder.appendChild(temp_span);
+                            labels_holder.appendChild(temp_br);
+
+                            console.log(document.getElementsByName("labels"));
+                            labels_input.value = "";
+                            
                             return
                         }
 
