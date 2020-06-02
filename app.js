@@ -76,6 +76,7 @@ require('./routes/info')(app);
 require('./routes/work')(app);
 require('./routes/final_test')(app);
 
+require('./routes/full_system/work')(app)
 
 
 
