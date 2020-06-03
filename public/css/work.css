@@ -1,0 +1,194 @@
+html{
+    font-family: 'Montserrat', sans-serif;   
+    font-size: 15px;
+    height:100%;
+    width:100%;
+  }
+  
+  .content {
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+  }
+  
+  
+  a {
+    color: inherit; 
+    text-decoration: inherit; 
+  }
+  
+  main{
+    /*padding-top: 10px;
+    padding-left:5%;
+    padding-right:5%;*/
+  
+  }
+  .logo {
+    object-fit: cover;
+    width: 75px;
+    height: 34px;
+  }
+  .logo{
+    object-fit: contain;
+    width:75px;
+    height:30px;
+  }
+  .bar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #434556;
+    position: fixed;
+    height: 30px;
+    width: 100%;
+    margin: 0;
+    left: 0px;
+    z-index: 10;
+    color: white;
+    padding-left: 20px;
+    
+  }
+  .bardb{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #434556;
+    position: fixed;
+    height: 30px;
+    width: 100%;
+    margin: 0;
+    left: 0px;
+    z-index: 10;
+    color: white;
+  }
+  img{
+    font-weight: bold;
+  }
+  
+  .topbar{
+    top: 0;
+  }
+  .lowbar{
+    bottom: 0;
+    font-size: small;
+  }
+  .content{
+    height:230px;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 50px;
+  
+  }
+  .empty{
+    height:120px;
+  }
+  .login{
+    margin-right : 50px;
+  }
+  .dashboard{
+    font-size: 2rem;
+    font-weight: bold;
+    text-align-last: center;
+    bottom: 10px;
+  }
+  
+  .detail > span {
+    display: grid;
+    font-weight: bold;
+    margin: 20px;
+  
+  }
+  
+  .detail > p {
+    display: grid;
+    margin: 20px;
+  
+  }
+  
+  .list-work {
+    margin: 5%;
+    margin-bottom: 10%;
+  }
+  
+  .list-work > div:last-child{
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  
+  
+  .title{
+    font-weight: bold;
+    font-size: small;
+    text-align: center;
+  }
+  
+  /*slider*/
+  .container{
+    margin-top: 100px;
+    padding: 20px;
+    width:600px;
+  }
+  
+  .btn {
+    margin-top:20px;
+    height:52px;
+    width: 100%;
+    text-align: center;
+    font-size: 15px;
+    background: #FBDF4B;
+    border-radius:5px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;   
+  
+    /* Center slide text vertically */
+    
+  }
+  
+  .footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding:10px;
+    background-color: #24252E;
+    
+  }
+  
+  .home {
+    position: absolute;
+    top: 90%;
+  }
+  
+  .logout {
+    position: absolute;
+    top: 90%;
+    right: 2%;
+    padding-right: 20px;
+  }
+  .logoutdb {
+    position: absolute;
+    top: 95%;
+    right: 43%;
+  }
+  
+  .start-btn{
+    height:52px;
+    width: 80%;
+    text-align: center;
+    font-size: 15px;
+    background: #FBDF4B;
+    border-radius:5px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;   
+    margin: 10%;
+
+  }

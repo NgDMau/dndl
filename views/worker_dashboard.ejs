@@ -100,16 +100,34 @@
 
     $(document).on("click", ".item", function(){
         var ele = this;
+<<<<<<< HEAD
+        $('#name').val($(ele).find("td:first").text());
+        submit(ele);
+=======
         $('#id').val($(ele).find("td:nth-child(2)").text());
         //alert($('#id').val($(ele).find("td:first").text()))
         read_selected(ele).then(function() {
             $("form").submit();
         })
+>>>>>>> 82cc9dd7613faf2671a50f43b3aa65acd682e1b0
         
     });
-    async function read_selected(ele){
+    function read_selected(ele){
         responsiveVoice.speak("Bạn đã chọn công việc: " + $(ele).find("td:first").text(),'Vietnamese Female')
+        return new Promise(resolve => {
+            setTimeout(() => {
+                resolve('resolved');
+            }, 5000);
+        });
     }
+
+    async function submit(ele){
+        let result = await read_selected(ele);
+        if (result) {
+            $("form").submit();
+        }
+    }
+
 </script>
 
 </html>

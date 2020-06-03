@@ -75,6 +75,7 @@ require('./routes/verify')(app);
 require('./routes/info')(app);
 require('./routes/work')(app);
 require('./routes/final_test')(app);
+require('./routes/labeling')(app);
 
 
 

@@ -4,7 +4,7 @@ var list = require('../public/js/questions_training/final_test.js')
 var User = require('../models/user')
 
 var questions = list.questions
-console.log(questions)
+
 
 const pool = new Pool({
     user: process.env.DB_USER,

@@ -8,6 +8,7 @@ module.exports = class User{
         this.role = userjson.role;
         this.fullname = userjson.full_name;
         this.lastlogin = userjson.lastlogin;
+        this.id = userjson.id;
     }
 
     async getAllProjectsInfo() {
@@ -23,13 +24,6 @@ module.exports = class User{
         })
 
         return result;
-    }
-
-    async owns(project_id) {
-        await db.getAllProjectsOf(this.username)
-        .then((res) => {
-            console.log(res);
-        })
     }
 
     async getScore() {
@@ -48,6 +42,7 @@ module.exports = class User{
     }
 
     async incrementScore(increment) {
+        var db = require('./db');
         let current_score = await this.getScore();
         let new_score = current_score + increment;
         let cmd = "UPDATE public.score SET score=$1 WHERE username=$2";
@@ -92,6 +87,8 @@ module.exports = class User{
         // Code here
         return true
     }
+
+
 
     setScore() {
         // Code here

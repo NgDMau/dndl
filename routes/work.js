@@ -16,15 +16,31 @@ const pool = new Pool({
 });
 
 module.exports = function (app) {
-    app.get('/work', function (req, res) {     
-        if(req.isAuthenticated()) {
-            if (req.body.id) {
-                const project_id = req.body.id;
-                const user = new User(req.session.passport.user);
+    app.get('/work', function (req, res) {
+        if (req.isAuthenticated()) {       
+            var user = new User(req.session.passport.user)   
+            if(user.isWorker()) {
+                var name_array = user.fullname.split();
+                var name = name_array[name_array.length - 1]
+                pool.connect(function (err, client, done) {
+                    if (err) {
+                        return console.error(err);
+                    }
 
-            } 
+                    client.query('select * from projects_metadata where name=$1', [req.param('name')], function (err, result) {
+                        if (err) {
+                            client.release();
+                            return console.error(err);
+                        }
+                        client.release();
+                        res.render('work.ejs', {data: result});
+                    });
+                })
+                // res.sendFile(path.join(__dirname, '../views/', 'worker_dashboard.html'));
+            }
+        } else {
+            res.redirect('/')
         }
-        res.render("about.ejs")  
     });
 
     app.get('/work/list', function (req, res) {    
@@ -54,4 +70,5 @@ module.exports = function (app) {
             res.redirect('/login')
         }
     });
+
 }
