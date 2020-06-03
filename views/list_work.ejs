@@ -21,7 +21,7 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <link rel="shortcut icon" type="image/png" href="/img/logoInlabSquare.png"/>
+    <link rel="shortcut icon" type="image/png" href="/img/logoInlabSquare.png" />
     <script src="https://code.responsivevoice.org/responsivevoice.js?key=U97eTLrB"></script>
     <script src="/js/jquery/jquery.min.js"></script>
     <title>Dashboard - Inlab</title>
@@ -30,8 +30,8 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light mt-3"  id="navbar-example">
-            <a class="navbar-brand" >
+        <nav class="navbar navbar-expand-lg navbar-light mt-3" id="navbar-example">
+            <a class="navbar-brand">
                 <img src="/img/logo.png" class="logo">
             </a>
         </nav>
@@ -42,48 +42,60 @@
     <div class="list-work">
         <table class="table">
             <thead>
-              <tr>
-                <th scope="col">Tên</th>
-                <th scope="col">Mô tả chung</th>
-                <th scope="col">Tiền công</th>
-              </tr>
+                <tr>
+                    <th scope="col">Tên</th>
+                    <th scope="col">Mô tả chung</th>
+                    <th scope="col">Tiền công</th>
+                </tr>
             </thead>
             <% list.rows.forEach(function(item){%>
-                <tbody>
-                    <tr class="item">
-                      <td ><%= item.name %></td>
-                      <td ><%= item.type %></td>
-                      <td ><%= item.rate %></td>
-                    </tr>
-                  </tbody>
+            <tbody>
+                <tr class="item">
+                    <td><%= item.name %></td>
+                    <td><%= item.type %></td>
+                    <td><%= item.rate %></td>
+                </tr>
+            </tbody>
             <% }); %>
-          </table>
-          
+        </table>
+
     </div>
     <footer>
-        <div class = "bardb lowbar">
-                  <a href="/logout">Đăng xuất</a>
+        <div class="bardb lowbar">
+            <a href="/logout">Đăng xuất</a>
         </div>
-    </footer> 
+    </footer>
 
-    <form action="/work/:name" method="GET">
-        <input type="hidden" id="name" name="name" ><br>
+    <form action="/work" method="GET">
+        <input type="hidden" id="name" name="name"><br>
     </form>
 </body>
 
 <script>
 
-    $(document).on("click", ".item", function(){
+    $(document).on("click", ".item", function () {
         var ele = this;
         $('#name').val($(ele).find("td:first").text());
-        read_selected(ele).then(function() {
-            $("form").submit();
-        })
-        
+        submit(ele);
+
     });
-    async function read_selected(ele){
-        responsiveVoice.speak("Bạn đã chọn công việc: " + $(ele).find("td:first").text(),'Vietnamese Female')
+
+    function read_selected(ele) {
+        responsiveVoice.speak("Bạn đã chọn công việc: " + $(ele).find("td:first").text(), 'Vietnamese Female')
+        return new Promise(resolve => {
+            setTimeout(() => {
+                resolve('resolved');
+            }, 5000);
+        });
     }
+
+    async function submit(ele) {
+        let result = await read_selected(ele);
+        if (result) {
+            $("form").submit();
+        }
+    }
+
 </script>
 
 </html>

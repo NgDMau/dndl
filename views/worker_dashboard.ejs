@@ -98,14 +98,25 @@
     $(document).on("click", ".item", function(){
         var ele = this;
         $('#name').val($(ele).find("td:first").text());
-        read_selected(ele).then(function() {
-            $("form").submit();
-        })
+        submit(ele);
         
     });
-    async function read_selected(ele){
+    function read_selected(ele){
         responsiveVoice.speak("Bạn đã chọn công việc: " + $(ele).find("td:first").text(),'Vietnamese Female')
+        return new Promise(resolve => {
+            setTimeout(() => {
+                resolve('resolved');
+            }, 5000);
+        });
     }
+
+    async function submit(ele){
+        let result = await read_selected(ele);
+        if (result) {
+            $("form").submit();
+        }
+    }
+
 </script>
 
 </html>
