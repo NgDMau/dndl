@@ -73,7 +73,7 @@ require('./routes/changepass')(app);
 require('./routes/contactsale')(app);
 require('./routes/verify')(app);
 require('./routes/info')(app);
-require('./routes/list_work')(app);
+require('./routes/work')(app);
 require('./routes/final_test')(app);
 require('./routes/labeling')(app);
 
