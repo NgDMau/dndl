@@ -22,9 +22,6 @@ var listQuestion = [], currentQuestionIndex
 var numberQuestion = 10;
 
 startButton.addEventListener('click', start)
-resetButton.addEventListener('click',()=> {
-  reset()
-})
 
 nextButton.addEventListener('click', () => {
 

@@ -92,7 +92,7 @@
     </footer> 
 
     <form action="/work" method="GET">
-        <input type="hidden" id="id" name="id" ><br>
+        <input type="hidden" id="name" name="name" ><br>
     </form>
 </body>
 
@@ -100,16 +100,8 @@
 
     $(document).on("click", ".item", function(){
         var ele = this;
-<<<<<<< HEAD
         $('#name').val($(ele).find("td:first").text());
         submit(ele);
-=======
-        $('#id').val($(ele).find("td:nth-child(2)").text());
-        //alert($('#id').val($(ele).find("td:first").text()))
-        read_selected(ele).then(function() {
-            $("form").submit();
-        })
->>>>>>> 82cc9dd7613faf2671a50f43b3aa65acd682e1b0
         
     });
     function read_selected(ele){
