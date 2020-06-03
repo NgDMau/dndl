@@ -33,6 +33,7 @@ module.exports = function (app) {
                             return console.error(err);
                         }
                         client.release();
+                        console.log(result)
                         res.render('work.ejs', {data: result});
                     });
                 })
