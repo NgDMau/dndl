@@ -58,10 +58,16 @@ module.exports = function (app) {
                             client.release();
                             return console.error(err);
                         }
-                        client.release();
-                        req.session.passport.user.role = "worker"
-                        res.redirect('/dashboard')
+                        client.query("insert into score (username, score, total_score, money, array_id_sentence, id) values ( $1 , 0 , 0, 0 , '{}' , $2 )", [user.username, user.id], function (err, result) {
+                            if (err) {
+                                client.release();
+                                return console.error(err);
+                            }
+                            req.session.passport.user.role = "worker"
+                            res.redirect('/dashboard')
+                        });
                     });
+
                 })
             } else {
                 res.redirect('/')
