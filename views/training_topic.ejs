@@ -16,75 +16,49 @@
 
 </head>
 <body>
-  <!-- <header class = "bar topbar" >          
-    <div class ="logo">
-      <img src="img/icon.png" alt="logo">
-    </div>
-    <div class = "dashboard">
-        Training
-    </div>
-    <div class = "login">
-        <p>Xin chào, Thu | <a href="#">Đăng xuất</a></p>
-    </div>
-  </header> -->
-  <div id="content" clas="container">
+  
+  <div id="content" class="container">
     <div class="flex-container">
-      <div class="empty">
+      <div id="emptybox" class="empty">
       </div>
-      <div class="title" id="title">Hướng dẫn</div>
+      <div class="title" id="title">HƯỚNG DẪN</div>
       <div id="question" class="data">
         Bạn hãy chọn một trong bốn chủ đề sau: Sức khỏe/ Giáo dục/ Công nghệ/ Chỗ ở, tương ứng cho 20 câu sau đây:
       </div>
-      <!-- <div id="shortcut_label" class="shortcut_label hide">
-        <input id="sl_label" placeholder="Điền nhãn muốn chọn" type="text" >
-        <button onclick="goto_label()" class="btn">Chọn</button>
-      </div> -->
-      <div id="label" class="label1 hide">
+      
+      <div id="label" class="label hide">
 
         <div id="answer-buttons" class="btn-grid">
         </div>
       </div>
       <div class="empty hide">
-        
       </div>
       <p id="noti-selected-answer"></p>
       <div class="controls">
         <button id="start-btn" class="start-btn">Bắt đầu</button>
-        <button id="next-btn" class="next-btn btn hide">Tiếp tục</button>
-        <button id="result-btn" class="next-btn btn hide">Tiếp tục</button>
+        <button id="next-btn" class="next-btn btn hide" data-correct="false">Tiếp tục</button>
+        <button id="result-btn" class="next-btn btn hide" data-correct="false"> Tiếp tục</button>
       </div>
+    </div>
   </div>
-</div>
 
-<div id="result" class="result hide">
-  <div class="empty"></div>
-  <div class="title">Kết quả</div>
-  <div id="result_content" class="data">
-    Chúc mừng bạn đã hoàn thành phần đào mức 2. Bây giờ hãy bắt đầu với phần đào tạo tiếp theo.
+  <div id="result" class="result hide">
+    <div class="empty"></div>
+    <div class="title">KẾT QUẢ</div>
+    <div id="result_content" class="data">
+      Chúc mừng bạn đã hoàn thành phần đào mức 2. Bây giờ hãy bắt đầu với phần đào tạo tiếp theo.
+    </div>
+    <a id="btn-next-lvl" style="width: 100%" class="" onclick="nextLvl()"><button class='start-btn'>Tiếp tục</button></a>
+    <a id="btn-again" style="width: 100%" class="hide"><button class='start-btn'>Làm lại</button></a>
   </div>
-  
-  <a id="btn-next-lvl" style="width: 70%" class="" onclick="nextLvl()"><button class='start-btn'>Tiếp tục</button></a>
-  <a id="btn-again" style="width: 70%" class="hide"><button class='start-btn'>Làm lại</button></a>
 
-</div>
+  <footer>
+    <div class = "bar lowbar">
+              <a href="/dashboard">Quay lại trang chủ</a>
+              <a href="/logout">Đăng xuất</a>
+    </div>
+  </footer> 
 
-<footer>
-  <div class = "bar lowbar">
-            <a href="/dashboard">Quay lại trang chủ</a>
-            <a href="/logout">Đăng xuất</a>
-  </div>
-</footer> 
-
-<!-- <footer>
-  <div class = "bar lowbar">
-      <div class = lowbar-container>
-          <img src="img/icon.png" alt="logo">
-          <div class = "lowbar-content">                               
-              <a href="#">Về chúng tôi</a> | <a href="#">Quay lại đầu trang</a>
-          </div>
-      </div>
-  </div>
-</footer> -->
 </body>
 <script>
   var questions = <%-JSON.stringify(list)%>;
