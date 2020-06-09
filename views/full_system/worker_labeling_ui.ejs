@@ -6,51 +6,128 @@
 
 <!-- Include the Label Studio library -->
 <script src="https://unpkg.com/label-studio@0.4.0/build/static/js/main.0249ea16.js"></script>
-
+<script src="/js/idp.js"></script>
+<script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
 <!-- Initialize Label Studio -->
 <script>
-  var labelStudio = new LabelStudio('editor', {
-    config: `
+
+    window.onload = function() {
+        var task_config = [{
+            completions: [],
+            predictions: [],
+            id: 1,
+            data: {
+                image: "https://htx-misc.s3.amazonaws.com/opensource/label-studio/examples/images/nick-owuor-astro-nic-visuals-wDifg5xc9Z4-unsplash.jpg"
+                
+            }
+        },
+        
+        {
+            completions: [],
+            predictions: [],
+            id: 2,
+            data: {
+                image: "https://go.heartex.net/static/samples/sample.jpg"
+                
+            }
+        },
+        {
+            completions: [],
+            predictions: [],
+            id: 3,
+            data: {
+                image: "https://go.heartex.net/static/samples/sample.jpg"
+                
+            }
+        },
+        {
+            completions: [],
+            predictions: [],
+            id: 4,
+            data: {
+                image: "https://go.heartex.net/static/samples/sample.jpg"
+                
+            }
+        }
+    ];
+    
+    var labelStudio = new LabelStudio('label-studio', {
+        config: `
       <View>
         <Image name="img" value="$image"></Image>
         <RectangleLabels name="tag" toName="img">
-          <Label value="Hello"></Label>
-          <Label value="World"></Label>  
+          <Label value="Máy bay"></Label>
+          <Label value="Bà Già"></Label>  
         </RectangleLabels>
       </View>
     `,
 
-    interfaces: [
-      "panel",
-      "update",
-      "controls",
-      "side-column",
-      "completions:menu",
-      "completions:add-new",
-      "completions:delete",
-      "predictions:menu",
-    ],
+        interfaces: [
+            "panel",
+            "update",
+            "controls",
+            "side-column",
+            "completions:menu",
+            "completions:add-new",
+            "completions:delete",
+            "predictions:menu",
+        ],
 
-    user: {
-      pk: 1,
-      firstName: "James",
-      lastName: "Dean"
-    },
+        user: {
+            pk: 1,
+            firstName: "James",
+            lastName: "Dean"
+        },
 
-    task: {
-      completions: [],
-      predictions: [],
-      id: 1,
-      data: {
-        image: "https://htx-misc.s3.amazonaws.com/opensource/label-studio/examples/images/nick-owuor-astro-nic-visuals-wDifg5xc9Z4-unsplash.jpg"
-      }
-    },
-    
-    onLabelStudioLoad: function(LS) {
-      var c = LS.completionStore.addCompletion({
-        userGenerate: true
-      });
-      LS.completionStore.selectCompletion(c.id);
+        task: task_config[0],
+
+        onLabelStudioLoad: function (LS) {
+            var c = LS.completionStore.addCompletion({
+                userGenerate: true
+            });
+            LS.completionStore.selectCompletion(c.id);
+
+            
+        },
+
+        onSubmitCompletion: function(ls, completion) {
+            console.log("completion", completion);
+            console.log(task_config[1])
+            ls.resetState();
+            //console.log(ls.resetState)
+            getNewData()
+            .then(response => {
+                console.log("response", response)
+                response.data = JSON.stringify(response.data)
+                ls.assignTask(response);
+                //console.log(ls.assignTask)
+                
+                ls.initializeStore(_convertTask(response));
+                let cs = ls.completionStore;
+                let c;
+                if (cs.predictions.length > 0) {
+                c = ls.completionStore.addCompletionFromPrediction(cs.predictions[0]);
+                }
+                else {
+                c = ls.completionStore.addCompletion({ userGenerate: true });
+                }
+
+                cs.selectCompletion(c.id);
+
+                ls.setFlags({ isLoading: false });
+                console.log("Re-assisgned!")
+            })
+        },
+
+        onEntityCreate: function(region) {
+            console.log(region);
+            //getNewData();
+            //task_config.data.image = "https://htx-misc.s3.amazonaws.com/opensource/label-studio/examples/images/nick-owuor-astro-nic-visuals-wDifg5xc9Z4-unsplash.jpg";
+            // labelStudio.task.data.image = "https://htx-misc.s3.amazonaws.com/opensource/label-studio/examples/images/nick-owuor-astro-nic-visuals-wDifg5xc9Z4-unsplash.jpg"
+        }
+        });
     }
-  });
+
+    
+   
 </script>
