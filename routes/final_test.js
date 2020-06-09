@@ -58,10 +58,29 @@ module.exports = function (app) {
                             client.release();
                             return console.error(err);
                         }
-                        client.release();
-                        req.session.passport.user.role = "worker"
-                        res.redirect('/dashboard')
+                        client.query('SELECT exists (SELECT 1 FROM score WHERE username = $1 LIMIT 1)',[username], function (err,result) {  
+                            console.log(result.rows[0].exists)                 
+                            if (result.rows[0].exists == true){
+                                client.release();
+                                res.redirect('/');
+                            }else{
+                                client.query("insert into score (username, score, total_score, money, array_id_sentence, id) values ( $1 , 0 , 0, 0 , '{}' , $2 )", [user.username, user.id], function (err, result) {
+                                    if (err) {
+                                        client.release();
+                                        res.redirect('/dashboard');
+                                        return console.error(err);
+                                    }
+                                    client.release();
+                                    req.session.passport.user.role = "worker"
+                                    res.redirect('/dashboard')
+                                });
+                            }
+    
+                        });
+
                     });
+
+
                 })
             } else {
                 res.redirect('/')
