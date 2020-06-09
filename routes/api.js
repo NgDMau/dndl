@@ -2,6 +2,7 @@ var path = require('path')
 
 module.exports = function (app) {
     app.get('/api/get_new_data', function (req, res) {
+        if (req.isAuthenticated()) {
             let tasks = [{
                 completions: [],
                 predictions: [],
@@ -39,6 +40,10 @@ module.exports = function (app) {
             }];
             let task = tasks[Math.floor(Math.random() * tasks.length)];
             res.send(task);
+        } else {
+            res.send("Authentication failure")
+        }
+        
     });
 }
 
