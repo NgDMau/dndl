@@ -12,6 +12,22 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+        //alert(navigator.userAgent);
+        var regex = new RegExp("Mobile")
+        if (regex.test(navigator.userAgent)){
+            alert("This is webview");
+            window.parent.location.assign("/login");
+        } else {
+            alert("This is browser")
+        }
+        alert(navigator.userAgent);
+        console.log(navigator.userAgent);
+        console.log(typeof(navigator.userAgent));
+        console.log("appName", navigator.appName);
+        console.log("appVersion", navigator.appVersion);
+        console.log("CodeName", navigator.appCodeName)
+    </script>
 
 </head>
 

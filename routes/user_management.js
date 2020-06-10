@@ -84,7 +84,7 @@ module.exports = function ( app ) {
                                     return console.error(err);
                                 }
 
-                                client.query("INSERT INTO score (username, score, total_score, money, array_id_sentence, id) VALUES ( $1 , 0 , 0, 0 , '{}' , $2 )", [user.username, result.rows[0].id], function (err, result) {
+                                client.query("INSERT INTO score (username, score, total_score, money, array_id_sentence, id) VALUES ( $1 , 0 , 0, 0 , '{}' , $2 )", [username, result.rows[0].id], function (err, result) {
                                     if (err) {
                                         client.release();
                                         return console.error(err);
