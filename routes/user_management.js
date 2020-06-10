@@ -29,7 +29,7 @@ module.exports = function ( app ) {
                         return console.error(err);
                     }
 
-                    client.query('SELECT * FROM users WHERE role NOT LIKE $1',['admin'], function (err, result) {
+                    client.query('SELECT * FROM users, score WHERE users.role NOT LIKE $1 and users.id = score.id ',['admin'], function (err, result) {
                         if (err) {
                             client.release();
                             return console.error(err);
@@ -48,6 +48,8 @@ module.exports = function ( app ) {
             res.redirect('/login')
         }      
     });
+
+    // add user
     
     app.post('/user_management/add', function (req, res) {
         if (req.isAuthenticated()) {
@@ -76,14 +78,22 @@ module.exports = function ( app ) {
                             req.flash('mess','Tên tài khoản đã tồn tại')
                             res.redirect('/user_management');
                         }else{
-                            client.query('INSERT INTO users(username, full_name, email, address, role) VALUES($1, $2, $3, $4, $5)',[username, full_name, email, address, role], function (err) {
+                            client.query('INSERT INTO users(username, full_name, email, address, role) VALUES ($1, $2, $3, $4, $5) RETURNING *',[username, full_name, email, address, role], function (err,result) {
                                 if (err) {
                                     client.release();
                                     return console.error(err);
                                 }
-                                    client.release();
-                                    req.flash('mess','Thêm tài khoản thành công')
-                                    res.redirect('/user_management');
+
+                                client.query("INSERT INTO score (username, score, total_score, money, array_id_sentence, id) VALUES ( $1 , 0 , 0, 0 , '{}' , $2 )", [user.username, result.rows[0].id], function (err, result) {
+                                    if (err) {
+                                        client.release();
+                                        return console.error(err);
+                                    }
+                       
+                                });
+                                client.release();
+                                req.flash('mess','Thêm tài khoản thành công')
+                                res.redirect('/user_management');
         
         
                             });
@@ -100,6 +110,26 @@ module.exports = function ( app ) {
             res.redirect('/login')
         } 
     });
+
+    app.get('/user_management/add', function (req, res) {
+        if (req.isAuthenticated()) {
+
+            var user = new User(req.session.passport.user)
+            
+            if (user.isMod()) {
+
+                res.redirect('/user_management');
+
+            } else {
+                res.redirect('/');
+            }
+            
+        } else {
+            res.redirect('/')
+        }
+    });
+
+    // edit user
     
     app.post('/user_management/edit', function (req, res) {
         if (req.isAuthenticated()) {
@@ -127,7 +157,10 @@ module.exports = function ( app ) {
                             res.redirect('/user_management');
                         }else{
                             client.query('UPDATE users SET username = $1, full_name = $2, email = $3, address = $4, role = $5  WHERE id=$6',[username, full_name, email, address, role, id], function (err) {
-
+                                if (err) {
+                                    client.release();
+                                    return console.error(err);
+                                }
                                 client.release();
                                 req.flash('mess','Sửa thông tin tài khoản thành công')
                                 res.redirect('/user_management');
@@ -149,14 +182,14 @@ module.exports = function ( app ) {
     
     });
     
-    app.get('/user_management/add', function (req, res) {
+    app.get('/user_management/edit', function (req, res) {
         if (req.isAuthenticated()) {
 
             var user = new User(req.session.passport.user)
             
             if (user.isMod()) {
 
-                res.redirect('/user_management');
+                res.redirect('/user_management')
 
             } else {
                 res.redirect('/');
@@ -165,7 +198,10 @@ module.exports = function ( app ) {
         } else {
             res.redirect('/')
         }
+        
     });
+
+    // delete user
     
     app.post('/user_management/delete', function (req, res) {
         if (req.isAuthenticated()) {
@@ -178,11 +214,22 @@ module.exports = function ( app ) {
                 pool.connect(function (err, client, done) {
                     var id = req.body.id;
             
-                    client.query('DELETE FROM users WHERE id=$1',[id], function (err) {
-            
+                    client.query('DELETE FROM score WHERE id=$1',[id], function (err) {
+                        if (err) {
                             client.release();
-                            req.flash('mess','Xóa thông tin tài khoản thành công')
-                            res.redirect('/user_management')
+                            return console.error(err);
+                        }
+                        client.query('DELETE FROM users WHERE id=$1',[id], function (err) {
+                            if (err) {
+                                client.release();
+                                return console.error(err);
+                            }
+    
+                        });
+                        
+                        client.release();
+                        req.flash('mess','Xóa thông tin tài khoản thành công')
+                        res.redirect('/user_management')
 
                     });
                 })
@@ -214,6 +261,8 @@ module.exports = function ( app ) {
         
     });
 
+    //find user
+
     app.post('/user_management/find', function (req, res) {
         if (req.isAuthenticated()) {
 
@@ -226,9 +275,9 @@ module.exports = function ( app ) {
                     var row = req.body.row || 'username';
                     var search = req.body.search;
                     
-                    const query = "SELECT * FROM users WHERE "+row+" LIKE \'%"+search+"%\'"
+                    const query = "SELECT * FROM users, score WHERE users."+row+" LIKE $1 and score.id = users.id ";
             
-                    client.query(query, function (err,result) {
+                    client.query(query, [search], function (err,result) {
 
                         if (err) {
                             client.release();
@@ -240,11 +289,11 @@ module.exports = function ( app ) {
                     });
                 })
             } else {
-                res.redirect('/login');
+                res.redirect('/');
             }
             
         } else {
-            res.redirect('/login')
+            res.redirect('/')
         }
     });
 
