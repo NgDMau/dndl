@@ -16,10 +16,10 @@
         //alert(navigator.userAgent);
         var regex = new RegExp("Mobile")
         if (regex.test(navigator.userAgent)){
-            alert("This is webview");
-            window.parent.location.assign("/login");
+            console.log("This is webview");
+            //window.parent.location.assign("/login");
         } else {
-            alert("This is browser")
+            console.log("This is browser")
         }
         alert(navigator.userAgent);
         console.log(navigator.userAgent);
