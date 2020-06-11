@@ -59,7 +59,7 @@ function start() {
     score += Number(localStorage.savedscore);
   }
   
-  alert("HELLO HELLO")
+  //alert("HELLO HELLO")
 
   startButton.classList.add('hide')
   shuffledQuestions(numberQuestion);
