@@ -235,7 +235,7 @@
                         <section class="p-t-20">
                             <div class="container">
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-12" style="overflow: auto;">
                                         <h3 class="title-5 m-b-35">Danh sách người dùng</h3>
                                         <div class="table-data__tool">
                                             <!-- <div class="table-data__tool-left">
@@ -285,6 +285,7 @@
                                                     <tr>
                                                         <th>ID</th>
                                                         <th>Tên tài khoản</th>
+                                                        <th>Mật khẩu</th>>
                                                         <th>Tên người dùng</th>
                                                         <th>Email</th>
                                                         <th>Địa chỉ</th>
@@ -297,6 +298,7 @@
                                                         <tr class="tr-shadow">
                                                             <td name="id"><%= item.id %></td>
                                                             <td name="username"><%= item.username %></td>
+                                                            <td name="password"><%= item.password %></td>
                                                             <td name="full_name"><%= item.full_name %></td>
                                                             <td name="email"><%= item.email %></td>
                                                             <td name="address"><%= item.address %></td>    
@@ -368,7 +370,7 @@
       </div>
     </div>
       
-
+    <!--Them tai khoan-->>
     <div class="modal fade" id="add_user" role="dialog">
         <div class="modal-dialog">
         
@@ -381,15 +383,21 @@
             <div class="modal-body">
                 <form action="/user_management/add" method="post">
                     <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-3 col-form-label">Tên người dùng</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="full_name" name="full_name" placeholder="Tên người dùng">
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-3 col-form-label">Tên tài khoản</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="username" name="username" placeholder="Tên tài khoản" required="required" pattern="[a-z]{1,15}" title="Tên tài khoản phải không bao gồm dấu và ký tự đặc biệt.">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-sm-3 col-form-label">Tên người dùng</label>
+                        <label for="inputEmail3" class="col-sm-3 col-form-label">Mật khẩu</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="full_name" name="full_name" placeholder="Tên người dùng">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Mật khẩu">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -433,9 +441,9 @@
           </div>
           
         </div>
-      </div>
-
-      <div class="modal fade" id="edit_user" role="dialog">
+    </div>
+    <!--Sauwr tai khoan-->>
+    <div class="modal fade" id="edit_user" role="dialog">
         <div class="modal-dialog">
         
           <!-- Modal content-->
@@ -453,15 +461,21 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-3 col-form-label">Tên người dùng</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="full_name_edit" name="full_name" placeholder="Tên người dùng">
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-3 col-form-label">Tên tài khoản</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="username_edit" name="username" placeholder="Tên tài khoản" pattern="[a-z]{1,15}" title="Tên tài khoản phải không bao gồm dấu và ký tự đặc biệt.">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-sm-3 col-form-label">Tên người dùng</label>
+                        <label for="inputEmail3" class="col-sm-3 col-form-label">Mật khẩu</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="full_name_edit" name="full_name" placeholder="Tên người dùng">
+                            <input type="password" class="form-control" id="password_edit" name="password" placeholder="Mật khẩu">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -505,9 +519,9 @@
           </div>
           
         </div>
-      </div>
+    </div>
 
-      <div class="modal fade" id="delete_user" role="dialog">
+    <div class="modal fade" id="delete_user" role="dialog">
         <div class="modal-dialog">
         
           <!-- Modal content-->
@@ -538,19 +552,20 @@
           </div>
           
         </div>
-      </div>
+    </div>
 
-      <script>
+    <script>
         var value;
         $(document).on("click", ".edit", function(){
 
             value = $(this).parents("tr").find("td");
             $('#id_edit').val($(value[0]).text());
             $('#username_edit').val($(value[1]).text());
-            $('#full_name_edit').val($(value[2]).text());
-            $('#email_edit').val($(value[3]).text());
-            $('#address_edit').val($(value[4]).text());
-            $('#role_edit').val($(value[5]).text());
+            $('#password_edit').val($(value[2]).text());
+            $('#full_name_edit').val($(value[3]).text());
+            $('#email_edit').val($(value[4]).text());
+            $('#address_edit').val($(value[5]).text());
+            $('#role_edit').val($(value[6]).text());
 
 
         });
@@ -558,13 +573,9 @@
 
             value = $(this).parents("tr").find("td");
             $('#id_delete').val($(value[0]).text());
-            $('#username_delete').val($(value[1]).text());
-            $('#full_name_delete').val($(value[2]).text());
-            $('#email_delete').val($(value[3]).text());
-            $('#address_delete').val($(value[4]).text());
-            $('#role_delete').val($(value[5]).text());
+
         });
-      </script>
+    </script>
       
 
 </body>

@@ -63,6 +63,7 @@ module.exports = function ( app ) {
                     var email = req.body.email;
                     var address = req.body.address;
                     var role = req.body.role;
+                    var password = req.body.password;
                     if (role === 'admin') {
                         role = 'moderator'
                     }
@@ -78,7 +79,7 @@ module.exports = function ( app ) {
                             req.flash('mess','Tên tài khoản đã tồn tại')
                             res.redirect('/user_management');
                         }else{
-                            client.query('INSERT INTO users(username, full_name, email, address, role) VALUES ($1, $2, $3, $4, $5) RETURNING *',[username, full_name, email, address, role], function (err,result) {
+                            client.query('INSERT INTO users(username, full_name, email, address, role, password) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',[username, full_name, email, address, role, password], function (err,result) {
                                 if (err) {
                                     client.release();
                                     return console.error(err);
@@ -144,6 +145,7 @@ module.exports = function ( app ) {
                     var email = req.body.email;
                     var address = req.body.address;
                     var role = req.body.role;
+                    var password = req.body.password;
                     
                     if (err) {
                         return console.error(err);
@@ -156,16 +158,24 @@ module.exports = function ( app ) {
                             req.flash('mess','Tên tài khoản đã tồn tại')
                             res.redirect('/user_management');
                         }else{
-                            client.query('UPDATE users SET username = $1, full_name = $2, email = $3, address = $4, role = $5  WHERE id=$6',[username, full_name, email, address, role, id], function (err) {
+                            client.query('UPDATE users SET username = $1, full_name = $2, email = $3, address = $4, role = $5 , password = $6 WHERE id=$7',[username, full_name, email, address, role, password, id], function (err) {
                                 if (err) {
                                     client.release();
                                     return console.error(err);
                                 }
-                                client.release();
-                                req.flash('mess','Sửa thông tin tài khoản thành công')
-                                res.redirect('/user_management');
+                                client.query('UPDATE score SET username = $1 WHERE id = $2',[username, id], function (err) {
+                                    if (err) {
+                                        client.release();
+                                        return console.error(err);
+                                    }
+                                    client.release();
+                                    req.flash('mess','Sửa thông tin tài khoản thành công')
+                                    res.redirect('/user_management');
+        
+                                });
     
                             });
+                            
 
                         }
 
