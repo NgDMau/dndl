@@ -49,13 +49,14 @@ module.exports = function (app) {
     passport.use('id-only', new customStrategy(
         function (req, done) {
             var id = req.body.username;
+            var password = req.body.password;
             loginAttempt();
             async function loginAttempt() {
 
                 const client = await pool.connect()
                 try {
                     await client.query('BEGIN')
-                    await JSON.stringify(client.query('SELECT "id", "username", "email", "address", "role", "full_name" FROM "users" WHERE "username"=$1', [id], function (err, result) {
+                    await JSON.stringify(client.query('SELECT "id", "username", "email", "address", "role", "full_name", "password" FROM "users" WHERE "username"=$1', [id], function (err, result) {
                         if (err) {
                             client.release();
                             return done(err)
@@ -65,10 +66,16 @@ module.exports = function (app) {
                             return done(null, false);
                         }
                         else {
-                            let res = client.query("UPDATE users SET last_login=(SELECT now() ::timestamp AT TIME ZONE 'GMT+7') WHERE username=($1)", [result.rows[0]]);
-                            console.log(res);
+                            //let res = client.query("UPDATE users SET last_login=(SELECT now() ::timestamp AT TIME ZONE 'GMT+7') WHERE username=($1)", [result.rows[0]]);
+                            //console.log(res);
+
                             client.release();
-                            return done(null, result.rows[0]);
+                            if (result.rows[0].password === password){
+                                console.log("checking!!")
+                                return done(null, result.rows[0]);
+                            }
+                            
+                            return done(null, false);
                         }
                     }))
                 }
@@ -149,7 +156,7 @@ module.exports = function (app) {
     });
 
     app.get('/loginrequester_fail', function (req, res) {
-        const mess = req.flash('login_fail', 'Đăng nhập thất bại. Hãy kiểm tra lại tên đăng nhập.');
+        const mess = req.flash('login_fail', 'Đăng nhập thất bại. Hãy kiểm tra lại thông tin đăng nhập.');
         res.redirect('/loginrequester')
     });
     

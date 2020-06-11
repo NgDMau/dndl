@@ -67,7 +67,6 @@ function start() {
   labelElement.classList.remove('hide')
   titleElement.innerText = 'CÂU HỎI'
   // document.getElementById("shortcut_label").classList.remove('hide')
-
   setNextQuestion()
 }
 
