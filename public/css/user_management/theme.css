@@ -4537,7 +4537,7 @@ section {
     -webkit-border-bottom-left-radius: 3px;
     -moz-border-radius-bottomleft: 3px;
     border-bottom-left-radius: 3px;
-    vertical-align: top;
+
 }
 
 .table-data2.table tbody tr td:first-child .au-checkbox {
