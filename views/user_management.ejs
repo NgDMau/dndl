@@ -285,7 +285,7 @@
                                                     <tr>
                                                         <th>ID</th>
                                                         <th>Tên tài khoản</th>
-                                                        <th>Mật khẩu</th>>
+                                                        <th>Mật khẩu</th>
                                                         <th>Tên người dùng</th>
                                                         <th>Email</th>
                                                         <th>Địa chỉ</th>
@@ -329,6 +329,209 @@
 
     </div>
 
+        <!-- Main JS-->
+        <script src="/js/user_management/main.js"></script>
+
+        <div class="modal fade" id="not_done" role="dialog">
+            <div class="modal-dialog">
+            
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                   <div>Tính năng này sẽ có ở phiên bản tiếp theo!</div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+          
+        <!--Them tai khoan-->>
+        <div class="modal fade" id="add_user" role="dialog">
+            <div class="modal-dialog">
+            
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Thêm tài khoản</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form action="/user_management/add" method="post">
+                        <div class="form-group row">
+                            <label for="usr" class="col-sm-3 col-form-label">Tên người dùng</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="full_name" name="full_name" placeholder="Tên người dùng">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Tên tài khoản</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="username" name="username" placeholder="Tên tài khoản" required="required" pattern="^[A-Za-z0-9_]{1,15}$" title="Tên tài khoản phải không bao gồm dấu và ký tự đặc biệt.">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="pwd" class="col-sm-3 col-form-label">Mật khẩu</label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control" id="password" name="password" required="required" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" placeholder="Mật khẩu">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputEmail3" class="col-sm-3 col-form-label">Email</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="email" name="email" required="required" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Địa chỉ</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="address" name="address" placeholder="Địa chỉ">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Quyền</label>
+                            <div class="col-sm-9">
+                                <select class="custom-select" id="role" name="role" required="required">
+                                    
+                                    <option value="level_1">Beginner</option>
+                                    <option value="worker">Worker</option>
+                                    <option value="admin">Admin</option>
+                                    
+                                </select>
+                            </div>
+    
+                        </div>
+    
+                        <div class="form-group row">
+                            <div class="col-sm-12 d-flex justify-content-center">
+                                <button type="submit" class="btn d-flex justify-content-end btn-warning">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- bo vi da co dau 'x' rui ah
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            -->
+              </div>
+              
+            </div>
+        </div>
+        <!--Sua tai khoan-->>
+        <div class="modal fade" id="edit_user" role="dialog">
+            <div class="modal-dialog">
+            
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Sửa tài khoản</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form action="/user_management/edit" method="post">
+                        <div class="form-group row hide">
+                            <label class="col-sm-3 col-form-label">ID</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="id_edit" name="id" placeholder="ID" >
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Tên người dùng</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="full_name_edit" name="full_name" placeholder="Tên người dùng">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="usr" class="col-sm-3 col-form-label">Tên tài khoản</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="username_edit" name="username" required="required" pattern="^[A-Za-z0-9_]{1,15}$" title="Tên tài khoản phải không bao gồm dấu và ký tự đặc biệt.">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="pwd" class="col-sm-3 col-form-label">Mật khẩu</label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control" id="password_edit" name="password" required="required" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" placeholder="Mật khẩu">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputEmail3" class="col-sm-3 col-form-label">Email</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="email_edit" name="email" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Địa chỉ</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="address_edit" name="address" placeholder="Địa chỉ">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Quyền</label>
+                            <div class="col-sm-9">
+                                <select class="custom-select" id="role_edit" name="role">
+                                    <option value="level_1">Beginner</option>
+                                    <option value="worker">Worker</option>
+                                    <option value="admin">Admin</option>
+                                </select>
+                            </div>
+    
+                        </div>
+    
+                        <div class="form-group row">
+                            <div class="col-sm-12 d-flex justify-content-center">
+                                <button type="submit" class="btn d-flex justify-content-end btn-warning">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- bo vi da co dau 'x' rui ah
+    
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+    
+            -->
+              </div>
+              
+            </div>
+        </div>
+        <!--Xoa tai khoan-->>
+        <div class="modal fade" id="delete_user" role="dialog">
+            <div class="modal-dialog">
+            
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Bạn có  chắc muốn xóa tài khoản này</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form action="/user_management/delete" method="post">
+                        <div class="form-group row hide">
+                            <label class="col-sm-3 col-form-label">ID</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="id_delete" name="id" placeholder="ID">
+                            </div>
+                        </div>
+    
+                        <div class="form-group row">
+                            <div class="col-sm-12 d-flex justify-content-center">
+                                <button type="submit" class="btn d-flex justify-content-end btn-warning">Xóa</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+              
+            </div>
+        </div>
+
 
     <!-- Jquery JS-->
     <script src="/vendor/jquery-3.2.1.min.js"></script>
@@ -350,209 +553,6 @@
     <script src="/vendor/chartjs/Chart.bundle.min.js"></script>
     <script src="/vendor/select2/select2.min.js">
     </script>
-
-    <!-- Main JS-->
-    <script src="/js/user_management/main.js"></script>
-
-    <div class="modal fade" id="not_done" role="dialog">
-        <div class="modal-dialog">
-        
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-               <div>Tính năng này sẽ có ở phiên bản tiếp theo!</div>
-          </div>
-          
-        </div>
-      </div>
-    </div>
-      
-    <!--Them tai khoan-->>
-    <div class="modal fade" id="add_user" role="dialog">
-        <div class="modal-dialog">
-        
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Thêm tài khoản</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form action="/user_management/add" method="post">
-                    <div class="form-group row">
-                        <label for="usr" class="col-sm-3 col-form-label">Tên người dùng</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="full_name" name="full_name" placeholder="Tên người dùng">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Tên tài khoản</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="username" name="username" placeholder="Tên tài khoản" required="required" pattern="^[A-Za-z0-9_]{1,15}$" title="Tên tài khoản phải không bao gồm dấu và ký tự đặc biệt.">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="pwd" class="col-sm-3 col-form-label">Mật khẩu</label>
-                        <div class="col-sm-9">
-                            <input type="password" class="form-control" id="password" name="password" required="required" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" placeholder="Mật khẩu">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="inputEmail3" class="col-sm-3 col-form-label">Email</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="email" name="email" placeholder="Email">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Địa chỉ</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="address" name="address" placeholder="Địa chỉ">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Quyền</label>
-                        <div class="col-sm-9">
-                            <select class="custom-select" id="role" name="role" required="required">
-                                
-                                <option value="level_1">Beginner</option>
-                                <option value="worker">Worker</option>
-                                <option value="admin">Admin</option>
-                                
-                            </select>
-                        </div>
-
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-sm-12 d-flex justify-content-center">
-                            <button type="submit" class="btn d-flex justify-content-end btn-warning">Submit</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <!-- bo vi da co dau 'x' rui ah
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        -->
-          </div>
-          
-        </div>
-    </div>
-    <!--Sua tai khoan-->>
-    <div class="modal fade" id="edit_user" role="dialog">
-        <div class="modal-dialog">
-        
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Sửa tài khoản</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form action="/user_management/edit" method="post">
-                    <div class="form-group row hide">
-                        <label class="col-sm-3 col-form-label">ID</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="id_edit" name="id" placeholder="ID" >
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Tên người dùng</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="full_name_edit" name="full_name" placeholder="Tên người dùng">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="usr" class="col-sm-3 col-form-label">Tên tài khoản</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="username_edit" name="username" required="required" pattern="^[A-Za-z0-9_]{1,15}$" title="Tên tài khoản phải không bao gồm dấu và ký tự đặc biệt.">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="pwd" class="col-sm-3 col-form-label">Mật khẩu</label>
-                        <div class="col-sm-9">
-                            <input type="password" class="form-control" id="password_edit" name="password" required="required" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" placeholder="Mật khẩu">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="inputEmail3" class="col-sm-3 col-form-label">Email</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="email_edit" name="email" placeholder="Email">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Địa chỉ</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="address_edit" name="address" placeholder="Địa chỉ">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Quyền</label>
-                        <div class="col-sm-9">
-                            <select class="custom-select" id="role_edit" name="role">
-                                <option value="level_1">Beginner</option>
-                                <option value="worker">Worker</option>
-                                <option value="admin">Admin</option>
-                            </select>
-                        </div>
-
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-sm-12 d-flex justify-content-center">
-                            <button type="submit" class="btn d-flex justify-content-end btn-warning">Submit</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <!-- bo vi da co dau 'x' rui ah
-
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-
-        -->
-          </div>
-          
-        </div>
-    </div>
-    <!--Xoa tai khoan-->>
-    <div class="modal fade" id="delete_user" role="dialog">
-        <div class="modal-dialog">
-        
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Bạn có  chắc muốn xóa tài khoản này</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form action="/user_management/delete" method="post">
-                    <div class="form-group row hide">
-                        <label class="col-sm-3 col-form-label">ID</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="id_delete" name="id" placeholder="ID">
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-sm-12 d-flex justify-content-center">
-                            <button type="submit" class="btn d-flex justify-content-end btn-warning">Xóa</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-          
-        </div>
-    </div>
 
     <script>
         var value;
