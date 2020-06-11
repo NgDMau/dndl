@@ -40,6 +40,9 @@ Notes:	decreasing heading by 0.4em with every subsequent heading level
 /*                   GENERIC                           */
 /*-----------------------------------------------------*/
 /* ----- Normalize ----- */
+.hidetext { 
+    -webkit-text-security: disc; /* Default */ 
+}
 
 .add {
     display: none;

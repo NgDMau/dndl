@@ -283,20 +283,35 @@ module.exports = function ( app ) {
     
                 pool.connect(function (err, client, done) {
                     var row = req.body.row || 'username';
-                    var search = req.body.search;
-                    
-                    const query = "SELECT * FROM users, score WHERE users."+row+" LIKE $1 and score.id = users.id ";
-            
-                    client.query(query, [search], function (err,result) {
+                    var search = req.body.search || false;
+                    var query;
 
-                        if (err) {
+                    if (search == false) {
+                        query = "SELECT * FROM users, score WHERE users.role NOT LIKE $1 and users.id = score.id";
+                        client.query(query, ['admin'], function (err,result) {
+
+                            if (err) {
+                                client.release();
+                                return console.error(err);
+                            }
                             client.release();
-                            return console.error(err);
-                        }
-                        client.release();
-                        res.render("user_management.ejs", {list:result, username:req.session.passport.user.username,mess:req.flash('mess') })
+                            res.render("user_management.ejs", {list:result, username:req.session.passport.user.username,mess:req.flash('mess') })
+    
+                        });
+                    }else{
+                        query = "SELECT * FROM users, score WHERE users."+row+" LIKE $1 and users.role NOT LIKE $2 and score.id = users.id ";
+                        client.query(query, [search, 'admin'], function (err,result) {
 
-                    });
+                            if (err) {
+                                client.release();
+                                return console.error(err);
+                            }
+                            client.release();
+                            res.render("user_management.ejs", {list:result, username:req.session.passport.user.username,mess:req.flash('mess') })
+    
+                        });
+                    }
+                    
                 })
             } else {
                 res.redirect('/');
