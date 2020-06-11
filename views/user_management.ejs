@@ -298,7 +298,7 @@
                                                         <tr class="tr-shadow">
                                                             <td name="id"><%= item.id %></td>
                                                             <td name="username"><%= item.username %></td>
-                                                            <td name="password"><%= item.password %></td>
+                                                            <td name="password" class="hidetext"><%= item.password %></td>
                                                             <td name="full_name"><%= item.full_name %></td>
                                                             <td name="email"><%= item.email %></td>
                                                             <td name="address"><%= item.address %></td>    
@@ -383,21 +383,21 @@
             <div class="modal-body">
                 <form action="/user_management/add" method="post">
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-sm-3 col-form-label">Tên người dùng</label>
+                        <label for="usr" class="col-sm-3 col-form-label">Tên người dùng</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="full_name" name="full_name" placeholder="Tên người dùng">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-sm-3 col-form-label">Tên tài khoản</label>
+                        <label class="col-sm-3 col-form-label">Tên tài khoản</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="username" name="username" placeholder="Tên tài khoản" required="required" pattern="[a-z]{1,15}" title="Tên tài khoản phải không bao gồm dấu và ký tự đặc biệt.">
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Tên tài khoản" required="required" pattern="^[A-Za-z0-9_]{1,15}$" title="Tên tài khoản phải không bao gồm dấu và ký tự đặc biệt.">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-sm-3 col-form-label">Mật khẩu</label>
+                        <label for="pwd" class="col-sm-3 col-form-label">Mật khẩu</label>
                         <div class="col-sm-9">
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Mật khẩu">
+                            <input type="password" class="form-control" id="password" name="password" required="required" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" placeholder="Mật khẩu">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -407,13 +407,13 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-sm-3 col-form-label">Địa chỉ</label>
+                        <label class="col-sm-3 col-form-label">Địa chỉ</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="address" name="address" placeholder="Địa chỉ">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-sm-3 col-form-label">Quyền</label>
+                        <label class="col-sm-3 col-form-label">Quyền</label>
                         <div class="col-sm-9">
                             <select class="custom-select" id="role" name="role" required="required">
                                 
@@ -442,7 +442,7 @@
           
         </div>
     </div>
-    <!--Sauwr tai khoan-->>
+    <!--Sua tai khoan-->>
     <div class="modal fade" id="edit_user" role="dialog">
         <div class="modal-dialog">
         
@@ -455,27 +455,27 @@
             <div class="modal-body">
                 <form action="/user_management/edit" method="post">
                     <div class="form-group row hide">
-                        <label for="inputEmail3" class="col-sm-3 col-form-label">ID</label>
+                        <label class="col-sm-3 col-form-label">ID</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="id_edit" name="id" placeholder="ID" >
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-sm-3 col-form-label">Tên người dùng</label>
+                        <label class="col-sm-3 col-form-label">Tên người dùng</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="full_name_edit" name="full_name" placeholder="Tên người dùng">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-sm-3 col-form-label">Tên tài khoản</label>
+                        <label for="usr" class="col-sm-3 col-form-label">Tên tài khoản</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="username_edit" name="username" placeholder="Tên tài khoản" pattern="[a-z]{1,15}" title="Tên tài khoản phải không bao gồm dấu và ký tự đặc biệt.">
+                            <input type="text" class="form-control" id="username_edit" name="username" required="required" pattern="^[A-Za-z0-9_]{1,15}$" title="Tên tài khoản phải không bao gồm dấu và ký tự đặc biệt.">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-sm-3 col-form-label">Mật khẩu</label>
+                        <label for="pwd" class="col-sm-3 col-form-label">Mật khẩu</label>
                         <div class="col-sm-9">
-                            <input type="password" class="form-control" id="password_edit" name="password" placeholder="Mật khẩu">
+                            <input type="password" class="form-control" id="password_edit" name="password" required="required" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" placeholder="Mật khẩu">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -485,13 +485,13 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-sm-3 col-form-label">Địa chỉ</label>
+                        <label class="col-sm-3 col-form-label">Địa chỉ</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="address_edit" name="address" placeholder="Địa chỉ">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-sm-3 col-form-label">Quyền</label>
+                        <label class="col-sm-3 col-form-label">Quyền</label>
                         <div class="col-sm-9">
                             <select class="custom-select" id="role_edit" name="role">
                                 <option value="level_1">Beginner</option>
@@ -520,7 +520,7 @@
           
         </div>
     </div>
-
+    <!--Xoa tai khoan-->>
     <div class="modal fade" id="delete_user" role="dialog">
         <div class="modal-dialog">
         
@@ -533,7 +533,7 @@
             <div class="modal-body">
                 <form action="/user_management/delete" method="post">
                     <div class="form-group row hide">
-                        <label for="inputEmail3" class="col-sm-3 col-form-label">ID</label>
+                        <label class="col-sm-3 col-form-label">ID</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="id_delete" name="id" placeholder="ID">
                         </div>
