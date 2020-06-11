@@ -283,10 +283,10 @@ module.exports = function ( app ) {
     
                 pool.connect(function (err, client, done) {
                     var row = req.body.row || 'username';
-                    var search = req.body.search || false;
+                    var search = req.body.search || undefined;
                     var query;
 
-                    if (search == false) {
+                    if (search == undefined) {
                         query = "SELECT * FROM users, score WHERE users.role NOT LIKE $1 and users.id = score.id";
                         client.query(query, ['admin'], function (err,result) {
 
@@ -300,7 +300,7 @@ module.exports = function ( app ) {
                         });
                     }else{
                         query = "SELECT * FROM users, score WHERE users."+row+" LIKE $1 and users.role NOT LIKE $2 and score.id = users.id ";
-                        client.query(query, [search, 'admin'], function (err,result) {
+                        client.query(query, ['%'+search+'%', 'admin'], function (err,result) {
 
                             if (err) {
                                 client.release();
