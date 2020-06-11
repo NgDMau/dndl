@@ -57,7 +57,9 @@ function start() {
   // check and add (if exists) saved-score in localStorage to current score
   if (localStorage.savedscore) {
     score += Number(localStorage.savedscore);
-  } 
+  }
+  
+  //alert("HELLO HELLO")
 
   startButton.classList.add('hide')
   shuffledQuestions(numberQuestion);
