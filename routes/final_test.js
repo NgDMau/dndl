@@ -12,7 +12,7 @@ const pool = new Pool({
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     database: process.env.DB_DATABASE,
-    ssl: process.env.DB_SSL
+    ssl: {rejectUnauthorized: false}
 });
 
 module.exports = function (app) {
@@ -21,7 +21,7 @@ module.exports = function (app) {
             var user = new User(req.session.passport.user)
             if (user.role == "beginner" || user.role == "worker") {
 
-                var listQuestion = [], numberQuestion = 10;
+                var listQuestion = [], numberQuestion = 20;
                 shuffledQuestions(numberQuestion).then(function () {
                     res.render("final_test.ejs", { list: listQuestion });
                 }
@@ -47,22 +47,40 @@ module.exports = function (app) {
     app.post('/final_test', function (req, res) {
         if (req.isAuthenticated()) {
             var user = new User(req.session.passport.user)
+            var reqBody = req.body;
+            var time = req.body.time;
+            var resultTest = req.body.resultTest;
+            console.log((req.body.constructor.name))
+            console.log(req.body.resultTest)
+            console.log(time+" "+resultTest)
+
+            
             if (user.role == "beginner") {
                 pool.connect(function (err, client, done) {
                     if (err) {
                         return console.error(err);
                     }
+                    if (resultTest == "true") {
+                        client.query('UPDATE users SET role=$1 WHERE username=$2', ['worker', user.username], function (err, result) {
+                            if (err) {
+                                client.release();
+                                return console.error(err);
+                            }
+                            req.session.passport.user.role = "worker"
 
-                    client.query('UPDATE users SET role=$1 WHERE username=$2', ['worker', user.username], function (err, result) {
-                        if (err) {
-                            client.release();
-                            return console.error(err);
-                        }
-                        client.release();
-                        req.session.passport.user.role = "worker"
-                        res.redirect('/dashboard')
+                        });
+                        client.query('UPDATE score SET total_score=$1 WHERE username=$2', [time, user.username], function (err, result) {
+                            if (err) {
+                                client.release();
+                                return console.error(err);
+                            }
+                        });
 
-                    });
+                    }
+
+                    client.release();
+                    res.redirect('/dashboard')
+
 
 
                 })

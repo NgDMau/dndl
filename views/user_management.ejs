@@ -219,7 +219,7 @@
             <div class="main-content">
 
                 <% if ( mess.length > 0 ) { %>
-                    <% if ( mess == "Tên tài khoản đã tồn tại" ) { %>
+                    <% if ( mess == "Tên đăng nhập đã tồn tại" ) { %>
                         <div class="alert alert-danger">
                             <%= mess %>
                         </div>
@@ -238,33 +238,37 @@
                                     <div class="col-md-12" style="overflow: auto;">
                                         <h3 class="title-5 m-b-35">Danh sách người dùng</h3>
                                         <div class="table-data__tool">
-                                            <!-- <div class="table-data__tool-left">
-                                                <div class="rs-select2--light rs-select2--md">
-                                                    <select class="js-select2" name="property">
-                                                        <option selected="selected">All Properties</option>
-                                                        <option value="">Option 1</option>
-                                                        <option value="">Option 2</option>
-                                                    </select>
-                                                    <div class="dropDownSelect2"></div>
-                                                </div>
-                                                <div class="rs-select2--light rs-select2--sm">
-                                                    <select class="js-select2" name="time">
-                                                        <option selected="selected">Today</option>
-                                                        <option value="">3 Days</option>
-                                                        <option value="">1 Week</option>
-                                                    </select>
-                                                    <div class="dropDownSelect2"></div>
-                                                </div>
-                                                <button class="au-btn-filter">
-                                                    <i class="zmdi zmdi-filter-list"></i>filters</button>
-                                            </div> -->
+                                            <div class="table-data__tool-left">
+                                                <form class="form-header" action="/user_management/filter" method="POST">
+                                                    <div class="rs-select2--light rs-select2--md">
+                                                        <select class="js-select2" name="property">
+                                                            <option selected="selected">Lọc theo</option>
+                                                            <option value="score">Điểm</option>
+                                                            <option value="time">Thời gian</option>
+                                                        </select>
+                                                        <div class="dropDownSelect2"></div>
+                                                    </div>
+                                                    <div class="rs-select2--light rs-select2--sm">
+                                                        <select class="js-select2" name="filter">
+                                                            <option selected="selected">Thứ tự</option>
+                                                            <option value="increase">Tăng dần</option>
+                                                            <option value="decrease">Giảm dần</option>
+                                                        </select>
+                                                        <div class="dropDownSelect2"></div>
+                                                    </div>
+                                                    <button class="au-btn-filter" type="submit">
+                                                        <i class="zmdi zmdi-filter-list"></i>Lọc
+                                                    </button>
+                                                </form>
+                                            </div>
+
                                             <div class="table-data__tool-right">
 
                                                 <form class="form-header" action="/user_management/find" method="POST">
                                                     <select class="au-select" name="row">
                                                         <option value="username">Tìm kiếm theo</option>
-                                                        <option value="username">Tên tài khoản</option>
-                                                        <option value="full_name">Tên người dùng</option>
+                                                        <option value="username">Tên đăng nhập</option>
+                                                        <option value="full_name">Họ và tên</option>
                                                         <option value="email">Email</option>
                                                         <option value="address">Địa chỉ</option>
                                                         <option value="role">Quyền tài khoản</option>
@@ -284,13 +288,14 @@
                                                 <thead>
                                                     <tr>
                                                         <th>ID</th>
-                                                        <th>Tên tài khoản</th>
+                                                        <th>Tên đăng nhập</th>
                                                         <th>Mật khẩu</th>
-                                                        <th>Tên người dùng</th>
+                                                        <th>Họ và tên</th>
                                                         <th>Email</th>
                                                         <th>Địa chỉ</th>
                                                         <th>Quyền</th>
                                                         <th>Điểm</th>
+                                                        <th>Thời gian</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -303,7 +308,9 @@
                                                             <td name="email"><%= item.email %></td>
                                                             <td name="address"><%= item.address %></td>    
                                                             <td name="role"><%= item.role %></td> 
-                                                            <td name="score"><%= item.score %></td>                                                  
+                                                            <td name="score"><%= item.score %></td>
+                                                            <td name="time"><%= new Date(item.total_score * 1000).toISOString().substr(11, 8) %></td>
+                                                                                                              
                                                             <td>
                                                                 <div class="table-data-feature">
                                                                     <button type="button" class="edit" title="Edit" data-toggle="modal" data-target="#edit_user"><i class="material-icons">&#xE254;</i></button>
@@ -383,15 +390,15 @@
             <div class="modal-body">
                 <form action="/user_management/add" method="post">
                     <div class="form-group row">
-                        <label for="usr" class="col-sm-3 col-form-label">Tên người dùng</label>
+                        <label for="usr" class="col-sm-3 col-form-label">Họ và tên</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="full_name" name="full_name" placeholder="Tên người dùng">
+                            <input type="text" class="form-control" id="full_name" name="full_name" placeholder="Họ và tên">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Tên tài khoản</label>
+                        <label class="col-sm-3 col-form-label">Tên đăng nhập</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="username" name="username" placeholder="Tên tài khoản" required="required" pattern="^[A-Za-z0-9_]{1,15}$" title="Tên tài khoản phải không bao gồm dấu và ký tự đặc biệt.">
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Tên đăng nhập" required="required" pattern="^[A-Za-z0-9_]{1,15}$" title="Tên đăng nhập phải không bao gồm dấu và ký tự đặc biệt.">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -461,15 +468,15 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Tên người dùng</label>
+                        <label class="col-sm-3 col-form-label">Họ và tên</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="full_name_edit" name="full_name" placeholder="Tên người dùng">
+                            <input type="text" class="form-control" id="full_name_edit" name="full_name" placeholder="Họ và tên">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="usr" class="col-sm-3 col-form-label">Tên tài khoản</label>
+                        <label for="usr" class="col-sm-3 col-form-label">Tên đăng nhập</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="username_edit" name="username" required="required" pattern="^[A-Za-z0-9_]{1,15}$" title="Tên tài khoản phải không bao gồm dấu và ký tự đặc biệt.">
+                            <input type="text" class="form-control" id="username_edit" name="username" required="required" pattern="^[A-Za-z0-9_]{1,15}$" title="Tên đăng nhập phải không bao gồm dấu và ký tự đặc biệt.">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -493,7 +500,7 @@
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Quyền</label>
                         <div class="col-sm-9">
-                            <select class="custom-select" id="role_edit" name="role">
+                            <select class="custom-select" id="role_edit" name="role" required="required">
                                 <option value="level_1">Beginner</option>
                                 <option value="worker">Worker</option>
                                 <option value="admin">Admin</option>
