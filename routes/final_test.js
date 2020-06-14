@@ -66,7 +66,6 @@ module.exports = function (app) {
                                 client.release();
                                 return console.error(err);
                             }
-                            req.session.passport.user.role = "worker"
 
                         });
                         client.query('UPDATE score SET total_score=$1 WHERE username=$2', [time, user.username], function (err, result) {
@@ -77,7 +76,7 @@ module.exports = function (app) {
                         });
 
                     }
-
+                    req.session.passport.user.role = "worker"
                     client.release();
                     res.redirect('/dashboard')
 
