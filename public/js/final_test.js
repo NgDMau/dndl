@@ -13,13 +13,19 @@ const resultButton = document.getElementById('result-btn')
 const resetButton = document.getElementById("btn-again")
 const selectedAnswerNoti = document.getElementById("noti-selected-answer")
 
+var startTime, endTime;
+
+var seconds;
+
 var score = 0;
+
+var res;
 
 var audioright = new Audio('/audio/correct1.mp3');
 var audiowrong = new Audio('/audio/wrong1.mp3');
 
 var listQuestion = [], currentQuestionIndex
-var numberQuestion = 10;
+var numberQuestion = 20;
 
 startButton.addEventListener('click', start)
 
@@ -48,12 +54,14 @@ resultButton.addEventListener('click', () => {
 })
 
 function start() {
+  startRecord_time()
   startButton.classList.add('hide')
   shuffledQuestions(numberQuestion)
   currentQuestionIndex = 0
   currentField =0
   labelElement.classList.remove('hide')
   titleElement.innerText = 'CÂU HỎI'
+  
   // document.getElementById("shortcut_label").classList.remove('hide')
 
   setNextQuestion()
@@ -127,12 +135,15 @@ function shuffledQuestions(index) {
 
 
 function result(){
-  if(score == numberQuestion){
+  endRecord_time();
+  if(score >= numberQuestion*0.6){
+    res = "true";
     audioright.play();
     document.getElementById('content').classList.add('hide');
     resultElement.classList.remove('hide');
     
   }else{
+    res = "false";
     audiowrong.play();
     document.getElementById('content').classList.add('hide');
     document.getElementById('result_content').innerText = `Bạn đã không hoàn thành được bài kiểm tra. Hãy làm lại phần đào tạo và bài kiểm tra một lần nữa.`
@@ -151,18 +162,32 @@ function goto_label(){
   document.getElementById(id_label).click();
 }
 
-function nextLvl(){
-  var formData = new FormData();
-    $.ajax({
-        type: "POST",
-        url: "/final_test",
-        data: formData,
-        processData: false,
-        contentType: false,
-        success: function (data) {
-          location.href="/dashboard"
-        }
-    });
+function uploadResult(){
+
+  var posting = $.post( "/final_test", { time: seconds, resultTest: res} );
+
+  posting.done(function (data) {
+    location.href="/dashboard"
+  });
+
+
+}
+
+
+
+function startRecord_time() {
+  startTime = new Date();
+};
+
+function endRecord_time() {
+  endTime = new Date();
+  var timeDiff = endTime - startTime; //in ms
+  // strip the ms
+  timeDiff /= 1000;
+
+  // get seconds 
+  seconds = parseInt(Math.round(timeDiff));
+
 }
 
 

@@ -49,6 +49,82 @@ module.exports = function ( app ) {
         }      
     });
 
+    //fillter
+    app.post('/user_management/filter', function (req, res) {
+        if (req.isAuthenticated()) {
+
+            var user = new User(req.session.passport.user)
+            
+            if (user.isMod()) {
+                
+    
+                pool.connect(function (err, client, done) {
+                    var property = req.body.property || 'score';
+                    var filter = req.body.filter || 'increase';
+
+                    if (property == "time") {
+                        property = "total_score"
+                    }
+
+                    console.log(property+" "+filter)
+
+                    var query;
+
+                    if (filter == 'increase') {
+                        query = "SELECT * FROM users, score WHERE users.role NOT LIKE $1 and users.id = score.id ORDER BY score."+property+" ASC";
+                        client.query(query, ['admin'], function (err,result) {
+
+                            if (err) {
+                                client.release();
+                                return console.error(err);
+                            }
+                            client.release();
+                            res.render("user_management.ejs", {list:result, username:req.session.passport.user.username,mess:req.flash('mess') })
+    
+                        });
+                    }else{
+                        query = "SELECT * FROM users, score WHERE users.role NOT LIKE $1 and users.id = score.id ORDER BY score."+property+" DESC";
+                        client.query(query, ['admin'], function (err,result) {
+
+                            if (err) {
+                                client.release();
+                                return console.error(err);
+                            }
+                            client.release();
+                            res.render("user_management.ejs", {list:result, username:req.session.passport.user.username,mess:req.flash('mess') })
+    
+                        });
+                    }
+                    
+                })
+            } else {
+                res.redirect('/');
+            }
+            
+        } else {
+            res.redirect('/')
+        }
+    });
+
+    app.get('/user_management/filter', function (req, res) {
+        if (req.isAuthenticated()) {
+
+            var user = new User(req.session.passport.user)
+            
+            if (user.isMod()) {
+
+                res.redirect('/user_management')
+
+            } else {
+                res.redirect('/');
+            }
+            
+        } else {
+            res.redirect('/')
+        }
+        
+    });
+
     // add user
     
     app.post('/user_management/add', function (req, res) {
