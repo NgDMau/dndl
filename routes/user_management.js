@@ -59,11 +59,13 @@ module.exports = function ( app ) {
                 
     
                 pool.connect(function (err, client, done) {
-                    var property = req.body.property || 'score';
+                    var property = req.body.property;
                     var filter = req.body.filter || 'increase';
 
                     if (property == "time") {
                         property = "total_score"
+                    }else if (property == "Lọc theo") {
+                        property = "test_score"
                     }
 
                     console.log(property+" "+filter)
