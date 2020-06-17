@@ -136,7 +136,7 @@ function shuffledQuestions(index) {
 
 function result(){
   endRecord_time();
-  if(score >= numberQuestion*0.6){
+  if(score >= numberQuestion*0.8){
     res = "true";
     audioright.play();
     document.getElementById('content').classList.add('hide');
