@@ -32,7 +32,7 @@ module.exports = {
     },
 
     registerNewProject: async function (values) {
-        var cmd = 'INSERT INTO projects_metadata VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)';
+        var cmd = 'INSERT INTO projects_metadata VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)';
         var client = await pool.connect()
         try {
             var res = await client.query(cmd, values);

@@ -41,9 +41,22 @@ module.exports = function (app) {
             let task = tasks[Math.floor(Math.random() * tasks.length)];
             res.send(task);
         } else {
-            res.send("Authentication failure")
+            res.send("Authentication failure");
         }
         
     });
 }
+
+function convertImageDataToTaskFormat(img_id, img_url) {
+    return {
+        completions: [],
+        predictions: [],
+        id: img_id,
+        data: {
+            image: img_url
+        }
+    }
+}
+
+
 
