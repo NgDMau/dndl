@@ -164,7 +164,7 @@ function goto_label(){
 
 function uploadResult(){
 
-  var posting = $.post( "/final_test", { time: seconds, resultTest: res} );
+  var posting = $.post( "/final_test", { time: seconds, resultTest: res, score: score} );
 
   posting.done(function (data) {
     location.href="/dashboard"

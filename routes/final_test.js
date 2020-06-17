@@ -50,6 +50,7 @@ module.exports = function (app) {
             var reqBody = req.body;
             var time = req.body.time;
             var resultTest = req.body.resultTest;
+            var score = req.body.score;
             console.log((req.body.constructor.name))
             console.log(req.body.resultTest)
             console.log(time+" "+resultTest)
@@ -66,21 +67,29 @@ module.exports = function (app) {
                                 client.release();
                                 return console.error(err);
                             }
+                            
 
                         });
-                        client.query('UPDATE score SET total_score=$1 WHERE username=$2', [time, user.username], function (err, result) {
+                        client.query('UPDATE score SET total_score=$1, test_score=$2 WHERE username=$3', [time,score, user.username], function (err, result) {
                             if (err) {
                                 client.release();
                                 return console.error(err);
                             }
                         });
+                        req.session.passport.user.role = "worker"
+                        client.release();
+                        res.redirect('/dashboard')
 
+                    }else{
+                        client.query('UPDATE score SET total_score=$1, test_score=$2 WHERE username=$3', [time,score, user.username], function (err, result) {
+                            if (err) {
+                                client.release();
+                                return console.error(err);
+                            }
+                        });
+                        client.release();
+                        res.redirect('/dashboard')
                     }
-                    req.session.passport.user.role = "worker"
-                    client.release();
-                    res.redirect('/dashboard')
-
-
 
                 })
             } else {
