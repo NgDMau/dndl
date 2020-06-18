@@ -1,7 +1,7 @@
 var path = require('path')
 
 module.exports = function (app) {
-    app.get('/api/get_new_data', function (req, res) {
+    app.get('/api/data', function (req, res) {
         if (req.isAuthenticated()) {
             let tasks = [{
                 completions: [],

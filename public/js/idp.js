@@ -1,5 +1,5 @@
-async function getNewData() {
-    const URL = "/api/get_new_data";
+async function getNewData(project_id) {
+    const URL = "/api/data/" + project_id;
     let response = await fetch(URL);
     try {
         return response.json();
