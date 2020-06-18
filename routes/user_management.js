@@ -61,42 +61,33 @@ module.exports = function ( app ) {
                 pool.connect(function (err, client, done) {
                     var property = req.body.property;
                     var filter = req.body.filter || 'increase';
+                    var query;
 
-                    if (property == "time") {
-                        property = "total_score"
+                    if (property == "score") {
+                        property = "test_score"
                     }else if (property == "Lọc theo") {
                         property = "test_score"
                     }
 
-                    console.log(property+" "+filter)
-
-                    var query;
-
-                    if (filter == 'increase') {
-                        query = "SELECT * FROM users, score WHERE users.role NOT LIKE $1 and users.id = score.id ORDER BY score."+property+" ASC";
-                        client.query(query, ['admin'], function (err,result) {
-
-                            if (err) {
-                                client.release();
-                                return console.error(err);
-                            }
-                            client.release();
-                            res.render("user_management.ejs", {list:result, username:req.session.passport.user.username,mess:req.flash('mess') })
-    
-                        });
+                    if(filter == 'increase'){
+                        query = "SELECT * FROM users, score WHERE users.role NOT LIKE $1 and users.id = score.id and score.test_score IS NOT NULL ORDER BY score.test_score ASC, score.total_score ASC"
                     }else{
-                        query = "SELECT * FROM users, score WHERE users.role NOT LIKE $1 and users.id = score.id ORDER BY score."+property+" DESC";
-                        client.query(query, ['admin'], function (err,result) {
-
-                            if (err) {
-                                client.release();
-                                return console.error(err);
-                            }
-                            client.release();
-                            res.render("user_management.ejs", {list:result, username:req.session.passport.user.username,mess:req.flash('mess') })
-    
-                        });
+                        query = "SELECT * FROM users, score WHERE users.role NOT LIKE $1 and users.id = score.id and score.test_score IS NOT NULL ORDER BY score.test_score DESC, score.total_score ASC"
                     }
+                   
+                    console.log(property+" "+filter)
+                 
+                    client.query(query, ['admin'], function (err,result) {
+
+                        if (err) {
+                            client.release();
+                            return console.error(err);
+                        }
+                        client.release();
+                        res.render("user_management.ejs", {list:result, username:req.session.passport.user.username,mess:req.flash('mess') })
+
+                    });
+
                     
                 })
             } else {
