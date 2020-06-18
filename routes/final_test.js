@@ -21,7 +21,7 @@ module.exports = function (app) {
             var user = new User(req.session.passport.user)
             if (user.role == "beginner" || user.role == "worker") {
 
-                var listQuestion = [], numberQuestion = 20;
+                var listQuestion = [], numberQuestion = 30;
                 shuffledQuestions(numberQuestion).then(function () {
                     res.render("final_test.ejs", { list: listQuestion });
                 }
