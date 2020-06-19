@@ -138,20 +138,28 @@ function result(){
   endRecord_time();
   if(score >= numberQuestion*0.8){
     res = "true";
-    audioright.play();
-    document.getElementById('content').classList.add('hide');
-    resultElement.classList.remove('hide');
+    var posting = $.post( "/final_test", { time: seconds, resultTest: res, score: score} );
+
+    posting.done(function (data) {
+      audioright.play();
+      document.getElementById('content').classList.add('hide');
+      resultElement.classList.remove('hide')
+    });
     
   }else{
     res = "false";
-    audiowrong.play();
-    document.getElementById('content').classList.add('hide');
-    document.getElementById('result_content').innerText = `Bạn đã không hoàn thành được bài kiểm tra. Hãy làm lại phần đào tạo và bài kiểm tra một lần nữa.`
-    document.getElementById('btn-next-lvl').classList.add('hide');
-    document.getElementById('btn-again').classList.remove('hide');
-    resultElement.classList.remove('hide');
-    listQuestion = listQuestion.filter(function (el) {
-      return el != null;
+    var posting = $.post( "/final_test", { time: seconds, resultTest: res, score: score} );
+
+    posting.done(function (data) {
+      audiowrong.play();
+      document.getElementById('content').classList.add('hide');
+      document.getElementById('result_content').innerText = `Bạn đã không hoàn thành được bài kiểm tra. Hãy làm lại phần đào tạo và bài kiểm tra một lần nữa.`
+      document.getElementById('btn-next-lvl').classList.add('hide');
+      document.getElementById('btn-again').classList.remove('hide');
+      resultElement.classList.remove('hide');
+      listQuestion = listQuestion.filter(function (el) {
+        return el != null;
+      });
     });
   }
 }
@@ -162,16 +170,13 @@ function goto_label(){
   document.getElementById(id_label).click();
 }
 
-function uploadResult(){
+// function uploadResult(){
 
-  var posting = $.post( "/final_test", { time: seconds, resultTest: res, score: score} );
+//   var posting = $.post( "/final_test", { time: seconds, resultTest: res, score: score} );
 
-  posting.done(function (data) {
-    location.href="/dashboard"
-  });
-
-
-}
+//   posting.done(function (data) {
+//   });
+// }
 
 
 
