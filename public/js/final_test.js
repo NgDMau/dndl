@@ -25,7 +25,7 @@ var audioright = new Audio('/audio/correct1.mp3');
 var audiowrong = new Audio('/audio/wrong1.mp3');
 
 var listQuestion = [], currentQuestionIndex
-var numberQuestion = 20;
+var numberQuestion = 30;
 
 startButton.addEventListener('click', start)
 
