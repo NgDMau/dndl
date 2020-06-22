@@ -17,7 +17,7 @@
             predictions: [],
             id: 1,
             data: {
-                image: "https://htx-misc.s3.amazonaws.com/opensource/label-studio/examples/images/nick-owuor-astro-nic-visuals-wDifg5xc9Z4-unsplash.jpg"
+                audio: "https://www2.cs.uic.edu/~i101/SoundFiles/PinkPanther30.wav"
                 
             }
         },
@@ -27,7 +27,7 @@
             predictions: [],
             id: 2,
             data: {
-                image: "https://go.heartex.net/static/samples/sample.jpg"
+                audio: "https://www2.cs.uic.edu/~i101/SoundFiles/StarWars60.wav"
                 
             }
         },
@@ -36,7 +36,7 @@
             predictions: [],
             id: 3,
             data: {
-                image: "https://go.heartex.net/static/samples/sample.jpg"
+                audio: "https://www2.cs.uic.edu/~i101/SoundFiles/CantinaBand60.wav"
                 
             }
         },
@@ -45,7 +45,7 @@
             predictions: [],
             id: 4,
             data: {
-                image: "https://go.heartex.net/static/samples/sample.jpg"
+                audio: "https://go.heartex.net/static/samples/game.wav"
                 
             }
         }
@@ -53,13 +53,13 @@
     
     var labelStudio = new LabelStudio('label-studio', {
         config: `
-      <View>
-        <Image name="img" value="$image"></Image>
-        <RectangleLabels name="tag" toName="img">
-          <Label value="Máy bay"></Label>
-          <Label value="Bà Già"></Label>  
-        </RectangleLabels>
-      </View>
+        <View>
+            <Header value="Phát audio:" />
+            <Audio name="audio" value="$audio" />
+            <Header value="Gõ lại phụ đề của audio" />
+            <TextArea name="transcription" toName="audio"
+                        rows="4" editable="true" maxSubmissions="1" />
+        </View>
     `,
 
         interfaces: [
@@ -75,8 +75,8 @@
 
         user: {
             pk: 1,
-            firstName: "James",
-            lastName: "Dean"
+            firstName: "Mậu",
+            lastName: "Nguyễn"
         },
 
         task: task_config[0],
@@ -95,28 +95,29 @@
             console.log(task_config[1])
             //ls.resetState();
             //console.log(ls.resetState)
-            getNewData()
-            .then(response => {
-                console.log("response", response)
-                response.data = JSON.stringify(response.data)
-                ls.assignTask(response);
-                //console.log(ls.assignTask)
-                
-                ls.initializeStore(_convertTask(response));
-                let cs = ls.completionStore;
-                let c;
-                if (cs.predictions.length > 0) {
-                c = ls.completionStore.addCompletionFromPrediction(cs.predictions[0]);
-                }
-                else {
-                c = ls.completionStore.addCompletion({ userGenerate: true });
-                }
 
-                cs.selectCompletion(c.id);
+            var response = task_config[Math.floor(Math.random() * task_config.length)] ;
 
-                ls.setFlags({ isLoading: false });
-                console.log("Re-assisgned!")
-            })
+            console.log("response", response)
+            response.data = JSON.stringify(response.data)
+            ls.assignTask(response);
+            //console.log(ls.assignTask)
+            
+            ls.initializeStore(_convertTask(response));
+            let cs = ls.completionStore;
+            let c;
+            if (cs.predictions.length > 0) {
+            c = ls.completionStore.addCompletionFromPrediction(cs.predictions[0]);
+            }
+            else {
+            c = ls.completionStore.addCompletion({ userGenerate: true });
+            }
+
+            cs.selectCompletion(c.id);
+
+            ls.setFlags({ isLoading: false });
+            console.log("Re-assisgned!")
+            
         },
 
         onEntityCreate: function(region) {
