@@ -17,10 +17,10 @@ const pool = new Pool({
 });
  
 module.exports = {
-    async getDataToLabel(user_id, project_id) {
-        let cmd = "SELECT * FROM public.sentiment \
-                        WHERE $1 != ALL(labeled_values)";
-        let values = [ user_id];
+    async getUnlabeledData(user_id, project_id) {
+        let cmd1 = "SELECT * FROM projects."
+        let cmd = cmd1 + project_id +  "  WHERE $1 != ALL(labeled_values)";
+        let values = [user_id];
         let client = await pool.connect();
         try {
             let result = client.query(cmd, values);
@@ -32,4 +32,6 @@ module.exports = {
             return e;
         }
     },
+
+
 }
