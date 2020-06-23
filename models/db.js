@@ -139,6 +139,34 @@ module.exports = {
 
     getPool: function () {
         return pool;
+    },
+
+    insertIntoTable: async function (table, data) {
+        var cmd = "UPDATE audio_transcription SET result=$1 WHERE id=$2";
+        var values = [data, data.id];
+        var client = await pool.connect();
+        try {
+            var result = await client.query(cmd, values);
+            client.release();
+            return result;
+        } catch(e) {
+            client.release();
+            return e;
+        }
+    },
+
+    getDataFromTable: async function (table) {
+        var cmd = "SELECT * FROM audio_transcription WHERE result IS NULL";
+        var values = [table];
+        var client = await pool.connect();
+        try {
+            var result = await client.query(cmd);
+            client.release();
+            return result.rows[0];
+        } catch(e) {
+            client.release();
+            return e;
+        }
     }
 }
 

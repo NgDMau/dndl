@@ -11,7 +11,7 @@
 <!-- Initialize Label Studio -->
 <script>
 
-    window.onload = function() {
+    window.onload = async function() {
         var task_config = [{
             completions: [],
             predictions: [],
@@ -45,11 +45,16 @@
             predictions: [],
             id: 4,
             data: {
-                audio: "https://go.heartex.net/static/samples/game.wav"
+                audio: "audio/audio_example.wav"
                 
             }
         }
     ];
+
+    var currentTaskID;
+    var initialTask = await initTask();
+    currentTaskID = initialTask.id;
+    console.log("initialTask", initialTask);
     
     var labelStudio = new LabelStudio('label-studio', {
         config: `
@@ -66,11 +71,9 @@
             "panel",
             "update",
             "controls",
-            "side-column",
             "completions:menu",
             "completions:add-new",
             "completions:delete",
-            "predictions:menu",
         ],
 
         user: {
@@ -79,7 +82,7 @@
             lastName: "Nguyễn"
         },
 
-        task: task_config[0],
+        task: initialTask,
 
         onLabelStudioLoad: function (LS) {
             var c = LS.completionStore.addCompletion({
@@ -90,38 +93,66 @@
             
         },
 
-        onSubmitCompletion: function(ls, completion) {
+        onSubmitCompletion: async function(ls, completion) {
             console.log("completion", completion);
-            console.log(task_config[1])
+            console.log("task_config[1]", task_config[1])
             //ls.resetState();
             //console.log(ls.resetState)
 
-            var response = task_config[Math.floor(Math.random() * task_config.length)] ;
+            // var response = task_config[Math.floor(Math.random() * task_config.length)] ;
+            // var response = task_config[3]
 
-            console.log("response", response)
-            response.data = JSON.stringify(response.data)
-            ls.assignTask(response);
-            //console.log(ls.assignTask)
+            // console.log("response", response)
+            // response.data = JSON.stringify(response.data)
             
-            ls.initializeStore(_convertTask(response));
+
             let cs = ls.completionStore;
             let c;
+            console.log("serialize", ls.completionStore.selected.serializeCompletion());
+            var serialized = ls.completionStore.selected.serializeCompletion()[0];
+
+            var result = {
+                id: currentTaskID,
+                value: serialized.value,
+                createdBy: completion.createdBy,
+                createdDate: completion.createdDate
+            }
+
+            console.log("Result done: ", result);
+
+            var task = await submitResult(result);
+            
+            
+            task.data = JSON.stringify(task.data);
+            // task = JSON.stringify(task);
+            console.log("Received task from server: ", task)
+            currentTaskID = task.id;
+
+            ls.assignTask(task);
+            ls.initializeStore(_convertTask(task));
+
             if (cs.predictions.length > 0) {
-            c = ls.completionStore.addCompletionFromPrediction(cs.predictions[0]);
+                c = ls.completionStore.addCompletionFromPrediction(cs.predictions[0]);
             }
             else {
-            c = ls.completionStore.addCompletion({ userGenerate: true });
+                c = ls.completionStore.addCompletion({ userGenerate: true });
             }
 
             cs.selectCompletion(c.id);
-
             ls.setFlags({ isLoading: false });
             console.log("Re-assisgned!")
             
         },
 
-        onEntityCreate: function(region) {
-            console.log(region);
+        onEntityCreate: async function(region) {
+            console.log("region", region);
+            var result = {
+                id: region.id,
+                value: region._value,
+                createdBy: region.completion.createdBy,
+                createdDate: region.completion.createdDate
+            }
+            console.log("Result: ", result);
             //getNewData();
             //task_config.data.image = "https://htx-misc.s3.amazonaws.com/opensource/label-studio/examples/images/nick-owuor-astro-nic-visuals-wDifg5xc9Z4-unsplash.jpg";
             // labelStudio.task.data.image = "https://htx-misc.s3.amazonaws.com/opensource/label-studio/examples/images/nick-owuor-astro-nic-visuals-wDifg5xc9Z4-unsplash.jpg"

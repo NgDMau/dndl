@@ -1,4 +1,5 @@
-var path = require('path')
+const path = require('path');
+const db = require('../models/db');
 
 module.exports = function (app) {
     app.get('/api/data', function (req, res) {
@@ -44,7 +45,34 @@ module.exports = function (app) {
             res.send("Authentication failure");
         }
         
-    });
+    },
+    
+    app.post('/api/data', async function(req, res) {
+        var data = req;
+        console.log("Received data from client: ", data.body);
+
+        var receivedData = data.body;
+
+        if(receivedData.value !== 1) {
+            var insertResult = await  db.insertIntoTable("audio_transcription", receivedData);
+            console.log("insertResult: ", insertResult);
+        }
+
+        var dataFromDb = await db.getDataFromTable("audio_transcription");
+        console.log("dataFromDb: ", dataFromDb);
+
+        var task = {
+            completions: [],
+            predictions: [],
+            id: dataFromDb.id,
+            data: {
+                audio: dataFromDb.url
+            }
+        }
+        res.send(task);
+    })
+    
+    );
 }
 
 function convertImageDataToTaskFormat(img_id, img_url) {
