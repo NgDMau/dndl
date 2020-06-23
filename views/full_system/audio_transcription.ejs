@@ -197,7 +197,35 @@
             //getNewData();
             //task_config.data.image = "https://htx-misc.s3.amazonaws.com/opensource/label-studio/examples/images/nick-owuor-astro-nic-visuals-wDifg5xc9Z4-unsplash.jpg";
             // labelStudio.task.data.image = "https://htx-misc.s3.amazonaws.com/opensource/label-studio/examples/images/nick-owuor-astro-nic-visuals-wDifg5xc9Z4-unsplash.jpg"
+        },
+
+        onSkipTask: async function(ls) {
+            let cs = ls.completionStore;
+            let c;
+            
+            var task = await initTask();
+            task.data = JSON.stringify(task.data);
+            // task = JSON.stringify(task);
+            console.log("Received task from server: ", task)
+            currentTaskID = task.id;
+            currentWorkerID = task.workerID;
+            currentWorkerPk = task.workerPk;
+            currentWorkerName = task.workerName;
+
+            ls.assignTask(task);
+            ls.initializeStore(_convertTask(task));
+
+            if (cs.predictions.length > 0) {
+                c = ls.completionStore.addCompletionFromPrediction(cs.predictions[0]);
+            }
+            else {
+                c = ls.completionStore.addCompletion({ userGenerate: true });
+            }
+
+            cs.selectCompletion(c.id);
         }
+
+
         });
     }
 
