@@ -12,48 +12,65 @@
 <script>
 
     window.onload = async function() {
-        var task_config = [{
-            completions: [],
-            predictions: [],
-            id: 1,
-            data: {
-                audio: "https://www2.cs.uic.edu/~i101/SoundFiles/PinkPanther30.wav"
+
+    //     var task_config = [{
+    //         completions: [],
+    //         predictions: [],
+    //         id: 1,
+    //         data: {
+    //             audio: "https://www2.cs.uic.edu/~i101/SoundFiles/PinkPanther30.wav"
                 
-            }
-        },
+    //         }
+    //     },
         
-        {
-            completions: [],
-            predictions: [],
-            id: 2,
-            data: {
-                audio: "https://www2.cs.uic.edu/~i101/SoundFiles/StarWars60.wav"
+    //     {
+    //         completions: [],
+    //         predictions: [],
+    //         id: 2,
+    //         data: {
+    //             audio: "https://www2.cs.uic.edu/~i101/SoundFiles/StarWars60.wav"
                 
-            }
-        },
-        {
-            completions: [],
-            predictions: [],
-            id: 3,
-            data: {
-                audio: "https://www2.cs.uic.edu/~i101/SoundFiles/CantinaBand60.wav"
+    //         }
+    //     },
+    //     {
+    //         completions: [],
+    //         predictions: [],
+    //         id: 3,
+    //         data: {
+    //             audio: "https://www2.cs.uic.edu/~i101/SoundFiles/CantinaBand60.wav"
                 
-            }
-        },
-        {
-            completions: [],
-            predictions: [],
-            id: 4,
-            data: {
-                audio: "audio/audio_example.wav"
+    //         }
+    //     },
+    //     {
+    //         completions: [],
+    //         predictions: [],
+    //         id: 4,
+    //         data: {
+    //             audio: "audio/audio_example.wav"
                 
-            }
-        }
-    ];
+    //         }
+    //     }
+    // ];
 
     var currentTaskID;
+    var currentWorkerID;
+    var currentWorkerPk;
+    var currentWorkerName;
     var initialTask = await initTask();
+
+    console.log("initialTask", initialTask);
+
     currentTaskID = initialTask.id;
+    currentWorkerID = initialTask.workerID;
+    currentWorkerPk = initialTask.workerPk;
+    currentWorkerName = initialTask.workerName;
+
+    console.log("Name: ", currentWorkerName);
+
+    if (currentTaskID === undefined) {
+        console.log("Hết dữ liệu dán nhãn");
+        //alert("Hiện đã hết dữ liệu để dán nhãn");
+    }
     console.log("initialTask", initialTask);
     
     var labelStudio = new LabelStudio('label-studio', {
@@ -71,16 +88,26 @@
             "panel",
             "update",
             "controls",
+            "skip",
             "completions:menu",
             "completions:add-new",
             "completions:delete",
         ],
 
         user: {
-            pk: 1,
-            firstName: "Mậu",
-            lastName: "Nguyễn"
+            pk: currentWorkerPk,
+            firstName: "",
+            lastName: currentWorkerName
         },
+
+        messages: {
+            DONE: "Đã hoàn thành!",
+            NO_COMP_LEFT: "Đã hết completion",
+            NO_NEXT_TASK: "Dữ liệu để dán nhãn đã hết, xin cảm ơn!",
+            NO_ACCESS: "Bạn không được quyền truy cập dữ liệu này"
+        },
+
+        description: "Nghe đoạn âm thanh dưới đây rồi gõ lại nội dung của đoạn âm thanh đó",
 
         task: initialTask,
 
@@ -89,13 +116,23 @@
                 userGenerate: true
             });
             LS.completionStore.selectCompletion(c.id);
+            if (currentTaskID === undefined) {
+                LS.setFlags({ noTask: true });
+            }
+            
 
             
         },
 
         onSubmitCompletion: async function(ls, completion) {
+            //ls.setFlags({ isLoading: true });
             console.log("completion", completion);
-            console.log("task_config[1]", task_config[1])
+            //console.log("task_config[1]", task_config[1])
+
+            if (currentTaskID === undefined) {
+                ls.setFlags({ noTask: true });
+                return;
+            }
             //ls.resetState();
             //console.log(ls.resetState)
 
@@ -104,8 +141,6 @@
 
             // console.log("response", response)
             // response.data = JSON.stringify(response.data)
-            
-
             let cs = ls.completionStore;
             let c;
             console.log("serialize", ls.completionStore.selected.serializeCompletion());
@@ -121,12 +156,18 @@
             console.log("Result done: ", result);
 
             var task = await submitResult(result);
+            if (task === undefined) {
+                ls.setFlags({ noTask: true})
+            }
             
             
             task.data = JSON.stringify(task.data);
             // task = JSON.stringify(task);
             console.log("Received task from server: ", task)
             currentTaskID = task.id;
+            currentWorkerID = task.workerID;
+            currentWorkerPk = task.workerPk;
+            currentWorkerName = task.workerName;
 
             ls.assignTask(task);
             ls.initializeStore(_convertTask(task));
@@ -139,7 +180,7 @@
             }
 
             cs.selectCompletion(c.id);
-            ls.setFlags({ isLoading: false });
+            //ls.setFlags({ isLoading: false });
             console.log("Re-assisgned!")
             
         },
@@ -149,7 +190,7 @@
             var result = {
                 id: region.id,
                 value: region._value,
-                createdBy: region.completion.createdBy,
+                createdBy: currentWorkerID,
                 createdDate: region.completion.createdDate
             }
             console.log("Result: ", result);

@@ -18,12 +18,12 @@ module.exports = function (app) {
     });
 
     app.get('/audio_transcription', function (req, res) {
-        // if (req.isAuthenticated()) {
-        //     res.render("full_system/audio_transcription.ejs")
-        // } else {
-        //     res.redirect('/login');
-        // }
-        res.render("full_system/audio_transcription.ejs");
+        if (req.isAuthenticated()) {
+            res.render("full_system/audio_transcription.ejs")
+        } else {
+            res.redirect('/login');
+        }
+        //res.render("full_system/audio_transcription.ejs");
     });
 
     app.get('/audio_emotions', function (req, res) {
