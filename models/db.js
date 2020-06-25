@@ -32,7 +32,7 @@ module.exports = {
     },
 
     registerNewProject: async function (values) {
-        var cmd = 'INSERT INTO projects_metadata VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)';
+        var cmd = 'INSERT INTO projects_metadata VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)';
         var client = await pool.connect()
         try {
             var res = await client.query(cmd, values);
@@ -139,6 +139,34 @@ module.exports = {
 
     getPool: function () {
         return pool;
+    },
+
+    insertIntoTable: async function (table, data) {
+        var cmd = "UPDATE audio_transcription SET result=$1 WHERE id=$2";
+        var values = [data, data.id];
+        var client = await pool.connect();
+        try {
+            var result = await client.query(cmd, values);
+            client.release();
+            return result;
+        } catch(e) {
+            client.release();
+            return e;
+        }
+    },
+
+    getDataFromTable: async function (table) {
+        var cmd = "SELECT * FROM audio_transcription WHERE result IS NULL ORDER BY random()";
+        var values = [table];
+        var client = await pool.connect();
+        try {
+            var result = await client.query(cmd);
+            client.release();
+            return result.rows[0];
+        } catch(e) {
+            client.release();
+            return e;
+        }
     }
 }
 
