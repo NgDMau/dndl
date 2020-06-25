@@ -76,7 +76,7 @@ module.exports = function (app) {
                 predictions: [],
                 id: dataFromDb.id,
                 data: {
-                    audio: dataFromDb.url
+                    audio: dataFromDb.audio
                 }
             }
             res.send(task);
