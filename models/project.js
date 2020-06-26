@@ -79,8 +79,9 @@ module.exports = class Project {
             if (lines[0].includes("|")) {
                 var labels = lines[0].split("|");
                 lines.pop();
-                lines.shift();
             }
+            
+            lines.shift();
             var labels = ["This task does not require predefined labels!"] 
             
             console.log("Labels: ", labels);
@@ -152,13 +153,18 @@ module.exports = class Project {
                 switch (values_number) {
                     case 4:
                         var values = [lines[line], [], [], []];
+                        break;
                     case 2:
                         var values = [lines[line], []];
+                        break;
                     default:
                         var values = [lines[line], []];
+                        break;
                     }
+                    
+                    var result = await client.query(cmd, values);
                 }
-            var result = await client.query(cmd, values);
+            
             client.release();
             final_result.push(result);
             return final_result;
