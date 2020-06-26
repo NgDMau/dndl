@@ -66,23 +66,26 @@ module.exports = class Project {
         var pool = db.getPool();
         //var client = await pool.connect();
         var raw_file = this.datafile;
+        var project_type = this.type;
         var table_name = this.id;
         var that = this;
 
         //console.log("Registered labels ", result)
-        
         fs.readFile(raw_file, async function(err, data) {
             if (err) throw err;
 
             var lines = data.toString().split('\n');
-            var labels = lines[0].split("|");
-
-            lines.pop();
-            lines.shift();
+            
+            if (lines[0].includes("|")) {
+                var labels = lines[0].split("|");
+                lines.pop();
+                lines.shift();
+            }
+            var labels = ["This task does not require predefined labels!"] 
             
             console.log("Labels: ", labels);
 
-            that.insertDataToDb(lines, table_name)
+            that.insertDataToDb(lines, table_name, project_type)
                 .then(function(result) {
                     console.log('Result of insertDataToDb: ', result);
                     return result;
@@ -108,20 +111,54 @@ module.exports = class Project {
         })
     }
 
-    async insertDataToDb (lines, tablename) {
+    async insertDataToDb (lines, table_name, project_type) {
         var db = require('./db');
         var pool = db.getPool();
         var client = await pool.connect();
 
-        var cmd = "INSERT INTO projects." + tablename + "(content, labeled_workers, labeled_values, labeled_time)" + " VALUES($1, $2, $3, $4)";
+        var cmd;
+        var values_number;
+
+        switch(project_type) {
+            case "image_description":
+                cmd = "INSERT INTO projects." + table_name + "(image, result) " + "VALUES($1, $2)";
+                values_number = 2;
+                break;
+            case "image_object_detection":
+                cmd = "INSERT INTO projects." + table_name + "(image, result) " + "VALUES($1, $2)";
+                values_number = 2;
+                break;
+            case "audio_transcription":
+                cmd = "INSERT INTO projects." + table_name + "(audio, result) " + "VALUES($1, $2)";
+                values_number = 2;
+                break;
+            case "image_classification":
+                cmd = "INSERT INTO projects." + table_name + "(image, result) " + "VALUES($1, $2)";
+                values_number = 2;
+                break;
+            default:
+                cmd = "INSERT INTO projects." + table_name + "(content, labeled_workers, labeled_values, labeled_time)" + " VALUES($1, $2, $3, $4)";
+                values_number = 4;
+                break;
+        }
+
+        
         var final_result = []
 
         try {
             for (var line in lines) {
                 console.log(lines[line])
-                var values = [lines[line], [], [], []]
-                var result = await client.query(cmd, values);
-            }
+
+                switch (values_number) {
+                    case 4:
+                        var values = [lines[line], [], [], []];
+                    case 2:
+                        var values = [lines[line], []];
+                    default:
+                        var values = [lines[line], []];
+                    }
+                }
+            var result = await client.query(cmd, values);
             client.release();
             final_result.push(result);
             return final_result;

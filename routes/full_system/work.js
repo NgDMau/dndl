@@ -42,4 +42,13 @@ module.exports = function (app) {
         }
     });
 
+    app.get('/image_description', function (req, res) {
+        // if (req.isAuthenticated()) {
+        //     res.render("full_system/image_classification.ejs")
+        // } else {
+        //     res.redirect('/login');
+        // }
+        res.render('full_system/image_description.ejs');
+    });
+
 }

@@ -76,11 +76,10 @@
     var labelStudio = new LabelStudio('label-studio', {
         config: `
         <View>
-            <Header value="Phát audio:" />
             <Audio name="audio" value="$audio" />
             <Header value="Gõ lại phụ đề của audio" />
             <TextArea name="transcription" toName="audio"
-                        rows="4" editable="true" maxSubmissions="1" />
+                        rows="4" editable="true" maxSubmissions="1" />            
         </View>
     `,
 
