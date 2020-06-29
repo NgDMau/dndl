@@ -102,7 +102,7 @@ p {
 
 /* ----- Typography ----- */
 body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-weight: 400;
     font-size: 16px;
     line-height: 1.625;
@@ -1621,7 +1621,7 @@ section {
 }
 
 .menu-sidebar .logo > a{
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Roboto', sans-serif;
     color: lightgray;
     font-weight: bold;
     margin-top: 10px;
