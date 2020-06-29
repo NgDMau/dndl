@@ -26,7 +26,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-
+app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.use(session({
@@ -75,11 +75,9 @@ require('./routes/verify')(app);
 require('./routes/info')(app);
 require('./routes/work')(app);
 require('./routes/final_test')(app);
-require('./routes/labeling')(app);
-require('./routes/dataset')(app);
-require('./routes/treebank_sentiment')(app);
+require('./routes/api')(app);
 
-
+require('./routes/full_system/work')(app);
 
 //The 404 Route (ALWAYS Keep this as the last route)
 app.get('*', function(req, res) {

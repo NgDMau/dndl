@@ -72,13 +72,15 @@ module.exports = function (app) {
                     priority: 0,
                     uploadtime: '2010-12-31 21:00:00 +00',
                     type: req.body.type || 'sentiment',
-                    owner_id: req.session.passport.user.username
+                    owner_id: req.session.passport.user.username,
+                    labels: req.body.labels || ["INITIAL_VALUE"]
                 }
 
                 var new_project = new Project(project_config);
                 
                 new_project.register()
                     .then((registered) => {
+                        console.log("registered", registered);
                         if (checkForSuccess(registered)) {
                             new_project.create()
                                 .then((created) => {
