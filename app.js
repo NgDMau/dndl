@@ -77,6 +77,7 @@ require('./routes/work')(app);
 require('./routes/final_test')(app);
 require('./routes/labeling')(app);
 require('./routes/dataset')(app);
+require('./routes/api')(app);
 require('./routes/treebank_sentiment')(app);
 
 

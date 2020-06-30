@@ -83,6 +83,48 @@ module.exports = function (app) {
         } else {
             res.redirect('/login')
         }
+    }),
+
+
+    app.post('/api/data/:project_id', async function(req, res) {
+        if (req.isAuthenticated()) {
+
+            var project_id = req.params.project_id;
+
+            var data = req;
+            console.log("Received data from client: ", data.body);
+
+            var receivedData = data.body;
+
+            if(receivedData.value !== 1) {
+                var insertResult = await  db.insertIntoTable("audio_transcription", receivedData);
+                console.log("insertResult: ", insertResult);
+            }
+
+            var dataFromDb = await db.getDataFromTable("audio_transcription");
+            if (dataFromDb === undefined) {
+                res.send({value: "none"});
+                return
+            }
+            console.log("dataFromDb: ", dataFromDb);
+
+            //console.log("FULLNAME: ", req.session.passport.user);
+
+            var task = {
+                workerPk: req.session.passport.user.id,
+                workerID: req.session.passport.user.username,
+                workerName: req.session.passport.user.full_name,
+                completions: [],
+                predictions: [],
+                id: dataFromDb.id,
+                data: {
+                    audio: dataFromDb.audio
+                }
+            }
+            res.send(task);
+        } else {
+            res.redirect('/login')
+        }
     })
     
     );

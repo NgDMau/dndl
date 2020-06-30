@@ -1,4 +1,5 @@
 const fs = require('fs');
+var db = require('./db')
 
 module.exports = class Project {
 
@@ -209,17 +210,37 @@ module.exports = class Project {
         var drop_table = this.id;
         var schema = 'projects';
         var result = false;
+        
 
         await db.dropTableInSchema(drop_table, schema)
         .then((res) => {
-            console.log("this is res ==============",res)
-            result = true;
+            console.log("result of dropTableInSchema ",res);
+            var result = await this.unregister();
+            return result;
+        })
+        .then((res) => {
+            console.log("result of this.unregister ", res);
         })
         .catch(err => {
             console.error(err)
             result = false;
         });
-        
+
+
+        /** Second approach */
+        var drop_result = await db.dropTableInSchema(drop_table, schema);
+        console.log("Drop result: ", drop_result);
+        var unregister_result = await this.unregister();
+        console.log("Unregistered result: ", unregister_result);
+        if (drop_result.code && unregister_result.code) {
+            return false;
+        }
+        return true;
+    }
+
+    async unregister() {
+        var condition = "id = " + this.id
+        var result = await db.deleteFromTable("projects_metadata", condition);
         return result;
     }
 

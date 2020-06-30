@@ -1,6 +1,15 @@
 var path = require('path')
 
 module.exports = function (app) {
+
+    app.get("/work/:project_id", async function(req, res) {
+        console.log(req.params);
+        var project_id = req.params.project_id;
+        res.render('full_system/audio_transcription.ejs');
+    })
+
+
+
     app.get('/image_object_detection', function (req, res) {
         if (req.isAuthenticated()) {
             res.render("full_system/image_object_detection.ejs")
