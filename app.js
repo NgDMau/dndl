@@ -74,13 +74,12 @@ require('./routes/contactsale')(app);
 require('./routes/verify')(app);
 require('./routes/info')(app);
 require('./routes/work')(app);
+require('./routes/api')(app);
 require('./routes/final_test')(app);
 require('./routes/labeling')(app);
 require('./routes/dataset')(app);
 require('./routes/api')(app);
 require('./routes/treebank_sentiment')(app);
-
-
 require('./routes/full_system/work')(app);
 
 //The 404 Route (ALWAYS Keep this as the last route)
