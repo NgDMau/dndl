@@ -74,6 +74,7 @@ require('./routes/contactsale')(app);
 require('./routes/verify')(app);
 require('./routes/info')(app);
 require('./routes/work')(app);
+require('./routes/api')(app);
 require('./routes/final_test')(app);
 require('./routes/labeling')(app);
 require('./routes/dataset')(app);

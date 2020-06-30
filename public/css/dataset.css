@@ -54,12 +54,12 @@ b {
   text-align: left;
   font-size: 0.9rem;
   line-height: 1.8rem;
+  cursor: pointer;
 }
 
 .table-container th {
   padding: 3px 14px;
   font-weight: 400;
-  cursor: pointer;
 }
 
 .resource-table-header {
@@ -110,6 +110,10 @@ tbody tr:hover {
   padding-left: 24px;
 }
 
+.author {
+  margin-top: 0px !important;
+}
+
 .dataset-content .text-secondary {
   font-weight: 400 !important;
   margin-bottom: 15px;
@@ -119,12 +123,8 @@ tbody tr:hover {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  margin: 16px 20px 16px 0;
+  margin: auto 20px auto 0;
   vertical-align: middle;
-}
-
-.author {
-  margin-top: 0px !important;
 }
 
 

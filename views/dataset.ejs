@@ -35,7 +35,7 @@
           <th class="dataset-content">
             <img src="/img/logo.png" alt="logo" class="table-logo"></img>
             <div>
-              <div>VST</div>
+              <div style="margin-top: 15px;">VST</div>
               <div class="author text-secondary">by Inlab Technology</div>
             </div>
           </th>
@@ -46,16 +46,16 @@
         </tr>
         <tr class="single-dataset">
           <th class="dataset-content">
-            <img src="/img/logo.png" alt="logo" class="table-logo"></img>
+            <img src="/img/mai-vutran.jpg" alt="logo" class="table-logo"></img>
             <div>
-              <div>Vietnamese Person Questions Dataset</div>
-              <div class="author text-secondary">by lupanh</div>
+              <div style="margin-top: 15px;">Vietnamese Person Questions Dataset</div>
+              <div class="author text-secondary">by Mai-Vu Tran</div>
             </div>
           </th>
           <th>2012</th>
           <th>Vietnam</th>
           <th>Text</th>
-          <th>Text Labels</th>
+          <th>Text Labeling</th>
         </tr>
       </tbody>
     
@@ -72,6 +72,7 @@
     var singleDataset = document.getElementsByClassName('single-dataset')
     for (let i=0; i<singleDataset.length; i++) {
       singleDataset[i].addEventListener('click', function() {
+        window.location.href = '/resources/dataset/treebank_sentiment'
         window.location.href= link[i]
       })
     }
