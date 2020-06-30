@@ -169,7 +169,7 @@ module.exports = {
         }
     },
 
-    deleteFromTable(table_name, condition) {
+    deleteFromTable: async function(table_name, condition) {
         var cmd = "DELETE FROM " + table_name +" WHERE " + condition;
         var client = await pool.connect();
         try {
