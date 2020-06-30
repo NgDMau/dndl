@@ -212,19 +212,19 @@ module.exports = class Project {
         var result = false;
         
 
-        await db.dropTableInSchema(drop_table, schema)
-        .then((res) => {
-            console.log("result of dropTableInSchema ",res);
-            var result = await this.unregister();
-            return result;
-        })
-        .then((res) => {
-            console.log("result of this.unregister ", res);
-        })
-        .catch(err => {
-            console.error(err)
-            result = false;
-        });
+        // await db.dropTableInSchema(drop_table, schema)
+        // .then((res) => {
+        //     console.log("result of dropTableInSchema ",res);
+        //     var result = await this.unregister();
+        //     return result;
+        // })
+        // .then((res) => {
+        //     console.log("result of this.unregister ", res);
+        // })
+        // .catch(err => {
+        //     console.error(err)
+        //     result = false;
+        // });
 
 
         /** Second approach */
