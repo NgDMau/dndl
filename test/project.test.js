@@ -7,5 +7,21 @@ async function registerLabelsToDb (project_id, project_labels) {
     return result;
 }
 
-registerLabelsToDb('_t4snjbsfx', ['tichcuc', 'tieucuc', 'trungtinh'])
+async function test_registerLabelsToDb() {
+    registerLabelsToDb('_t4snjbsfx', ['tichcuc', 'tieucuc', 'trungtinh'])
     .then(console.log)
+}
+
+async function test_destroy() {
+    var Project = require('../models/project');
+    var test_project = new Project({id: '_yqks7xtty'})
+    var result = await test_project.destroy();
+    return result
+}
+
+test_destroy()
+    .then(console.log)
+
+
+
+
