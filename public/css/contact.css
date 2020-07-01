@@ -119,6 +119,16 @@ a{
 .contact{
     width:100%;
 }
+.received {
+    width: 80%;
+    margin: 20px auto !important;
+}
+#back-button {
+    margin: 20px auto;
+}
+#back-button:hover {
+    color: white !important;
+}
 .h5{
     font-weight:bold;
 }
