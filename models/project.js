@@ -239,9 +239,9 @@ module.exports = class Project {
     }
 
     async unregister() {
-        var condition = "id = " + this.id
+        var condition = "id = " + "'this.id'"
         var result = await db.deleteFromTable("projects_metadata", condition);
         return result;
     }
-
 }
+
