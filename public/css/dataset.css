@@ -318,6 +318,27 @@ tbody tr:hover {
   padding-left: 1rem;
 }
 
+#graph-container {
+  position: fixed;
+  background-color: white;
+  top: 50px;
+  bottom: 50px;
+  left: 50px;
+  right: 50px;
+  overflow: scroll;
+  z-index: 3;
+}
+
+#filter {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 2;
+}
+
 /* Detail Box */
 .detail {
   margin-top: 2rem;

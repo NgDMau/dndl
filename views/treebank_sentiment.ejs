@@ -83,6 +83,12 @@
       </div>
     </div>
 
+    <img src="/img/treebank.jpg" width="100%" style="margin-top: 20px" onclick="handleClickGraph()">
+    <div id="graph-container" style="display: none;">
+      <div><img src="/img/treebank.jpg"></div>
+      
+    </div>
+    <div id="filter" style="display: none;" onclick="handleClickOutsideGraph()"></div>
     <!-- Detail Box -->
     <div class="show-flex detail">
       <div id="left-panel" class="left-panel">
@@ -305,6 +311,26 @@
         e.target.classList.add('left-arrow')
       }
     })
+  </script>
+
+  <script>
+    function handleClickGraph() {
+      document.getElementById('graph-container').style.display = 'block';
+      document.getElementById('filter').style.display = 'block'
+    }
+  </script>
+
+  <script>
+    function handleClickOutsideGraph() {
+      document.getElementById('graph-container').style.display = 'none';
+      document.getElementById('filter').style.display = 'none';
+    }
+  </script>
+
+  <script>
+    function zoomGraph() {
+      let zoomLevel = 2;
+    }
   </script>
 </body>
 </html>
