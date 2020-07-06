@@ -20,8 +20,14 @@
   <div id="treebank-body">
     <!-- Intro Box -->
     <h1 class="dataset-intro treebank-box">
-      <img class="dataset-img" src='https://storage.googleapis.com/kaggle-datasets-images/691884/1211839/37ce0fac9739e66187705c87ea39c41d/dataset-cover.jpg?t=2020-06-03-21-42-09'></img>
-      <div class="dataset-name">Sentiment dataset</div>
+      <img class="dataset-img" src='/img/sentiment-background.jpg'></img>
+      <div class="dataset-name">
+        <div>Sentiment dataset</div>
+        <div class="show-flex">
+          <a type="button" href="/contactsale" class="btn-warning btn startbtn nav-item nav-link text-center mt-4 d-flex justify-content-center align-items-center sentiment-button contact-sale">MUA NGAY</a>
+          <a type="button" href="#left-panel" class="btn btn-dark startbtn nav-item nav-link d-flex justify-content-center align-items-center sentiment-button">XEM THÊM</a>
+        </div>
+      </div>
     </h1>
     <div style="width: 100px;"></div>
    
@@ -77,13 +83,19 @@
       </div>
     </div>
 
+    <img src="/img/treebank.jpg" width="100%" style="margin-top: 20px" onclick="handleClickGraph()">
+    <div id="graph-container" style="display: none;">
+      <div><img src="/img/treebank.jpg"></div>
+      
+    </div>
+    <div id="filter" style="display: none;" onclick="handleClickOutsideGraph()"></div>
     <!-- Detail Box -->
     <div class="show-flex detail">
       <div id="left-panel" class="left-panel">
         <div class="overall">
           <h2 class="text-secondary">Thông tin file</h2>
           <div class="text-tertiary">100KB</div>
-          <a>Link file</a>
+          <a id="link-file" class="text-tertiary" href="https://docs.google.com/spreadsheets/d/1MR0eKXt-k2-prN1tMbX-fg_VnBLk7tO2QfrZyQIjirw/edit?usp=sharing" target="_blank">Link file</a>
         </div>
         <div id="summary" class="overall">
           <h2 class="text-secondary">Tóm tắt</h2>
@@ -103,8 +115,12 @@
           <div id="stats" class="right-panel-button" style='color: lightgrey'>Số liệu chi tiết</div>
           <div id="sample" class="right-panel-button" style='color: lightgrey'>Sample</div>
         </h2>
-        <div id="right-panel-detail" style='overflow: scroll; max-height: 400px'></div>
+        <div id="right-panel-detail"></div>
       </div>
+    </div>
+    <div>
+      <h3 id="interested">Hứng thú với dataset này?</h3>
+      <a id="buy-now" type="button" href="/contactsale" class="btn-warning btn startbtn nav-item nav-link text-center mt-4 d-flex justify-content-center align-items-center contact-sale">MUA NGAY</a>
     </div>
   </div>
 
@@ -295,6 +311,26 @@
         e.target.classList.add('left-arrow')
       }
     })
+  </script>
+
+  <script>
+    function handleClickGraph() {
+      document.getElementById('graph-container').style.display = 'block';
+      document.getElementById('filter').style.display = 'block'
+    }
+  </script>
+
+  <script>
+    function handleClickOutsideGraph() {
+      document.getElementById('graph-container').style.display = 'none';
+      document.getElementById('filter').style.display = 'none';
+    }
+  </script>
+
+  <script>
+    function zoomGraph() {
+      let zoomLevel = 2;
+    }
   </script>
 </body>
 </html>

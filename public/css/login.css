@@ -133,7 +133,7 @@ input[type=submit]:hover {
     object-fit: contain; 
 }
 
-#contact-sale:hover {
+.contact-sale:hover {
     color: white !important;
 }
 
