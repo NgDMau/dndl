@@ -1,4 +1,5 @@
 const fs = require('fs');
+var db = require('./db')
 
 module.exports = class Project {
 
@@ -79,8 +80,9 @@ module.exports = class Project {
             if (lines[0].includes("|")) {
                 var labels = lines[0].split("|");
                 lines.pop();
-                lines.shift();
             }
+            
+            lines.shift();
             var labels = ["This task does not require predefined labels!"] 
             
             console.log("Labels: ", labels);
@@ -152,13 +154,18 @@ module.exports = class Project {
                 switch (values_number) {
                     case 4:
                         var values = [lines[line], [], [], []];
+                        break;
                     case 2:
                         var values = [lines[line], []];
+                        break;
                     default:
                         var values = [lines[line], []];
+                        break;
                     }
+                    
+                    var result = await client.query(cmd, values);
                 }
-            var result = await client.query(cmd, values);
+            
             client.release();
             final_result.push(result);
             return final_result;
@@ -203,18 +210,38 @@ module.exports = class Project {
         var drop_table = this.id;
         var schema = 'projects';
         var result = false;
-
-        await db.dropTableInSchema(drop_table, schema)
-        .then((res) => {
-            console.log("this is res ==============",res)
-            result = true;
-        })
-        .catch(err => {
-            console.error(err)
-            result = false;
-        });
         
-        return result;
+
+        // await db.dropTableInSchema(drop_table, schema)
+        // .then((res) => {
+        //     console.log("result of dropTableInSchema ",res);
+        //     var result = await this.unregister();
+        //     return result;
+        // })
+        // .then((res) => {
+        //     console.log("result of this.unregister ", res);
+        // })
+        // .catch(err => {
+        //     console.error(err)
+        //     result = false;
+        // });
+
+
+        /** Second approach */
+        var drop_result = await db.dropTableInSchema(drop_table, schema);
+        console.log("Drop result: ", drop_result);
+        var unregister_result = await this.unregister();
+        console.log("Unregistered result: ", unregister_result);
+        if (drop_result.code && unregister_result.code) {
+            return false;
+        }
+        return true;
     }
 
+    async unregister() {
+        var condition = "id = " + "'this.id'"
+        var result = await db.deleteFromTable("projects_metadata", condition);
+        return result;
+    }
 }
+

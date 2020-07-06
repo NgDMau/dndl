@@ -83,6 +83,26 @@ module.exports = class User{
         return (this.role).split('_')[0] === 'level';
     }
 
+    async isOwnerOf(project_id) {
+        var user_id = this.id;
+        let pool = db.getPgPool();
+        let client = await pool.connect();
+        let cmd = "SELECT * FROM projects_metadata WHERE id=$1";
+        let values = [project_id]
+        try {
+            let result = await client.query(cmd, values);
+            client.release();
+            if(result.rows[0].owner_id === user_id) {
+                console.log("OWNER_ID: ", result.rows[0].owner_id)
+                return true;
+            }
+            return false;
+        } catch(e) {
+            client.release();
+            return e;
+        }
+    }
+
     updateLastlogin() {
         // Code here
         return true

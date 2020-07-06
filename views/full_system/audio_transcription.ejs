@@ -1,56 +1,17 @@
+<title>Audio transcription</title>
+<link rel="shortcut icon" type="image/png" href="/img/logoInlabSquare.png"/>
 <!-- Include Label Studio stylesheet -->
 <link href="https://unpkg.com/label-studio@0.4.0/build/static/css/main.14acfaa5.css" rel="stylesheet">
 
-<!-- Create the Label Studio container -->
 <div id="label-studio"></div>
 
-<!-- Include the Label Studio library -->
-<script src="/js/label_studio/main.js"></script>
+<script src="js/inlabjs/main.js"></script>
 <script src="/js/idp.js"></script>
 <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
 <!-- Initialize Label Studio -->
 <script>
 
     window.onload = async function() {
-
-    //     var task_config = [{
-    //         completions: [],
-    //         predictions: [],
-    //         id: 1,
-    //         data: {
-    //             audio: "https://www2.cs.uic.edu/~i101/SoundFiles/PinkPanther30.wav"
-                
-    //         }
-    //     },
-        
-    //     {
-    //         completions: [],
-    //         predictions: [],
-    //         id: 2,
-    //         data: {
-    //             audio: "https://www2.cs.uic.edu/~i101/SoundFiles/StarWars60.wav"
-                
-    //         }
-    //     },
-    //     {
-    //         completions: [],
-    //         predictions: [],
-    //         id: 3,
-    //         data: {
-    //             audio: "https://www2.cs.uic.edu/~i101/SoundFiles/CantinaBand60.wav"
-                
-    //         }
-    //     },
-    //     {
-    //         completions: [],
-    //         predictions: [],
-    //         id: 4,
-    //         data: {
-    //             audio: "audio/audio_example.wav"
-                
-    //         }
-    //     }
-    // ];
 
     var currentTaskID;
     var currentWorkerID;
@@ -76,10 +37,20 @@
     var labelStudio = new LabelStudio('label-studio', {
         config: `
         <View>
-            <Audio name="audio" value="$audio" />
-            <Header value="Gõ lại phụ đề của audio" />
-            <TextArea name="transcription" toName="audio"
-                        rows="4" editable="true" maxSubmissions="1" />            
+            <Style> .silent { aria-hidden="true" }</Style>
+            <View>
+                <Header value="Công việc: dán nhãn âm thanh" />
+                <Audio name="audio" value="$audio" />
+                <Header value="Gõ lại phụ đề của audio" />
+                <TextArea name="transcription" toName="audio"
+                            rows="4" editable="true" maxSubmissions="1" />            
+            </View>
+            <View>
+                <Choices  name="gender" toName="txt-1" choice="single">
+                    <Choice className="silent" value="accept" />
+                    <Choice className="silent" value="reject" />
+                </Choices>
+            </View>
         </View>
     `,
 
@@ -103,7 +74,7 @@
             DONE: "Đã hoàn thành!",
             NO_COMP_LEFT: "Đã hết completion",
             NO_NEXT_TASK: "Dữ liệu để dán nhãn đã hết, xin cảm ơn!",
-            NO_ACCESS: "Bạn không được quyền truy cập dữ liệu này"
+            NO_ACCESS: "Bạn không được cấp quyền truy cập dữ liệu này"
         },
 
         description: "Nghe đoạn âm thanh dưới đây rồi gõ lại nội dung của đoạn âm thanh đó",
@@ -118,13 +89,10 @@
             if (currentTaskID === undefined) {
                 LS.setFlags({ noTask: true });
             }
-            
-
-            
         },
 
         onSubmitCompletion: async function(ls, completion) {
-            //ls.setFlags({ isLoading: true });
+            ls.setFlags({ isLoading: true });
             console.log("completion", completion);
             //console.log("task_config[1]", task_config[1])
 
@@ -146,23 +114,27 @@
             var serialized = ls.completionStore.selected.serializeCompletion()[0];
 
             var result = {
-                id: currentTaskID,
+                id: currentWorkerID,
                 value: serialized.value,
                 createdBy: completion.createdBy,
                 createdDate: completion.createdDate
             }
 
-            console.log("Result done: ", result);
+            // console.log("Result done: ", result);
 
             var task = await submitResult(result);
+
             if (task === undefined) {
                 ls.setFlags({ noTask: true})
+            } else {
+                ls.setFlags({isLoading: false})
             }
             
             
             task.data = JSON.stringify(task.data);
             // task = JSON.stringify(task);
             console.log("Received task from server: ", task)
+
             currentTaskID = task.id;
             currentWorkerID = task.workerID;
             currentWorkerPk = task.workerPk;

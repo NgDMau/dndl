@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   
+  <link href="/css/dataset.css" rel="stylesheet">
+  <link href="/css/about2.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <title>Treebank Sentiment - Inlab</title>
+  <link rel="shortcut icon" type="image/png" href="/img/logoInlabSquare.png"/>
+  
+</head>
+<body>
+  <header>
+    <%- include("header.ejs") %>
+  </header>
+  <div id="treebank-body">
+    <!-- Intro Box -->
+    <h1 class="dataset-intro treebank-box">
+      <img class="dataset-img" src='/img/sentiment-background.jpg'></img>
+      <div class="dataset-name">
+        <div>Sentiment dataset</div>
+        <div class="show-flex">
+          <a type="button" href="/contactsale" class="btn-warning btn startbtn nav-item nav-link text-center mt-4 d-flex justify-content-center align-items-center sentiment-button contact-sale">MUA NGAY</a>
+          <a type="button" href="#left-panel" class="btn btn-dark startbtn nav-item nav-link d-flex justify-content-center align-items-center sentiment-button">XEM THÊM</a>
+        </div>
+      </div>
+    </h1>
+    <div style="width: 100px;"></div>
+   
+    <!-- QuickInfo Box  -->
+    <h2 class="text-secondary dataset-quickinfo treebank-box">
+      <div class="usability">
+        <div class="text-primary">Khả năng sử dụng</div>
+        <ul class="left-padding">
+          <li class="text-tertiary quickinfo-text">Phát triển lên thành sơ đồ cây phân tích sắc thái của câu</li>
+          <li class="text-tertiary quickinfo-text">Tiếp tục thu thập dữ liệu các câu văn của các báo điện tử để phân tích sự thay đổi cách hành văn của các trang báo mạng qua thời gian</li>
+        </ul>
+      </div>
+      <div class="license">
+        <div class="text-primary">Chứng chỉ sử dụng</div>
+        <div class="text-tertiary quickinfo-text">Other (specified in description)</div>
+      </div>
+      <div class="tags">
+        <div class="text-primary">Tags</div>
+        <div class="text-tertiary quickinfo-text">sắc thái, báo chí, văn hóa mạng,…</div>
+      </div>
+    </h2>
+
+    <!-- Overall Box -->
+    <div class="treebank-box">
+      <div id="overall-box">
+        <h2 class="overall text-primary">Tổng quát</h2>
+        <div>
+          <div class="overall-content">
+            <div class="text-secondary">Miêu tả</div>
+            <ul>
+              <li class="text-tertiary">Dataset gồm các câu văn bản đã được phân tích thành các từ và cụm từ và đã ghi điểm sắc thái cho từng từ.
+              </li>
+              <li class="text-tertiary">Có tiềm năng phát triển lên thành sơ đồ cây phân tích sắc thái câu
+              </li>
+            </ul>
+          </div>
+          <div class="overall-content">
+            <div class="text-secondary">Nội dung</div>
+            <ul>
+              <li class="text-tertiary">Các câu văn từ các bài báo điện tử và các trang thông tin trên Facebook năm 2017.</li>
+            </ul>
+          </div>
+          <div class="overall-content">
+            <div class="text-secondary">Nguồn</div>
+            <ul>
+              <li class="text-tertiary">Báo điện tử: Vietnamnet, Dân trí, Vnplus,…</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="down-arrow-container" class="arrow-container">
+        <div id="down-arrow"></div>
+      </div>
+    </div>
+
+    <img src="/img/treebank.jpg" width="100%" style="margin-top: 20px" onclick="handleClickGraph()">
+    <div id="graph-container" style="display: none;">
+      <div><img src="/img/treebank.jpg"></div>
+      
+    </div>
+    <div id="filter" style="display: none;" onclick="handleClickOutsideGraph()"></div>
+    <!-- Detail Box -->
+    <div class="show-flex detail">
+      <div id="left-panel" class="left-panel">
+        <div class="overall">
+          <h2 class="text-secondary">Thông tin file</h2>
+          <div class="text-tertiary">100KB</div>
+          <a id="link-file" class="text-tertiary" href="https://docs.google.com/spreadsheets/d/1MR0eKXt-k2-prN1tMbX-fg_VnBLk7tO2QfrZyQIjirw/edit?usp=sharing" target="_blank">Link file</a>
+        </div>
+        <div id="summary" class="overall">
+          <h2 class="text-secondary">Tóm tắt</h2>
+          <ul class="left-padding">
+            <li class="text-tertiary">1 file</li>
+            <li class="text-tertiary">10 cột</li>
+            <li class="text-tertiary">90,000 dòng</li>
+          </ul>
+        </div>
+      </div>
+      <div id="right-panel" class="treebank-box right-panel">
+        <h2 id="right-panel-button-container" class="overall text-primary show-flex">
+          <div id="right-panel-arrow" class="right-panel-button left-arrow"></div>
+          <div id="file-detail" class="right-panel-button">Chi tiết file</div>
+          
+          <div id="col-info" class="right-panel-button" style='color: lightgrey'>Thông tin các cột</div>
+          <div id="stats" class="right-panel-button" style='color: lightgrey'>Số liệu chi tiết</div>
+          <div id="sample" class="right-panel-button" style='color: lightgrey'>Sample</div>
+        </h2>
+        <div id="right-panel-detail"></div>
+      </div>
+    </div>
+    <div>
+      <h3 id="interested">Hứng thú với dataset này?</h3>
+      <a id="buy-now" type="button" href="/contactsale" class="btn-warning btn startbtn nav-item nav-link text-center mt-4 d-flex justify-content-center align-items-center contact-sale">MUA NGAY</a>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <script>
+    
+  </script>
+  <script>
+    const fileDetailHeader = ['Id', 'Wordid', 'Pure Sentence', 
+                          'Old Sentence', 'New Sentence',
+                          'Created Date', 'Modified Date',
+                          'Has Modified', 'Userid', 'Has skipped']
+
+    const fileDetailDescription = ['Số id riêng biệt dùng để nhận dạng câu', '',
+                                  'Câu nguyên gốc', 'Tách câu thành từng từ và với mỗi từ sẽ được ghi một số điểm sắc thái (0,1,2,3)', 'Tách câu thành từng từ và với mỗi từ sẽ được ghi một số điểm sắc thái (0,1,2,3)',
+                                  'Đánh dấu ngày câu được tạo trong dataset', 'Ngày thêm/ sửa chữa câu', 'Có hoặc không câu đã được sửa',
+                                  '', 'Có hoặc không dòng data bị bỏ qua trong quá trình']
+                                
+    const fileDetailData = ['Số dữ liệu độc nhất: <b>90,000</b>', 'Số dữ liệu độc nhất: <b>80,000</b>', 
+                            'Số dữ liệu độc nhất: <b>90,000</b>', 'Số dữ liệu độc nhất: <b>90,000</b>',
+                            'Số dữ liệu độc nhất: <b>90,000</b>', 'Số dữ liệu khác nhau: <b>365</b>', 'Số dữ liệu khác nhau: <b>365</b>', 'Số dữ liệu khác nhau: <b>2</b>',
+                            'Số dữ liệu khác nhau: <b>1</b>', 'Số dữ liệu khác nhau: <b>1</b>']
+
+    const colInfoData = [['Dữ liệu tốt: <b>90,000 (100%)</b>', 'Lỗi: <b>0 (0%)</b>', 'Mất: <b>0 (0%)</b>'],
+                        ['Dữ liệu tốt: <b>90,000 (100%)</b>', 'Lỗi: <b>0 (0%)</b>', 'Mất: <b>0 (0%)</b>'],
+                        ['Dữ liệu tốt: <b>90,000 (100%)</b>', 'Lỗi: <b>0 (0%)</b>', 'Mất: <b>0 (0%)</b>'],
+                        ['Dữ liệu tốt: <b>90,000 (100%)</b>', 'Lỗi: <b>0 (0%)</b>', 'Mất: <b>0 (0%)</b>'],
+                        ['Dữ liệu tốt: <b>90,000 (100%)</b>', 'Lỗi: <b>0 (0%)</b>', 'Mất: <b>0 (0%)</b>'],
+                        ['Dữ liệu tốt: <b>90,000 (100%)</b>', 'Lỗi: <b>0 (0%)</b>', 'Mất: <b>0 (0%)</b>', 'Dữ liệu xuất hiện nhiều nhất: 12/07/2017'],
+                        ['Dữ liệu tốt: <b>90,000 (100%)</b>', 'Lỗi: <b>0 (0%)</b>', 'Mất: <b>0 (0%)</b>', 'Dữ liệu xuất hiện nhiều nhất: 05/08/2017'],
+                        ['Dữ liệu tốt: <b>90,000 (100%)</b>', 'Lỗi: <b>0 (0%)</b>', 'Mất: <b>0 (0%)</b>', 'Dữ liệu xuất hiện nhiều nhất: 1'],
+                        ['Dữ liệu tốt: <b>90,000 (100%)</b>', 'Lỗi: <b>0 (0%)</b>', 'Mất: <b>0 (0%)</b>', 'Dữ liệu xuất hiện nhiều nhất: 1'],
+                        ['Dữ liệu tốt: <b>90,000 (100%)</b>', 'Lỗi: <b>0 (0%)</b>', 'Mất: <b>0 (0%)</b>', 'Dữ liệu xuất hiện nhiều nhất: 0']]
+
+    const stats = ['Số câu: <b>90,000</b>', 'Tổng số từ và cụm từ: <b>810,000</b>', 'Số từ: <b>350,000</b>',
+                  'Số cụm từ: <b>460,000</b>', 'Số câu lặp lại: <b>0</b>', 'Số từ mang sắc thái tiêu cực: <b>300,000</b>',
+                  'Số từ mang sắc thái tích cực: <b>510,000<b>']
+               
+    var table = document.getElementById('right-panel-detail')
+    var button = document.getElementsByClassName('right-panel-button')
+    var body
+    var headerBar = ''
+
+    window.onload = function () {
+      button[1].click()
+    }
+
+    for (var i=1; i<button.length; i++) {
+      button[i].addEventListener("click", function(e) {
+        for (var i=1; i<button.length; i++) {
+          if (button.item(i).id !== e.target.id) {
+            button.item(i).style.color = 'lightgrey'
+          }
+          else {
+            button.item(i).style.color = ''
+            const rightPanelDetail = document.getElementById('right-panel-detail')
+            
+            // show detail in table body
+            if (e.target.id === 'sample') {
+              headerBar = fileDetailHeader.map((header) => {
+                var isNumberCol
+                (['Pure Sentence', 'New Sentence', 'Old Sentence'].includes(header)) 
+                ? isNumberCol = false : isNumberCol = true
+
+                return (
+                  `<div style="background: white" class='${`table-header-text table-header ${isNumberCol ? 'width-100' : 'width-300'}`}'>
+                      ${header}
+                  </div>`
+                )
+              }).join("");
+
+              body = `<div> <%- googleSheet%> </div>`
+            }
+
+            else if (e.target.id === 'stats') {
+              headerBar = ''
+                body = 
+                  `<ul style="margin-top: 10px">
+                    ${stats.map((stat) => {
+                      return `<li class="text-tertiary">${stat}</li>`
+                    }).join("")}
+                  </ul>`
+            }
+
+            else {
+              headerBar = fileDetailHeader.map((header) => {
+                  return (
+                    `<div class="table-header-text table-header">${header}</div>`
+                  )
+              }).join("")
+              
+              if (e.target.id === 'file-detail') {
+                body =
+                  `<div>
+                    <div class="show-flex">
+                      ${fileDetailDescription.map((desc) => {
+                        return (
+                          `<div class="text-tertiary table-data">${desc}</div>`
+                        )
+                      }).join("")}
+                    </div>
+                    <div class="show-flex">
+                      ${fileDetailData.map((desc) => {
+                        return (
+                          `<div class="text-tertiary table-data">${desc}</div>`
+                        )
+                      }).join("")}
+                    </div>
+                  </div>`
+              }
+
+              else if (e.target.id === 'col-info') {
+                body = 
+                  `<div class="show-flex">
+                    ${colInfoData.map((info) => {
+                      return (
+                      `<div class="text-tertiary table-data" style='padding: 0'>
+                        <ul style='padding-left: 25px'>
+                          ${info.map((item) => {
+                            return `<li>${item}</li>`
+                          }).join("")}
+                        </ul>
+                      </div>`
+                      )
+                  }).join("")}
+                  </div>`
+              }
+            }
+
+            const detail = 
+              `<div class="table">
+                <div id="table-header-container" class="show-flex">${headerBar}</div>
+                <div>${body}</div>
+              </div> `
+            rightPanelDetail.innerHTML = detail
+          }
+        }
+      })
+    }
+  </script>
+
+  <script>
+    // handle click up/down arrow - overall box
+    document.getElementById("down-arrow-container").addEventListener("click", function (e) {
+      var overall;
+      var arrow;
+      var overall_id;
+      var arrow_id;
+      if (e.target.id === 'down-arrow-container' || e.target.id === 'down-arrow') {
+        overall = document.getElementById('overall-box');
+        arrow = document.getElementById('down-arrow');
+        overall_id = 'overall-box-show';
+        arrow_id = 'up-arrow';
+  
+        document.getElementById('down-arrow-container').setAttribute('id','up-arrow-container');
+      }
+      else {
+        overall = document.getElementById('overall-box-show');
+        arrow = document.getElementById('up-arrow');
+        overall_id = 'overall-box'
+        arrow_id = 'down-arrow';
+        document.getElementById('up-arrow-container').setAttribute('id','down-arrow-container');
+      }
+      overall.setAttribute('id', overall_id);
+      arrow.setAttribute('id', arrow_id);
+    })
+  </script>
+
+  <script>
+    // handle click left/right arrow - detail box
+    document.getElementById("right-panel-arrow").addEventListener('click', function(e) {
+      var leftPanel = document.getElementById('left-panel')
+      var rightPanel = document.getElementById('right-panel')
+      if (e.target.classList.contains('left-arrow')) {
+        leftPanel.style.display = 'none'
+        rightPanel.classList.add('right-panel-full')
+        e.target.classList.remove('left-arrow')
+        e.target.classList.add('right-arrow')
+      }
+      else {
+        leftPanel.style.display = ''
+        rightPanel.classList.remove('right-panel-full')
+        e.target.classList.remove('right-arrow')
+        e.target.classList.add('left-arrow')
+      }
+    })
+  </script>
+
+  <script>
+    function handleClickGraph() {
+      document.getElementById('graph-container').style.display = 'block';
+      document.getElementById('filter').style.display = 'block'
+    }
+  </script>
+
+  <script>
+    function handleClickOutsideGraph() {
+      document.getElementById('graph-container').style.display = 'none';
+      document.getElementById('filter').style.display = 'none';
+    }
+  </script>
+
+  <script>
+    function zoomGraph() {
+      let zoomLevel = 2;
+    }
+  </script>
+</body>
+</html>

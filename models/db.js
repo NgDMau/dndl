@@ -167,7 +167,22 @@ module.exports = {
             client.release();
             return e;
         }
+    },
+
+    deleteFromTable: async function(table_name, condition) {
+        var cmd = "DELETE FROM " + table_name +" WHERE " + condition;
+        var client = await pool.connect();
+        try {
+            var result = await client.query(cmd);
+            client.release();
+            return result;
+        } catch(e) {
+            client.release();
+            return e;
+        }
     }
+
+
 }
 
 //dropTableInSchema('xinchao', 'projects').then(console.log)

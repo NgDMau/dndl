@@ -1,0 +1,31 @@
+<style>
+     code {
+  background-color: #eee;
+  border: 1px solid #999;
+  display: block;
+  padding: 20px;
+}
+</style>
+<br>
+<h3>Yêu cầu về module</h3>
+<p>Tên module: <b>contact_handler.js</b></p>
+<p>Module này hiện giờ chỉ cần 1 hàm, đặt tên là insertContact() chẳng hạn, nhận đầu vào là 1 đối tượng JSON gồm 6 trường: <b>name (string), company (string), phone (string), email (string), interested (array of string), content (string)</b>.</p>
+<p>Nhiệm vụ của hàm này là insert thông tin từ 6 trường trong JSON kia, cộng với thời gian lúc thực hiện insert <b>(HH:MM:SS:PM/AM, DD/MM/YYYY)</b>, tổng cộng là 7 thông tin, vào 7 cột trong 1 bảng google sheet</p>
+<p>Nếu thành công, module hàm này trả về giá trị true, nếu không thì trả về false"</p>
+<p>Thời gian yêu cầu: <b>trong vòng 24h từ lúc nhận</b></p>
+<p>Tiền công: <b>150k</b></p>
+<p>Ví dụ: </p>
+<code>/** inside contact_handler.js */<br><br>
+            var input = { <br>
+                &nbsp &nbsp name: "Nguyen Tien Dung", <br>
+                &nbsp &nbsp company: "Inlab JSC",<br>
+                &nbsp &nbsp phone: "0966778899",<br>
+                &nbsp &nbsp email: "dung@inlab.com.vn", <br>
+                &nbsp &nbsp interested: ["image-classification", "audio-transcription"] <br>
+                &nbsp &nbsp content: "MÌnh rất muốn mua bộ dữ liệu của bên bạn!" <br>
+            }<br><br>
+
+            insertContact(input)
+</code>
+<br>
+<a href="https://docs.google.com/spreadsheets/d/195nUBjWoxAlt1KZAaEQDBl0JJnVx-k90rsNWHBBVxjc/edit?usp=sharing">Link file Google sheet</a>
