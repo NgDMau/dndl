@@ -83,6 +83,10 @@ module.exports = class User{
         return (this.role).split('_')[0] === 'level';
     }
 
+    isReviewer() {
+        return this.role === 'reviewer';
+    }
+
     async isOwnerOf(project_id) {
         var user_id = this.id;
         let pool = db.getPgPool();
@@ -98,7 +102,7 @@ module.exports = class User{
             }
             return false;
         } catch(e) {
-            client.release();
+            //client.release();
             return e;
         }
     }

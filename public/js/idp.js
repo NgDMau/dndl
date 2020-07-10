@@ -64,7 +64,6 @@ async function submitResult(result) {
     }
 
     console.log(JSON.stringify(data))
-
     var res = await fetch(postUrl, otherParams);
     //console.log(res.json());
     return res.json();
