@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            window.onload = function(){
+                //var project_kpis = '
+                //var project_kpis = JSON.parse('.replace(/&#34;;/g, '"'));
+                //console.log("project_id: ", project_kpis);
+                //alert("project_id: ", project_id);
+            }
+            
+        </script>
+
+    </head>
+
+    <body>
+        <br>
+        <h3 id="status-title">Project status: </h3>
+        <br>
+        <% if (data) { %>
+            <h2>Number of workers: <%= data.no_of_workers %></h2>
+            <h2>Process: <%= data.percentage %></h2>
+            <h2>Rejected tasks: <%= data.rejected_tasks %></h2>
+            <h2>Remaining days: <%= data.remaining_days %></h2>
+          <% } %>
+        <br>
+        <div id="kpis-content">
+            <p></p>
+        </div>
+</html>

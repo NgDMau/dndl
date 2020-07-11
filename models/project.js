@@ -197,12 +197,25 @@ module.exports = class Project {
         return result;
     }
 
-    async getData() {
+    async getKPIS() {
+        // var pool = db.getPool(); 
+        await setTimeout(function() {
+            console.log("Faking process....");
+        }, 500);
 
+        var fake_data = {
+            no_of_workers: 11,
+            percentage: 80,
+            rejected_tasks: 25,
+            accepted_tasks: 10120,
+            remaining_days: 4
+            }
+
+        return fake_data;
     }
 
     async uploadData() {
-
+        
     }
 
     async destroy() {
