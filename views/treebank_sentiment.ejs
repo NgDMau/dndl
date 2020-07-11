@@ -9,8 +9,12 @@
   <link href="/css/about2.css" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.1.0/echarts-en.common.min.js"></script>
   <title>Treebank Sentiment - Inlab</title>
   <link rel="shortcut icon" type="image/png" href="/img/logoInlabSquare.png"/>
+  
+  
   
 </head>
 <body>
@@ -54,9 +58,9 @@
     <div class="treebank-box">
       <div id="overall-box">
         <h2 class="overall text-primary">Tổng quát</h2>
-        <div>
+        <div class="pointer" onclick="handleClickOverall()">
           <div class="overall-content">
-            <div class="text-secondary">Miêu tả</div>
+            <div class="text-secondary">Mô tả</div>
             <ul>
               <li class="text-tertiary">Dataset gồm các câu văn bản đã được phân tích thành các từ và cụm từ và đã ghi điểm sắc thái cho từng từ.
               </li>
@@ -78,18 +82,36 @@
           </div>
         </div>
       </div>
-      <div id="down-arrow-container" class="arrow-container">
+      <div id="down-arrow-container" class="arrow-container pointer" onclick="handleClickOverall()">
         <div id="down-arrow"></div>
       </div>
     </div>
 
-    <img src="/img/treebank.jpg" width="100%" style="margin-top: 20px" onclick="handleClickGraph()">
+    <div class="treebank-box">
+      <h2 class="text-primary">Cấu trúc</h2>
+      <img class="pointer" src="/img/treebank.jpg" width="100%" style="margin-bottom: 20px" onclick="handleClickGraph()">
+    </div>
+    
     <div id="graph-container" style="display: none;">
       <div><img src="/img/treebank.jpg"></div>
-      
     </div>
     <div id="filter" style="display: none;" onclick="handleClickOutsideGraph()"></div>
+
+    <!-- Chart Box -->
+    <div>
+      <h2 class="title">Thống kê</h2>
+      <div class="chart-container">
+        <!-- <div id="mostRepeatedMeaningWord" class="chart bar" style="height: 0; width: 0; grid-area: bar1;"></div>
+        <div id="mostRepeatedNonsenseWord" class="chart bar" style="height: 0; width: 0;grid-area: bar2;"></div> -->
+        <div id="sentimentScore" class="chart" style="grid-area: pie1;"></div>
+        <div id="wordNumInSenc" class="chart" style="grid-area: pie2;"></div>
+        <div id="totalSentimentWord" class="chart" style="grid-area: pie3;"></div>
+        <div id="singleVsCompoundWord" class="chart" style="grid-area: pie4;"></div>
+      </div>
+    </div>
+
     <!-- Detail Box -->
+    <h2 class="title">Thông tin chi tiết</h2>
     <div class="show-flex detail">
       <div id="left-panel" class="left-panel">
         <div class="overall">
@@ -108,19 +130,19 @@
       </div>
       <div id="right-panel" class="treebank-box right-panel">
         <h2 id="right-panel-button-container" class="overall text-primary show-flex">
-          <div id="right-panel-arrow" class="right-panel-button left-arrow"></div>
-          <div id="file-detail" class="right-panel-button">Chi tiết file</div>
+          <div id="right-panel-arrow" class="right-panel-button left-arrow pointer"></div>
+          <div id="file-detail" class="right-panel-button pointer">Chi tiết file</div>
           
-          <div id="col-info" class="right-panel-button" style='color: lightgrey'>Thông tin các cột</div>
-          <div id="stats" class="right-panel-button" style='color: lightgrey'>Số liệu chi tiết</div>
-          <div id="sample" class="right-panel-button" style='color: lightgrey'>Sample</div>
+          <div id="col-info" class="right-panel-button pointer" style='color: lightgrey'>Thông tin các cột</div>
+          <div id="stats" class="right-panel-button pointer" style='color: lightgrey'>Số liệu chi tiết</div>
+          <div id="sample" class="right-panel-button pointer" style='color: lightgrey'>Sample</div>
         </h2>
         <div id="right-panel-detail"></div>
       </div>
     </div>
     <div>
       <h3 id="interested">Hứng thú với dataset này?</h3>
-      <a id="buy-now" type="button" href="/contactsale" class="btn-warning btn startbtn nav-item nav-link text-center mt-4 d-flex justify-content-center align-items-center contact-sale">MUA NGAY</a>
+      <a id="buy-now" type="button" href="/contactsale" class="btn-warning btn startbtn nav-item nav-link text-center mt-4 d-flex justify-content-center align-items-center contact-sale">LIÊN HỆ VỚI CHÚNG TÔI</a>
     </div>
   </div>
 
@@ -128,6 +150,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>    -->
 
   <script>
     
@@ -168,10 +191,6 @@
     var body
     var headerBar = ''
 
-    window.onload = function () {
-      button[1].click()
-    }
-
     for (var i=1; i<button.length; i++) {
       button[i].addEventListener("click", function(e) {
         for (var i=1; i<button.length; i++) {
@@ -190,7 +209,7 @@
                 ? isNumberCol = false : isNumberCol = true
 
                 return (
-                  `<div style="background: white" class='${`table-header-text table-header ${isNumberCol ? 'width-100' : 'width-300'}`}'>
+                  `<div style="background: white; margin-top: 0px" class='${`table-header-text table-header text-secondary ${isNumberCol ? 'width-100' : 'width-300'}`}'>
                       ${header}
                   </div>`
                 )
@@ -242,7 +261,7 @@
                     ${colInfoData.map((info) => {
                       return (
                       `<div class="text-tertiary table-data" style='padding: 0'>
-                        <ul style='padding-left: 25px'>
+                        <ul>
                           ${info.map((item) => {
                             return `<li>${item}</li>`
                           }).join("")}
@@ -264,16 +283,21 @@
         }
       })
     }
+
+    window.onload = function() {  
+      document.getElementsByClassName('right-panel-button')[1].click()
+    }
   </script>
 
   <script>
     // handle click up/down arrow - overall box
-    document.getElementById("down-arrow-container").addEventListener("click", function (e) {
+    function handleClickOverall () {
       var overall;
       var arrow;
       var overall_id;
       var arrow_id;
-      if (e.target.id === 'down-arrow-container' || e.target.id === 'down-arrow') {
+      var arrow_container = document.getElementsByClassName('arrow-container').item(0)
+      if (arrow_container.id === 'down-arrow-container' || arrow_container.id === 'down-arrow') {
         overall = document.getElementById('overall-box');
         arrow = document.getElementById('down-arrow');
         overall_id = 'overall-box-show';
@@ -290,7 +314,7 @@
       }
       overall.setAttribute('id', overall_id);
       arrow.setAttribute('id', arrow_id);
-    })
+    }
   </script>
 
   <script>
@@ -327,10 +351,358 @@
     }
   </script>
 
-  <script>
-    function zoomGraph() {
-      let zoomLevel = 2;
-    }
+  <script type="text/javascript">
+    var sentimentScore = echarts.init(document.getElementById('sentimentScore'));
+    var wordNumInSenc = echarts.init(document.getElementById('wordNumInSenc'));
+    var totalSentimentWord = echarts.init(document.getElementById('totalSentimentWord'));
+    var singleVsCompoundWord = echarts.init(document.getElementById('singleVsCompoundWord'));
+    // var mostRepeatedMeaningWord = echarts.init(document.getElementById('mostRepeatedMeaningWord'));
+    // var mostRepeatedNonsenseWord = echarts.init(document.getElementById('mostRepeatedNonsenseWord'));
+
+    option1 = {
+      title: {
+          text: 'Liệt kê số điểm sắc thái của các câu',
+          bottom: '20',
+          left: 'center',
+          textStyle: {
+            fontSize: 13,
+            fontFamily: 'IBM Plex Sans',
+          },
+      },
+      tooltip: {
+          trigger: 'item',
+          formatter: '{a} <br/>{b} : {c} ({d}%)',
+          textStyle: {
+            fontSize: 11,
+            fontFamily: 'IBM Plex Sans',
+          },
+      },
+      legend: {
+          orient: 'vertical',
+          left: 'left',
+          data: ['Câu positive', 'Câu negative', 'Câu neutral'],
+          textStyle: {
+            fontSize: 11,
+            fontFamily: 'IBM Plex Sans',
+          },
+      },
+      series: [
+          {
+              name: 'Liệt kê số điểm sắc thái của các câu',
+              type: 'pie',
+              radius: '40%',
+              data: [
+                  {value: 46000, name: 'Câu positive', itemStyle: {color: '#f5b971'}},
+                  {value: 40500, name: 'Câu negative', itemStyle: {color: '#fdd998'}},
+                  {value: 3500, name: 'Câu neutral', itemStyle: {color: '#ffecc7'}},
+              ],
+              // label: {
+              //   show: false,
+              // },
+              label: {
+                normal: {
+                  formatter: '{c}',
+                    position: 'inside',
+                    textStyle: {
+                      color: '#000',
+                      fontSize: 11,
+                    }
+                }
+            },
+              emphasis: {
+                  itemStyle: {
+                      shadowBlur: 10,
+                      shadowOffsetX: 0,
+                      shadowColor: 'rgba(0, 0, 0, 0.5)'
+                  }
+              },
+              top: "60%",
+          }
+      ]
+    };
+
+    option2 = {
+      title: {
+          text: 'Số từ trong một câu',
+          bottom: '20',
+          left: 'center',
+          textStyle: {
+            fontSize: 13,
+            fontFamily: 'IBM Plex Sans',
+          },
+      },
+      tooltip: {
+          trigger: 'item',
+          formatter: '{a} <br/>{b} : {c} ({d}%)',
+          textStyle: {
+            fontSize: 11,
+            fontFamily: 'IBM Plex Sans',
+          },
+      },
+      legend: {
+          orient: 'vertical',
+          left: 'left',
+          data: ['Câu chứa 10-15 từ', 'Câu chứa nhiều hơn 15 từ', 'Câu chứa dưới 10 từ'],
+          textStyle: {
+            fontSize: 11,
+            fontFamily: 'IBM Plex Sans',
+          },
+      },
+      series: [
+          {
+              name: 'Số từ trong một câu',
+              type: 'pie',
+              radius: '40%',
+              data: [
+                  {value: 52000, name: 'Câu chứa 10-15 từ', itemStyle: {color: '#f5b971'}},
+                  {value: 35000, name: 'Câu chứa nhiều hơn 15 từ', itemStyle: {color: '#fdd998'}},
+                  {value: 3000, name: 'Câu chứa dưới 10 từ', itemStyle: {color: '#ffecc7'}},
+              ],
+              label: {
+                normal: {
+                    formatter: '{c}',
+                    position: 'inside',
+                    textStyle: {
+                      color: '#000',
+                      fontSize: 11,
+                    }
+                }
+            },
+              emphasis: {
+                  itemStyle: {
+                      shadowBlur: 10,
+                      shadowOffsetX: 0,
+                      shadowColor: 'rgba(0, 0, 0, 0.5)'
+                  }
+              }
+          }
+      ]
+    };
+
+    option3 = {
+      title: {
+          text: 'Tổng số từ positive/ negative / neutral\n trong toàn bộ dataset',
+          bottom: '20',
+          left: 'center',
+          textStyle: {
+            fontSize: 13,
+            fontFamily: 'IBM Plex Sans',
+          },
+      },
+      tooltip: {
+          trigger: 'item',
+          formatter: '{a} <br/>{b} : {c} ({d}%)',
+          textStyle: {
+            fontSize: 11,
+            fontFamily: 'IBM Plex Sans',
+          },
+      },
+      legend: {
+          orient: 'vertical',
+          left: 'left',
+          data: ['Từ positive', 'Từ negative', 'Từ neutral'],
+          textStyle: {
+            fontSize: 11,
+            fontFamily: 'IBM Plex Sans',
+          },
+      },
+      series: [
+          {
+              type: 'pie',
+              name: 'Tổng số từ theo sắc thái trong dataset',
+              radius: '40%',
+              data: [
+                  {value: 100000, name: 'Từ positive', itemStyle: {color: '#f5b971'}},
+                  {value: 80000, name: 'Từ negative', itemStyle: {color: '#fdd998'}},
+                  {value: 20000, name: 'Từ neutral', itemStyle: {color: '#ffecc7'}},
+              ],
+              label: {
+                normal: {
+                  formatter: '{c}',
+                    position: 'inside',
+                    textStyle: {
+                      color: '#000',
+                      fontSize: 11,
+                    }
+                }
+            },
+              emphasis: {
+                  itemStyle: {
+                      shadowBlur: 10,
+                      shadowOffsetX: 0,
+                      shadowColor: 'rgba(0, 0, 0, 0.5)'
+                  }
+              }
+          }
+      ]
+    };
+
+    option4 = {
+      title: {
+          text: 'Số từ đơn, từ ghép trong dataset',
+          bottom: '20',
+          left: 'center',
+          textStyle: {
+            fontSize: 13,
+            fontFamily: 'IBM Plex Sans',
+          },
+      },
+      tooltip: {
+          trigger: 'item',
+          formatter: '{a} <br/>{b} : {c} ({d}%)',
+          textStyle: {
+            fontSize: 11,
+            fontFamily: 'IBM Plex Sans',
+          },
+      },
+      legend: {
+          orient: 'vertical',
+          left: 'left',
+          data: ['Từ ghép', 'Từ đơn'],
+          textStyle: {
+            fontSize: 11,
+            fontFamily: 'IBM Plex Sans',
+          },
+      },
+      series: [
+          {
+              name: 'Số từ đơn, từ ghép trong dataset',
+              type: 'pie',
+              radius: '40%',
+              data: [
+                  {value: 115000, name: 'Từ ghép', itemStyle: {color: '#f5b971'}},
+                  {value: 97000, name: 'Từ đơn', itemStyle: {color: '#fdd998'}},
+              ],
+              label: {
+                normal: {
+                  formatter: '{c}',
+                    position: 'inside',
+                    textStyle: {
+                      color: '#000',
+                      fontSize: 11,
+                    }
+                }
+              },
+              emphasis: {
+                  itemStyle: {
+                      shadowBlur: 10,
+                      shadowOffsetX: 0,
+                      shadowColor: 'rgba(0, 0, 0, 0.5)'
+                  }
+              }
+          }
+      ]
+    };
+
+    // option5 = {
+    //   color: ['#ffc107'],
+    //   title: {
+    //       text: 'Số từ lặp lại với số lần lặp lại\n trong dataset (có ý nghĩa)',
+    //       left: 'center',
+    //       textStyle: {
+    //         fontSize: 13,
+    //         fontFamily: 'IBM Plex Sans',
+    //       },
+    //   },
+    //   tooltip: {
+    //       trigger: 'axis',
+    //       axisPointer: {
+    //           type: 'shadow'        
+    //       },
+    //       textStyle: {
+    //         fontSize: 11,
+    //         fontFamily: 'IBM Plex Sans',
+    //       },
+    //   },
+    //   grid: {
+    //       left: '3%',
+    //       right: '4%',
+    //       bottom: '3%',
+    //       containLabel: true
+    //   },
+    //   xAxis: [
+    //       {
+    //           type: 'category',
+    //           data: ['tốt', 'vui vẻ', 'hạnh phúc'],
+    //           axisTick: {
+    //               alignWithLabel: true
+    //           }
+    //       }
+    //   ],
+    //   yAxis: [
+    //       {
+    //           type: 'value'
+    //       }
+    //   ],
+    //   series: [
+    //       {
+    //           name: '',
+    //           type: 'bar',
+    //           barWidth: '60%',
+    //           data: [300,400,210]
+    //       }
+    //   ]
+    // };
+
+    // option6 = {
+    //   color: ['#ffc107'],
+    //   title: {
+    //       text: 'Số từ lặp lại nhiều không có sắc thái\n trong dataset (từ nối)',
+    //       left: 'center',
+    //       textStyle: {
+    //         fontSize: 13,
+    //         fontFamily: 'IBM Plex Sans',
+    //       },
+    //   },
+    //   tooltip: {
+    //       trigger: 'axis',
+    //       axisPointer: {
+    //           type: 'shadow'        
+    //       },
+    //       textStyle: {
+    //         fontSize: 11,
+    //         fontFamily: 'IBM Plex Sans',
+    //       },
+    //   },
+    //   grid: {
+    //       left: '3%',
+    //       right: '4%',
+    //       bottom: '3%',
+    //       containLabel: true
+    //   },
+    //   xAxis: [
+    //       {
+    //           type: 'category',
+    //           data: ['và', 'tôi', 'bạn', 'với'],
+    //           axisTick: {
+    //               alignWithLabel: true
+    //           }
+    //       }
+    //   ],
+    //   yAxis: [
+    //       {
+    //           type: 'value'
+    //       }
+    //   ],
+    //   series: [
+    //       {
+    //           name: '',
+    //           type: 'bar',
+    //           barWidth: '60%',
+    //           data: [300,400,210,100]
+    //       }
+    //   ]
+    // };
+
+
+    // use configuration item and data specified to show chart
+    sentimentScore.setOption(option1);
+    wordNumInSenc.setOption(option2);
+    totalSentimentWord.setOption(option3);
+    singleVsCompoundWord.setOption(option4);
+    // mostRepeatedMeaningWord.setOption(option5);
+    // mostRepeatedNonsenseWord.setOption(option6);
+    
   </script>
 </body>
 </html>

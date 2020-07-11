@@ -11,6 +11,18 @@ b {
   font-weight: 500;
 }
 
+h3 {
+  font-size: 1.5rem !important;
+}
+
+input[type=email] {
+  padding: 0 !important;
+  font-family: inherit !important;
+  font-size: inherit !important;
+  font-weight: 400 !important;
+  margin-top: 0 !important;
+}
+
 .table-data ul {
   padding-left: 25px;
   padding-top: 10px;
@@ -24,6 +36,10 @@ b {
   cursor: pointer;
 }
 
+.light-text {
+  font-weight: 200 !important;
+}
+
 /* DataSet.js */
 @media only screen and (max-width: 1000px) {
   .table-container {
@@ -33,27 +49,27 @@ b {
 
 .text-primary {
   color: #000 !important;
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 500;
   margin-top: 15px;
 }
 
 .text-secondary {
   color: #000 !important;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: 500;
   margin-top: 10px;
 }
 
 .text-tertiary {
   color: #000;
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   font-weight: 100;
 }
 
 .title {
   text-align: center;
-  margin: 30px auto;
+  padding-top: 100px;
 }
 
 .table-wrapper {
@@ -145,44 +161,67 @@ tbody tr:hover {
 
 
 /* TreeBank.js */
+.yellow-line {
+  width: 200px;
+  height: 2px;
+  background-color: #FFC107;
+  margin: 0 auto;
+}
+
 #treebank-body {
-  padding-right: 1rem;
-  padding-left: 1rem;
-  margin: 20px 0px 70px 0px;
+  margin: 0px 0px 70px 0px;
 }
 
 .treebank-box {
-  border: 1px solid rgba(0,0,0,0.1);
-  border-radius: 4px;
+  width: 100%;
+  border-top: 1px solid rgba(0,0,0,0.1);
   box-sizing: border-box;
   padding-left: 1rem;
   padding-right: 1rem;
-  margin-top: 30px;
 }
 
 /* Intro box  */
 .dataset-intro {
   width: 100%;
   height: 400px;
+  background: #FFFEEF;
   filter: brightness(1);
-  color: white;
+  color: #000;
   display: flex;
 }
 
-.dataset-img {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  right: 1px;
-  border-radius: 4px;
-  height: 400px;
-  width: 100%;
-  filter: brightness(0.5);
+.intro-text {
+  margin: auto 0;
+  margin-left: 3rem;
 }
 
-.dataset-name {
-  position: relative;
-  margin: auto 0;
+.intro-item-container {
+  justify-content: space-between;
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
+.intro-item {
+  width: calc((100% - 10rem)/ 3);
+  padding-top: 50px;
+  padding-bottom: 90px;
+  text-align: center;
+}
+
+.intro-item-sub {
+  height: 5%;
+}
+
+.sentiment-header {
+  height: 400px;
+  width: 400px;
+  margin-left: auto;
+  margin-right: 3rem;
+}
+
+.treebank-icon {
+  height: 2rem;
+  width: 2rem;
 }
 
 .sentiment-button {
@@ -196,12 +235,41 @@ tbody tr:hover {
   color: white !important;
 }
 
+@media screen and (max-width: 780px) {
+  .intro-text {
+    text-align: center;
+  }
+
+  .intro-text a:nth-child(2) {
+    margin-right: 0;
+  }
+}
+
 /* QuickIntro Box */
 .dataset-quickinfo {
   display: flex;
   width: 100%;
+  background: #FFFEEF;
   padding-top: 10px;
   padding-bottom: 10px;
+}
+
+.quickinfo-text {
+  width: 50%;
+  align-self: center;
+  margin-left: auto;
+  margin-right: 1rem;
+  font-weight: 200 !important;
+}
+
+.dataset-quickinfo .title {
+  text-align: left;
+  padding-top: 0;
+}
+
+.dataset-quickinfo .yellow-line {
+  margin: 0;
+  margin-bottom: 20px;
 }
 
 /* .dataset-quickinfo .text-primary {
@@ -213,12 +281,8 @@ tbody tr:hover {
     flex-direction: column;
   }
 
-  .usability, .license, .tags {
+  .usability {
     width: 100% !important;
-  }
-
-  .tags .quickinfo-text {
-    margin-bottom: 15px;
   }
 
   ul {
@@ -229,34 +293,9 @@ tbody tr:hover {
     flex-direction: column;
   }
 
-  .left-panel {
-    display: flex;
-    width: 100% !important;
-  }
-
-  .left-panel .overall {
-    border-bottom: none !important;
-  }
-
-  .left-panel .overall:nth-child(2) {
-    margin-left: 50%;
-  }
-
-  .right-panel {
-    position: relative !important;
-    left: 0 !important;
-    right: 0 !important;
-    margin-left: 0 !important;
-    width: 100% !important;
-  }
-
   #right-panel-button-container {
     padding-left: 5px !important;
     padding-right: 5px;
-  }
-
-  #right-panel-arrow {
-    display: none;
   }
 }
 
@@ -265,109 +304,25 @@ tbody tr:hover {
   margin-right: 3%;
 }
 
-.license {
-  width: 30%;
-  margin-right: 3%;
-}
-
-.tags {
-  width: 30%;
-}
-
 .quickinfo-text {
   margin-top: 10px;
 }
 
-/* Overall Box */
-#overall-box {
-  max-height: 150px;
-  overflow: hidden;
-  transition-delay: 0ms;
-  transition: max-height 0.5s ease;
-  -webkit-transition: max-height 0.5s ease;
-  -moz-transition: max-height 0.5s ease;
-  -o-transition: max-height 0.5s ease;
-}
-
-#overall-box-show {
-  max-height: 2000px;
-  transition-delay: 0ms;
-  transition: max-height 1s ease;
-  -webkit-transition: max-height 1s ease;
-  -moz-transition: max-height 1s ease;
-  -o-transition: max-height 1s ease;
-}
-
-.overall {
-  /* background-color: #d3d3d3; */
-  border-bottom: 1px solid rgba(0,0,0,0.1);
-  padding-bottom: 10px;
-}
-
-.overall-content {
-  margin-bottom: 10px;
-}
-
-.arrow-container {
-  border-top: 1px solid rgba(0,0,0,0.1);
-  padding: 7px 0;
-}
-
-#down-arrow {
-  background: url('../img/down-arrow.svg') no-repeat;
-  width: 0.9rem;
-  height: 0.9rem;
-  margin: auto auto;
-}
-
-#up-arrow {
-  background: url('../img/up-arrow.svg') no-repeat;
-  width: 0.9rem;
-  height: 0.9rem;
-  margin: auto auto;
-}
-
-.left-padding {
-  padding-left: 1rem;
-}
-
-#graph-container {
-  position: fixed;
-  background-color: white;
-  top: 50px;
-  bottom: 50px;
-  left: 50px;
-  right: 50px;
-  overflow: scroll;
-  z-index: 3;
-}
-
-#filter {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(0,0,0,0.5);
-  z-index: 2;
-}
 
 /* Chart Box */
 .chart-container {
   display: grid;
   grid-template-areas: 
-  /* ". bar1 bar2 ." */
-  "pie1 pie2 pie3 pie4";
-  /* grid-template-areas: 
-  "pie3 pie3 pie1 pie2 pie4"
-  "pie3 pie3 . bar1 bar2"; */
+  "pie1 pie2 pie3";
   width: 100%;
+  margin-top: 30px;
 }
 
 .chart {
   height: 250px;
   width: 250px;
   margin: 0 auto;
+  margin-top: 50px;
 }
 
 .bar {
@@ -377,11 +332,9 @@ tbody tr:hover {
 @media only screen and (max-width: 1070px) {
   .chart-container {
     grid-template-areas: 
-                        /* "bar1 bar2" */
                         "pie1 pie2"
-                        "pie3 pie4";
+                        "pie3";
     margin-bottom: 0;
-    margin-top: 0;
   }
 
   .chart {
@@ -404,8 +357,7 @@ tbody tr:hover {
                         "bar2" */
                         "pie1"
                         "pie2"
-                        "pie3"
-                        "pie4";
+                        "pie3";
     margin-bottom: 0;
     margin-top: 0;
   }
@@ -420,77 +372,26 @@ tbody tr:hover {
 }
 
 /* Detail Box */
-.detail {
-  margin-top: 2rem;
-}
-
-.left-panel {
-  width: 20%;
-}
-
-#link-file {
-  color: #ffc107;
-  font-weight: 400;
-  font-size: 0.9rem;
-}
-
-#link-file:hover {
-  text-decoration: none;
-  color: #e0a800 !important;
+#detail-box .treebank-box {
+  border-top: none;
 }
 
 .right-panel {
-  position: relative;
-  width: 75%;
-  left: 5%;
-  margin-top: 0px;
-  margin-bottom: 20px;
-  padding-left: 0;
-  padding-right: 0;
-  transition: left 0.7s ease;
-  -webkit-transition: left 0.7s ease;
-  -moz-transition: left 0.7s ease;
-  -o-transition: left 0.7s ease;
-}
-
-.right-panel-full {
-  position: relative;
-  width: 100%;
-  left: 0;
-  margin-left: 0 !important;
-  transition: left 0.7s ease;
-  -webkit-transition: left 0.7s linear ease;
-  -moz-transition: left 0.7s ease;
-  -o-transition: left 0.7s ease;
+  width: 90%;
+  margin: 0 auto 100px auto;
 }
 
 #right-panel-button-container {
-  padding-left: 1rem;
   margin-bottom: 0;
+  border: 1px solid rgb(230, 230, 230);
 }
 
 .right-panel-button {
-  margin-right: 1rem;
-  width: 20%;
   box-sizing: border-box;
   margin: auto;
+  padding: 20px;
+  text-align: center;
   letter-spacing: -1px;
-}
-
-.left-arrow {
-  background: url('../img/left-arrow.svg');
-  width: 0.9rem;
-  height: 0.9rem;
-  margin-top: auto;
-  margin-bottom: auto;
-}
-
-.right-arrow {
-  background: url('../img/right-arrow.svg');
-  width: 0.9rem;
-  height: 0.9rem;
-  margin-top: auto;
-  margin-bottom: auto;
 }
 
 .table {
@@ -538,14 +439,208 @@ tbody tr:hover {
 #right-panel-detail {
   overflow: scroll; 
   max-height: 400px;
+  border: 1px solid rgb(230, 230, 230);
 }
 
 #interested {
-  margin-top: 40px;
-  text-align: center;
-  color: rgba(0,0,0,0.65);
+  text-align: left;
+  color: #fff;
 }
 
 #buy-now {
   margin: 0 auto !important;
+}
+
+/* Contact Us */
+#contact-us-box {
+  width: 100%;
+  height: auto;
+  background: #565D69;
+  padding: 40px;
+}
+
+#our-info {
+  width: 50%;
+  margin-left: 30px;
+}
+
+#contact-container {
+  margin-top: 30px;
+}
+
+#our-info h3 {
+  color: #FFC107;
+}
+
+#our-info .yellow-line {
+  float: left;
+  width: 150px;
+}
+
+#our-info .text-tertiary {
+  color: #fff;
+}
+
+.contact-item {
+  margin-bottom: 10px;
+}
+
+.contact-item h6 {
+  margin-bottom: 0;
+}
+
+.contact-icon {
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+#location-icon {
+  background: url("../img/location.svg") no-repeat;
+}
+
+#phone-icon {
+  background: url("../img/phone.svg") no-repeat;
+}
+
+#mail-icon {
+  background: url("../img/mail.svg") no-repeat;
+}
+
+#facebook-icon {
+  background: url("../img/facebook.svg") no-repeat;
+}
+
+.contact-text {
+  color: #fff;
+  margin-left: 10px;
+}
+
+#contact-us-form .text-tertiary {
+  color: #fff;
+}
+
+.form-width {
+  width: 90% !important;
+}
+
+.form-group label {
+  color: #fff;
+}
+
+#form-group {
+  margin-top: 20px;
+}
+
+.btn {
+  width: 60% !important;
+}
+
+@media screen and (max-width: 780px) {
+  .yellow-line {
+    width: 100px;
+  }
+
+  .sentiment-header {
+    width: 0;
+    height: 0;
+  }
+
+  .intro-item-container {
+    flex-direction: column;
+    margin-left: 0;
+    margin-right: 0;
+    align-items: center;
+  }
+
+  .intro-item {
+    width: 60%;
+  }
+
+  .dataset-quickinfo {
+    flex-direction: column;
+  }
+
+  .dataset-quickinfo img {
+    width: 300px;
+  }
+
+  .dataset-quickinfo img {
+    margin: auto;
+  }
+
+  .dataset-quickinfo .title {
+    text-align: center;
+  }
+
+  .dataset-quickinfo .yellow-line {
+    margin: 0 auto;
+    margin-bottom: 20px;
+  }
+
+  .quickinfo-text {
+    margin-left: 0;
+    margin-right: 0;
+    width: 70%;
+  }
+
+  .quickinfo-text ul {
+    margin-bottom: 70px;
+  }
+
+  .chart-container {
+    grid-template-areas: 
+    "pie1"
+    "pie2"
+    "pie3";
+  }
+
+  #contact-us-box {
+    flex-direction: column;
+  }
+
+  #our-info {
+    width: 80%;
+    margin: auto;
+    margin-top: 70px;
+  }
+
+  #our-info h3 {
+    text-align: center;
+  }
+
+  #our-info .yellow-line {
+    float: none;
+  }
+
+  #contact-us-form {
+    margin-top: 70px;
+  }
+
+  #interested {
+    text-align: center;
+  }
+
+  #contact-us-form .text-tertiary {
+    text-align: center;
+  }
+
+  .contact-item {
+    flex-direction: column;
+  }
+
+  .contact-icon {
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 7px;
+  }
+
+  .contact-text {
+    text-align: center;
+  }
+
+  .form-width {
+    width: 100% !important;
+  }
 }

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   
+  <link href="/css/dataset2.css" rel="stylesheet">
+  <link href="/css/about2.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.1.0/echarts-en.common.min.js"></script>
+  <title>Treebank Sentiment - Inlab</title>
+  <link rel="shortcut icon" type="image/png" href="/img/logoInlabSquare.png"/>
+  
+  
+  
+</head>
+<body>
+  <header>
+    <%- include("header.ejs") %>
+  </header>
+  <div id="treebank-body">
+    <!-- Intro Box -->
+    <div class="dataset-intro">
+      <div class="treebank-box show-flex">
+        <div class="intro-text">
+          <h1>Vietnamese Stanford Treebank</h1>
+          <div class="text-secondary light-text">Bộ dữ liệu phân tích sắc thái câu Tiếng Việt</div>
+          <div class="show-flex">
+            <a type="button" href="/contactsale" class="btn-warning btn startbtn nav-item nav-link text-center mt-4 d-flex justify-content-center align-items-center sentiment-button contact-sale">MUA NGAY</a>
+            <a type="button" href="#right-panel" class="btn btn-dark startbtn nav-item nav-link d-flex justify-content-center align-items-center sentiment-button">XEM THÊM</a>
+          </div>
+        </div>
+        <img src='/img/sentiment-header.svg' class="sentiment-header"/>
+      </div>
+    </div>
+    <div style="width: 100px;"></div>
+
+    <div class="treebank-box">
+      <h3 class="title">Đây là bộ dữ liệu gì?</h3>
+      <div class="yellow-line"></div>
+      <div class="show-flex intro-item-container">
+        <div class="intro-item" data-aos="fade-up">
+          <img class="treebank-icon" src="/img/sentiment-icon-computer.svg"/>
+          <div class="text-secondary">90,000 câu</div>
+          <div class="intro-item-sub">được phân tích thành các từ/cụm từ và ghi điểm sắc thái</div>
+        </div>
+        <div class="intro-item" data-aos="fade-up">
+          <img class="treebank-icon" src="/img/sentiment-icon-content.svg"/>
+          <div class="text-secondary">Chủ đề đa dạng</div>
+          <div class="intro-item-sub">như văn hóa, kinh tế, giáo dục, lịch sử, ...</div>
+        </div>
+        <div class="intro-item" data-aos="fade-up">
+          <img class="treebank-icon" src="/img/sentiment-icon-tablet.svg"/>
+          <div class="text-secondary">Nguồn dữ liệu xác thực</div>
+          <div class="intro-item-sub">được tổng hợp từ các báo điện tử và các trang thông tin trên Facebook</div>
+        </div>
+      </div>
+    </div>
+   
+    <!-- QuickInfo Box  -->
+    <div class="dataset-quickinfo treebank-box show-flex">
+      <img src="/img/sentiment-img.svg" width="400px" height="400px">
+      <div class="quickinfo-text" data-aos="fade-left">
+        <h3 class="title">Ứng dụng của bộ dữ liệu</h3>
+        <div class="yellow-line"></div>
+        <div>Từ việc phân tích sắc thái của một từ đơn lẻ, ta có thể...</div>
+        <ul class="left-padding">
+          <li>Phát triển lên thành sơ đồ cây phân tích sắc thái của câu</li>
+          <li>Phân tích sắc thái của một văn bản dựa trên sắc thái của các câu trong văn bản</li>
+          <li>Phân loại văn bản</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Chart Box -->
+    <div class="treebank-box">
+      <h3 class="title">Thống kê nội dung bộ dữ liệu</h3>
+      <div class="yellow-line"></div>
+      <div class="chart-container">
+        <div id="sentimentScore" class="chart" style="grid-area: pie1;" data-aos="fade-up"></div>
+        <div id="wordNumInSenc" class="chart" style="grid-area: pie2;" data-aos="fade-up"></div>
+        <div id="totalSentimentWord" class="chart" style="grid-area: pie3;" data-aos="fade-up"></div>
+      </div>
+    </div>
+
+    <!-- Detail Box -->
+    <div id="detail-box" class="show-flex">
+      <div id="right-panel" class="treebank-box right-panel">
+        <h2 id="right-panel-button-container" class="overall text-primary show-flex">
+          <div class="right-panel-button pointer">Sample</div>
+        </h2>
+        <div id="right-panel-detail"></div>
+      </div>
+    </div>
+
+    <!-- Contact Us -->
+    <div id="contact-us-box" class="show-flex">
+      <div id="our-info">
+        <h3>Thông tin liên lạc</h3>
+        <div class="yellow-line"></div>
+        <div id="contact-container">
+          <div class="contact-item show-flex" data-aos="fade-right">
+            <div id="location-icon" class="contact-icon"></div>
+            <div class="contact-text">
+              <h6>Địa chỉ</h6>
+              <div>Số 12 ngõ 293 Khuất Duy Tiến, Hà Nội</div>
+            </div>
+          </div>
+          <div class="contact-item show-flex" data-aos="fade-right">
+            <div id="phone-icon" class="contact-icon"></div>
+            <div class="contact-text">
+              <h6>Điện thoại</h6>
+              <div>0902425586</div>
+            </div>
+          </div>
+          <div class="contact-item show-flex" data-aos="fade-right">
+            <div id="mail-icon" class="contact-icon"></div>
+            <div class="contact-text">
+              <h6>Email</h6>
+              <div>lienhe@inlab.com.vn</div>
+            </div>
+          </div>
+          <div class="contact-item show-flex" data-aos="fade-right">
+            <div id="facebook-icon" class="contact-icon"></div>
+            <div class="contact-text">
+              <h6>Fanpage</h6>
+              <div>Inlab.fanpage</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="contact-us-form" data-aos="fade-left">
+        <h3 id="interested">Bạn có hứng thú với bộ dữ liệu này?</h3>
+        <div class="text-tertiary">Hãy để lại thông tin liên hệ để được tư vấn nhanh nhất</div>
+        <form class="form-width" action="/contact" method="POST" id="contactForm">
+          <div class="text-center message"></div>
+          <div id="form-group">
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Tên</label>
+              <div class="d-flex align-items-center jsx-560990836 jsx-2177858300 input input--icon">
+              <input type="Name" name="name" id="exampleFormControlInput1" required="" placeholder="Họ và tên" value="" style="width:100%;border: none; background-color: #F5F4F9;" required>                       
+              </div>   
+          </div>
+          <div class="form-group">
+              <label for="exampleFormControlInput1">Công ty</label>
+              <div class="d-flex align-items-center jsx-560990836 jsx-2177858300 input input--icon"> 
+              <input type="Name" name="company" id="exampleFormControlInput1" placeholder="Tên công ty" value="" style="width:100%;border: none; background-color: #F5F4F9;" required>                       
+              </div>   
+          </div>
+          <div class="form-group">
+              <label for="exampleFormControlInput1">Số điện thoại</label>
+              <div class="d-flex align-items-center jsx-560990836 jsx-2177858300 input input--icon">
+              <input type="Name" name="phone" id="exampleFormControlInput1" placeholder="Số điện thoại" value="" style="width:100%;border: none; background-color: #F5F4F9;" required>                       
+              </div>   
+          </div>
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Email</label>
+        <div class="d-flex align-items-center jsx-560990836 jsx-2177858300 input input--icon">
+      <input  type="email" name="email" id="exampleFormControlInput1" placeholder="Email" value="" style="width:100%;border: none; background-color: #F5F4F9;" required>                       
+      </div>                  
+  </div>
+  <div class ="justify-content-center d-flex pb-5">        
+    <button type="submit" id="submit" class="contact btn btn-warning btn-lg btn-block">Gửi</button><br><br>
+  </div> 
+    </div>
+  </form>
+        <!-- <a id="buy-now" type="button" href="/contactsale" class="btn-warning btn startbtn nav-item nav-link text-center mt-4 d-flex justify-content-center align-items-center contact-sale">GỬI THÔNG TIN LIÊN HỆ</a> -->
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <%- include("footer.ejs") %>
+  </footer>  
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <script>
+    const fileDetailHeader = ['Id', 'Wordid', 'Pure Sentence', 
+                          'Old Sentence', 'New Sentence',
+                          'Created Date', 'Modified Date',
+                          'Has Modified', 'Userid', 'Has skipped']
+
+    const fileDetailDescription = ['Số id riêng biệt dùng để nhận dạng câu', '',
+                                  'Câu nguyên gốc', 'Tách câu thành từng từ và với mỗi từ sẽ được ghi một số điểm sắc thái (0,1,2,3)', 'Tách câu thành từng từ và với mỗi từ sẽ được ghi một số điểm sắc thái (0,1,2,3)',
+                                  'Đánh dấu ngày câu được tạo trong dataset', 'Ngày thêm/ sửa chữa câu', 'Có hoặc không câu đã được sửa',
+                                  '', 'Có hoặc không dòng data bị bỏ qua trong quá trình']
+                                
+    const fileDetailData = ['Số dữ liệu độc nhất: <b>90,000</b>', 'Số dữ liệu độc nhất: <b>80,000</b>', 
+                            'Số dữ liệu độc nhất: <b>90,000</b>', 'Số dữ liệu độc nhất: <b>90,000</b>',
+                            'Số dữ liệu độc nhất: <b>90,000</b>', 'Số dữ liệu khác nhau: <b>365</b>', 'Số dữ liệu khác nhau: <b>365</b>', 'Số dữ liệu khác nhau: <b>2</b>',
+                            'Số dữ liệu khác nhau: <b>1</b>', 'Số dữ liệu khác nhau: <b>1</b>']
+
+    const colInfoData = [['Dữ liệu tốt: <b>90,000 (100%)</b>', 'Lỗi: <b>0 (0%)</b>', 'Mất: <b>0 (0%)</b>'],
+                        ['Dữ liệu tốt: <b>90,000 (100%)</b>', 'Lỗi: <b>0 (0%)</b>', 'Mất: <b>0 (0%)</b>'],
+                        ['Dữ liệu tốt: <b>90,000 (100%)</b>', 'Lỗi: <b>0 (0%)</b>', 'Mất: <b>0 (0%)</b>'],
+                        ['Dữ liệu tốt: <b>90,000 (100%)</b>', 'Lỗi: <b>0 (0%)</b>', 'Mất: <b>0 (0%)</b>'],
+                        ['Dữ liệu tốt: <b>90,000 (100%)</b>', 'Lỗi: <b>0 (0%)</b>', 'Mất: <b>0 (0%)</b>'],
+                        ['Dữ liệu tốt: <b>90,000 (100%)</b>', 'Lỗi: <b>0 (0%)</b>', 'Mất: <b>0 (0%)</b>', 'Dữ liệu xuất hiện nhiều nhất: 12/07/2017'],
+                        ['Dữ liệu tốt: <b>90,000 (100%)</b>', 'Lỗi: <b>0 (0%)</b>', 'Mất: <b>0 (0%)</b>', 'Dữ liệu xuất hiện nhiều nhất: 05/08/2017'],
+                        ['Dữ liệu tốt: <b>90,000 (100%)</b>', 'Lỗi: <b>0 (0%)</b>', 'Mất: <b>0 (0%)</b>', 'Dữ liệu xuất hiện nhiều nhất: 1'],
+                        ['Dữ liệu tốt: <b>90,000 (100%)</b>', 'Lỗi: <b>0 (0%)</b>', 'Mất: <b>0 (0%)</b>', 'Dữ liệu xuất hiện nhiều nhất: 1'],
+                        ['Dữ liệu tốt: <b>90,000 (100%)</b>', 'Lỗi: <b>0 (0%)</b>', 'Mất: <b>0 (0%)</b>', 'Dữ liệu xuất hiện nhiều nhất: 0']]
+
+    const stats = ['Số câu: <b>90,000</b>', 'Tổng số từ và cụm từ: <b>810,000</b>', 'Số từ: <b>350,000</b>',
+                  'Số cụm từ: <b>460,000</b>', 'Số câu lặp lại: <b>0</b>', 'Số từ mang sắc thái tiêu cực: <b>300,000</b>',
+                  'Số từ mang sắc thái tích cực: <b>510,000<b>']
+               
+    var table = document.getElementById('right-panel-detail');
+    var button = document.getElementsByClassName('right-panel-button');
+    var body;
+    var headerBar = '';
+
+    const rightPanelDetail = document.getElementById('right-panel-detail')
+            
+    // show detail in table body
+      headerBar = fileDetailHeader.map((header) => {
+        var isNumberCol;
+
+        (['Pure Sentence', 'New Sentence', 'Old Sentence'].includes(header)) 
+        ? isNumberCol = false : isNumberCol = true
+
+        return (
+          `<div style="background: white; margin-top: 0px" class='${`table-header-text table-header text-secondary ${isNumberCol ? 'width-100' : 'width-300'}`}'>
+              ${header}
+          </div>`
+        )
+      }).join("");
+
+      const detail = 
+        `<div class="table">
+          <div id="table-header-container" class="show-flex">${headerBar}</div>
+          <div>
+            <div> <%- googleSheet%> </div>
+          </div>
+        </div> `
+      rightPanelDetail.innerHTML = detail
+  </script>
+
+  <script type="text/javascript">
+    var sentimentScore = echarts.init(document.getElementById('sentimentScore'));
+    var wordNumInSenc = echarts.init(document.getElementById('wordNumInSenc'));
+    var totalSentimentWord = echarts.init(document.getElementById('totalSentimentWord'));
+
+    option1 = {
+      title: {
+          text: 'Tỉ lệ các câu có sắc thái \ntích cực/ tiêu cực/ trung tính\n trên tổng số câu',
+          bottom: '20',
+          left: 'center',
+          textStyle: {
+            fontSize: 13,
+            fontFamily: 'IBM Plex Sans',
+          },
+      },
+      tooltip: {
+          trigger: 'item',
+          formatter: '{a} <br/>{b} : {c} ({d}%)',
+          textStyle: {
+            fontSize: 11,
+            fontFamily: 'IBM Plex Sans',
+          },
+      },
+      legend: {
+          orient: 'vertical',
+          left: 'left',
+          data: ['Câu positive', 'Câu negative', 'Câu neutral'],
+          textStyle: {
+            fontSize: 11,
+            fontFamily: 'IBM Plex Sans',
+          },
+      },
+      series: [
+          {
+              name: 'Liệt kê số điểm sắc thái của các câu',
+              type: 'pie',
+              radius: '40%',
+              data: [
+                  {value: 46000, name: 'Câu positive', itemStyle: {color: '#f5b971'}},
+                  {value: 40500, name: 'Câu negative', itemStyle: {color: '#fdd998'}},
+                  {value: 3500, name: 'Câu neutral', itemStyle: {color: '#ffecc7'}},
+              ],
+              // label: {
+              //   show: false,
+              // },
+              label: {
+                normal: {
+                  formatter: '{c}',
+                    position: 'inside',
+                    textStyle: {
+                      color: '#000',
+                      fontSize: 11,
+                    }
+                }
+            },
+              emphasis: {
+                  itemStyle: {
+                      shadowBlur: 10,
+                      shadowOffsetX: 0,
+                      shadowColor: 'rgba(0, 0, 0, 0.5)'
+                  }
+              },
+              top: "60%",
+          }
+      ]
+    };
+
+    option2 = {
+      title: {
+          text: 'Tỉ lệ các câu \nphân chia theo số từ có trong câu',
+          bottom: '20',
+          left: 'center',
+          textStyle: {
+            fontSize: 13,
+            fontFamily: 'IBM Plex Sans',
+          },
+      },
+      tooltip: {
+          trigger: 'item',
+          formatter: '{a} <br/>{b} : {c} ({d}%)',
+          textStyle: {
+            fontSize: 11,
+            fontFamily: 'IBM Plex Sans',
+          },
+      },
+      legend: {
+          orient: 'vertical',
+          left: 'left',
+          data: ['Câu chứa 10-15 từ', 'Câu chứa nhiều hơn 15 từ', 'Câu chứa dưới 10 từ'],
+          textStyle: {
+            fontSize: 11,
+            fontFamily: 'IBM Plex Sans',
+          },
+      },
+      series: [
+          {
+              name: 'Số từ trong một câu',
+              type: 'pie',
+              radius: '40%',
+              data: [
+                  {value: 52000, name: 'Câu chứa 10-15 từ', itemStyle: {color: '#f5b971'}},
+                  {value: 35000, name: 'Câu chứa nhiều hơn 15 từ', itemStyle: {color: '#fdd998'}},
+                  {value: 3000, name: 'Câu chứa dưới 10 từ', itemStyle: {color: '#ffecc7'}},
+              ],
+              label: {
+                normal: {
+                    formatter: '{c}',
+                    position: 'inside',
+                    textStyle: {
+                      color: '#000',
+                      fontSize: 11,
+                    }
+                }
+            },
+              emphasis: {
+                  itemStyle: {
+                      shadowBlur: 10,
+                      shadowOffsetX: 0,
+                      shadowColor: 'rgba(0, 0, 0, 0.5)'
+                  }
+              }
+          }
+      ]
+    };
+
+    option3 = {
+      title: {
+          text: ' Tỉ lệ các từ mang sắc thái\n tích cực/ tiêu cực/ trung tính\n trên tổng số từ',
+          bottom: '20',
+          left: 'center',
+          textStyle: {
+            fontSize: 13,
+            fontFamily: 'IBM Plex Sans',
+          },
+      },
+      tooltip: {
+          trigger: 'item',
+          formatter: '{a} <br/>{b} : {c} ({d}%)',
+          textStyle: {
+            fontSize: 11,
+            fontFamily: 'IBM Plex Sans',
+          },
+      },
+      legend: {
+          orient: 'vertical',
+          left: 'left',
+          data: ['Từ positive', 'Từ negative', 'Từ neutral'],
+          textStyle: {
+            fontSize: 11,
+            fontFamily: 'IBM Plex Sans',
+          },
+      },
+      series: [
+          {
+              type: 'pie',
+              name: 'Tổng số từ theo sắc thái trong dataset',
+              radius: '40%',
+              data: [
+                  {value: 100000, name: 'Từ positive', itemStyle: {color: '#f5b971'}},
+                  {value: 80000, name: 'Từ negative', itemStyle: {color: '#fdd998'}},
+                  {value: 20000, name: 'Từ neutral', itemStyle: {color: '#ffecc7'}},
+              ],
+              label: {
+                normal: {
+                  formatter: '{c}',
+                    position: 'inside',
+                    textStyle: {
+                      color: '#000',
+                      fontSize: 11,
+                    }
+                }
+            },
+              emphasis: {
+                  itemStyle: {
+                      shadowBlur: 10,
+                      shadowOffsetX: 0,
+                      shadowColor: 'rgba(0, 0, 0, 0.5)'
+                  }
+              }
+          }
+      ]
+    };
+    
+    // use configuration item and data specified to show chart
+    sentimentScore.setOption(option1);
+    wordNumInSenc.setOption(option2);
+    totalSentimentWord.setOption(option3);
+    
+  </script>
+
+<script>
+
+  $('#contactForm').submit(function (e) {
+      e.preventDefault();
+
+      // var interested = [];
+      // $.each($("input[name='interested']:checked"), function(){
+      //   interested.push($(this).val());
+      // });
+      
+      var $form = $( this ),
+      input_name = $form.find( "input[name='name']" ).val(),
+      input_company = $form.find( "input[name='company']" ).val(),
+      input_phone = $form.find( "input[name='phone']" ).val(),
+      input_email = $form.find( "input[name='email']" ).val(),
+
+      url = $form.attr( "action" );
+
+      var posting = $.post( url, { name: input_name, company: input_company, phone: input_phone, email: input_email } );
+      
+      var contactUs = document.getElementById("contact-us-box")
+      posting.done(function (data) {
+        document.getElementById("form-group").style.display = "none";
+        contactUs.innerHTML = 'Chúng tôi đã nhận được tin nhắn của bạn và sẽ liên lạc lại với bạn trong thời gian ngắn nhất.'
+        contactUs.classList ='text-center message received'
+        
+        var return_button = document.createElement('a')
+        return_button.id = 'back-button'
+        return_button.classList = "btn-warning btn startbtn nav-item nav-link text-center mt-4 d-flex justify-content-center align-items-center contact-sale"
+        return_button.type = "button"
+        return_button.href = "/"
+        return_button.innerHTML = 'Quay lại'
+        contactUs.appendChild(return_button)
+      });
+  })
+
+</script>
+
+  <script>
+    AOS.init();
+  </script>
+</body>
+</html>
