@@ -1,3 +1,5 @@
+const db =require('../models/db');
+
 module.exports = function(app) {
     app.get('/review/project', function(req, res) {
         var project_id = req.query.project_id;
@@ -11,15 +13,11 @@ module.exports = function(app) {
     })
 
     app.post('/review/project/:project_id', async function(req, res) {
-        var data = req.body.data;
+        var project_id = req.params.project_id
         console.log(req.body);
 
-        var data = {
-            url: "audio/Wednesday-at-07-50.wav",
-            text: "HÔm nay là một ngày đặc biệt trong cuộc đời tôi",
-            code: "continue"
-        }
-        
+        var data = await db.fetchUnreviewedData(project_id)
+
         res.status(200).send(data);
     })
 }

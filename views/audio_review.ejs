@@ -95,7 +95,7 @@
                     .then(async function(new_task){
                         new_task = await new_task.json()
                         console.log("New task:", new_task);
-                        if (result.code === "full") {
+                        if (new_task.code === "full") {
                             alert("Đã hết dữ liệu cần review, xin cảm ơn!")
                             return
                         }
