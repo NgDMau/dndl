@@ -5,6 +5,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-weight: 100;
   font-size: 0.9rem;
+  width: 100%;
 }
 
 b {
@@ -38,6 +39,14 @@ input[type=email] {
 
 .light-text {
   font-weight: 200 !important;
+}
+
+[data-aos=fade-right] {
+  transform: translate3d(-30px,0,0);
+}
+
+[data-aos=fade-left] {
+  transform: translate3d(30px,0,0);
 }
 
 /* DataSet.js */
@@ -252,6 +261,7 @@ tbody tr:hover {
   background: #FFFEEF;
   padding-top: 10px;
   padding-bottom: 10px;
+  overflow-x: hidden;
 }
 
 .quickinfo-text {
@@ -303,11 +313,6 @@ tbody tr:hover {
   width: 30%;
   margin-right: 3%;
 }
-
-.quickinfo-text {
-  margin-top: 10px;
-}
-
 
 /* Chart Box */
 .chart-container {
@@ -457,11 +462,13 @@ tbody tr:hover {
   height: auto;
   background: #565D69;
   padding: 40px;
+  overflow-x: hidden;
 }
 
 #our-info {
   width: 50%;
   margin-left: 30px;
+  overflow-x: hidden;
 }
 
 #contact-container {
@@ -598,6 +605,7 @@ tbody tr:hover {
 
   #contact-us-box {
     flex-direction: column;
+    overflow-x: hidden;
   }
 
   #our-info {
@@ -616,6 +624,7 @@ tbody tr:hover {
 
   #contact-us-form {
     margin-top: 70px;
+    overflow-x: hidden;
   }
 
   #interested {
