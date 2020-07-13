@@ -1,5 +1,4 @@
 var path = require('path')
-var Chart = require('chart.js');
 
 module.exports = function (app) {
     app.get('/resources/dataset/treebank_sentiment', async function (req, res) {
@@ -31,7 +30,7 @@ module.exports = function (app) {
                 )
             }).join("")
 
-            return res.render("treebank_sentiment_2.ejs", {googleSheet: googleSheet, chart: Chart})
+            return res.render("treebank_sentiment_2.ejs", {googleSheet: googleSheet})
         });
     })
 }

@@ -280,6 +280,7 @@ tbody tr:hover {
 @media screen and (max-width: 600px) {
   .dataset-quickinfo {
     flex-direction: column;
+    overflow-x: hidden;
   }
 
   .usability {
@@ -619,6 +620,8 @@ tbody tr:hover {
   }
 
   #contact-us-form {
+    width: 80%;
+    margin: 0 auto;
     margin-top: 70px;
     overflow-x: hidden;
   }
