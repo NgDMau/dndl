@@ -74,7 +74,7 @@
                 console.log("data:", data);
 
                 var url = '/review/project/' + project_id;
-
+                console.log("url:", url)
                 var otherParams = {
                     headers: {
                         "Content-Type": "application/json"
@@ -96,7 +96,11 @@
                         new_task = await new_task.json()
                         console.log("New task:", new_task);
                         if (new_task.code === "full") {
-                            alert("Đã hết dữ liệu cần review, xin cảm ơn!")
+                            alert("Chưa có dữ liệu cần review, xin cảm ơn!");
+                            return
+                        }
+                        if (new_task.code == 'ERROR') {
+                            alert("ERROR HAPPENED");
                             return
                         }
                         displayReceivedTask(new_task);

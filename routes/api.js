@@ -47,19 +47,22 @@ module.exports = function (app) {
         
     },
     
-    app.post('/api/data', async function(req, res) {
+    app.post('/api/data/:project_id', async function(req, res) {
         if (req.isAuthenticated()) {
             var data = req;
+            var project_id = data.params.project_id;
+            console.log("project_id", project_id)
             console.log("Received data from client: ", data.body);
 
             var receivedData = data.body;
 
             if(receivedData.value !== 1) {
-                var insertResult = await  db.insertIntoTable("audio_transcription", receivedData);
+                var insertResult = await  db.insertIntoTable(project_id, receivedData);
                 console.log("insertResult: ", insertResult);
             }
 
-            var dataFromDb = await db.getDataFromTable("audio_transcription");
+            var dataFromDb = await db.getDataFromTable(project_id);
+            console.log("dataFromDb", dataFromDb);
             if (dataFromDb === undefined) {
                 res.send({value: "none"});
                 return

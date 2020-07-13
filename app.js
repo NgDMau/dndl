@@ -80,6 +80,7 @@ require('./routes/labeling')(app);
 require('./routes/dataset')(app);
 require('./routes/api')(app);
 require('./routes/project')(app);
+require('./routes/full_system/label')(app);
 require('./routes/treebank_sentiment')(app);
 require('./routes/full_system/work')(app);
 require('./routes/test/outsource')(app)

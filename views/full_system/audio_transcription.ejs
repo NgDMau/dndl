@@ -14,11 +14,13 @@
 
     window.onload = async function() {
 
+    var currentProjectId = '<%= project_id %>';
+
     var currentTaskID;
     var currentWorkerID;
     var currentWorkerPk;
     var currentWorkerName;
-    var initialTask = await initTask();
+    var initialTask = await initTask(currentProjectId);
 
     console.log("initialTask", initialTask);
 
@@ -38,20 +40,11 @@
     var labelStudio = new LabelStudio('label-studio', {
         config: `
         <View>
-            <Style> .silent { aria-hidden="true" }</Style>
-            <View>
-                <Header value="Công việc: dán nhãn âm thanh" />
-                <Audio name="audio" value="$audio" />
-                <Header value="Gõ lại phụ đề của audio" />
-                <TextArea name="transcription" toName="audio"
-                            rows="4" editable="true" maxSubmissions="1" />            
-            </View>
-            <View>
-                <Choices  name="gender" toName="txt-1" choice="single">
-                    <Choice className="silent" value="accept" />
-                    <Choice className="silent" value="reject" />
-                </Choices>
-            </View>
+            <Header value="Công việc: dán nhãn âm thanh" />
+            <Audio name="audio" value="$audio" />
+            <Header value="Gõ lại phụ đề của audio" />
+            <TextArea name="transcription" toName="audio"
+                        rows="4" editable="true" maxSubmissions="1" />            
         </View>
     `,
 
@@ -60,9 +53,6 @@
             "update",
             "controls",
             "skip",
-            "completions:menu",
-            "completions:add-new",
-            "completions:delete",
         ],
 
         user: {
@@ -123,7 +113,7 @@
 
             // console.log("Result done: ", result);
 
-            var task = await submitResult(result);
+            var task = await submitResult(currentProjectId, result);
 
             if (task === undefined) {
                 ls.setFlags({ noTask: true})
@@ -175,7 +165,7 @@
             let cs = ls.completionStore;
             let c;
             
-            var task = await initTask();
+            var task = await initTask(currentProjectId);
             task.data = JSON.stringify(task.data);
             // task = JSON.stringify(task);
             console.log("Received task from server: ", task)
