@@ -180,6 +180,33 @@ module.exports = {
             client.release();
             return e;
         }
+    },
+
+    fetchUnreviewedData: async function(project_id) {
+        var cmd = "SELECT * FROM projects." + project_id + "WHERE checked IS NULL LIMIT 1";
+        var client = await pool.connect();
+        try {
+            var result = await client.query(cmd);
+            console.log("fetchUnreviewedData", result);
+            client.release();
+
+            if (result.rows[0].audio !== null) {
+                var data = {
+                    url: result.rows[0].audio,
+                    text: result.rows[0].result.value.text,
+                    code: "continue"
+                }
+            } else {
+                var data = {
+                    code: "full"
+                }
+            }
+            
+            return data;
+        } catch(e) {
+            client.release();
+            return e;
+        }
     }
 
 

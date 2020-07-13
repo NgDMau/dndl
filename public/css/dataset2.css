@@ -5,7 +5,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-weight: 100;
   font-size: 0.9rem;
-  width: 100%;
 }
 
 b {
@@ -39,14 +38,6 @@ input[type=email] {
 
 .light-text {
   font-weight: 200 !important;
-}
-
-[data-aos=fade-right] {
-  transform: translate3d(-30px,0,0);
-}
-
-[data-aos=fade-left] {
-  transform: translate3d(30px,0,0);
 }
 
 /* DataSet.js */
@@ -463,12 +454,17 @@ tbody tr:hover {
   background: #565D69;
   padding: 40px;
   overflow-x: hidden;
+  justify-content: space-around;
 }
 
 #our-info {
-  width: 50%;
+  width: 40%;
   margin-left: 30px;
   overflow-x: hidden;
+}
+
+#contact-us-form {
+  width: 40%;
 }
 
 #contact-container {
@@ -489,7 +485,7 @@ tbody tr:hover {
 }
 
 .contact-item {
-  margin-bottom: 10px;
+  margin-bottom: 5%;
 }
 
 .contact-item h6 {
@@ -647,6 +643,7 @@ tbody tr:hover {
 
   .contact-text {
     text-align: center;
+    margin-left: 0 !important;
   }
 
   .form-width {
