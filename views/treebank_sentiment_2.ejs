@@ -189,7 +189,6 @@
                           'Old Sentence', 'New Sentence',
                           'Created Date', 'Modified Date',
                           'Has Modified', 'Userid', 'Has skipped']
-
     const fileDetailDescription = ['Số id riêng biệt dùng để nhận dạng câu', '',
                                   'Câu nguyên gốc', 'Tách câu thành từng từ và với mỗi từ sẽ được ghi một số điểm sắc thái (0,1,2,3)', 'Tách câu thành từng từ và với mỗi từ sẽ được ghi một số điểm sắc thái (0,1,2,3)',
                                   'Đánh dấu ngày câu được tạo trong dataset', 'Ngày thêm/ sửa chữa câu', 'Có hoặc không câu đã được sửa',
@@ -199,7 +198,6 @@
                             'Số dữ liệu độc nhất: <b>90,000</b>', 'Số dữ liệu độc nhất: <b>90,000</b>',
                             'Số dữ liệu độc nhất: <b>90,000</b>', 'Số dữ liệu khác nhau: <b>365</b>', 'Số dữ liệu khác nhau: <b>365</b>', 'Số dữ liệu khác nhau: <b>2</b>',
                             'Số dữ liệu khác nhau: <b>1</b>', 'Số dữ liệu khác nhau: <b>1</b>']
-
     const colInfoData = [['Dữ liệu tốt: <b>90,000 (100%)</b>', 'Lỗi: <b>0 (0%)</b>', 'Mất: <b>0 (0%)</b>'],
                         ['Dữ liệu tốt: <b>90,000 (100%)</b>', 'Lỗi: <b>0 (0%)</b>', 'Mất: <b>0 (0%)</b>'],
                         ['Dữ liệu tốt: <b>90,000 (100%)</b>', 'Lỗi: <b>0 (0%)</b>', 'Mất: <b>0 (0%)</b>'],
@@ -210,7 +208,6 @@
                         ['Dữ liệu tốt: <b>90,000 (100%)</b>', 'Lỗi: <b>0 (0%)</b>', 'Mất: <b>0 (0%)</b>', 'Dữ liệu xuất hiện nhiều nhất: 1'],
                         ['Dữ liệu tốt: <b>90,000 (100%)</b>', 'Lỗi: <b>0 (0%)</b>', 'Mất: <b>0 (0%)</b>', 'Dữ liệu xuất hiện nhiều nhất: 1'],
                         ['Dữ liệu tốt: <b>90,000 (100%)</b>', 'Lỗi: <b>0 (0%)</b>', 'Mất: <b>0 (0%)</b>', 'Dữ liệu xuất hiện nhiều nhất: 0']]
-
     const stats = ['Số câu: <b>90,000</b>', 'Tổng số từ và cụm từ: <b>810,000</b>', 'Số từ: <b>350,000</b>',
                   'Số cụm từ: <b>460,000</b>', 'Số câu lặp lại: <b>0</b>', 'Số từ mang sắc thái tiêu cực: <b>300,000</b>',
                   'Số từ mang sắc thái tích cực: <b>510,000<b>']
@@ -219,23 +216,19 @@
     var button = document.getElementsByClassName('right-panel-button');
     var body;
     var headerBar = '';
-
     const rightPanelDetail = document.getElementById('right-panel-detail')
             
     // show detail in table body
       headerBar = fileDetailHeader.map((header) => {
         var isNumberCol;
-
         (['Pure Sentence', 'New Sentence', 'Old Sentence'].includes(header)) 
         ? isNumberCol = false : isNumberCol = true
-
         return (
           `<div style="background: white; margin-top: 0px" class='${`table-header-text table-header text-secondary ${isNumberCol ? 'width-100' : 'width-300'}`}'>
               ${header}
           </div>`
         )
       }).join("");
-
       const detail = 
         `<div class="table">
           <div id="table-header-container" class="show-flex">${headerBar}</div>
@@ -250,7 +243,6 @@
     var sentimentScore = echarts.init(document.getElementById('sentimentScore'));
     var wordNumInSenc = echarts.init(document.getElementById('wordNumInSenc'));
     var totalSentimentWord = echarts.init(document.getElementById('totalSentimentWord'));
-
     option1 = {
       title: {
           text: 'Tỉ lệ các câu có sắc thái \ntích cực/ tiêu cực/ trung tính\n trên tổng số câu',
@@ -268,11 +260,12 @@
             fontSize: 11,
             fontFamily: 'IBM Plex Sans',
           },
+          confine: true,
       },
       legend: {
           orient: 'vertical',
           left: 'left',
-          data: ['Câu positive', 'Câu negative', 'Câu neutral'],
+          data: ['Câu tích cực', 'Câu tiêu cực', 'Câu trung tính'],
           textStyle: {
             fontSize: 11,
             fontFamily: 'IBM Plex Sans',
@@ -284,16 +277,16 @@
               type: 'pie',
               radius: '40%',
               data: [
-                  {value: 46000, name: 'Câu positive', itemStyle: {color: '#f5b971'}},
-                  {value: 40500, name: 'Câu negative', itemStyle: {color: '#fdd998'}},
-                  {value: 3500, name: 'Câu neutral', itemStyle: {color: '#ffecc7'}},
+                  {value: 46000, name: 'Câu tích cực', itemStyle: {color: '#f5b971'}},
+                  {value: 40500, name: 'Câu tiêu cực', itemStyle: {color: '#fdd998'}},
+                  {value: 3500, name: 'Câu trung tính', itemStyle: {color: '#ffecc7'}},
               ],
               // label: {
               //   show: false,
               // },
               label: {
                 normal: {
-                  formatter: '{c}',
+                  formatter: '{d}',
                     position: 'inside',
                     textStyle: {
                       color: '#000',
@@ -312,7 +305,6 @@
           }
       ]
     };
-
     option2 = {
       title: {
           text: 'Tỉ lệ các câu \nphân chia theo số từ có trong câu',
@@ -330,6 +322,7 @@
             fontSize: 11,
             fontFamily: 'IBM Plex Sans',
           },
+          confine: true,
       },
       legend: {
           orient: 'vertical',
@@ -352,7 +345,7 @@
               ],
               label: {
                 normal: {
-                    formatter: '{c}',
+                    formatter: '{d}',
                     position: 'inside',
                     textStyle: {
                       color: '#000',
@@ -370,7 +363,6 @@
           }
       ]
     };
-
     option3 = {
       title: {
           text: ' Tỉ lệ các từ mang sắc thái\n tích cực/ tiêu cực/ trung tính\n trên tổng số từ',
@@ -388,11 +380,12 @@
             fontSize: 11,
             fontFamily: 'IBM Plex Sans',
           },
+          confine: true,
       },
       legend: {
           orient: 'vertical',
           left: 'left',
-          data: ['Từ positive', 'Từ negative', 'Từ neutral'],
+          data: ['Từ tích cực', 'Từ tiêu cực', 'Từ trung tính'],
           textStyle: {
             fontSize: 11,
             fontFamily: 'IBM Plex Sans',
@@ -404,13 +397,13 @@
               name: 'Tổng số từ theo sắc thái trong dataset',
               radius: '40%',
               data: [
-                  {value: 100000, name: 'Từ positive', itemStyle: {color: '#f5b971'}},
-                  {value: 80000, name: 'Từ negative', itemStyle: {color: '#fdd998'}},
-                  {value: 20000, name: 'Từ neutral', itemStyle: {color: '#ffecc7'}},
+                  {value: 100000, name: 'Từ tích cực', itemStyle: {color: '#f5b971'}},
+                  {value: 80000, name: 'Từ tiêu cực', itemStyle: {color: '#fdd998'}},
+                  {value: 20000, name: 'Từ trung tính', itemStyle: {color: '#ffecc7'}},
               ],
               label: {
                 normal: {
-                  formatter: '{c}',
+                  formatter: '{d}',
                     position: 'inside',
                     textStyle: {
                       color: '#000',
@@ -437,10 +430,8 @@
   </script>
 
 <script>
-
   $('#contactForm').submit(function (e) {
       e.preventDefault();
-
       // var interested = [];
       // $.each($("input[name='interested']:checked"), function(){
       //   interested.push($(this).val());
@@ -451,9 +442,7 @@
       input_company = $form.find( "input[name='company']" ).val(),
       input_phone = $form.find( "input[name='phone']" ).val(),
       input_email = $form.find( "input[name='email']" ).val(),
-
       url = $form.attr( "action" );
-
       var posting = $.post( url, { name: input_name, company: input_company, phone: input_phone, email: input_email } );
       
       var contactUs = document.getElementById("contact-us-box")
@@ -471,7 +460,6 @@
         contactUs.appendChild(return_button)
       });
   })
-
 </script>
 
   <script>
