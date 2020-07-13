@@ -268,12 +268,11 @@
             fontSize: 11,
             fontFamily: 'IBM Plex Sans',
           },
-          confine: true,
       },
       legend: {
           orient: 'vertical',
           left: 'left',
-          data: ['Câu tích cực', 'Câu tiêu cực', 'Câu trung tính'],
+          data: ['Câu positive', 'Câu negative', 'Câu neutral'],
           textStyle: {
             fontSize: 11,
             fontFamily: 'IBM Plex Sans',
@@ -285,16 +284,16 @@
               type: 'pie',
               radius: '40%',
               data: [
-                  {value: 46000, name: 'Câu tích cực', itemStyle: {color: '#f5b971'}},
-                  {value: 40500, name: 'Câu tiêu cực', itemStyle: {color: '#fdd998'}},
-                  {value: 3500, name: 'Câu trung tính', itemStyle: {color: '#ffecc7'}},
+                  {value: 46000, name: 'Câu positive', itemStyle: {color: '#f5b971'}},
+                  {value: 40500, name: 'Câu negative', itemStyle: {color: '#fdd998'}},
+                  {value: 3500, name: 'Câu neutral', itemStyle: {color: '#ffecc7'}},
               ],
               // label: {
               //   show: false,
               // },
               label: {
                 normal: {
-                  formatter: '{d}',
+                  formatter: '{c}',
                     position: 'inside',
                     textStyle: {
                       color: '#000',
@@ -331,7 +330,6 @@
             fontSize: 11,
             fontFamily: 'IBM Plex Sans',
           },
-          confine: true,
       },
       legend: {
           orient: 'vertical',
@@ -354,7 +352,7 @@
               ],
               label: {
                 normal: {
-                    formatter: '{d}',
+                    formatter: '{c}',
                     position: 'inside',
                     textStyle: {
                       color: '#000',
@@ -390,12 +388,11 @@
             fontSize: 11,
             fontFamily: 'IBM Plex Sans',
           },
-          confine: true,
       },
       legend: {
           orient: 'vertical',
           left: 'left',
-          data: ['Từ tích cực', 'Từ tiêu cực', 'Từ trung tính'],
+          data: ['Từ positive', 'Từ negative', 'Từ neutral'],
           textStyle: {
             fontSize: 11,
             fontFamily: 'IBM Plex Sans',
@@ -407,13 +404,13 @@
               name: 'Tổng số từ theo sắc thái trong dataset',
               radius: '40%',
               data: [
-                  {value: 100000, name: 'Từ tích cực', itemStyle: {color: '#f5b971'}},
-                  {value: 80000, name: 'Từ tiêu cực', itemStyle: {color: '#fdd998'}},
-                  {value: 20000, name: 'Từ trung tính', itemStyle: {color: '#ffecc7'}},
+                  {value: 100000, name: 'Từ positive', itemStyle: {color: '#f5b971'}},
+                  {value: 80000, name: 'Từ negative', itemStyle: {color: '#fdd998'}},
+                  {value: 20000, name: 'Từ neutral', itemStyle: {color: '#ffecc7'}},
               ],
               label: {
                 normal: {
-                  formatter: '{d}',
+                  formatter: '{c}',
                     position: 'inside',
                     textStyle: {
                       color: '#000',
