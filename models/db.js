@@ -140,7 +140,19 @@ module.exports = {
         }
     },
 
-    getProgressByTask: async function (table, index) {
+    getPool: function () {
+        return pool;
+    },
+
+    insertIntoTable: async function (table, data) {
+        var cmd = "UPDATE projects." + table + " SET result=$1, worker_id=$2, label=$3, finish_at=$4 WHERE id=$5";
+        var values = [data, data.createdBy, data.value.text, data.createdDate, data.id];
+        var client = await pool.connect();
+        try {
+            var result = await client.query(cmd, values);
+            client.release();
+            return result;
+    getBatchTenTasks: async function (table, index) {
         var cmd = "select id, worker_id, finish_at, finish_time, checked, cost from "+table+" order by id LIMIT 10 OFFSET (("+index+" - 1) * 10)"
         var client = await pool.connect()
         try{

@@ -101,13 +101,13 @@
             // response.data = JSON.stringify(response.data)
             let cs = ls.completionStore;
             let c;
-            console.log("serialize", ls.completionStore.selected.serializeCompletion());
+            console.log("serialize", ls.completionStore.selected.serializeCompletion()[0]);
             var serialized = ls.completionStore.selected.serializeCompletion()[0];
 
             var result = {
-                id: currentWorkerID,
+                id: currentTaskID,
                 value: serialized.value,
-                createdBy: completion.createdBy,
+                createdBy: currentWorkerPk,
                 createdDate: completion.createdDate
             }
 
