@@ -142,8 +142,8 @@ module.exports = {
     },
 
     insertIntoTable: async function (table, data) {
-        var cmd = "UPDATE projects." + table + " SET result=$1 WHERE id=$2";
-        var values = [data, data.id];
+        var cmd = "UPDATE projects." + table + " SET result=$1, worker_id=$2, label=$3, finish_at=$4 WHERE id=$5";
+        var values = [data, data.createdBy, data.value.text, data.createdDate, data.id];
         var client = await pool.connect();
         try {
             var result = await client.query(cmd, values);
@@ -210,10 +210,6 @@ module.exports = {
             return e;
         }
     }
-
-    
-
-
 }
 
 //dropTableInSchema('xinchao', 'projects').then(console.log)

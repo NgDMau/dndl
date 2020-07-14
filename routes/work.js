@@ -23,7 +23,7 @@ module.exports = function (app) {
                         return console.error(err);
                     }
 
-                    client.query('select * from projects_metadata where name=$1', [req.param('name')], function (err, result) {
+                    client.query('select *,count(id) from projects_metadata where name=$1', [req.param('name')], function (err, result) {
                         if (err) {
                             client.release();
                             return console.error(err);
