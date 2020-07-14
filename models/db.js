@@ -190,6 +190,7 @@ module.exports = {
         }
     },
 
+
     getPool: function () {
         return pool;
     }
