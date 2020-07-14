@@ -79,10 +79,10 @@ module.exports = class Project {
             
             if (lines[0].includes("|")) {
                 var labels = lines[0].split("|");
-                lines.pop();
+                lines.shift();
             }
             
-            // lines.shift();
+            lines.pop();
             var labels = ["This task does not require predefined labels!"] 
             
             console.log("Labels: ", labels);
