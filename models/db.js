@@ -142,7 +142,7 @@ module.exports = {
     },
 
     insertIntoTable: async function (table, data) {
-        var cmd = "UPDATE audio_transcription SET result=$1 WHERE id=$2";
+        var cmd = "UPDATE projects." + table + " SET result=$1 WHERE id=$2";
         var values = [data, data.id];
         var client = await pool.connect();
         try {
@@ -156,11 +156,12 @@ module.exports = {
     },
 
     getDataFromTable: async function (table) {
-        var cmd = "SELECT * FROM audio_transcription WHERE result IS NULL ORDER BY random()";
-        var values = [table];
+        var cmd = "SELECT * FROM projects." + table + " WHERE finish_at IS NULL ORDER BY random()";
+        // var values = [table];
         var client = await pool.connect();
         try {
             var result = await client.query(cmd);
+            console.log("getDataFromTable:", result)
             client.release();
             return result.rows[0];
         } catch(e) {
@@ -176,6 +177,34 @@ module.exports = {
             var result = await client.query(cmd);
             client.release();
             return result;
+        } catch(e) {
+            client.release();
+            return e;
+        }
+    },
+
+    fetchUnreviewedData: async function(project_id) {
+        var cmd = "SELECT * FROM projects." + project_id + " WHERE checked IS NULL AND result is NULL LIMIT 1";
+        var client = await pool.connect();
+        try {
+            var result = await client.query(cmd);
+            console.log("fetchUnreviewedData", result);
+            //client.release();
+
+            if (result.rows[0]) {
+                var data = {
+                    url: result.rows[0].audio,
+                    text: result.rows[0].result.value.text,
+                    code: "continue"
+                }
+                console.log("result rows 0", result.rows[0])
+            } else {
+                var data = {
+                    code: "full"
+                }
+            }
+            
+            return data;
         } catch(e) {
             client.release();
             return e;

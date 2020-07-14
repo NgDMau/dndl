@@ -36,7 +36,7 @@
             </a>
         </nav>
     </header>
-    <div class="content">
+    <!-- <div class="content">
         <div class="title">
             <h1>Tổng quan</h1>
         </div>
@@ -54,7 +54,7 @@
                 <hr />
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="title">
         <h2>Danh sách công việc</h2>
     </div>
@@ -92,8 +92,8 @@
     </footer> 
 
     <!-- <form action="/work" method="GET"> -->
-    <form action="/label" method="GET">
-        <input type="hidden" id="name" name="project_id" ><br>
+    <form id ="testform" action="/review/project" method="GET">
+        <input type="hidden" id="project_id" name="project_id" ><br>
     </form>
 </body>
 
@@ -101,7 +101,10 @@
 
     $(document).on("click", ".item", function(){
         var ele = this;
-        $('#name').val($(ele).find("td:nth-child(2)").text());
+        $('#project_id').val($(ele).find("td:nth-child(2)").text());
+        console.log($(ele).find("td:nth-child(2)").text())
+        console.log($('#project_id').val())
+        console.log(document.getElementById('testform'))
         submit(ele);
         
     });

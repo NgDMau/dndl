@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Audio transcription</title>
+        <link rel="shortcut icon" type="image/png" href="/img/logoInlabSquare.png"/>
+
+        <style>
+            .review-text {
+                width: 390px;
+                height: 90px;
+                border: 1px solid;
+                padding: 5px;
+                text-align: left;
+            }
+
+            body{
+                text-align: center
+            }
+
+            #labeled-transcription {
+                height: 50px; 
+                background-color: lawngreen;
+                padding: 4px;
+                margin-left: 100px ;
+                margin-right: 100px;
+            }
+
+            #task-display {
+                text-align: center;
+            }
+            
+        </style>
+
+        <script>
+
+            var project_id = '<%= project_id%>'
+            var reviewer_id = '<%= reviewer_id %>'
+
+            window.onload = async function() {
+                var task = await loadNewTask(project_id);
+
+            }
+
+            function displayReceivedTask(task) {
+                document.getElementById("audio-component").setAttribute("src", task.url);
+                document.getElementById("review-audio").load();
+                document.getElementById("labeled-transcription").innerText = task.text;
+                document.getElementById("review-correct-text").value = "";
+                document.getElementById("review-comment").value = "";
+            }
+
+            async function loadNewTask() {
+                setTimeout(function() {
+                    console.log("Loading new task...")
+                }, 1500);
+                var task = {
+                    url: "https://go.heartex.net/static/samples/game.wav",
+                    text: "-M WHY DID YOU do That"
+                }
+                return task
+            }
+
+            async function sendReviewedTaskOf(project_id) {
+                var rv_accepted = document.querySelector('input[name="accepted"]:checked').value;
+                var rv_correct_text = document.getElementById("review-correct-text").value;
+                var rv_comment = document.getElementById("review-comment").value;
+
+                var data = {
+                    review_accepted: rv_accepted,
+                    review_correct_text: rv_correct_text,
+                    review_comment: rv_comment
+                }
+
+                console.log("data:", data);
+
+                var url = '/review/project/' + project_id;
+                console.log("url:", url)
+                var otherParams = {
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(data),
+                    method: "POST"
+                }
+
+                var response = await fetch(url, otherParams)
+
+                console.log("response", response);
+
+                return response
+            }
+
+            async function processSubmitButton() {
+                sendReviewedTaskOf(project_id)
+                    .then(async function(new_task){
+                        new_task = await new_task.json()
+                        console.log("New task:", new_task);
+                        if (new_task.code === "full") {
+                            alert("Chưa có dữ liệu cần review, xin cảm ơn!");
+                            return
+                        }
+                        if (new_task.code == 'ERROR') {
+                            alert("ERROR HAPPENED");
+                            return
+                        }
+                        displayReceivedTask(new_task);
+                    })
+            }
+            
+        </script>
+    </head>
+    <body>
+        <br>
+        <br>
+        <div id="task-display">
+            <p><b>Audio transcription review</b></p>
+            <audio id="review-audio" controls>
+                <source id="audio-component" src="https://go.heartex.net/static/samples/game.wav" type="audio/wav">
+                Your browser does not support the audio tag.
+            </audio>
+            <p id="labeled-transcription">Sáng hôm nay trời thật là đẹp</p>
+        </div>
+        <div id="task-review">
+            <p><b>Verify result:</b></p>
+            <input type="radio"name="accepted" value="true">
+            <label for="accepted">Accepted</label><br>
+            <input type="radio" name="accepted" value="false">
+            <label for="accepted">Rejected</label><br>
+            <p><b>Verify text:</b></p>
+            <textarea class="review-text" id="review-correct-text" name="review-correct-text" ></textarea>
+            <p><b>Comment:</b></p>
+            <textarea class="review-text" id="review-comment" name="review-comment" ></textarea>
+            <br>
+            <input type="hidden" name="project_id" value="gotit">
+            <br>
+            <!-- <input type="submit" value="Submit"> -->
+            <button onclick="processSubmitButton()">Submit</button>
+        </div>
+
+    </body>
+</html>

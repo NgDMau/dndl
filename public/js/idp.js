@@ -36,8 +36,8 @@ const _convertTask = function(task) {
     return task;
 };
 
-async function initTask() {
-    return await this.submitResult({value: 1});
+async function initTask(project_id) {
+    return await this.submitResult(project_id, {value: 1});
     var testTask = {
         completions: [],
         predictions: [],
@@ -50,9 +50,10 @@ async function initTask() {
     return testTask;
 }
 
-async function submitResult(result) {
+async function submitResult(project_id, result) {
     //import fetch from "node-fetch";
-    var postUrl = '/api/data';
+    var postUrl = '/api/data/' + project_id;
+    console.log("postUrl: ", postUrl)
     var data = result;
 
     var otherParams = {
@@ -63,8 +64,7 @@ async function submitResult(result) {
         method: "POST"
     }
 
-    console.log(JSON.stringify(data))
-
+    console.log("data: ", JSON.stringify(data))
     var res = await fetch(postUrl, otherParams);
     //console.log(res.json());
     return res.json();

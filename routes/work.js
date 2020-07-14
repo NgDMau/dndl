@@ -1,19 +1,15 @@
 var path = require('path')
 var User = require('../models/user')
 var Project = require('../models/project')
+const db = require("../models/db");
 // var express = require('express')
 
 var Pool = require('pg-pool')
 const flash = require('connect-flash');
 
-const pool = new Pool({
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    database: process.env.DB_DATABASE,
-    ssl: process.env.DB_SSL
-});
+// const pool = 
+
+const pool = db.getPgPool();
 
 module.exports = function (app) {
     app.get('/work', function (req, res) {

@@ -14,8 +14,8 @@ async function test_registerLabelsToDb() {
 
 async function test_destroy() {
     var Project = require('../models/project');
-    var test_project = new Project({id: '_yqks7xtty'})
-    var result = await test_project.destroy();
+    var test_project = new Project({id: '_doufj1dwf'})
+    var result = await test_project.getAttribute('type');
     return result
 }
 

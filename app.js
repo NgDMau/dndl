@@ -79,9 +79,12 @@ require('./routes/final_test')(app);
 require('./routes/labeling')(app);
 require('./routes/dataset')(app);
 require('./routes/api')(app);
+require('./routes/project')(app);
+require('./routes/full_system/label')(app);
 require('./routes/treebank_sentiment')(app);
 require('./routes/full_system/work')(app);
 require('./routes/test/outsource')(app)
+require('./routes/review')(app);
 
 //The 404 Route (ALWAYS Keep this as the last route)
 app.get('*', function(req, res) {
