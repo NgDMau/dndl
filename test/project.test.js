@@ -12,15 +12,28 @@ async function test_registerLabelsToDb() {
     .then(console.log)
 }
 
-async function test_destroy() {
-    var Project = require('../models/project');
-    var test_project = new Project({id: '_doufj1dwf'})
-    var result = await test_project.getAttribute('type');
-    return result
+async function getAllProjects() {
+    var pool = require('../models/db').getPool(); 
+    var cmd = "SELECT tablename FROM pg_catalog.pg_tables where schemaname='projects'";
+    var client = await pool.connect();
+    var result = await client.query(cmd);
+    return result.rows;
 }
 
-test_destroy()
-    .then(console.log)
+// async function test_destroy(project_id) {
+//     var Project = require('../models/project');
+//     var test_project = new Project({id: project_id})
+//     var result = await test_project.destroy();
+//     return result
+// }
+
+// getAllProjects()
+//     .then(function(projects_list) {
+//         projects_list.forEach(function(item, index, array){
+//             test_destroy(item.tablename)
+//                 .then(console.log)
+//         })
+//     })
 
 
 

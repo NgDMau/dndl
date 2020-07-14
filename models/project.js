@@ -269,12 +269,17 @@ module.exports = class Project {
 
         /** Second approach */
         var drop_result = await db.dropTableInSchema(drop_table, schema);
-        console.log("Drop result: ", drop_result);
-        var unregister_result = await this.unregister();
-        console.log("Unregistered result: ", unregister_result);
-        if (drop_result.code && unregister_result.code) {
-            return false;
-        }
+
+        db.dropTableInSchema(drop_table, schema)
+            .then(async function(drop_result) {
+                console.log("Drop result:", drop_result);
+                var unregister_result = await this.unregister();
+                console.log("Unregistered result: ", unregister_result);
+            })
+        
+        // if (drop_result.code && unregister_result.code) {
+        //     return false;
+        // }
         return true;
     }
 
