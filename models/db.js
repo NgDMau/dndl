@@ -32,7 +32,7 @@ module.exports = {
     },
 
     registerNewProject: async function (values) {
-        var cmd = 'INSERT INTO projects_metadata VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)';
+        var cmd = 'INSERT INTO projects_metadata VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)';
         var client = await pool.connect()
         try {
             var res = await client.query(cmd, values);
@@ -113,6 +113,59 @@ module.exports = {
         }
     },
 
+    getProgressProj: async function (table) {
+        var cmd = 'select count(id) as total_task, count(case when checked is not null then checked end) as task_finish, count(case when checked != 0 then checked end) as task_ischecked, count(distinct worker_id ) as total_worker, sum(case when cost is not null then cost end) as sum_cost from '+table;
+        var client = await pool.connect()
+
+        try{
+            var res = await client.query(cmd);
+            client.release()
+            return res
+        } catch(e) {
+            client.release();
+            return e;
+        }
+    },
+
+    getProgressByWorker: async function (table, index) {
+        var cmd = "SELECT worker_id, count(id) as total_task, round(avg(finish_time),2) as avg_time, count(case when checked = 1 then checked end) as task_istrue FROM "+table+" group by worker_id Order by worker_id LIMIT 10 OFFSET (("+index+" - 1) * 10)"
+        var client = await pool.connect()
+        try{
+            var res = await client.query(cmd);
+            client.release()
+            return res
+        } catch(e) {
+            client.release();
+            return e;
+        }
+    },
+
+    getProgressByTask: async function (table, index) {
+        var cmd = "select id, worker_id, finish_at, finish_time, checked, cost from "+table+" order by id LIMIT 10 OFFSET (("+index+" - 1) * 10)"
+        var client = await pool.connect()
+        try{
+            var res = await client.query(cmd);
+            client.release()
+            return res
+        } catch(e) {
+            client.release();
+            return e;
+        }
+    },
+
+    getTaskforReviewer: async function (table) {
+        var cmd = "select * from "+table+" where checked =! 0 and checked is not null order by id LIMIT 1"
+        var client = await pool.connect()
+        try{
+            var res = await client.query(cmd);
+            client.release()
+            return res
+        } catch(e) {
+            client.release();
+            return e;
+        }
+    },
+
     updateRoleOfUserById: async function (role, id) {
         var cmd = 'UPDATE users SET role = $1 WHERE id = $2';
         var values = [role, id];
@@ -139,79 +192,7 @@ module.exports = {
 
     getPool: function () {
         return pool;
-    },
-
-    insertIntoTable: async function (table, data) {
-        var cmd = "UPDATE projects." + table + " SET result=$1 WHERE id=$2";
-        var values = [data, data.id];
-        var client = await pool.connect();
-        try {
-            var result = await client.query(cmd, values);
-            client.release();
-            return result;
-        } catch(e) {
-            client.release();
-            return e;
-        }
-    },
-
-    getDataFromTable: async function (table) {
-        var cmd = "SELECT * FROM projects." + table + " WHERE finish_at IS NULL ORDER BY random()";
-        // var values = [table];
-        var client = await pool.connect();
-        try {
-            var result = await client.query(cmd);
-            console.log("getDataFromTable:", result)
-            client.release();
-            return result.rows[0];
-        } catch(e) {
-            client.release();
-            return e;
-        }
-    },
-
-    deleteFromTable: async function(table_name, condition) {
-        var cmd = "DELETE FROM " + table_name +" WHERE " + condition;
-        var client = await pool.connect();
-        try {
-            var result = await client.query(cmd);
-            client.release();
-            return result;
-        } catch(e) {
-            client.release();
-            return e;
-        }
-    },
-
-    fetchUnreviewedData: async function(project_id) {
-        var cmd = "SELECT * FROM projects." + project_id + " WHERE checked IS NULL AND result is NULL LIMIT 1";
-        var client = await pool.connect();
-        try {
-            var result = await client.query(cmd);
-            console.log("fetchUnreviewedData", result);
-            //client.release();
-
-            if (result.rows[0]) {
-                var data = {
-                    url: result.rows[0].audio,
-                    text: result.rows[0].result.value.text,
-                    code: "continue"
-                }
-                console.log("result rows 0", result.rows[0])
-            } else {
-                var data = {
-                    code: "full"
-                }
-            }
-            
-            return data;
-        } catch(e) {
-            client.release();
-            return e;
-        }
     }
-
-
 }
 
 //dropTableInSchema('xinchao', 'projects').then(console.log)
