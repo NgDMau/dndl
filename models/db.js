@@ -152,6 +152,12 @@ module.exports = {
             var result = await client.query(cmd, values);
             client.release();
             return result;
+        } catch(e) {
+            client.release();
+            return e;
+        }
+    },
+    
     getBatchTenTasks: async function (table, index) {
         var cmd = "select id, worker_id, finish_at, finish_time, checked, cost from "+table+" order by id LIMIT 10 OFFSET (("+index+" - 1) * 10)"
         var client = await pool.connect()
