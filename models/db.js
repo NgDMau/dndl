@@ -32,7 +32,7 @@ module.exports = {
     },
 
     registerNewProject: async function (values) {
-        var cmd = 'INSERT INTO projects_metadata VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)';
+        var cmd = 'INSERT INTO projects_metadata VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11,$12)';
         var client = await pool.connect()
         try {
             var res = await client.query(cmd, values);
@@ -172,7 +172,7 @@ module.exports = {
     },
 
     getTaskforReviewer: async function (table) {
-        var cmd = "select * from "+table+" where checked =! 0 and checked is not null order by id LIMIT 1"
+        var cmd = "SELECT * FROM projects."+ table +" WHERE checked IS NOT NULL ORDER BY id LIMIT 1"
         var client = await pool.connect()
         try{
             var res = await client.query(cmd);
@@ -199,6 +199,51 @@ module.exports = {
         }
     },
 
+    fetchUnreviewedData: async function(project_id) {
+        var cmd = "SELECT * FROM projects." + project_id + " WHERE checked IS NULL AND result IS NOT NULL LIMIT 1";
+        // var cmd = "SELECT * FROM projects." + project_id + " WHERE checked IS NULL AND result is NULL LIMIT 1";
+        var client = await pool.connect();
+        try {
+            var result = await client.query(cmd);
+            console.log("fetchUnreviewedData", result);
+            // client.release();
+            //client.release();
+
+            if (result.rows[0].audio !== null) {
+            if (result.rows[0]) {
+                var data = {
+                    id: result.rows[0].id,
+                    url: result.rows[0].audio,
+                    text: result.rows[0].result.value.text,
+                    code: "continue"
+                }
+                console.log("result rows 0", result.rows[0])
+            } 
+        } else {
+            var data = {
+                code: "full"
+            }
+        }
+            
+            return data;
+        } catch(e) {
+            client.release();
+            return e;
+        }
+    },
+
+    insertReviewData: async function(reviewer_id, project_id, review_time, data) {
+        var cmd = "UPDATE projects." + project_id + " SET checked=$1, reviewer_id=$2, reviewer_decision=$3, reviewer_correction=$4, reviewer_comment=$5, review_time=$6 WHERE id=$7"; 
+        var values = [1, reviewer_id, data.review_accepted, data.review_correct_text, data.review_comment, review_time, data.review_id];
+        var client = await pool.connect();
+        var insert_review_result = await client.query(cmd, values);
+        if (insert_review_result.severity | insert_review_result.code) {
+            console.log("ERROR of insertReviewData:", insert_review_result);
+            return false
+        }
+        return true;
+    },
+
     getClient: async function () {
         try {
             var client = await pool.connect();
@@ -207,7 +252,23 @@ module.exports = {
             return e;
         }
     },
-
+    
+    getDataFromTable: async function (table) {
+        // var cmd = "SELECT * FROM audio_transcription WHERE result IS NULL ORDER BY random()";
+        var values = [table];
+        var cmd = "SELECT * FROM projects." + table + " WHERE checked IS NULL ORDER BY random()";
+        // var values = [table];
+        var client = await pool.connect();
+        try {
+            var result = await client.query(cmd);
+            console.log("getDataFromTable:", result)
+            client.release();
+            return result.rows[0];
+        } catch(e) {
+            client.release();
+            return e;
+        }
+    },
 
     getPool: function () {
         return pool;

@@ -102,6 +102,8 @@ module.exports = function (app) {
                         notiProjectCreated(res, false);
                     });
             })
+        } else {
+            res.redirect('/login')
         }
     });
 }
