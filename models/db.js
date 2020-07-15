@@ -98,6 +98,34 @@ module.exports = {
         }
     },
 
+    getPage: async function (table,index) {
+        var cmd = "select count(*) as total_page from "+table
+        var client = await pool.connect()
+
+        try{
+            var res = await client.query(cmd);
+            client.release()
+            return res
+        } catch(e) {
+            client.release();
+            return e;
+        }
+    },
+
+    getAllProjects: async function (index) {
+        var cmd = "select id, name, type, rate, starttime from projects_metadata order by starttime desc OFFSET (("+index+" - 1) * 10) FETCH NEXT 10 ROWS ONLY"
+        var client = await pool.connect()
+
+        try{
+            var res = await client.query(cmd);
+            client.release()
+            return res
+        } catch(e) {
+            client.release();
+            return e;
+        }
+    },
+
     getAllProjectsOf: async function (userid) {
         var cmd = 'SELECT * FROM "projects_metadata" WHERE "owner_id"=$1'
         var value = [userid]
@@ -114,7 +142,7 @@ module.exports = {
     },
 
     getProgressProj: async function (table) {
-        var cmd = 'select count(id) as total_task, count(case when checked is not null then checked end) as task_finish, count(case when checked != 0 then checked end) as task_ischecked, count(distinct worker_id ) as total_worker, sum(case when cost is not null then cost end) as sum_cost from '+table;
+        var cmd = 'select count(id) as total_task, count(case when checked is not null then checked end) as task_finish, count(case when checked != 0 then checked end) as task_ischecked, count(distinct worker_id ) as total_worker, sum(case when cost is not null then cost end) as sum_cost from projects.'+table;
         var client = await pool.connect()
 
         try{
@@ -128,7 +156,7 @@ module.exports = {
     },
 
     getProgressByWorker: async function (table, index) {
-        var cmd = "SELECT worker_id, count(id) as total_task, round(avg(finish_time),2) as avg_time, count(case when checked = 1 then checked end) as task_istrue FROM "+table+" group by worker_id Order by worker_id LIMIT 10 OFFSET (("+index+" - 1) * 10)"
+        var cmd = "SELECT worker_id, count(id) as total_task, round(avg(finish_time),2) as avg_time, count(case when checked = 1 then checked end) as task_istrue FROM projects."+table+" group by worker_id Order by worker_id OFFSET (("+index+" - 1) * 10) FETCH NEXT 10 ROWS ONLY"
         var client = await pool.connect()
         try{
             var res = await client.query(cmd);
@@ -152,8 +180,14 @@ module.exports = {
             var result = await client.query(cmd, values);
             client.release();
             return result;
+        } catch(e) {
+            client.release();
+            return e;
+        }
+    },
+
     getBatchTenTasks: async function (table, index) {
-        var cmd = "select id, worker_id, finish_at, finish_time, checked, cost from "+table+" order by id LIMIT 10 OFFSET (("+index+" - 1) * 10)"
+        var cmd = "select id, worker_id, finish_at, finish_time, checked, cost from projects."+table+" order by id OFFSET (("+index+" - 1) * 10) FETCH NEXT 10 ROWS ONLY"
         var client = await pool.connect()
         try{
             var res = await client.query(cmd);

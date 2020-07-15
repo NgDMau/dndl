@@ -55,22 +55,7 @@ module.exports = function (app) {
             } 
 
             if(user.isWorker()) {
-                var name_array = user.fullname.split();
-                var name = name_array[name_array.length - 1]
-                pool.connect(function (err, client, done) {
-                    if (err) {
-                        return console.error(err);
-                    }
-
-                    client.query('select * from projects_metadata order by starttime desc limit 10', function (err, result) {
-                        if (err) {
-                            client.release();
-                            return console.error(err);
-                        }
-                        client.release();
-                        res.render('worker_dashboard.ejs', {list: result});
-                    });
-                })
+                res.render('worker_dashboard.ejs');
                 // res.sendFile(path.join(__dirname, '../views/', 'worker_dashboard.html'));
             }
 

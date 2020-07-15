@@ -62,26 +62,23 @@
         <table class="table">
             <thead>
               <tr>
-                <th scope="col">Tên</th>
-                <th scope="col>">ID</th>
+                <th scope="col">ID</th>
+                <th scope="col>">Tên</th>
                 <th scope="col">Mô tả chung</th>
                 <th scope="col">Tiền công</th>
               </tr>
             </thead>
-            <% list.rows.forEach(function(item){%>
-                <tbody>
-                    <tr class="item">
-                      <td ><%= item.name %></td>
-                      <td ><%= item.id %></td>
-                      <td ><%= item.type %></td>
-                      <td ><%= item.rate %></td>
-                    
-                    </tr>
-                  </tbody>
-            <% }); %>
+            <tbody id="addhere">
+            </tbody>
           </table>
           <div>
-            <a href="/work/list">Xem thêm</a>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                  <li class="page-item" id="previous"><a class="page-link" >Trang trước</a></li>
+                  <li class="page-item" id="current"><a class="page-link" >1</a></li>
+                  <li class="page-item" id="next"><a class="page-link" >Trang sau</a></li>
+                </ul>
+              </nav>
           </div>
           
     </div>
@@ -120,6 +117,79 @@
             $("form").submit();
         }
     }
+
+    function getTask(list_task) {
+        $( "#addhere" ).empty();
+        var cols = ["id","name", "type", "rate"];
+        for (var i = 0; i < list_task.length; i++) {
+            var newRow = document.createElement("tr");
+            newRow.setAttribute("class", "item");
+            for (var colIndex = 0; colIndex < cols.length; colIndex++) {
+                var newCell = document.createElement("td");
+                var val = list_task[i][cols[colIndex]];
+                newCell.innerHTML = val;
+                newRow.append(newCell);
+            }
+            document.getElementById("addhere").appendChild(newRow);
+        }
+    }
+
+    function pagination(current_page, total_page){
+        if (current_page == total_page) {
+            document.getElementById("previous").style.visibility = "visible";
+            document.getElementById("next").style.visibility = "hidden";
+            $("#current > a").text(current_page);
+        }else if(current_page == 1){
+            document.getElementById("previous").style.visibility = "hidden";
+            document.getElementById("next").style.visibility = "visible";
+            $("#current > a").text(current_page);
+        }else{
+            document.getElementById("previous").style.visibility = "visible";
+            document.getElementById("next").style.visibility = "visible";
+            $("#current > a").text(current_page);
+        }
+
+        if(total_page == 1){
+            document.getElementById("previous").style.visibility = "hidden";
+            document.getElementById("next").style.visibility = "hidden";
+            $("#current > a").text(current_page);
+        }
+        
+    }
+
+    $(document).on("click", "#next", function(){
+        var page = parseInt($("#current").text())+1
+        var url = "/project?page=" + page;
+
+        $.get(url, function( result ) {
+            getTask(result.data)
+            pagination(result.current_page,result.total_page)
+            console.log(result)
+        });
+        
+    });
+
+    $(document).on("click", "#previous", function(){
+        var page = parseInt($("#current").text())-1
+        var url = "/project?page=" + page;
+
+        $.get(url, function( result ) {
+            getTask(result.data)
+            pagination(result.current_page,result.total_page)
+            console.log(result)
+        });
+        
+    });
+
+
+    $.get( "/project", function( result ) {
+        getTask(result.data)
+        pagination(result.current_page,result.total_page)
+        console.log(result)
+    });
+
+
+
 
 </script>
 
