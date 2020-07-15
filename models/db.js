@@ -224,7 +224,7 @@ module.exports = {
                 code: "full"
             }
         }
-            
+            client.release()
             return data;
         } catch(e) {
             client.release();
@@ -239,8 +239,10 @@ module.exports = {
         var insert_review_result = await client.query(cmd, values);
         if (insert_review_result.severity | insert_review_result.code) {
             console.log("ERROR of insertReviewData:", insert_review_result);
+            client.release()
             return false
         }
+        client.release()
         return true;
     },
 

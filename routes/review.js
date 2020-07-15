@@ -41,11 +41,11 @@ module.exports = function(app) {
                 }
             }
 
-            if(data.rows.length === 0){
-                data = {
-                    code: "full"
-                }
-            }
+            // if(data.rows === undefined){
+            //     data = {
+            //         code: "full"
+            //     }
+            // }
             
             res.status(200).send(data);
             return
