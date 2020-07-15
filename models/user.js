@@ -102,7 +102,7 @@ module.exports = class User{
             }
             return false;
         } catch(e) {
-            //client.release();
+            client.release();
             return e;
         }
     }
