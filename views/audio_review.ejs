@@ -97,6 +97,11 @@
             async function processSubmitButton() {
                 sendReviewedTaskOf(project_id)
                     .then(async function(new_task){
+
+                        document.querySelector('input[name="accepted"]').checked = false;
+                        document.getElementById("review-correct-text").value = "";
+                        document.getElementById("review-comment").value = "";
+
                         new_task = await new_task.json()
                         console.log("New task:", new_task);
                         if (new_task.code === "full") {

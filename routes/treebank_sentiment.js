@@ -1,5 +1,4 @@
 var path = require('path')
-=======
 var Chart = require('chart');
 
 module.exports = function (app) {
