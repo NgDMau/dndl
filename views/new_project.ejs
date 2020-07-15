@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="/css/project_manage.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <title>Giới thiệu - Inlab</title>
+    <link rel="shortcut icon" type="image/png" href="/img/logoInlabSquare.png"/>
+
+</head>
+
+<body>
+
+    <header>
+        <%- include("header.ejs") %>
+    </header>
+    <div>
+      <div id="project-header">
+        <h2>TẠO PROJECT</h2>
+        <div class="divide-line"></div>
+      </div>
+      <div>
+        <form class="form-width" action="/contact" method="POST" id="contactForm">
+          <div class="text-center message"></div>
+          <div id="form-group">
+            <div class="form-group">
+              <label for="exampleFormControlInput1"><b>Tên Project <span class="required">*</span></b></label>
+              <div class="d-flex align-items-center jsx-560990836 jsx-2177858300 input input--icon"> 
+                <input class="ml-2"type="Name" name="name" id="exampleFormControlInput1" placeholder="Tên Project" value="" style="width:100%;border: none; background-color: #F5F4F9;" required>                       
+              </div>   
+            </div>
+
+            <label><b>Kiểu dữ liệu <span class="required">*</span></b></label>
+            <div class="button-container">
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioDatatype1" name="datatype" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioDatatype1">Âm thanh</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioDatatype2" name="datatype" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioDatatype2">Hình ảnh</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioDatatype3" name="datatype" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioDatatype3">Text</label>
+              </div>
+            </div>
+
+            <label><b>Kiểu dán nhãn <span class="required">*</span></b></label>
+            <div class="button-container">
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioLabel" name="label" class="custom-control-input label-radio">
+                <label class="custom-control-label" for="customRadioLabel">Worker tự viết nhãn</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioLabel2" name="label" class="custom-control-input label-radio">
+                <label class="custom-control-label" for="customRadioLabel2">Worker chọn đáp án có sẵn</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1" id="label-header"><b>Liệt kê đáp án (nếu có)</b></label>
+              <div class="d-flex align-items-center jsx-560990836 jsx-2177858300 input input--icon">
+              <textarea class="ml-2"type="Name" name="answerSet" id="answer-set" placeholder="Liệt kê đáp án" value="" style="width:100%;height: 200px; border: none; background-color: #F5F4F9;"></textarea>             
+              </div>   
+            </div>
+
+          <div class="form-group">
+            <label for="exampleFormControlInput1"><b>Mô tả bộ dữ liệu <span class="required">*</span></b></label>
+            <div class="subtext-form">(VD: Bộ dữ liệu bao gồm các đoạn hội thoại giữa khách hàng và hotline ngân hàng)</div>
+            <div class="d-flex align-items-center jsx-560990836 jsx-2177858300 input input--icon">
+              <textarea class="ml-2" type="text" name="description" id="exampleFormControlInput1" placeholder="Mô tả bộ dữ liệu" value="" style="width:100%; height: 200px; border: none; background-color: #F5F4F9;" required></textarea>                
+            </div>   
+          </div>
+
+          <div class="form-group">
+            <label for="exampleFormControlInput1"><b>Tổng số tasks <span class="required">*</span></b></label>
+            <div class="d-flex align-items-center jsx-560990836 jsx-2177858300 input input--icon"> 
+              <input class="ml-2"type="number" min="0" name="task-num" id="exampleFormControlInput1" placeholder="0" value="" style="width:100%;border: none; background-color: #F5F4F9;" required>                       
+            </div>   
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput1"><b>Thời gian tối đa hoàn thành 1 task <span class="required">*</span></b></label>
+            <div class="d-flex align-items-center jsx-560990836 jsx-2177858300 input input--icon"> 
+              <input class="ml-2"type="number" min="0" name="maximum-each-task-time" id="exampleFormControlInput1" placeholder="0" value="" style="width:85%;border: none; background-color: #F5F4F9;" required>       
+              <div style="margin-left: auto; margin-right: 10px;">giờ</div>                 
+            </div>   
+          </div>
+
+          <div class="form-group">
+            <label for="exampleFormControlInput1"><b>Tiền công trả trên 1 task <span class="required">*</span></b></label>
+            <div class="d-flex align-items-center jsx-560990836 jsx-2177858300 input input--icon"> 
+              <input class="ml-2"type="number" min="0" name="salary-each-task" id="exampleFormControlInput1" placeholder="0" value="" style="width:85%;border: none; background-color: #F5F4F9;" required>   
+              <div style="margin-left: auto; margin-right: 10px;">vnđ</div>                    
+            </div>   
+          </div>
+
+          <div><b>Có yêu cầu cụ thể về trình độ của worker? <span class="required">*</span></b></div>
+          <div class="button-container">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" id="customRadioWorker1" name="worker" class="custom-control-input worker-radio">
+              <label class="custom-control-label" for="customRadioWorker1">Có</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" id="customRadioWorker2" name="worker" class="custom-control-input worker-radio">
+              <label class="custom-control-label" for="customRadioWorker2">Không</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput1" id="worker-header"><b>Yêu cầu về worker (nếu có)</b></label>
+            <div class="d-flex align-items-center jsx-560990836 jsx-2177858300 input input--icon">
+            <textarea class="ml-2" type="text" name="worker-requirement" id="worker-requirement" placeholder="Yêu cầu về worker" value="" style="width:100%;height: 200px; border: none; background-color: #F5F4F9;"></textarea>                  
+            </div>                  
+          </div>
+
+            <div class ="justify-content-center d-flex">        
+              <button type="submit" id="submit" class="contact btn btn-warning btn-lg btn-block">UPLOAD DỮ LIỆU THÔ</button><br><br>
+            </div> 
+            <a href="/project_manage" class="back">Quay lại</a>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <footer>
+        <%- include("footer.ejs") %>
+    </footer>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    
+
+</body>
+  <script>
+    $('.label-radio').on('click', function () {
+      const answerSet = document.getElementById('answer-set');
+      const labelRadio = document.getElementsByClassName('label-radio');
+      const labelHeader = document.getElementById('label-header');
+      if (labelRadio.item(1).checked) {
+        answerSet.required = true;
+        labelHeader.innerHTML = 'Liệt kê đáp án (nếu có) <span class="required">*</span>';
+      }
+      else {
+        answerSet.required = false;
+        labelHeader.innerHTML = 'Liệt kê đáp án (nếu có)';
+      }
+    })
+  </script>
+
+  <script>
+    $('.worker-radio').on('click', function () {
+      const workerRequirement = document.getElementById('worker-requirement');
+      const workerRadio = document.getElementsByClassName('worker-radio');
+      const workerHeader = document.getElementById('worker-header');
+      if (workerRadio.item(0).checked) {
+        workerRequirement.required = true;
+        workerHeader.innerHTML = 'Yêu cầu về worker (nếu có) <span class="required">*</span>'
+      }
+      else {
+        workerRequirement.required = false;
+        workerHeader.innerHTML = 'Yêu cầu về worker (nếu có)'
+      }
+    })
+  </script>
+
+    <script>
+        $(document).on('click',function(){
+        $('.collapse').collapse('hide');
+        })
+        AOS.init();
+    </script> 
+</html>

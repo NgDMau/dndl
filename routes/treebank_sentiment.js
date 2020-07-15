@@ -31,7 +31,7 @@ module.exports = function (app) {
                 )
             }).join("")
 
-            return res.render("treebank_sentiment_2.ejs", {googleSheet: googleSheet, chart: Chart})
+            return res.render("treebank_sentiment_2.ejs", {googleSheet: googleSheet})
         });
     })
 }
