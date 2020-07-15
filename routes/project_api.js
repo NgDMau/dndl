@@ -48,28 +48,6 @@ module.exports = function (app) {
         }
     });
 
-    app.get('/project/:id/dashboard',async function (req, res) {
-        var project_id = req.params.id;
-        if (req.isAuthenticated()) {
-            
-            var user = new User(req.session.passport.user)
-
-            if (user.isCustomer()) {
-                if (user.isOwnerOf(project_id)) {
-                    
-                    res.render('project_detail.ejs')
-
-                }else{
-                    res.send('You are not owner this project')
-                }
-            }else{
-                res.send('Permission denied')
-            }            
-        }else{
-            res.send('You must login')
-        }
-    });
-
     app.get('/project/:id',async function (req, res) {
         var project_id = req.params.id;
         if (req.isAuthenticated()) {
