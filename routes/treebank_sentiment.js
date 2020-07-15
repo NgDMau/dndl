@@ -1,4 +1,6 @@
 var path = require('path')
+=======
+var Chart = require('chart');
 
 module.exports = function (app) {
     app.get('/resources/dataset/treebank_sentiment', async function (req, res) {

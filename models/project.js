@@ -79,10 +79,10 @@ module.exports = class Project {
             
             if (lines[0].includes("|")) {
                 var labels = lines[0].split("|");
-                lines.pop();
+                lines.shift();
             }
             
-            lines.shift();
+            lines.pop();
             var labels = ["This task does not require predefined labels!"] 
             
             console.log("Labels: ", labels);
@@ -131,8 +131,8 @@ module.exports = class Project {
                 values_number = 2;
                 break;
             case "audio_transcription":
-                cmd = "INSERT INTO projects." + table_name + "(audio, result) " + "VALUES($1, $2)";
-                values_number = 2;
+                cmd = "INSERT INTO projects." + table_name + "(audio) " + "VALUES($1)";
+                values_number = 1;
                 break;
             case "image_classification":
                 cmd = "INSERT INTO projects." + table_name + "(image, result) " + "VALUES($1, $2)";
@@ -158,12 +158,17 @@ module.exports = class Project {
                     case 2:
                         var values = [lines[line], []];
                         break;
+                    case 1:
+                        var values = [lines[line]];
+                        break;
                     default:
                         var values = [lines[line], []];
                         break;
                     }
-                    
-                    var result = await client.query(cmd, values);
+                    console.log("values_number", values_number);
+                    if  (line !== ""){
+                        var result = await client.query(cmd, values);
+                    }
                 }
             
             client.release();
@@ -195,6 +200,28 @@ module.exports = class Project {
         var result = await client.query(cmd, values);
         client.release();
         return result;
+    }
+
+    async getAttribute(attr) {
+        if (this.type) {
+            return this.type
+        }
+        var pool = require('./db').getPool(); 
+        var cmd = "SELECT " + attr + " FROM projects_metadata WHERE id=$1";
+        var values = [this.id];
+        var client = await pool.connect();
+        var result = await client.query(cmd, values);
+        client.release();
+        if (result.rows[0]) {
+            return {
+                code: "OK",
+                type: result.rows[0].type
+            }
+        }
+        return {
+            code: "ERROR",
+        }
+        
     }
 
     async getKPIS() {
@@ -242,12 +269,17 @@ module.exports = class Project {
 
         /** Second approach */
         var drop_result = await db.dropTableInSchema(drop_table, schema);
-        console.log("Drop result: ", drop_result);
-        var unregister_result = await this.unregister();
-        console.log("Unregistered result: ", unregister_result);
-        if (drop_result.code && unregister_result.code) {
-            return false;
-        }
+
+        db.dropTableInSchema(drop_table, schema)
+            .then(async function(drop_result) {
+                console.log("Drop result:", drop_result);
+                var unregister_result = await this.unregister();
+                console.log("Unregistered result: ", unregister_result);
+            })
+        
+        // if (drop_result.code && unregister_result.code) {
+        //     return false;
+        // }
         return true;
     }
 
