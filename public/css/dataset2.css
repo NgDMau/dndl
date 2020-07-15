@@ -5,6 +5,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-weight: 100;
   font-size: 0.9rem;
+  width: 100%;
 }
 
 b {
@@ -180,6 +181,12 @@ tbody tr:hover {
   padding-right: 1rem;
 }
 
+@media screen and (min-width: 780px) {
+  .treebank-box {
+    padding: 0;
+  }
+}
+
 /* Intro box  */
 .dataset-intro {
   width: 100%;
@@ -252,6 +259,7 @@ tbody tr:hover {
   background: #FFFEEF;
   padding-top: 10px;
   padding-bottom: 10px;
+  overflow-x: hidden;
 }
 
 .quickinfo-text {
@@ -303,11 +311,6 @@ tbody tr:hover {
   width: 30%;
   margin-right: 3%;
 }
-
-.quickinfo-text {
-  margin-top: 10px;
-}
-
 
 /* Chart Box */
 .chart-container {
@@ -457,11 +460,18 @@ tbody tr:hover {
   height: auto;
   background: #565D69;
   padding: 40px;
+  overflow-x: hidden;
+  justify-content: space-around;
 }
 
 #our-info {
-  width: 50%;
+  width: 40%;
   margin-left: 30px;
+  overflow-x: hidden;
+}
+
+#contact-us-form {
+  width: 40%;
 }
 
 #contact-container {
@@ -482,7 +492,7 @@ tbody tr:hover {
 }
 
 .contact-item {
-  margin-bottom: 10px;
+  margin-bottom: 5%;
 }
 
 .contact-item h6 {
@@ -598,6 +608,7 @@ tbody tr:hover {
 
   #contact-us-box {
     flex-direction: column;
+    overflow-x: hidden;
   }
 
   #our-info {
@@ -615,7 +626,10 @@ tbody tr:hover {
   }
 
   #contact-us-form {
+    width: 80%;
+    margin: 0 auto;
     margin-top: 70px;
+    overflow-x: hidden;
   }
 
   #interested {
@@ -638,6 +652,7 @@ tbody tr:hover {
 
   .contact-text {
     text-align: center;
+    margin-left: 0 !important;
   }
 
   .form-width {

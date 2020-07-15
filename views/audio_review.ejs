@@ -35,6 +35,7 @@
 
             var project_id = '<%= project_id%>'
             var reviewer_id = '<%= reviewer_id %>'
+            var current_task_id = -1
 
             window.onload = async function() {
                 var task = await loadNewTask(project_id);
@@ -42,7 +43,8 @@
             }
 
             function displayReceivedTask(task) {
-                document.getElementById("audio-component").setAttribute("src", task.url);
+                let audio_url = "http://inlab.nisci.gov.vn/" + task.url
+                document.getElementById("audio-component").setAttribute("src", audio_url);
                 document.getElementById("review-audio").load();
                 document.getElementById("labeled-transcription").innerText = task.text;
                 document.getElementById("review-correct-text").value = "";
@@ -66,6 +68,7 @@
                 var rv_comment = document.getElementById("review-comment").value;
 
                 var data = {
+                    review_id: current_task_id,
                     review_accepted: rv_accepted,
                     review_correct_text: rv_correct_text,
                     review_comment: rv_comment
@@ -75,6 +78,7 @@
 
                 var url = '/review/project/' + project_id;
                 console.log("url:", url)
+
                 var otherParams = {
                     headers: {
                         "Content-Type": "application/json"
@@ -93,16 +97,22 @@
             async function processSubmitButton() {
                 sendReviewedTaskOf(project_id)
                     .then(async function(new_task){
+
+                        document.querySelector('input[name="accepted"]').checked = false;
+                        document.getElementById("review-correct-text").value = "";
+                        document.getElementById("review-comment").value = "";
+
                         new_task = await new_task.json()
                         console.log("New task:", new_task);
                         if (new_task.code === "full") {
-                            alert("Chưa có dữ liệu cần review, xin cảm ơn!");
+                            alert("Đã hết dữ liệu cần review, xin cảm ơn!");
                             return
                         }
                         if (new_task.code == 'ERROR') {
                             alert("ERROR HAPPENED");
                             return
                         }
+                        current_task_id = new_task.id;
                         displayReceivedTask(new_task);
                     })
             }
