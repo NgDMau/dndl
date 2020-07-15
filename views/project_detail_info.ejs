@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="/css/project_manage.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <title>Giới thiệu - Inlab</title>
+    <link rel="shortcut icon" type="image/png" href="/img/logoInlabSquare.png"/>
+
+</head>
+
+<body>
+
+    <header>
+        <%- include("header.ejs") %>
+    </header>
+
+    <div class="body">
+      <div class="body-header">
+        <h2>PROJECT B</h2>
+        <div class="divide-line"></div>
+      </div>
+      <div id="quick-info">
+        <h3>Tiến độ</h3>
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" style="width: 70%; background-color: #FFC107; border-radius: 20px; height: 30px; color: #000; font-weight: 500;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
+        </div>
+        <div class="card-container">
+          <div class="card card-light-yellow">
+            <img class="card-img" src="/img/research.svg"/>
+            <h4><b>10000</b></h4>
+            <p>câu đã được kiểm tra</p>
+          </div>
+          <div class="card card-dark-yellow">
+            <img class="card-img" src="/img/people.svg"/>
+            <h4><b>90</b></h4>
+            <p>workers thực hiện dán nhãn</p>
+          </div>
+          <div class="card card-light-yellow">
+            <img class="card-img" src="/img/money.svg"/>
+            <h4><b>1,000,000 vnd</b></h4>
+            <p>phải trả tính tới thời điểm hiện tại</p>
+          </div>
+          <div class="card card-dark-yellow">
+            <img class="card-img" src="/img/failure.svg"/>
+            <h4><b>5%</b></h4>
+            <p>tỉ lệ câu sai</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <div id="tracking-bar" class="show-flex">
+          <div>
+            <h3>Tracking</h3>
+            <div class="divide-line"></div>
+          </div>
+          <button id="by-task" class="detail-table-button hover">Theo task</button>
+          <button id="by-worker" class="detail-table-button">Theo worker</button>
+        </div>
+        <div id="search-bar" class="show-flex">
+          <p>Search</p>
+          <input type="text" id="search">
+        </div>
+        <div id="task-table" class="full-project-table">
+          <div class="project-table-header project-table-row">
+            <p class="project-table-element">Tên task</p>
+            <p class="project-table-element">ID worker dán nhãn</p>
+            <p class="project-table-element">Ngày thực hiện</p>
+            <p class="project-table-element">Thời gian dán nhãn</p>
+            <p class="project-table-element">Tổng số worker</p>
+            <p class="project-table-element">Check</p>
+            <p class="project-table-element">Đúng/Sai</p>
+            <p class="project-table-element">Tiền công</p>
+          </div>
+          <div class="project-table-row">
+            <p class="project-table-element">a</p>
+            <p class="project-table-element">1</p>
+            <p class="project-table-element">05/05/2020</p>
+            <p class="project-table-element">5 phút</p>
+            <p class="project-table-element">6</p>
+            <p class="project-table-element">Có</p>
+            <p class="project-table-element">Đúng</p>
+            <p class="project-table-element">20000</p>
+          </div>
+          <div class="project-table-row">
+            <p class="project-table-element">a</p>
+            <p class="project-table-element">1</p>
+            <p class="project-table-element">05/05/2020</p>
+            <p class="project-table-element">5 phút</p>
+            <p class="project-table-element">6</p>
+            <p class="project-table-element">Không</p>
+            <p class="project-table-element">Đúng</p>
+            <p class="project-table-element">20000</p>
+          </div>
+        </div>
+
+        <div id="worker-table" class="full-project-table" style="display: none;">
+          <div class="project-table-header project-table-row">
+            <p class="project-table-element">Tên worker</p>
+            <p class="project-table-element">Số task đã thực hiện</p>
+            <p class="project-table-element">Thời gian dán nhãn trung bình</p>
+            <p class="project-table-element">Số task đúng/tổng số task thực hiện</p>
+          </div>
+          <div class="project-table-row">
+            <p class="project-table-element">quynhhuong1701</p>
+            <p class="project-table-element">30</p>
+            <p class="project-table-element">7 phút /10 phút</p>
+            <p class="project-table-element">29/30</p>
+          </div>
+          <div class="project-table-row">
+            <p class="project-table-element">hathu123</p>
+            <p class="project-table-element">30</p>
+            <p class="project-table-element">7 phút /10 phút</p>
+            <p class="project-table-element">29/30</p>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+    <footer>
+        <%- include("footer.ejs") %>
+    </footer>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    
+
+</body>
+    <script>
+        $(document).on('click',function(){
+        $('.collapse').collapse('hide');
+        })
+        AOS.init();
+    </script> 
+
+    <script>
+      $('.detail-table-button').on('click', function(e) {
+        if (e.target.id === 'by-task') {
+          e.target.classList.add('hover');
+          document.getElementById('by-worker').classList.remove('hover');
+          const taskTable = document.getElementById('task-table');
+          const workerTable = document.getElementById('worker-table');
+          taskTable.style.display = 'block';
+          workerTable.style.display = 'none';
+        }
+        else {
+          e.target.classList.add('hover');
+          document.getElementById('by-task').classList.remove('hover');
+          const taskTable = document.getElementById('task-table');
+          const workerTable = document.getElementById('worker-table');
+          taskTable.style.display = 'none';
+          workerTable.style.display = 'block';
+        }
+      })
+    </script>
+</html>
