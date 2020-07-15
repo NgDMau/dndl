@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="/css/info.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <title>Giới thiệu - Inlab</title>
+    <link rel="shortcut icon" type="image/png" href="/img/logoInlabSquare.png"/>
+
+</head>
+
+<body>
+
+    <header>
+        <%- include("header.ejs") %>
+    </header>
+    <div id="intro-box" class="show-flex">
+      <div>
+        <div class="show-flex">
+          <h2>VỀ CHÚNG TÔI</h2>
+          <a href="#overall-box" class="play-icon"></a>
+        </div>
+        <div class="divide-line"></div>
+      </div>
+      <img class="intro-img" src="/img/undraw_team_spirit.svg"/>
+    </div>   
+
+    <div id="overall-box" data-aos="fade-up">
+      <h3>TỔNG QUAN</h3>
+      <div class="divide-line"></div>
+      <p><b>INLAB</b> là nền tảng hoạt động dựa trên hình thức crowdsourcing và được thể hiện dưới dạng một bảng tin việc làm.</p>
+      <p>Tính năng chính của <b>INLAB</b> là hỗ trợ các requester (các cá nhân và tổ chức có nhu cầu về dữ liệu) thu thập dữ liệu và tìm kiếm nguồn nhân lực xử lý dữ liệu thông qua việc đăng tải các công việc lên hệ thống, đồng thời cung cấp công cụ giúp đơn giản hóa và tăng hiệu suất quá trình thu thập, xử lý dữ liệu của các workers (lực lượng xử lý dữ liệu).</p>
+    </div>
+
+    <div id="card-container" class="show-flex">
+      <div id="info-left-card" class="info-card" data-aos="flip-left">
+        <div>
+          <h3>TẦM NHÌN</h3>
+          <div class="divide-line"></div>
+        </div>
+        
+        <p>Trở thành nền tảng tiên phong cho việc kiến tạo dữ liệu đầu tiên  tại Việt Nam.</p>
+      </div>
+      <div id="info-right-card" class="info-card" data-aos="flip-right">
+        <div>
+          <h3>SỨ MỆNH</h3>
+          <div class="divide-line"></div>
+        </div>
+        
+        <p>Hỗ trợ nguồn lực cho các cá nhân và tổ chức có nhu cầu về dữ liệu, đồng thời tạo ra các việc làm liên quan đến dữ liệu cho mọi đối tượng cho xã hội.</p>
+      </div>
+    </div>
+
+    <div id="story-container">
+      <h3>CÂU CHUYỆN INLAB</h3>
+      <div class="divide-line"></div>
+      <div class="show-flex story-box" data-aos="fade-right">
+        <p class="story-text">Đầu năm 2020, dự án <b>INLAB</b> bắt đầu từ ý tưởng giúp người khiếm thị được tiếp cận nhiều hơn với một ngành nghề mới trong thời đại 4.0. Với sự hỗ trợ của Viện Công nghiệp phần mềm và nội dung số Việt Nam phối hợp Hội người mù Việt Nam, InfoRe Technology, HMD Technology, các cộng tác viên đang học tập, nghiên cứu trong nước và quốc tế, <b>INLAB</b> đã hỗ trợ được rất nhiều người khiếm thị tiếp cận với các công nghệ mới, thực hiện các công việc liên quan đến công nghệ số nhằm phát huy khả năng của bản thân, cải thiện cuộc sống, hòa nhập, tham gia bình đẳng vào các hoạt động kinh tế - xã hội, và góp phần xây dựng đất nước.</p>
+        <div class="story-img">
+          <img src="/img/info-1.jpg" width="100%"/>
+          <p>Hình ảnh buổi gặp mặt giữa các thành viên dự án INLAB với Hội người mù Việt Nam ngày 18/12/2019</p>
+        </div>
+        
+      </div>
+      <div class="show-flex story-box" data-aos="fade-left">
+        <div class="story-img">
+          <img src="/img/info-2.jpg" width="100%"/>
+          <p>Giám đốc Inlab Nguyễn Đinh Mậu tham gia Lễ khai giảng khoá đào sử dụng phần mềm Dán nhãn dữ liệu Inlab được tổ chức bởi Hội người mù Việt Nam</p>
+        </div>
+        <p class="story-text">Từ ý tưởng đó, <b>INLAB</b> nhận thấy nhu cầu được hỗ trợ nguồn lực của các cá nhân và tổ chức có nhu cầu về dữ liệu cũng như nhu cầu việc làm của đông đảo các đối tượng trong xã hội. Vì thế, chúng tôi đã quyết định trở thành <b>một trong những nền tảng đầu tiên tại Việt Nam hoạt động trong lĩnh vực kết nối các cá nhân, tổ chức có nhu cầu thu thập và xử lý dữ liệu với nguồn nhân lực đa dạng và chất lượng.</b></p>
+      </div>
+      <div class="show-flex story-box" data-aos="fade-right">
+        <p class="story-text">Ngày 15/06/2020, Công ty Cổ phần <b>INLAB</b> được thành lập với mục đích đáp ứng nhu cầu về nguồn lực của các cá nhân và tổ chức có nhu cầu về dữ liệu cũng như vấn đề việc làm cho một bộ phận không nhỏ người dân. Và từng ngày trôi qua, chúng tôi vẫn luôn gắn chặt với mục tiêu to lớn này.</p>
+        <div class="story-img">
+          <img src="/img/info-3.jpg" width="100%"/>
+          <p>Nhân lực INLAB cung cấp đều được đào tạo một cách bài bản</p>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+        <%- include("footer.ejs") %>
+    </footer>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+</body>
+
+    <script>
+        $(document).on('click',function(){
+        $('.collapse').collapse('hide');
+        })
+        AOS.init();
+    </script> 
+</html>

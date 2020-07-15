@@ -85,6 +85,12 @@ require('./routes/treebank_sentiment')(app);
 require('./routes/full_system/work')(app);
 require('./routes/test/outsource')(app)
 require('./routes/review')(app);
+require('./routes/project_manage')(app);
+require('./routes/new_project')(app);
+require('./routes/project_detail_info')(app);
+require('./routes/current_project')(app);
+require('./routes/finish_project')(app);
+
 require('./routes/project_api')(app);
 
 //The 404 Route (ALWAYS Keep this as the last route)

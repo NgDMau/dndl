@@ -1,4 +1,5 @@
 var path = require('path')
+=======
 var Chart = require('chart');
 
 module.exports = function (app) {
@@ -31,7 +32,7 @@ module.exports = function (app) {
                 )
             }).join("")
 
-            return res.render("treebank_sentiment_2.ejs", {googleSheet: googleSheet, chart: Chart})
+            return res.render("treebank_sentiment_2.ejs", {googleSheet: googleSheet})
         });
     })
 }
