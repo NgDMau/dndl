@@ -5,6 +5,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-weight: 100;
   font-size: 0.9rem;
+  width: 100%;
 }
 
 b {
@@ -180,6 +181,12 @@ tbody tr:hover {
   padding-right: 1rem;
 }
 
+@media screen and (min-width: 780px) {
+  .treebank-box {
+    padding: 0;
+  }
+}
+
 /* Intro box  */
 .dataset-intro {
   width: 100%;
@@ -280,7 +287,6 @@ tbody tr:hover {
 @media screen and (max-width: 600px) {
   .dataset-quickinfo {
     flex-direction: column;
-    overflow-x: hidden;
   }
 
   .usability {
