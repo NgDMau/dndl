@@ -153,11 +153,11 @@
       const labelHeader = document.getElementById('label-header');
       if (labelRadio.item(1).checked) {
         answerSet.required = true;
-        labelHeader.innerHTML = 'Liệt kê đáp án (nếu có) <span class="required">*</span>';
+        labelHeader.innerHTML = '<b>Liệt kê đáp án (nếu có) <span class="required">*</span></b>';
       }
       else {
         answerSet.required = false;
-        labelHeader.innerHTML = 'Liệt kê đáp án (nếu có)';
+        labelHeader.innerHTML = '<b>Liệt kê đáp án (nếu có)</b>';
       }
     })
   </script>
@@ -169,11 +169,11 @@
       const workerHeader = document.getElementById('worker-header');
       if (workerRadio.item(0).checked) {
         workerRequirement.required = true;
-        workerHeader.innerHTML = 'Yêu cầu về worker (nếu có) <span class="required">*</span>'
+        workerHeader.innerHTML = '<b>Yêu cầu về worker (nếu có) <span class="required">*</span></b>'
       }
       else {
         workerRequirement.required = false;
-        workerHeader.innerHTML = 'Yêu cầu về worker (nếu có)'
+        workerHeader.innerHTML = '<b>Yêu cầu về worker (nếu có)</b>'
       }
     })
   </script>
