@@ -22,7 +22,7 @@ module.exports = function (app) {
                 res.send('Permission denied')
             }            
         }else{
-            res.send('You must login')
+            res.redirect('/login')
         }
     });
 }

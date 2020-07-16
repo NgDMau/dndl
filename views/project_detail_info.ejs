@@ -76,12 +76,12 @@
         </div>
         <div id="task-table" class="full-project-table">
           <div class="project-table-header project-table-row">
-            <p class="project-table-element">ID task</p>
+            <p class="project-table-element">Task ID</p>
             <p class="project-table-element">Tên worker dán nhãn</p>
             <p class="project-table-element">Ngày thực hiện</p>
-            <p class="project-table-element">Thời gian dán nhãn</p>
+            <p class="project-table-element">Thời gian dán nhãn (giây)</p>
             <p class="project-table-element">Trạng thái</p>
-            <p class="project-table-element">Tiền công</p>
+            <p class="project-table-element">Tiền công (vnđ)</p>
           </div>
           <div id="task_kpi">
           </div>
@@ -149,11 +149,13 @@
         function getKPI(data) {
           var progress = Math.round(parseInt(data.task_finish)*100/parseInt(data.total_task))
           var wrong_rate = Math.round(parseInt(data.task_wrong)*100/parseInt(data.task_finish))
+          console.log("wrong no", data.task_wrong);
+          console.log("total no", data.task_finish);
           $(".progress-bar").css("width", progress+"%");
           $(".progress-bar").text(progress+"%");
-          $("#task_isChecked > h4 > b").text(data.task_ischecked);
+          $("#task_isChecked > h4 > b").text(data.task_ischecked + "/" + data.total_task);
           $("#total_worker > h4 > b").text(data.total_worker);
-          $("#total_cost > h4 > b").text(data.sum_cost);
+          $("#total_cost > h4 > b").text(data.sum_cost+" vnđ");
           $("#wrong_rate > h4 > b").text(wrong_rate+"%");
         }
 
@@ -176,7 +178,7 @@
 
         function getKpiByTask(data) {
           $( "#task_kpi" ).empty();
-          var cols = ["id","worker_name", "finish_at", "finish_time", "checked", "cost"];
+          var cols = ["id","worker_name", "finish_at", "finish_time", "reviewer_decision", "cost"];
           for (var i = 0; i < data.length; i++) {
             var newRow = document.createElement("div");
             newRow.setAttribute("class", "project-table-row");
@@ -190,11 +192,11 @@
                       newCell.innerHTML = "Chưa kiểm tra";
                     break;
                   
-                    case 1:
+                    case 'true':
                       newCell.innerHTML = "Đúng";
                     break;
 
-                    case 2:
+                    case 'false':
                       newCell.innerHTML = "Sai";
                     break;
                   }
