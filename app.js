@@ -86,8 +86,6 @@ require('./routes/test/outsource')(app)
 require('./routes/review')(app);
 require('./routes/project_manage')(app);
 require('./routes/new_project')(app);
-require('./routes/project_detail_info')(app);
-require('./routes/current_project')(app);
 require('./routes/finish_project')(app);
 
 require('./routes/project_api')(app);

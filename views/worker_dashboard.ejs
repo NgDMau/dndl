@@ -98,7 +98,7 @@
 
     $(document).on("click", ".item", function(){
         var ele = this;
-        $('#name').val($(ele).find("td:nth-child(2)").text());
+        $('#name').val($(ele).find("td:nth-child(1)").text());
         submit(ele);
         
     });

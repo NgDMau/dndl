@@ -22,6 +22,8 @@
     var currentWorkerName;
     var initialTask = await initTask(currentProjectId);
 
+    var start_timestamp = Math.floor(Date.now() / 1000);
+
     console.log("initialTask", initialTask);
 
     currentTaskID = initialTask.id;
@@ -104,16 +106,22 @@
             console.log("serialize", ls.completionStore.selected.serializeCompletion()[0]);
             var serialized = ls.completionStore.selected.serializeCompletion()[0];
 
+            var interval_sec = Math.floor(Date.now() / 1000) - start_timestamp;
+
+
             var result = {
                 id: currentTaskID,
                 value: serialized.value,
                 createdBy: currentWorkerPk,
-                createdDate: completion.createdDate
+                createdDate: completion.createdDate,
+                createdInterval: interval_sec
             }
 
-            // console.log("Result done: ", result);
+            console.log("Result done: ", result);
 
             var task = await submitResult(currentProjectId, result);
+
+            start_timestamp = Math.floor(Date.now() / 1000) ;
 
             if (task === undefined) {
                 ls.setFlags({ noTask: true})
@@ -149,13 +157,14 @@
 
         onEntityCreate: async function(region) {
             console.log("region", region);
-            var result = {
-                id: region.id,
-                value: region._value,
-                createdBy: currentWorkerID,
-                createdDate: region.completion.createdDate
-            }
-            console.log("Result: ", result);
+            // var result = {
+            //     id: region.id,
+            //     value: region._value,
+            //     createdBy: currentWorkerID,
+            //     createdDate: region.completion.createdDate,
+            //     createdInterval: Math.floor(Date.now() / 1000) - start_timestamp
+            // }
+            // console.log("Result: ", result);
             //getNewData();
             //task_config.data.image = "https://htx-misc.s3.amazonaws.com/opensource/label-studio/examples/images/nick-owuor-astro-nic-visuals-wDifg5xc9Z4-unsplash.jpg";
             // labelStudio.task.data.image = "https://htx-misc.s3.amazonaws.com/opensource/label-studio/examples/images/nick-owuor-astro-nic-visuals-wDifg5xc9Z4-unsplash.jpg"

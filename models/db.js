@@ -142,7 +142,7 @@ module.exports = {
     },
 
     getProgressProj: async function (table) {
-        var cmd = 'select count(id) as total_task, count(case when checked is not null then checked end) as task_finish, count(case when checked != 0 then checked end) as task_ischecked, count(distinct worker_id ) as total_worker, sum(case when cost is not null then cost end) as sum_cost from projects.'+table;
+        var cmd = "SELECT count(id) as total_task, count(case when checked is not null then checked end) as task_finish, count(case when checked != 0 then checked end) as task_ischecked, count(case when reviewer_decision = 'false' then checked end) as task_wrong, count(distinct worker_id ) as total_worker, sum(case when cost is not null and reviewer_decision = 'true' then cost end) as sum_cost from projects."+table;
         var client = await pool.connect()
 
         try{
@@ -156,7 +156,7 @@ module.exports = {
     },
 
     getProgressByWorker: async function (table, index) {
-        var cmd = "SELECT worker_id, count(id) as total_task, round(avg(finish_time),2) as avg_time, count(case when checked = 1 then checked end) as task_istrue FROM projects."+table+" group by worker_id Order by worker_id OFFSET (("+index+" - 1) * 10) FETCH NEXT 10 ROWS ONLY"
+        var cmd = "SELECT table_users.username as worker_name, count(table_project.id) as total_task, round(avg(table_project.finish_time),2) as avg_time, count(case when table_project.reviewer_decision = 'true' then table_project.reviewer_decision end) as task_istrue FROM projects."+table+" as table_project left join public.users as table_users on table_project.worker_id = table_users.id where table_project.worker_id is not null group by table_users.username Order by table_users.username OFFSET (("+index+" - 1) * 10) FETCH NEXT 10 ROWS ONLY"
         var client = await pool.connect()
         try{
             var res = await client.query(cmd);
@@ -173,8 +173,8 @@ module.exports = {
     },
 
     insertIntoTable: async function (table, data) {
-        var cmd = "UPDATE projects." + table + " SET result=$1, worker_id=$2, label=$3, finish_at=$4 WHERE id=$5";
-        var values = [data, data.createdBy, data.value.text, data.createdDate, data.id];
+        var cmd = "UPDATE projects." + table + " SET result=$1, worker_id=$2, label=$3, finish_at=$4, finish_time=$5 WHERE id=$6";
+        var values = [data, data.createdBy, data.value.text, data.createdDate, data.createdInterval, data.id];
         var client = await pool.connect();
         try {
             var result = await client.query(cmd, values);
@@ -186,8 +186,8 @@ module.exports = {
         }
     },
     
-    getBatchTenTasks: async function (table, index) {
-        var cmd = "select id, worker_id, finish_at, finish_time, checked, cost from projects."+table+" order by id OFFSET (("+index+" - 1) * 10) FETCH NEXT 10 ROWS ONLY"
+    getProgressByTask: async function (table, index) {
+        var cmd = "select table_project.id, table_users.username as worker_name, table_project.finish_at, table_project.finish_time, table_project.reviewer_decision, cost from projects."+table+" as table_project left join public.users as table_users on table_project.worker_id = table_users.id where table_project.worker_id is not null order by id OFFSET (("+index+" - 1) * 10) FETCH NEXT 10 ROWS ONLY"
         var client = await pool.connect()
         try{
             var res = await client.query(cmd);
@@ -261,8 +261,15 @@ module.exports = {
     },
 
     insertReviewData: async function(reviewer_id, project_id, review_time, data) {
-        var cmd = "UPDATE projects." + project_id + " SET checked=$1, reviewer_id=$2, reviewer_decision=$3, reviewer_correction=$4, reviewer_comment=$5, review_time=$6 WHERE id=$7"; 
-        var values = [1, reviewer_id, data.review_accepted, data.review_correct_text, data.review_comment, review_time, data.review_id];
+        if(data.review_accepted === 'false') {
+            var cmd = "UPDATE projects." + project_id + " SET checked=$1, reviewer_id=$2, reviewer_decision=$3, reviewer_correction=$4, reviewer_comment=$5, review_time=$6, cost=$7 WHERE id=$8"; 
+            // var project_rate = await new project_rate({id: project_id}).getRate();
+            var values = [1, reviewer_id, data.review_accepted, data.review_correct_text, data.review_comment, review_time, 0, data.review_id];
+        } else {
+            var cmd = "UPDATE projects." + project_id + " SET checked=$1, reviewer_id=$2, reviewer_decision=$3, reviewer_correction=$4, reviewer_comment=$5, review_time=$6 WHERE id=$7"; 
+            var values = [1, reviewer_id, data.review_accepted, data.review_correct_text, data.review_comment, review_time, data.review_id];
+        }
+        
         var client = await pool.connect();
         var insert_review_result = await client.query(cmd, values);
         if (insert_review_result.severity | insert_review_result.code) {
@@ -302,7 +309,8 @@ module.exports = {
 
     getPool: function () {
         return pool;
-    }
+    },
+
 }
 
 //dropTableInSchema('xinchao', 'projects').then(console.log)

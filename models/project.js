@@ -86,6 +86,7 @@ module.exports = class Project {
             var labels = ["This task does not require predefined labels!"] 
             
             console.log("Labels: ", labels);
+            var project_info = that;
 
             that.insertDataToDb(lines, table_name, project_type)
                 .then(function(result) {
@@ -131,8 +132,8 @@ module.exports = class Project {
                 values_number = 2;
                 break;
             case "audio_transcription":
-                cmd = "INSERT INTO projects." + table_name + "(audio) " + "VALUES($1)";
-                values_number = 1;
+                cmd = "INSERT INTO projects." + table_name + "(audio, cost) " + "VALUES($1, $2)";
+                values_number = 2;
                 break;
             case "image_classification":
                 cmd = "INSERT INTO projects." + table_name + "(image, result) " + "VALUES($1, $2)";
@@ -156,7 +157,7 @@ module.exports = class Project {
                         var values = [lines[line], [], [], []];
                         break;
                     case 2:
-                        var values = [lines[line], []];
+                        var values = [lines[line], 0];
                         break;
                     case 1:
                         var values = [lines[line]];

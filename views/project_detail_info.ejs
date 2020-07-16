@@ -13,6 +13,9 @@
     <link href="/css/project_manage.css" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
+    <!-- JQuery -->
+    <script src="/js/jquery/jquery.min.js"></script>
+
     <title>Giới thiệu - Inlab</title>
     <link rel="shortcut icon" type="image/png" href="/img/logoInlabSquare.png"/>
 
@@ -32,28 +35,28 @@
       <div id="quick-info">
         <h3>Tiến độ</h3>
         <div class="progress">
-          <div class="progress-bar" role="progressbar" style="width: 70%; background-color: #FFC107; border-radius: 20px; height: 30px; color: #000; font-weight: 500;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
+          <div class="progress-bar" role="progressbar" style="width: 0%; background-color: #FFC107; border-radius: 20px; height: 30px; color: #000; font-weight: 500;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
         </div>
         <div class="card-container">
-          <div class="card card-light-yellow" data-aos="flip-left">
+          <div class="card card-light-yellow" id="task_isChecked" data-aos="flip-left">
             <img class="card-img" src="/img/research.svg"/>
-            <h4><b>10000</b></h4>
+            <h4><b>0</b></h4>
             <p>tasks đã được kiểm tra</p>
           </div>
-          <div class="card card-dark-yellow" data-aos="flip-right">
+          <div class="card card-dark-yellow" id="total_worker" data-aos="flip-right">
             <img class="card-img" src="/img/people.svg"/>
-            <h4><b>90</b></h4>
+            <h4><b>0</b></h4>
             <p>workers thực hiện dán nhãn</p>
           </div>
-          <div class="card card-light-yellow" data-aos="flip-left">
+          <div class="card card-light-yellow" id="total_cost" data-aos="flip-left">
             <img class="card-img" src="/img/money.svg"/>
-            <h4><b>1,000,000 vnd</b></h4>
+            <h4><b>0 vnd</b></h4>
             <p>phải trả tính tới thời điểm hiện tại</p>
           </div>
-          <div class="card card-dark-yellow" data-aos="flip-right">
+          <div class="card card-dark-yellow" id="wrong_rate" data-aos="flip-right">
             <img class="card-img" src="/img/failure.svg"/>
-            <h4><b>5%</b></h4>
-            <p>tỉ lệ task sai</p>
+            <h4><b>0%</b></h4>
+            <p>tỉ lệ tasks sai</p>
           </div>
         </div>
       </div>
@@ -75,32 +78,16 @@
         </div>
         <div id="task-table" class="full-project-table">
           <div class="project-table-header project-table-row">
-            <p class="project-table-element">Tên task</p>
-            <p class="project-table-element">ID worker dán nhãn</p>
+            <p class="project-table-element">Task ID</p>
+            <p class="project-table-element">Tên worker dán nhãn</p>
             <p class="project-table-element">Ngày thực hiện</p>
-            <p class="project-table-element">Thời gian dán nhãn</p>
-            <p class="project-table-element">Check</p>
-            <p class="project-table-element">Đúng/Sai</p>
-            <p class="project-table-element">Tiền công (VNĐ)</p>
+            <p class="project-table-element">Thời gian dán nhãn (giây)</p>
+            <p class="project-table-element">Trạng thái</p>
+            <p class="project-table-element">Tiền công (vnđ)</p>
           </div>
-          <div class="project-table-row">
-            <p class="project-table-element">a</p>
-            <p class="project-table-element">1</p>
-            <p class="project-table-element">05/05/2020</p>
-            <p class="project-table-element">5 phút/ 10 phút</p>
-            <p class="project-table-element">Có</p>
-            <p class="project-table-element">Đúng</p>
-            <p class="project-table-element">10000 </p>
+          <div id="task_kpi">
           </div>
-          <div class="project-table-row">
-            <p class="project-table-element">a</p>
-            <p class="project-table-element">1</p>
-            <p class="project-table-element">05/05/2020</p>
-            <p class="project-table-element">11 phút/10 phút</p>
-            <p class="project-table-element">Không</p>
-            <p class="project-table-element">-</p>
-            <p class="project-table-element">8000</p>
-          </div>
+          
         </div>
 
         <div id="worker-table" class="full-project-table" style="display: none;">
@@ -110,17 +97,7 @@
             <p class="project-table-element">Thời gian dán nhãn trung bình</p>
             <p class="project-table-element">Số task đúng/tổng số task thực hiện</p>
           </div>
-          <div class="project-table-row">
-            <p class="project-table-element">quynhhuong1701</p>
-            <p class="project-table-element">30</p>
-            <p class="project-table-element">7 phút /10 phút</p>
-            <p class="project-table-element">29/30</p>
-          </div>
-          <div class="project-table-row">
-            <p class="project-table-element">hathu123</p>
-            <p class="project-table-element">30</p>
-            <p class="project-table-element">7 phút /10 phút</p>
-            <p class="project-table-element">29/30</p>
+          <div id="worker_kpi">
           </div>
         </div>
       </div>
@@ -134,7 +111,7 @@
 
 
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -168,5 +145,88 @@
           workerTable.style.display = 'block';
         }
       })
+    </script>
+
+    <script>
+        function getKPI(data) {
+          var progress = Math.round(parseInt(data.task_finish)*100/parseInt(data.total_task))
+          var wrong_rate = Math.round(parseInt(data.task_wrong)*100/parseInt(data.task_finish))
+          console.log("wrong no", data.task_wrong);
+          console.log("total no", data.task_finish);
+          $(".progress-bar").css("width", progress+"%");
+          $(".progress-bar").text(progress+"%");
+          $("#task_isChecked > h4 > b").text(data.task_ischecked + "/" + data.total_task);
+          $("#total_worker > h4 > b").text(data.total_worker);
+          $("#total_cost > h4 > b").text(data.sum_cost+" vnđ");
+          $("#wrong_rate > h4 > b").text(wrong_rate+"%");
+        }
+
+        function getKpiByWorker(data) {
+          $( "#worker_kpi" ).empty();
+          var cols = ["worker_name","total_task", "avg_time", "task_istrue"];
+          for (var i = 0; i < data.length; i++) {
+            var newRow = document.createElement("div");
+            newRow.setAttribute("class", "project-table-row");
+            for (var colIndex = 0; colIndex < cols.length; colIndex++) {
+                var newCell = document.createElement("p");
+                newCell.setAttribute("class", "project-table-element");
+                var val = data[i][cols[colIndex]];
+                newCell.innerHTML = val;
+                newRow.append(newCell);
+            }
+            document.getElementById("worker_kpi").appendChild(newRow);
+          }
+        }
+
+        function getKpiByTask(data) {
+          $( "#task_kpi" ).empty();
+          var cols = ["id","worker_name", "finish_at", "finish_time", "reviewer_decision", "cost"];
+          for (var i = 0; i < data.length; i++) {
+            var newRow = document.createElement("div");
+            newRow.setAttribute("class", "project-table-row");
+            for (var colIndex = 0; colIndex < cols.length; colIndex++) {
+                var newCell = document.createElement("p");
+                newCell.setAttribute("class", "project-table-element");
+                if (colIndex==4) {
+                  var val = data[i][cols[colIndex]];
+                  switch (val) {
+                    case null:
+                      newCell.innerHTML = "Chưa kiểm tra";
+                    break;
+                  
+                    case 'true':
+                      newCell.innerHTML = "Đúng";
+                    break;
+
+                    case 'false':
+                      newCell.innerHTML = "Sai";
+                    break;
+                  }
+                }else{
+                  var val = data[i][cols[colIndex]];
+                  newCell.innerHTML = val;
+                }
+                
+                newRow.append(newCell);
+            }
+            document.getElementById("task_kpi").appendChild(newRow);
+          }
+        }
+
+
+        $.get( "/project/"+'<%- project_id %>', function( result ) {
+          getKPI(result[0])
+          console.log(result)
+        });
+
+        $.get( "/project/"+'<%- project_id %>'+"/worker", function( result ) {
+          getKpiByWorker(result)
+          console.log(result)
+        });
+
+        $.get( "/project/"+'<%- project_id %>'+"/task", function( result ) {
+          getKpiByTask(result)
+          console.log(result)
+        });
     </script>
 </html>
