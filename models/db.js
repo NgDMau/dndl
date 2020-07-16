@@ -142,7 +142,7 @@ module.exports = {
     },
 
     getProgressProj: async function (table) {
-        var cmd = 'select count(id) as total_task, count(case when checked is not null then checked end) as task_finish, count(case when checked != 0 then checked end) as task_ischecked, count(distinct worker_id ) as total_worker, sum(case when cost is not null then cost end) as sum_cost from projects.'+table;
+        var cmd = 'select count(id) as total_task, count(case when checked is not null then checked end) as task_finish, count(case when checked != 0 then checked end) as task_ischecked, count(case when checked = 2 then checked end) as task_wrong, count(distinct worker_id ) as total_worker, sum(case when cost is not null and checked = 1 then cost end) as sum_cost from projects.'+table;
         var client = await pool.connect()
 
         try{
@@ -156,7 +156,7 @@ module.exports = {
     },
 
     getProgressByWorker: async function (table, index) {
-        var cmd = "SELECT worker_id, count(id) as total_task, round(avg(finish_time),2) as avg_time, count(case when checked = 1 then checked end) as task_istrue FROM projects."+table+" group by worker_id Order by worker_id OFFSET (("+index+" - 1) * 10) FETCH NEXT 10 ROWS ONLY"
+        var cmd = "SELECT table_users.username as worker_name, count(table_project.id) as total_task, round(avg(table_project.finish_time),2) as avg_time, count(case when table_project.checked = 1 then table_project.checked end) as task_istrue FROM projects."+table+" as table_project left join public.users as table_users on table_project.worker_id = table_users.id where table_project.worker_id is not null group by table_users.username Order by table_users.username OFFSET (("+index+" - 1) * 10) FETCH NEXT 10 ROWS ONLY"
         var client = await pool.connect()
         try{
             var res = await client.query(cmd);
@@ -186,8 +186,8 @@ module.exports = {
         }
     },
     
-    getBatchTenTasks: async function (table, index) {
-        var cmd = "select id, worker_id, finish_at, finish_time, checked, cost from projects."+table+" order by id OFFSET (("+index+" - 1) * 10) FETCH NEXT 10 ROWS ONLY"
+    getProgressByTask: async function (table, index) {
+        var cmd = "select table_project.id, table_users.username as worker_name, table_project.finish_at, table_project.finish_time, table_project.checked, cost from projects."+table+" as table_project left join public.users as table_users on table_project.worker_id = table_users.id where table_project.worker_id is not null order by id OFFSET (("+index+" - 1) * 10) FETCH NEXT 10 ROWS ONLY"
         var client = await pool.connect()
         try{
             var res = await client.query(cmd);
