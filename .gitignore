@@ -9,4 +9,5 @@ bin
 rawdata/*
 breathe/*
 *.log
-contact/*
+contact
+breath
