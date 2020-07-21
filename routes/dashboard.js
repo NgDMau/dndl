@@ -86,7 +86,7 @@ module.exports = function (app) {
             if(user.isNewbie() || user.isBeginner()) {
                 user = new User(req.session.passport.user)
                 console.log(user);
-                res.render('dashboard.ejs', {name: name, level: user.role});
+                res.render('dashboard.ejs', {name: user.fullname, level: user.role});
             }
             
         } else {
