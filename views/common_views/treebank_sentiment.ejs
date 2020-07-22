@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   
+  <link href="/css/dataset.css" rel="stylesheet">
+  <link href="/css/about2.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.1.0/echarts-en.common.min.js"></script>
+  <title>Treebank Sentiment - Inlab</title>
+  <link rel="shortcut icon" type="image/png" href="/img/logoInlabSquare.png"/>
+  
+  
+  
+</head>
+<body>
+  <header>
+    <%- include("header.ejs") %>
+  </header>
+  <div id="treebank-body">
+    <!-- Intro Box -->
+    <h1 class="dataset-intro treebank-box">
+      <img class="dataset-img" src='/img/sentiment-background.jpg'></img>
+      <div class="dataset-name">
+        <div>Sentiment dataset</div>
+        <div class="show-flex">
+          <a type="button" href="/contactsale" class="btn-warning btn startbtn nav-item nav-link text-center mt-4 d-flex justify-content-center align-items-center sentiment-button contact-sale">MUA NGAY</a>
+          <a type="button" href="#left-panel" class="btn btn-dark startbtn nav-item nav-link d-flex justify-content-center align-items-center sentiment-button">XEM THÊM</a>
+        </div>
+      </div>
+    </h1>
+    <div style="width: 100px;"></div>
+   
+    <!-- QuickInfo Box  -->
+    <h2 class="text-secondary dataset-quickinfo treebank-box">
+      <div class="usability">
+        <div class="text-primary">Khả năng sử dụng</div>
+        <ul class="left-padding">
+          <li class="text-tertiary quickinfo-text">Phát triển lên thành sơ đồ cây phân tích sắc thái của câu</li>
+          <li class="text-tertiary quickinfo-text">Tiếp tục thu thập dữ liệu các câu văn của các báo điện tử để phân tích sự thay đổi cách hành văn của các trang báo mạng qua thời gian</li>
+        </ul>
+      </div>
+      <div class="license">
+        <div class="text-primary">Chứng chỉ sử dụng</div>
+        <div class="text-tertiary quickinfo-text">Other (specified in description)</div>
+      </div>
+      <div class="tags">
+        <div class="text-primary">Tags</div>
+        <div class="text-tertiary quickinfo-text">sắc thái, báo chí, văn hóa mạng,…</div>
+      </div>
+    </h2>
+
+    <!-- Overall Box -->
+    <div class="treebank-box">
+      <div id="overall-box">
+        <h2 class="overall text-primary">Tổng quát</h2>
+        <div class="pointer" onclick="handleClickOverall()">
+          <div class="overall-content">
+            <div class="text-secondary">Mô tả</div>
+            <ul>
+              <li class="text-tertiary">Dataset gồm các câu văn bản đã được phân tích thành các từ và cụm từ và đã ghi điểm sắc thái cho từng từ.
+              </li>
+              <li class="text-tertiary">Có tiềm năng phát triển lên thành sơ đồ cây phân tích sắc thái câu
+              </li>
+            </ul>
+          </div>
+          <div class="overall-content">
+            <div class="text-secondary">Nội dung</div>
+            <ul>
+              <li class="text-tertiary">Các câu văn từ các bài báo điện tử và các trang thông tin trên Facebook năm 2017.</li>
+            </ul>
+          </div>
+          <div class="overall-content">
+            <div class="text-secondary">Nguồn</div>
+            <ul>
+              <li class="text-tertiary">Báo điện tử: Vietnamnet, Dân trí, Vnplus,…</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="down-arrow-container" class="arrow-container pointer" onclick="handleClickOverall()">
+        <div id="down-arrow"></div>
+      </div>
+    </div>
+
+    <div class="treebank-box">
+      <h2 class="text-primary">Cấu trúc</h2>
+      <img class="pointer" src="/img/treebank.jpg" width="100%" style="margin-bottom: 20px" onclick="handleClickGraph()">
+    </div>
+    
+    <div id="graph-container" style="display: none;">
+      <div><img src="/img/treebank.jpg"></div>
+    </div>
+    <div id="filter" style="display: none;" onclick="handleClickOutsideGraph()"></div>
+
+    <!-- Chart Box -->
+    <div>
+      <h2 class="title">Thống kê</h2>
+      <div class="chart-container">
+        <!-- <div id="mostRepeatedMeaningWord" class="chart bar" style="height: 0; width: 0; grid-area: bar1;"></div>
+        <div id="mostRepeatedNonsenseWord" class="chart bar" style="height: 0; width: 0;grid-area: bar2;"></div> -->
+        <div id="sentimentScore" class="chart" style="grid-area: pie1;"></div>
+        <div id="wordNumInSenc" class="chart" style="grid-area: pie2;"></div>
+        <div id="totalSentimentWord" class="chart" style="grid-area: pie3;"></div>
+        <div id="singleVsCompoundWord" class="chart" style="grid-area: pie4;"></div>
+      </div>
+    </div>
+
+    <!-- Detail Box -->
+    <h2 class="title">Thông tin chi tiết</h2>
+    <div class="show-flex detail">
+      <div id="left-panel" class="left-panel">
+        <div class="overall">
+          <h2 class="text-secondary">Thông tin file</h2>
+          <div class="text-tertiary">100KB</div>
+          <a id="link-file" class="text-tertiary" href="https://docs.google.com/spreadsheets/d/1MR0eKXt-k2-prN1tMbX-fg_VnBLk7tO2QfrZyQIjirw/edit?usp=sharing" target="_blank">Link file</a>
+        </div>
+        <div id="summary" class="overall">
+          <h2 class="text-secondary">Tóm tắt</h2>
+          <ul class="left-padding">
+            <li class="text-tertiary">1 file</li>
+            <li class="text-tertiary">10 cột</li>
+            <li class="text-tertiary">90,000 dòng</li>
+          </ul>
+        </div>
+      </div>
+      <div id="right-panel" class="treebank-box right-panel">
+        <h2 id="right-panel-button-container" class="overall text-primary show-flex">
+          <div id="right-panel-arrow" class="right-panel-button left-arrow pointer"></div>
+          <div id="file-detail" class="right-panel-button pointer">Chi tiết file</div>
+          
+          <div id="col-info" class="right-panel-button pointer" style='color: lightgrey'>Thông tin các cột</div>
+          <div id="stats" class="right-panel-button pointer" style='color: lightgrey'>Số liệu chi tiết</div>
+          <div id="sample" class="right-panel-button pointer" style='color: lightgrey'>Sample</div>
+        </h2>
+        <div id="right-panel-detail"></div>
+      </div>
+    </div>
+    <div>
+      <h3 id="interested">Hứng thú với dataset này?</h3>
+      <a id="buy-now" type="button" href="/contactsale" class="btn-warning btn startbtn nav-item nav-link text-center mt-4 d-flex justify-content-center align-items-center contact-sale">LIÊN HỆ VỚI CHÚNG TÔI</a>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>    -->
+
+  <script>
+    
+  </script>
+  <script>
+    const fileDetailHeader = ['Id', 'Wordid', 'Pure Sentence', 
+                          'Old Sentence', 'New Sentence',
+                          'Created Date', 'Modified Date',
+                          'Has Modified', 'Userid', 'Has skipped']
+
+    const fileDetailDescription = ['Số id riêng biệt dùng để nhận dạng câu', '',
+                                  'Câu nguyên gốc', 'Tách câu thành từng từ và với mỗi từ sẽ được ghi một số điểm sắc thái (0,1,2,3)', 'Tách câu thành từng từ và với mỗi từ sẽ được ghi một số điểm sắc thái (0,1,2,3)',
+                                  'Đánh dấu ngày câu được tạo trong dataset', 'Ngày thêm/ sửa chữa câu', 'Có hoặc không câu đã được sửa',
+                                  '', 'Có hoặc không dòng data bị bỏ qua trong quá trình']
+                                
+    const fileDetailData = ['Số dữ liệu độc nhất: <b>90,000</b>', 'Số dữ liệu độc nhất: <b>80,000</b>', 
+                            'Số dữ liệu độc nhất: <b>90,000</b>', 'Số dữ liệu độc nhất: <b>90,000</b>',
+                            'Số dữ liệu độc nhất: <b>90,000</b>', 'Số dữ liệu khác nhau: <b>365</b>', 'Số dữ liệu khác nhau: <b>365</b>', 'Số dữ liệu khác nhau: <b>2</b>',
+                            'Số dữ liệu khác nhau: <b>1</b>', 'Số dữ liệu khác nhau: <b>1</b>']
+
+    const colInfoData = [['Dữ liệu tốt: <b>90,000 (100%)</b>', 'Lỗi: <b>0 (0%)</b>', 'Mất: <b>0 (0%)</b>'],
+                        ['Dữ liệu tốt: <b>90,000 (100%)</b>', 'Lỗi: <b>0 (0%)</b>', 'Mất: <b>0 (0%)</b>'],
+                        ['Dữ liệu tốt: <b>90,000 (100%)</b>', 'Lỗi: <b>0 (0%)</b>', 'Mất: <b>0 (0%)</b>'],
+                        ['Dữ liệu tốt: <b>90,000 (100%)</b>', 'Lỗi: <b>0 (0%)</b>', 'Mất: <b>0 (0%)</b>'],
+                        ['Dữ liệu tốt: <b>90,000 (100%)</b>', 'Lỗi: <b>0 (0%)</b>', 'Mất: <b>0 (0%)</b>'],
+                        ['Dữ liệu tốt: <b>90,000 (100%)</b>', 'Lỗi: <b>0 (0%)</b>', 'Mất: <b>0 (0%)</b>', 'Dữ liệu xuất hiện nhiều nhất: 12/07/2017'],
+                        ['Dữ liệu tốt: <b>90,000 (100%)</b>', 'Lỗi: <b>0 (0%)</b>', 'Mất: <b>0 (0%)</b>', 'Dữ liệu xuất hiện nhiều nhất: 05/08/2017'],
+                        ['Dữ liệu tốt: <b>90,000 (100%)</b>', 'Lỗi: <b>0 (0%)</b>', 'Mất: <b>0 (0%)</b>', 'Dữ liệu xuất hiện nhiều nhất: 1'],
+                        ['Dữ liệu tốt: <b>90,000 (100%)</b>', 'Lỗi: <b>0 (0%)</b>', 'Mất: <b>0 (0%)</b>', 'Dữ liệu xuất hiện nhiều nhất: 1'],
+                        ['Dữ liệu tốt: <b>90,000 (100%)</b>', 'Lỗi: <b>0 (0%)</b>', 'Mất: <b>0 (0%)</b>', 'Dữ liệu xuất hiện nhiều nhất: 0']]
+
+    const stats = ['Số câu: <b>90,000</b>', 'Tổng số từ và cụm từ: <b>810,000</b>', 'Số từ: <b>350,000</b>',
+                  'Số cụm từ: <b>460,000</b>', 'Số câu lặp lại: <b>0</b>', 'Số từ mang sắc thái tiêu cực: <b>300,000</b>',
+                  'Số từ mang sắc thái tích cực: <b>510,000<b>']
+               
+    var table = document.getElementById('right-panel-detail')
+    var button = document.getElementsByClassName('right-panel-button')
+    var body
+    var headerBar = ''
+
+    for (var i=1; i<button.length; i++) {
+      button[i].addEventListener("click", function(e) {
+        for (var i=1; i<button.length; i++) {
+          if (button.item(i).id !== e.target.id) {
+            button.item(i).style.color = 'lightgrey'
+          }
+          else {
+            button.item(i).style.color = ''
+            const rightPanelDetail = document.getElementById('right-panel-detail')
+            
+            // show detail in table body
+            if (e.target.id === 'sample') {
+              headerBar = fileDetailHeader.map((header) => {
+                var isNumberCol
+                (['Pure Sentence', 'New Sentence', 'Old Sentence'].includes(header)) 
+                ? isNumberCol = false : isNumberCol = true
+
+                return (
+                  `<div style="background: white; margin-top: 0px" class='${`table-header-text table-header text-secondary ${isNumberCol ? 'width-100' : 'width-300'}`}'>
+                      ${header}
+                  </div>`
+                )
+              }).join("");
+
+              body = `<div> <%- googleSheet%> </div>`
+            }
+
+            else if (e.target.id === 'stats') {
+              headerBar = ''
+                body = 
+                  `<ul style="margin-top: 10px">
+                    ${stats.map((stat) => {
+                      return `<li class="text-tertiary">${stat}</li>`
+                    }).join("")}
+                  </ul>`
+            }
+
+            else {
+              headerBar = fileDetailHeader.map((header) => {
+                  return (
+                    `<div class="table-header-text table-header">${header}</div>`
+                  )
+              }).join("")
+              
+              if (e.target.id === 'file-detail') {
+                body =
+                  `<div>
+                    <div class="show-flex">
+                      ${fileDetailDescription.map((desc) => {
+                        return (
+                          `<div class="text-tertiary table-data">${desc}</div>`
+                        )
+                      }).join("")}
+                    </div>
+                    <div class="show-flex">
+                      ${fileDetailData.map((desc) => {
+                        return (
+                          `<div class="text-tertiary table-data">${desc}</div>`
+                        )
+                      }).join("")}
+                    </div>
+                  </div>`
+              }
+
+              else if (e.target.id === 'col-info') {
+                body = 
+                  `<div class="show-flex">
+                    ${colInfoData.map((info) => {
+                      return (
+                      `<div class="text-tertiary table-data" style='padding: 0'>
+                        <ul>
+                          ${info.map((item) => {
+                            return `<li>${item}</li>`
+                          }).join("")}
+                        </ul>
+                      </div>`
+                      )
+                  }).join("")}
+                  </div>`
+              }
+            }
+
+            const detail = 
+              `<div class="table">
+                <div id="table-header-container" class="show-flex">${headerBar}</div>
+                <div>${body}</div>
+              </div> `
+            rightPanelDetail.innerHTML = detail
+          }
+        }
+      })
+    }
+
+    window.onload = function() {  
+      document.getElementsByClassName('right-panel-button')[1].click()
+    }
+  </script>
+
+  <script>
+    // handle click up/down arrow - overall box
+    function handleClickOverall () {
+      var overall;
+      var arrow;
+      var overall_id;
+      var arrow_id;
+      var arrow_container = document.getElementsByClassName('arrow-container').item(0)
+      if (arrow_container.id === 'down-arrow-container' || arrow_container.id === 'down-arrow') {
+        overall = document.getElementById('overall-box');
+        arrow = document.getElementById('down-arrow');
+        overall_id = 'overall-box-show';
+        arrow_id = 'up-arrow';
+  
+        document.getElementById('down-arrow-container').setAttribute('id','up-arrow-container');
+      }
+      else {
+        overall = document.getElementById('overall-box-show');
+        arrow = document.getElementById('up-arrow');
+        overall_id = 'overall-box'
+        arrow_id = 'down-arrow';
+        document.getElementById('up-arrow-container').setAttribute('id','down-arrow-container');
+      }
+      overall.setAttribute('id', overall_id);
+      arrow.setAttribute('id', arrow_id);
+    }
+  </script>
+
+  <script>
+    // handle click left/right arrow - detail box
+    document.getElementById("right-panel-arrow").addEventListener('click', function(e) {
+      var leftPanel = document.getElementById('left-panel')
+      var rightPanel = document.getElementById('right-panel')
+      if (e.target.classList.contains('left-arrow')) {
+        leftPanel.style.display = 'none'
+        rightPanel.classList.add('right-panel-full')
+        e.target.classList.remove('left-arrow')
+        e.target.classList.add('right-arrow')
+      }
+      else {
+        leftPanel.style.display = ''
+        rightPanel.classList.remove('right-panel-full')
+        e.target.classList.remove('right-arrow')
+        e.target.classList.add('left-arrow')
+      }
+    })
+  </script>
+
+  <script>
+    function handleClickGraph() {
+      document.getElementById('graph-container').style.display = 'block';
+      document.getElementById('filter').style.display = 'block'
+    }
+  </script>
+
+  <script>
+    function handleClickOutsideGraph() {
+      document.getElementById('graph-container').style.display = 'none';
+      document.getElementById('filter').style.display = 'none';
+    }
+  </script>
+
+  <script type="text/javascript">
+    var sentimentScore = echarts.init(document.getElementById('sentimentScore'));
+    var wordNumInSenc = echarts.init(document.getElementById('wordNumInSenc'));
+    var totalSentimentWord = echarts.init(document.getElementById('totalSentimentWord'));
+    var singleVsCompoundWord = echarts.init(document.getElementById('singleVsCompoundWord'));
+    // var mostRepeatedMeaningWord = echarts.init(document.getElementById('mostRepeatedMeaningWord'));
+    // var mostRepeatedNonsenseWord = echarts.init(document.getElementById('mostRepeatedNonsenseWord'));
+
+    option1 = {
+      title: {
+          text: 'Liệt kê số điểm sắc thái của các câu',
+          bottom: '20',
+          left: 'center',
+          textStyle: {
+            fontSize: 13,
+            fontFamily: 'IBM Plex Sans',
+          },
+      },
+      tooltip: {
+          trigger: 'item',
+          formatter: '{a} <br/>{b} : {c} ({d}%)',
+          textStyle: {
+            fontSize: 11,
+            fontFamily: 'IBM Plex Sans',
+          },
+      },
+      legend: {
+          orient: 'vertical',
+          left: 'left',
+          data: ['Câu positive', 'Câu negative', 'Câu neutral'],
+          textStyle: {
+            fontSize: 11,
+            fontFamily: 'IBM Plex Sans',
+          },
+      },
+      series: [
+          {
+              name: 'Liệt kê số điểm sắc thái của các câu',
+              type: 'pie',
+              radius: '40%',
+              data: [
+                  {value: 46000, name: 'Câu positive', itemStyle: {color: '#f5b971'}},
+                  {value: 40500, name: 'Câu negative', itemStyle: {color: '#fdd998'}},
+                  {value: 3500, name: 'Câu neutral', itemStyle: {color: '#ffecc7'}},
+              ],
+              // label: {
+              //   show: false,
+              // },
+              label: {
+                normal: {
+                  formatter: '{c}',
+                    position: 'inside',
+                    textStyle: {
+                      color: '#000',
+                      fontSize: 11,
+                    }
+                }
+            },
+              emphasis: {
+                  itemStyle: {
+                      shadowBlur: 10,
+                      shadowOffsetX: 0,
+                      shadowColor: 'rgba(0, 0, 0, 0.5)'
+                  }
+              },
+              top: "60%",
+          }
+      ]
+    };
+
+    option2 = {
+      title: {
+          text: 'Số từ trong một câu',
+          bottom: '20',
+          left: 'center',
+          textStyle: {
+            fontSize: 13,
+            fontFamily: 'IBM Plex Sans',
+          },
+      },
+      tooltip: {
+          trigger: 'item',
+          formatter: '{a} <br/>{b} : {c} ({d}%)',
+          textStyle: {
+            fontSize: 11,
+            fontFamily: 'IBM Plex Sans',
+          },
+      },
+      legend: {
+          orient: 'vertical',
+          left: 'left',
+          data: ['Câu chứa 10-15 từ', 'Câu chứa nhiều hơn 15 từ', 'Câu chứa dưới 10 từ'],
+          textStyle: {
+            fontSize: 11,
+            fontFamily: 'IBM Plex Sans',
+          },
+      },
+      series: [
+          {
+              name: 'Số từ trong một câu',
+              type: 'pie',
+              radius: '40%',
+              data: [
+                  {value: 52000, name: 'Câu chứa 10-15 từ', itemStyle: {color: '#f5b971'}},
+                  {value: 35000, name: 'Câu chứa nhiều hơn 15 từ', itemStyle: {color: '#fdd998'}},
+                  {value: 3000, name: 'Câu chứa dưới 10 từ', itemStyle: {color: '#ffecc7'}},
+              ],
+              label: {
+                normal: {
+                    formatter: '{c}',
+                    position: 'inside',
+                    textStyle: {
+                      color: '#000',
+                      fontSize: 11,
+                    }
+                }
+            },
+              emphasis: {
+                  itemStyle: {
+                      shadowBlur: 10,
+                      shadowOffsetX: 0,
+                      shadowColor: 'rgba(0, 0, 0, 0.5)'
+                  }
+              }
+          }
+      ]
+    };
+
+    option3 = {
+      title: {
+          text: 'Tổng số từ positive/ negative / neutral\n trong toàn bộ dataset',
+          bottom: '20',
+          left: 'center',
+          textStyle: {
+            fontSize: 13,
+            fontFamily: 'IBM Plex Sans',
+          },
+      },
+      tooltip: {
+          trigger: 'item',
+          formatter: '{a} <br/>{b} : {c} ({d}%)',
+          textStyle: {
+            fontSize: 11,
+            fontFamily: 'IBM Plex Sans',
+          },
+      },
+      legend: {
+          orient: 'vertical',
+          left: 'left',
+          data: ['Từ positive', 'Từ negative', 'Từ neutral'],
+          textStyle: {
+            fontSize: 11,
+            fontFamily: 'IBM Plex Sans',
+          },
+      },
+      series: [
+          {
+              type: 'pie',
+              name: 'Tổng số từ theo sắc thái trong dataset',
+              radius: '40%',
+              data: [
+                  {value: 100000, name: 'Từ positive', itemStyle: {color: '#f5b971'}},
+                  {value: 80000, name: 'Từ negative', itemStyle: {color: '#fdd998'}},
+                  {value: 20000, name: 'Từ neutral', itemStyle: {color: '#ffecc7'}},
+              ],
+              label: {
+                normal: {
+                  formatter: '{c}',
+                    position: 'inside',
+                    textStyle: {
+                      color: '#000',
+                      fontSize: 11,
+                    }
+                }
+            },
+              emphasis: {
+                  itemStyle: {
+                      shadowBlur: 10,
+                      shadowOffsetX: 0,
+                      shadowColor: 'rgba(0, 0, 0, 0.5)'
+                  }
+              }
+          }
+      ]
+    };
+
+    option4 = {
+      title: {
+          text: 'Số từ đơn, từ ghép trong dataset',
+          bottom: '20',
+          left: 'center',
+          textStyle: {
+            fontSize: 13,
+            fontFamily: 'IBM Plex Sans',
+          },
+      },
+      tooltip: {
+          trigger: 'item',
+          formatter: '{a} <br/>{b} : {c} ({d}%)',
+          textStyle: {
+            fontSize: 11,
+            fontFamily: 'IBM Plex Sans',
+          },
+      },
+      legend: {
+          orient: 'vertical',
+          left: 'left',
+          data: ['Từ ghép', 'Từ đơn'],
+          textStyle: {
+            fontSize: 11,
+            fontFamily: 'IBM Plex Sans',
+          },
+      },
+      series: [
+          {
+              name: 'Số từ đơn, từ ghép trong dataset',
+              type: 'pie',
+              radius: '40%',
+              data: [
+                  {value: 115000, name: 'Từ ghép', itemStyle: {color: '#f5b971'}},
+                  {value: 97000, name: 'Từ đơn', itemStyle: {color: '#fdd998'}},
+              ],
+              label: {
+                normal: {
+                  formatter: '{c}',
+                    position: 'inside',
+                    textStyle: {
+                      color: '#000',
+                      fontSize: 11,
+                    }
+                }
+              },
+              emphasis: {
+                  itemStyle: {
+                      shadowBlur: 10,
+                      shadowOffsetX: 0,
+                      shadowColor: 'rgba(0, 0, 0, 0.5)'
+                  }
+              }
+          }
+      ]
+    };
+
+    // option5 = {
+    //   color: ['#ffc107'],
+    //   title: {
+    //       text: 'Số từ lặp lại với số lần lặp lại\n trong dataset (có ý nghĩa)',
+    //       left: 'center',
+    //       textStyle: {
+    //         fontSize: 13,
+    //         fontFamily: 'IBM Plex Sans',
+    //       },
+    //   },
+    //   tooltip: {
+    //       trigger: 'axis',
+    //       axisPointer: {
+    //           type: 'shadow'        
+    //       },
+    //       textStyle: {
+    //         fontSize: 11,
+    //         fontFamily: 'IBM Plex Sans',
+    //       },
+    //   },
+    //   grid: {
+    //       left: '3%',
+    //       right: '4%',
+    //       bottom: '3%',
+    //       containLabel: true
+    //   },
+    //   xAxis: [
+    //       {
+    //           type: 'category',
+    //           data: ['tốt', 'vui vẻ', 'hạnh phúc'],
+    //           axisTick: {
+    //               alignWithLabel: true
+    //           }
+    //       }
+    //   ],
+    //   yAxis: [
+    //       {
+    //           type: 'value'
+    //       }
+    //   ],
+    //   series: [
+    //       {
+    //           name: '',
+    //           type: 'bar',
+    //           barWidth: '60%',
+    //           data: [300,400,210]
+    //       }
+    //   ]
+    // };
+
+    // option6 = {
+    //   color: ['#ffc107'],
+    //   title: {
+    //       text: 'Số từ lặp lại nhiều không có sắc thái\n trong dataset (từ nối)',
+    //       left: 'center',
+    //       textStyle: {
+    //         fontSize: 13,
+    //         fontFamily: 'IBM Plex Sans',
+    //       },
+    //   },
+    //   tooltip: {
+    //       trigger: 'axis',
+    //       axisPointer: {
+    //           type: 'shadow'        
+    //       },
+    //       textStyle: {
+    //         fontSize: 11,
+    //         fontFamily: 'IBM Plex Sans',
+    //       },
+    //   },
+    //   grid: {
+    //       left: '3%',
+    //       right: '4%',
+    //       bottom: '3%',
+    //       containLabel: true
+    //   },
+    //   xAxis: [
+    //       {
+    //           type: 'category',
+    //           data: ['và', 'tôi', 'bạn', 'với'],
+    //           axisTick: {
+    //               alignWithLabel: true
+    //           }
+    //       }
+    //   ],
+    //   yAxis: [
+    //       {
+    //           type: 'value'
+    //       }
+    //   ],
+    //   series: [
+    //       {
+    //           name: '',
+    //           type: 'bar',
+    //           barWidth: '60%',
+    //           data: [300,400,210,100]
+    //       }
+    //   ]
+    // };
+
+
+    // use configuration item and data specified to show chart
+    sentimentScore.setOption(option1);
+    wordNumInSenc.setOption(option2);
+    totalSentimentWord.setOption(option3);
+    singleVsCompoundWord.setOption(option4);
+    // mostRepeatedMeaningWord.setOption(option5);
+    // mostRepeatedNonsenseWord.setOption(option6);
+    
+  </script>
+</body>
+</html>

@@ -4826,7 +4826,7 @@ input[type="button"].btn-block {
 
     .navbar-expand-lg .navbar-nav .nav-link {
         padding-right: 0.5rem;
-        padding-left: 0.5rem;
+        padding-left: 1rem;
     }
 
     .navbar-expand-lg > .container,
@@ -8656,7 +8656,6 @@ button.bg-dark:focus {
     padding-top: 3rem !important;
 }
 
-.pr-5,
 .px-5 {
     padding-right: 3rem !important;
 }

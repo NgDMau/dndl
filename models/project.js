@@ -1,3 +1,5 @@
+const fs = require('fs');
+var db = require('./db')
 
 module.exports = class Project {
 
@@ -13,11 +15,12 @@ module.exports = class Project {
         this.priority = projectjson.priority;
         this.uploadtime = projectjson.uploadtime;
         this.owner_id = projectjson.owner_id;
+        this.labels = projectjson.labels;
     }
 
     async register() {
         var db = require('./db');
-        var values = [this.name, this.id, this.type, this.theme, this.rate, this.starttime, this.endtime, this.datafile, this.uploadtime, this.priority, this.owner_id];
+        var values = [this.name, this.id, this.type, this.theme, this.rate, this.starttime, this.endtime, this.datafile, this.uploadtime, this.priority, this.owner_id, this.labels];
         var result = false
 
         await db.registerNewProject(values)
@@ -62,64 +65,185 @@ module.exports = class Project {
 
         var db = require('./db');
         var pool = db.getPool();
+        //var client = await pool.connect();
+        var raw_file = this.datafile;
+        var project_type = this.type;
+        var table_name = this.id;
+        var that = this;
+
+        //console.log("Registered labels ", result)
+        fs.readFile(raw_file, async function(err, data) {
+            if (err) throw err;
+
+            var lines = data.toString().split('\n');
+            
+            if (lines[0].includes("|")) {
+                var labels = lines[0].split("|");
+                lines.shift();
+            }
+            
+            lines.pop();
+            var labels = ["This task does not require predefined labels!"] 
+            
+            console.log("Labels: ", labels);
+            var project_info = that;
+
+            that.insertDataToDb(lines, table_name, project_type)
+                .then(function(result) {
+                    console.log('Result of insertDataToDb: ', result);
+                    return result;
+                })
+                .then(function(result) {
+                    that.registerLabelsToDb(that.id, labels)
+                    .then(function(result) {
+                        console.log("Result of registerLabelsToDb: ", result);
+                    })
+                })
+            // that.registerLabelsToDb(that.project_id, labels)
+            //     .then(async (result) =>  {
+            //         console.log("Result command/code of registerLabelsToDb: ", result.command || result.code);
+            //         console.log("Lines insert to DB: \n", lines);
+
+            //         var insert_result = await that.insertDataToDb(lines, table_name);
+
+            //         return insert_result;
+            //     })
+            //     .then((result) => {
+            //         console.log("Result of insertDataToDb: ", result);
+            //     })
+        })
+    }
+
+    async insertDataToDb (lines, table_name, project_type) {
+        var db = require('./db');
+        var pool = db.getPool();
         var client = await pool.connect();
 
-        var rawfile = this.datafile;
-        var tablename = this.id;
-        var labels = this.labels || ["Tích cực", "tiêu cực", "trung tính"]
+        var cmd;
+        var values_number;
 
-        //var sentences = this.readlines(rawfile);
-
-        var fs = require('fs');
-        fs.readFile(rawfile, async function(err, data) {
-            if(err) throw err;
-            var array = data.toString().split('\n');
-            array.pop();
-            console.log(array)
-            var cmd = "INSERT INTO projects." + tablename + "(content, labeled_workers, labeled_values, labeled_time)" + " VALUES($1, $2, $3, $4)";
-            var final_result = []
-
-            try {
-                for (var index in array) {
-                    console.log(array[index])
-                    var values = [array[index], [], [], []]
-                    var result = await client.query(cmd, values);
-                }
-                client.release();
-                final_result.push(result);
-                return final_result;
-            } catch (e) {
-                console.log(e)
-                client.release();
-                final_result.push(e);
-                return final_result;
-            }
-
-        });
-
-
+        switch(project_type) {
+            case "image_description":
+                cmd = "INSERT INTO projects." + table_name + "(image, result) " + "VALUES($1, $2)";
+                values_number = 2;
+                break;
+            case "image_object_detection":
+                cmd = "INSERT INTO projects." + table_name + "(image, result) " + "VALUES($1, $2)";
+                values_number = 2;
+                break;
+            case "audio_transcription":
+                cmd = "INSERT INTO projects." + table_name + "(audio, cost) " + "VALUES($1, $2)";
+                values_number = 2;
+                break;
+            case "image_classification":
+                cmd = "INSERT INTO projects." + table_name + "(image, result) " + "VALUES($1, $2)";
+                values_number = 2;
+                break;
+            default:
+                cmd = "INSERT INTO projects." + table_name + "(content, labeled_workers, labeled_values, labeled_time)" + " VALUES($1, $2, $3, $4)";
+                values_number = 4;
+                break;
+        }
 
         
-    
+        var final_result = []
+
+        try {
+            for (var line in lines) {
+                console.log(lines[line])
+
+                switch (values_number) {
+                    case 4:
+                        var values = [lines[line], [], [], []];
+                        break;
+                    case 2:
+                        var values = [lines[line], 0];
+                        break;
+                    case 1:
+                        var values = [lines[line]];
+                        break;
+                    default:
+                        var values = [lines[line], []];
+                        break;
+                    }
+                    console.log("values_number", values_number);
+                    if  (line !== ""){
+                        var result = await client.query(cmd, values);
+                    }
+                }
+            
+            client.release();
+            final_result.push(result);
+            return final_result;
+        } catch (e) {
+            console.log(e)
+            client.release();
+            final_result.push(e);
+            return final_result;
+        }
     }
 
-    readlines(filepath) {
-        var fs = require('fs');
-        fs.readFile(filepath, function(err, data) {
-            if(err) throw err;
-            var array = data.toString().split('\n');
-            console.log(array);
-            return array
-        });
+    getCommandByType (type, tablename) {
+        var command_json = {
+            sentiment: "INSERT INTO projects." + tablename + "(content, labeled_workers, labeled_values, labeled_time)" + " VALUES($1, $2, $3, $4)",
+            topic: "INSERT INTO projects." + tablename + "(content, labeled_workers, labeled_values, labeled_time)" + " VALUES($1, $2, $3, $4)",
+            audio: "INSERT INTO projects." + tablename + "(content, labeled_workers, labeled_values, labeled_time)" + " VALUES($1, $2, $3, $4)",
+            image_object_label: "INSERT INTO projects." + tablename + "("
+        }
+    } 
+
+    async registerLabelsToDb (project_id, project_labels) {
+        console.log("Insert to table ", project_id, " labels ", project_labels);
+        var pool = require('./db').getPool(); 
+        var cmd = "UPDATE projects_metadata SET labels=$1 WHERE id=$2";
+        var values = [project_labels, project_id];
+        var client = await pool.connect();
+        var result = await client.query(cmd, values);
+        client.release();
+        return result;
     }
-    
 
-    async getData() {
+    async getAttribute(attr) {
+        if (this.type) {
+            return this.type
+        }
+        var pool = require('./db').getPool(); 
+        var cmd = "SELECT " + attr + " FROM projects_metadata WHERE id=$1";
+        var values = [this.id];
+        var client = await pool.connect();
+        var result = await client.query(cmd, values);
+        client.release();
+        if (result.rows[0]) {
+            return {
+                code: "OK",
+                type: result.rows[0].type
+            }
+        }
+        return {
+            code: "ERROR",
+        }
+        
+    }
 
+    async getKPIS() {
+        // var pool = db.getPool(); 
+        await setTimeout(function() {
+            console.log("Faking process....");
+        }, 500);
+
+        var fake_data = {
+            no_of_workers: 11,
+            percentage: 80,
+            rejected_tasks: 25,
+            accepted_tasks: 10120,
+            remaining_days: 4
+            }
+
+        return fake_data;
     }
 
     async uploadData() {
-
+        
     }
 
     async destroy() {
@@ -127,18 +251,43 @@ module.exports = class Project {
         var drop_table = this.id;
         var schema = 'projects';
         var result = false;
-
-        await db.dropTableInSchema(drop_table, schema)
-        .then((res) => {
-            console.log("this is res ==============",res)
-            result = true;
-        })
-        .catch(err => {
-            console.error(err)
-            result = false;
-        });
         
-        return result;
+
+        // await db.dropTableInSchema(drop_table, schema)
+        // .then((res) => {
+        //     console.log("result of dropTableInSchema ",res);
+        //     var result = await this.unregister();
+        //     return result;
+        // })
+        // .then((res) => {
+        //     console.log("result of this.unregister ", res);
+        // })
+        // .catch(err => {
+        //     console.error(err)
+        //     result = false;
+        // });
+
+
+        /** Second approach */
+        var drop_result = await db.dropTableInSchema(drop_table, schema);
+
+        db.dropTableInSchema(drop_table, schema)
+            .then(async function(drop_result) {
+                console.log("Drop result:", drop_result);
+                var unregister_result = await this.unregister();
+                console.log("Unregistered result: ", unregister_result);
+            })
+        
+        // if (drop_result.code && unregister_result.code) {
+        //     return false;
+        // }
+        return true;
     }
 
+    async unregister() {
+        var condition = "id = " + "'this.id'"
+        var result = await db.deleteFromTable("projects_metadata", condition);
+        return result;
+    }
 }
+

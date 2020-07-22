@@ -7,3 +7,7 @@ Dockerfile
 .vs
 bin
 rawdata/*
+breathe/*
+*.log
+contact
+breath

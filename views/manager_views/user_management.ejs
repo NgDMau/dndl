@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+
+    <!-- Title Page-->
+    <title>Dashboard - Inlab</title>
+    <link rel="shortcut icon" type="image/png" href="/img/logoInlabSquare.png"/>
+
+    <!-- Fontfaces CSS-->
+    <link href="/public/css/font-face.css" rel="stylesheet" media="all">
+    <link href="/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS-->
+    <link href="/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link href="/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/wow/animate.css" rel="stylesheet" media="all">
+    <link href="/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/slick/slick.css" rel="stylesheet" media="all">
+    <link href="/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="/css/user_management/theme.css" rel="stylesheet" media="all">
+    
+
+</head>
+
+<body class="animsition">
+    <div class="page-wrapper">
+
+
+        <!-- MENU SIDEBAR-->
+        <aside class="menu-sidebar d-none d-lg-block">
+            <div class = "logobox pt-5" aria-hidden="true">
+                <a href='/about'>
+                    <img src="/img/logo.png" alt="inlab logo" class="logo" href='/about'>
+           </a>
+                </div>
+    
+            <div class="menu-sidebar__content js-scrollbar1">
+                <nav class="navbar-sidebar">
+                    <ul class="list-unstyled navbar__list">
+                        </li>
+                        <li class="active has-sub"> 
+                            <a href="#">
+                                <i class="fas fa-users"></i>Quản lý người dùng</a>
+                            <a href="#" data-toggle="modal" data-target="#not_done">
+                                    <i class="fas fa-list"></i>Dữ liệu đào tạo</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+        <!-- END MENU SIDEBAR-->
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            <!-- HEADER DESKTOP-->
+            <header class="header-desktop">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="header-wrap">
+                            <div class="header-button">
+                                <!-- <div class="noti-wrap">
+                                    <div class="noti__item js-item-menu">
+                                        <i class="zmdi zmdi-comment-more"></i>
+                                        <span class="quantity">1</span>
+                                        <div class="mess-dropdown js-dropdown">
+                                            <div class="mess__title">
+                                                <p>You have 2 news message</p>
+                                            </div>
+                                            <div class="mess__item">
+                                                <div class="image img-cir img-40">
+                                                    
+                                                </div>
+                                                <div class="content">
+                                                    <h6>Michelle Moreno</h6>
+                                                    <p>Have sent a photo</p>
+                                                    <span class="time">3 min ago</span>
+                                                </div>
+                                            </div>
+                                            <div class="mess__item">
+                                                <div class="image img-cir img-40">
+                                                    
+                                                </div>
+                                                <div class="content">
+                                                    <h6>Diane Myers</h6>
+                                                    <p>You are now connected on message</p>
+                                                    <span class="time">Yesterday</span>
+                                                </div>
+                                            </div>
+                                            <div class="mess__footer">
+                                                <a href="#">View all messages</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="noti__item js-item-menu">
+                                        <i class="zmdi zmdi-email"></i>
+                                        <span class="quantity">1</span>
+                                        <div class="email-dropdown js-dropdown">
+                                            <div class="email__title">
+
+                                            </div>
+                                            <div class="email__item">
+                                                <div class="image img-cir img-40">
+                                                </div>
+                                                <div class="content">
+                                                </div>
+                                            </div>
+                                            <div class="email__item">
+                                                <div class="image img-cir img-40">
+                                                </div>
+                                                <div class="content">
+                                                </div>
+                                            </div>
+                                            <div class="email__item">
+                                                <div class="image img-cir img-40">
+                                                </div>
+                                                <div class="content">
+                                                </div>
+                                            </div>
+                                            <div class="email__footer">
+                                                <a href="#">See all emails</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="noti__item js-item-menu">
+                                        <i class="zmdi zmdi-notifications"></i>
+                                        <span class="quantity">3</span>
+                                        <div class="notifi-dropdown js-dropdown">
+                                            <div class="notifi__title">
+                                                <p>You have 3 Notifications</p>
+                                            </div>
+                                            <div class="notifi__item">
+                                                <div class="bg-c1 img-cir img-40">
+                                                    <i class="zmdi zmdi-email-open"></i>
+                                                </div>
+                                                <div class="content">
+                                                    <p>You got a email notification</p>
+                                                    <span class="date">April 12, 2018 06:50</span>
+                                                </div>
+                                            </div>
+                                            <div class="notifi__item">
+                                                <div class="bg-c2 img-cir img-40">
+                                                    <i class="zmdi zmdi-account-box"></i>
+                                                </div>
+                                                <div class="content">
+                                                    <p>Your account has been blocked</p>
+                                                    <span class="date">April 12, 2018 06:50</span>
+                                                </div>
+                                            </div>
+                                            <div class="notifi__item">
+                                                <div class="bg-c3 img-cir img-40">
+                                                    <i class="zmdi zmdi-file-text"></i>
+                                                </div>
+                                                <div class="content">
+                                                    <p>You got a new file</p>
+                                                    <span class="date">April 12, 2018 06:50</span>
+                                                </div>
+                                            </div>
+                                            <div class="notifi__footer">
+                                                <a href="#">All notifications</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <div class="account-wrap">
+                                    <div class="account-item clearfix js-item-menu">                                   
+                                        <div>
+                                            <a class="js-acc-btn" ><%= username %></a>
+                                        </div>
+                                        <div class="account-dropdown js-dropdown">
+                                            <div class="info clearfix">                                               
+                                                <h5 class="name">
+                                                    <a ><%= username %></a>
+                                                </h5>
+                                            </div>
+                                            <!-- <div class="account-dropdown__body">
+                                                <div class="account-dropdown__item">
+                                                    <a href="#">
+                                                        <i class="zmdi zmdi-account"></i>Thông tin cá nhân</a>
+                                                </div>
+                                                <div class="account-dropdown__item">
+                                                    <a href="#">
+                                                        <i class="zmdi zmdi-settings"></i>Cài đặt</a>
+                                                </div>
+                                            </div> -->
+                                            <div class="account-dropdown__footer">
+                                                <a href="/logout">
+                                                    <i class="zmdi zmdi-power"></i>Đăng xuất</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- HEADER DESKTOP-->
+
+            <!-- MAIN CONTENT-->
+            <div class="main-content">
+
+                <% if ( mess.length > 0 ) { %>
+                    <% if ( mess == "Tên đăng nhập đã tồn tại" ) { %>
+                        <div class="alert alert-danger">
+                            <%= mess %>
+                        </div>
+                    <% }else{ %>
+                        <div class="alert alert-success">
+                            <%= mess %>
+                        </div>
+                    <% } %>
+                <% } %>
+
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <section class="p-t-20">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12" style="overflow: auto;">
+                                        <h3 class="title-5 m-b-35">Danh sách người dùng</h3>
+                                        <div class="table-data__tool">
+                                            <div class="table-data__tool-left">
+                                                <form class="form-header" action="/user_management/filter" method="POST">
+                                                    <div class="rs-select2--light rs-select2--md">
+                                                        <select class="js-select2" name="property">
+                                                            <option selected="selected" >Lọc theo</option>
+                                                            <option value="score">Điểm</option>
+                                                        </select>
+                                                        <div class="dropDownSelect2"></div>
+                                                    </div>
+                                                    <div class="rs-select2--light rs-select2--sm">
+                                                        <select class="js-select2" name="filter">
+                                                            <option selected="selected">Thứ tự</option>
+                                                            <option value="increase">Tăng dần</option>
+                                                            <option value="decrease">Giảm dần</option>
+                                                        </select>
+                                                        <div class="dropDownSelect2"></div>
+                                                    </div>
+                                                    <button class="au-btn-filter" type="submit">
+                                                        <i class="zmdi zmdi-filter-list"></i>Lọc
+                                                    </button>
+                                                </form>
+                                            </div>
+
+                                            <div class="table-data__tool-right">
+
+                                                <form class="form-header" action="/user_management/find" method="POST">
+                                                    <select class="au-select" name="row">
+                                                        <option value="username">Tìm kiếm theo</option>
+                                                        <option value="username">Tên đăng nhập</option>
+                                                        <option value="full_name">Họ và tên</option>
+                                                        <option value="email">Email</option>
+                                                        <option value="address">Địa chỉ</option>
+                                                        <option value="role">Quyền tài khoản</option>
+                                                    </select>
+                                                    <input class="au-input" type="text" name="search" placeholder="Tìm kiếm" />
+                                                    <button class="au-btn--submit" type="submit">
+                                                        <i class="zmdi zmdi-search"></i>
+                                                    </button>
+                                                </form>
+
+                                                <button class="au-btn au-btn-icon au-btn--green au-btn--small" data-toggle="modal" data-target="#add_user">
+                                                    <i class="zmdi zmdi-plus"></i>Thêm người dùng</button>                                               
+                                            </div>
+                                        </div>
+                                        <div class="table-responsive table-responsive-data2">
+                                            <table class="table table-data2">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Tên đăng nhập</th>
+                                                        <th>Mật khẩu</th>
+                                                        <th>Họ và tên</th>
+                                                        <th>Email</th>
+                                                        <th>Địa chỉ</th>
+                                                        <th>Quyền</th>
+                                                        <th>Điểm</th>
+                                                        <th>Thời gian</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                <% list.rows.forEach(function(item){%>
+                                                        <tr class="tr-shadow">
+                                                            <td name="id"><%= item.id %></td>
+                                                            <td name="username"><%= item.username %></td>
+                                                            <td name="password" class="hidetext"><%= item.password %></td>
+                                                            <td name="full_name"><%= item.full_name %></td>
+                                                            <td name="email"><%= item.email %></td>
+                                                            <td name="address"><%= item.address %></td>    
+                                                            <td name="role"><%= item.role %></td> 
+                                                            <td name="score"><%= item.test_score %></td>
+                                                            <td name="time"><%= new Date(item.total_score * 1000).toISOString().substr(11, 8) %></td>
+                                                                                                              
+                                                            <td>
+                                                                <div class="table-data-feature">
+                                                                    <button type="button" class="edit" title="Edit" data-toggle="modal" data-target="#edit_user"><i class="material-icons">&#xE254;</i></button>
+                                                                    <button type="button" class="delete" title="Delete" data-toggle="modal" data-target="#delete_user"><i class="material-icons">&#xE872;</i></button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    <tr class="spacer"></tr>
+                                                <% }); %>                                                   
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+            <!-- END MAIN CONTENT-->
+            <!-- END PAGE CONTAINER-->
+        </div>
+
+    </div>
+
+
+    <!-- Jquery JS-->
+    <script src="/vendor/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap JS-->
+    <script src="/vendor/bootstrap-4.1/popper.min.js"></script>
+    <script src="/vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    <!-- Vendor JS       -->
+    <script src="/vendor/slick/slick.min.js">
+    </script>
+    <script src="/vendor/wow/wow.min.js"></script>
+    <script src="/vendor/animsition/animsition.min.js"></script>
+    <script src="/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+    </script>
+    <script src="/vendor/counter-up/jquery.waypoints.min.js"></script>
+    <script src="/vendor/counter-up/jquery.counterup.min.js">
+    </script>
+    <script src="/vendor/circle-progress/circle-progress.min.js"></script>
+    <script src="/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="/vendor/chartjs/Chart.bundle.min.js"></script>
+    <script src="/vendor/select2/select2.min.js">
+    </script>
+
+    <!-- Main JS-->
+    <script src="/js/user_management/main.js"></script>
+
+    <div class="modal fade" id="not_done" role="dialog">
+        <div class="modal-dialog">
+        
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+               <div>Tính năng này sẽ có ở phiên bản tiếp theo!</div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+      
+    <!--Them tai khoan-->>
+    <div class="modal fade" id="add_user" role="dialog">
+        <div class="modal-dialog">
+        
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Thêm tài khoản</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form action="/user_management/add" method="post">
+                    <div class="form-group row">
+                        <label for="usr" class="col-sm-3 col-form-label">Họ và tên</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="full_name" name="full_name" placeholder="Họ và tên">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Tên đăng nhập</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Tên đăng nhập" required="required" pattern="^[A-Za-z0-9_]{1,15}$" title="Tên đăng nhập phải không bao gồm dấu và ký tự đặc biệt.">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="pwd" class="col-sm-3 col-form-label">Mật khẩu</label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" id="password" name="password" required="required" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" placeholder="Mật khẩu">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-3 col-form-label">Email</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="email" name="email" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Địa chỉ</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="address" name="address" placeholder="Địa chỉ">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Quyền</label>
+                        <div class="col-sm-9">
+                            <select class="custom-select" id="role" name="role" required="required">
+                                
+                                <option value="level_1">Beginner</option>
+                                <option value="worker">Worker</option>
+                                <option value="admin">Admin</option>
+                                
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-12 d-flex justify-content-center">
+                            <button type="submit" class="btn d-flex justify-content-end btn-warning">Thêm</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- bo vi da co dau 'x' rui ah
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        -->
+          </div>
+          
+        </div>
+    </div>
+    <!--Sua tai khoan-->>
+    <div class="modal fade" id="edit_user" role="dialog">
+        <div class="modal-dialog">
+        
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Sửa tài khoản</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form action="/user_management/edit" method="post">
+                    <div class="form-group row hide">
+                        <label class="col-sm-3 col-form-label">ID</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="id_edit" name="id" placeholder="ID" >
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Họ và tên</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="full_name_edit" name="full_name" placeholder="Họ và tên">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="usr" class="col-sm-3 col-form-label">Tên đăng nhập</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="username_edit" name="username" required="required" pattern="^[A-Za-z0-9_]{1,15}$" title="Tên đăng nhập phải không bao gồm dấu và ký tự đặc biệt.">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="pwd" class="col-sm-3 col-form-label">Mật khẩu</label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" id="password_edit" name="password" required="required" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" placeholder="Mật khẩu">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-3 col-form-label">Email</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="email_edit" name="email" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Địa chỉ</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="address_edit" name="address" placeholder="Địa chỉ">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Quyền</label>
+                        <div class="col-sm-9">
+                            <select class="custom-select" id="role_edit" name="role" required="required">
+                                <option value="level_1">Beginner</option>
+                                <option value="worker">Worker</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-12 d-flex justify-content-center">
+                            <button type="submit" class="btn d-flex justify-content-end btn-warning">Sửa</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- bo vi da co dau 'x' rui ah
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+
+        -->
+          </div>
+          
+        </div>
+    </div>
+    <!--Xoa tai khoan-->>
+    <div class="modal fade" id="delete_user" role="dialog">
+        <div class="modal-dialog">
+        
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Bạn có  chắc muốn xóa tài khoản này</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form action="/user_management/delete" method="post">
+                    <div class="form-group row hide">
+                        <label class="col-sm-3 col-form-label">ID</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="id_delete" name="id" placeholder="ID">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-12 d-flex justify-content-center">
+                            <button type="submit" class="btn d-flex justify-content-end btn-warning">Xóa</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+          
+        </div>
+    </div>
+
+    <script>
+        var value;
+        $(document).on("click", ".edit", function(){
+
+            value = $(this).parents("tr").find("td");
+            $('#id_edit').val($(value[0]).text());
+            $('#username_edit').val($(value[1]).text());
+            $('#password_edit').val($(value[2]).text());
+            $('#full_name_edit').val($(value[3]).text());
+            $('#email_edit').val($(value[4]).text());
+            $('#address_edit').val($(value[5]).text());
+            $('#role_edit').val($(value[6]).text());
+
+
+        });
+        $(document).on("click", ".delete", function(){
+
+            value = $(this).parents("tr").find("td");
+            $('#id_delete').val($(value[0]).text());
+
+        });
+    </script>
+      
+
+</body>
+
+</html>
+<!-- end document-->

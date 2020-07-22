@@ -39,7 +39,7 @@ body{
     flex-direction: column;
 }
 .logo{
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Roboto', sans-serif;
     color: lightgray;
     font-weight: bold;
     margin-top: 10px;

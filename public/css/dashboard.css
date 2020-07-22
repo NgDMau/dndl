@@ -1,5 +1,5 @@
 html{
-  font-family: 'Montserrat', sans-serif;   
+  font-family: 'Roboto', sans-serif;   
   font-size: 15px;
   height:100%;
   width:100%;
@@ -105,7 +105,7 @@ img{
 
 .list-work > div:last-child{
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
 }
 
 
@@ -135,7 +135,7 @@ img{
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Montserrat', sans-serif;   
+  font-family: 'Roboto', sans-serif;   
 
   /* Center slide text vertically */
   
