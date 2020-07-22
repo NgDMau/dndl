@@ -43,8 +43,8 @@
             }
 
             function displayReceivedTask(task) {
-                let audio_url = "http://inlab.nisci.gov.vn/" + task.url
-                document.getElementById("audio-component").setAttribute("src", audio_url);
+                // let audio_url = "http://inlab.nisci.gov.vn/" + task.url
+                document.getElementById("audio-component").setAttribute("src", task.url);
                 document.getElementById("review-audio").load();
                 document.getElementById("labeled-transcription").innerText = task.text;
                 document.getElementById("review-correct-text").value = "";
