@@ -29,7 +29,7 @@
 
     <div class="body">
       <div class="body-header">
-        <h2>PROJECT B</h2>
+        <h2 id="project-name"></h2>
         <div class="divide-line"></div>
       </div>
       <div id="quick-info">
@@ -156,7 +156,8 @@
           $("#task_isChecked > h4 > b").text(data.task_ischecked + "/" + data.total_task);
           $("#total_worker > h4 > b").text(data.total_worker);
           $("#total_cost > h4 > b").text(data.sum_cost+" vnđ");
-          $("#wrong_rate > h4 > b").text(wrong_rate+"%");
+          $("#wrong_rate > h4 > b").text(wrong_rate+"%");id="project-name"
+          $("#project-name").text(data.name);
         }
 
         function getKpiByWorker(data) {
