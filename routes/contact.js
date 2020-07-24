@@ -1,5 +1,6 @@
 const path = require('path')
 const fs = require('fs')
+const fetch = require("node-fetch");
 
 module.exports = function (app) {
     app.post('/contact', function (req, res) {
@@ -14,23 +15,30 @@ module.exports = function (app) {
             content: req.body.content || "unknown",
         }
         console.log(`Got message: ${contact_info}`);
-        try {
-            fs.appendFile(path.join(__dirname, '../contact/', 'contact.json'), JSON.stringify(req.body), function(err){
-                if (err) {
-                    res.write("Error");
-                    throw err;
 
-                }
-            console.log(contact_info);
-            //res.write("Message sent successfully!")
-            res.send('/')
-            });
-        } catch(e) {
-            console.log("Contact recording wrong!")
-            res.write("Message sent failed!")
-            res.redirect('/')
-            throw e;
+        var data = contact_info
 
-        }
+
+            var data = insertContact(data);
+
+            if (data.result == 'success'){
+                res.send("success")
+            }else{
+                res.send("error")
+            }
+
+
     });
+}
+
+async function insertContact(input) {
+    
+    var url = 'https://script.google.com/macros/s/AKfycbxea9e-4H2JiHE74ZcqnehhgtVdsqfTNSUSZPyEpfdtKo5hNQ8/exec'
+    url = url + "?Name=" + input.name + "&Company=" + input.company + "&Phone=" + input.phone + "&Email=" + input.email + "&Content=" + input.content;
+    input.interested.forEach(element => url = url + "&Interested=" + element )
+    var res = encodeURI(url)
+    let response = await fetch(res, {mode: "no-cors"});
+    let data = await response.json()
+    return data;
+
 }
