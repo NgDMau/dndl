@@ -36,7 +36,7 @@
             </a>
         </nav>
     </header>
-    <!-- <div class="content">
+    <div class="content">
         <div class="title">
             <h1>Tổng quan</h1>
         </div>
@@ -54,7 +54,7 @@
                 <hr />
             </div>
         </div>
-    </div> -->
+    </div>
     <div class="title">
         <h2>Danh sách công việc</h2>
     </div>
@@ -68,17 +68,19 @@
                 <th scope="col">Tiền công</th>
               </tr>
             </thead>
-            <% list.rows.forEach(function(item){%>
-                <tbody>
+            <tbody>
+                <% list.rows.forEach(function(item){%>
+                    
                     <tr class="item">
-                      <td ><%= item.name %></td>
-                      <td ><%= item.id %></td>
-                      <td ><%= item.type %></td>
-                      <td ><%= item.rate %></td>
+                    <td ><%= item.name %></td>
+                    <td ><%= item.id %></td>
+                    <td ><%= item.type %></td>
+                    <td ><%= item.rate %></td>
                     
                     </tr>
-                  </tbody>
-            <% }); %>
+                    
+                <% }); %>
+            </tbody>
           </table>
           <div>
             <a href="/work/list">Xem thêm</a>

@@ -1,4 +1,4 @@
-const db =require('../models/db');
+const db = require('../models/db');
 
 module.exports = function(app) {
     app.get('/review/project', function(req, res) {

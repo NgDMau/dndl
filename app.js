@@ -84,6 +84,7 @@ require('./routes/treebank_sentiment')(app);
 require('./routes/full_system/work')(app);
 require('./routes/test/outsource')(app)
 require('./routes/review')(app);
+require('./routes/review2')(app);
 require('./routes/project_manage')(app);
 require('./routes/new_project')(app);
 require('./routes/finish_project')(app);

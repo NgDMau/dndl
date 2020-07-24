@@ -5,24 +5,33 @@ html{
   width:100%;
 }
 
+.table thead th {
+  border-bottom: none !important;
+}
+
+.table tbody tr {
+  cursor: pointer;
+}
+
+.table tbody tr:hover {
+  background-color: #fae5b6;
+}
+
 .content {
   display: flex;
   justify-content: center;
   margin-top: 5%;
 }
 
-
-a {
-  color: inherit; 
-  text-decoration: inherit; 
+.lowbar a {
+  color: #F1DF64 !important; 
+  text-decoration: none; 
 }
 
-main{
-  /*padding-top: 10px;
-  padding-left:5%;
-  padding-right:5%;*/
-
+.lowbar a:hover {
+  color: #FFC107 !important;
 }
+
 .logo {
   object-fit: cover;
   width: 75px;
