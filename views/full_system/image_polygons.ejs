@@ -1,0 +1,136 @@
+<!-- Include Label Studio stylesheet -->
+<link href="https://unpkg.com/label-studio@0.4.0/build/static/css/main.14acfaa5.css" rel="stylesheet">
+
+<!-- Create the Label Studio container -->
+<div id="label-studio"></div>
+
+<!-- Include the Label Studio library -->
+<script src="/js/inlabjs/main.js"></script>
+<script src="/js/idp.js"></script>
+<script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
+<!-- Initialize Label Studio -->
+<script>
+
+    window.onload = function() {
+        var task_config = [{
+            completions: [],
+            predictions: [],
+            id: 1,
+            data: {
+                image: "https://p0.pikist.com/photos/228/633/flowers-plants-grass-fence-spring-garden-nature-flora.jpg"                
+            }
+        },
+        
+        {
+            completions: [],
+            predictions: [],
+            id: 2,
+            data: {
+                image: "https://i.pinimg.com/originals/49/29/b2/4929b26870360cae824bdeb99cf3f72b.jpg"
+                
+            }
+        },
+        {
+            completions: [],
+            predictions: [],
+            id: 3,
+            data: {
+                image: "https://ask.extension.org/uploads/question/images/attachments/000/028/819/IMG_4206_original.JPG?1472651425"
+                
+            }
+        },
+        {
+            completions: [],
+            predictions: [],
+            id: 4,
+            data: {
+                image: "https://cdn.pixabay.com/photo/2018/02/23/21/28/nature-3176664_960_720.jpg"
+                
+            }
+        }
+    ];
+    
+    var labelStudio = new LabelStudio('label-studio', {
+        config: `
+        <View style="display: flex">
+        <View style="width: 100px">
+            <Header value="Pick label" />
+            <PolygonLabels name="tag" toName="img" strokewidth="2" pointstyle="circle" pointsize="small" showInline="false">
+            <Label value="Grass" background="blue" />
+            <Label value="Weed" background="blue" />
+            <Label value="Weed-root" background="blue" />
+            </PolygonLabels>
+            </View>
+        <View>
+            <Image name="img" value="$image" showMousePos="true" zoom="true" />
+        </View>
+        </View>
+    `,
+
+        interfaces: [
+            "panel",
+            "update",
+            "controls",
+        ],
+
+        user: {
+            pk: 1,
+            firstName: "Mậu",
+            lastName: "Nguyễn"
+        },
+
+        task: task_config[0],
+
+        onLabelStudioLoad: function (LS) {
+            var c = LS.completionStore.addCompletion({
+                userGenerate: true
+            });
+            LS.completionStore.selectCompletion(c.id);
+
+            
+        },
+
+        onSubmitCompletion: function(ls, completion) {
+            //console.log("completion", completion);
+            //console.log(task_config[1])
+            //ls.resetState();
+            //console.log(ls.resetState)
+
+            var response = task_config[Math.floor(Math.random() * task_config.length)] ;
+
+            //console.log("response", response)
+            response.data = JSON.stringify(response.data)
+            ls.assignTask(response);
+            //console.log(ls.assignTask)
+            var serialized = ls.completionStore.selected.serializeCompletion()[0];
+            console.log("Result: :", serialized)
+            
+            ls.initializeStore(_convertTask(response));
+            let cs = ls.completionStore;
+            let c;
+            if (cs.predictions.length > 0) {
+            c = ls.completionStore.addCompletionFromPrediction(cs.predictions[0]);
+            }
+            else {
+            c = ls.completionStore.addCompletion({ userGenerate: true });
+            }
+
+            cs.selectCompletion(c.id);
+
+            ls.setFlags({ isLoading: false });
+            //console.log("Re-assisgned!")
+            
+        },
+
+        // onEntityCreate: function(region) {
+        //     //console.log(region);
+        //     //getNewData();
+        //     //task_config.data.image = "https://htx-misc.s3.amazonaws.com/opensource/label-studio/examples/images/nick-owuor-astro-nic-visuals-wDifg5xc9Z4-unsplash.jpg";
+        //     // labelStudio.task.data.image = "https://htx-misc.s3.amazonaws.com/opensource/label-studio/examples/images/nick-owuor-astro-nic-visuals-wDifg5xc9Z4-unsplash.jpg"
+        // }
+        });
+    }
+
+    
+   
+</script>
