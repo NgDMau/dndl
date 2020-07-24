@@ -53,6 +53,7 @@ require('./routes/index')(app);
 require('./routes/text_sentiment')(app);
 require('./routes/signup')(app);
 require('./routes/login')(app);
+require('./routes/demo')(app);
 require('./routes/forgotpass')(app);
 require('./routes/about')(app);
 require('./routes/dashboard')(app);

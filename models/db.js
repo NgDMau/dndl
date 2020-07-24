@@ -142,7 +142,18 @@ module.exports = {
     },
 
     getProgressProj: async function (table) {
-        var cmd = "SELECT count(id) as total_task, count(case when checked is not null then checked end) as task_finish, count(case when checked != 0 then checked end) as task_ischecked, count(case when reviewer_decision = 'false' then checked end) as task_wrong, count(distinct worker_id ) as total_worker, sum(case when cost is not null and reviewer_decision = 'true' then cost end) as sum_cost from projects."+table;
+        var cmd = `SELECT count(table_projects.id) as total_task, 
+        table_project_data.name,
+        count(case when table_projects.checked is not null then table_projects.checked end) as task_finish,
+        count(case when table_projects.checked != 0 then table_projects.checked end) as task_ischecked,
+        count(case when table_projects.reviewer_decision = 'false' then table_projects.reviewer_decision end) as task_wrong,
+        count(distinct table_projects.worker_id ) as total_worker,
+        sum(case when table_projects.cost is not null and table_projects.reviewer_decision = 'true' then table_projects.cost end) as sum_cost
+        from projects.${table} as table_projects
+        left join public.projects_metadata as table_project_data on table_project_data.id = '${table}'
+        group by table_project_data.name`;
+
+        
         var client = await pool.connect()
 
         try{

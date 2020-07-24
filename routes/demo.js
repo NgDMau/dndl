@@ -3,4 +3,3 @@ module.exports = function (app) {
         // res.sendFile(path.join(__dirname, '../views/', 'info.html'))
         res.render("full_system/image_polygons.ejs");
     });
-}
