@@ -140,7 +140,7 @@ html{
     justify-content: center;
     align-items: center;
     font-family: 'Roboto', sans-serif;   
-  
+    cursor: pointer;
     /* Center slide text vertically */
     
   }

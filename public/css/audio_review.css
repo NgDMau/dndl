@@ -1,0 +1,162 @@
+body {
+  background-color: rgba(0, 0, 0, 0.02);
+  text-align: center;
+}
+
+.divide-line {
+  width: 100px;
+  height: 2px;
+  background-color: #FFC107;
+  margin-bottom: 20px;
+}
+
+h2 + .divide-line {
+  margin: auto;
+  width: 200px;
+}
+
+.radio-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.radio-item {
+  height: 50px;
+  position: relative;
+  padding: 0 6px;
+  margin: 10px 0 0;
+}
+
+.radio-item input[type='radio'] {
+  display: none;
+}
+
+.radio-item label {
+  color: #666;
+  font-weight: normal;
+}
+
+.radio-item label:before {
+  content: " ";
+  display: inline-block;
+  position: relative;
+  top: 15px;
+  margin: 0 5px 0 0;
+  border-radius: 11px;
+  background-color: transparent;
+}
+
+.radio-item input[type=radio]:checked + label:after {
+  border-radius: 11px;
+  width: 11px;
+  height: 11px;
+  position: absolute;
+  top: 19.75px;
+  left: calc(50% - 195px/2 + 4.5px);
+  content: " ";
+  display: block;
+}
+
+.radio-text {
+  width: 160px;
+  border: 2px solid #FFC107;
+  text-align: center;
+  padding: 10px;
+  border-radius: 40px;
+  font-size: 0.8rem;
+}
+
+#radio-true input[type=radio]:checked + label .radio-text {
+  background: #58D592;
+  color: #fff;
+  border: 3px solid #58D592;
+}
+
+#radio-false input[type=radio]:checked + label .radio-text {
+  background: #E04E4E;
+  color: #fff;
+  border: 3px solid #E04E4E;
+}
+
+/* #radio-true input[type=radio] + label .radio-text:hover {
+  background: #43bb7b;
+  color: #fff;
+  border: 3px solid #43bb7b;
+  width: 190px;
+  padding: 10px;
+  font-size: 1rem;
+  transition: all ease 0.1s;
+}
+
+#radio-false input[type=radio] + label .radio-text:hover {
+  background: #c2384b;
+  color: #fff;
+  border: 3px solid #c2384b;
+  width: 190px;
+  padding: 10px;
+  font-size: 1rem;
+  transition: all ease 0.1s;
+} */
+
+.review-text {
+  width: 100%;
+  height: 90px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 5px;
+  text-align: left;
+  margin-right: 5%;
+  background-color: #FFFEEF;
+}
+
+label {
+  width: fit-content;
+  border-radius: 40px;
+  display: flex !important;
+  margin: auto;
+  cursor: pointer;
+}
+
+#review-audio {
+  width: 90%;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+
+#labeled-transcription {
+  width: 90%;
+  background-color: #faefd8;
+  padding: 40px;
+  margin-left: 5%;
+}
+
+#task-display {
+  text-align: center;
+}
+
+.quickinfo {
+  margin-top: 50px;
+}
+
+.quickinfo p {
+  margin-bottom: 5px;
+}
+
+#task-review {
+  margin-top: 50px;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+#task-review p {
+  font-size: 1.5rem;
+  margin-top: 50px;
+  margin-bottom: 5px;
+}
+
+#task-review p:first-child {
+  width: fit-content;
+  margin: auto !important;
+  margin-bottom: 20px !important;
+}

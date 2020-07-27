@@ -38,25 +38,25 @@
           <div class="progress-bar" role="progressbar" style="width: 0%; background-color: #FFC107; border-radius: 20px; height: 30px; color: #000; font-weight: 500;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
         </div>
         <div class="card-container">
-          <div class="card card-light-yellow" id="task_isChecked">
+          <div class="card card-light-yellow" id="task_isChecked" data-aos="flip-left">
             <img class="card-img" src="/img/research.svg"/>
             <h4><b>0</b></h4>
-            <p>câu đã được kiểm tra</p>
+            <p>tasks đã được kiểm tra</p>
           </div>
-          <div class="card card-dark-yellow" id="total_worker">
+          <div class="card card-dark-yellow" id="total_worker" data-aos="flip-right">
             <img class="card-img" src="/img/people.svg"/>
             <h4><b>0</b></h4>
             <p>workers thực hiện dán nhãn</p>
           </div>
-          <div class="card card-light-yellow" id="total_cost">
+          <div class="card card-light-yellow" id="total_cost" data-aos="flip-left">
             <img class="card-img" src="/img/money.svg"/>
             <h4><b>0 vnd</b></h4>
             <p>phải trả tính tới thời điểm hiện tại</p>
           </div>
-          <div class="card card-dark-yellow" id="wrong_rate">
+          <div class="card card-dark-yellow" id="wrong_rate" data-aos="flip-right">
             <img class="card-img" src="/img/failure.svg"/>
             <h4><b>0%</b></h4>
-            <p>tỉ lệ câu sai</p>
+            <p>tỉ lệ tasks sai</p>
           </div>
         </div>
       </div>
@@ -67,8 +67,10 @@
             <h3>Tracking</h3>
             <div class="divide-line"></div>
           </div>
-          <button id="by-task" class="detail-table-button hover">Theo task</button>
-          <button id="by-worker" class="detail-table-button">Theo worker</button>
+          <div class="detail-button-container show-flex">
+            <button id="by-task" class="detail-table-button hover">Theo task</button>
+            <button id="by-worker" class="detail-table-button">Theo worker</button>
+          </div>
         </div>
         <div id="search-bar" class="show-flex">
           <p>Search</p>
