@@ -1,5 +1,9 @@
-const { models } = require('../../sequelize');
+const { models } = require('../../../sequelize');
 const { getIdParam } = require('../helpers');
+
+var passport = require('passport');
+var path = require('path')
+var customStrategy = require('passport-custom').Strategy;
 
 async function getAll(req, res) {
 	const users = await models.user.findAll();

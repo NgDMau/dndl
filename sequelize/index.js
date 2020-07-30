@@ -10,7 +10,8 @@ const sequelize = new Sequelize('d1r7gpirn3t2e6', 'qrmmeltkivmkot', 'a3582d2e319
 });
 
 const modelDefiners = [
-	require('./models/user.model'),
+    require('./model/customer.model'),
+    require('./model/user.model'),
 	// Add more models here...
 	// require('./models/item'),
 ];
