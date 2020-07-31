@@ -1,0 +1,132 @@
+<!-- Include Label Studio stylesheet -->
+<link href="https://unpkg.com/label-studio@0.4.0/build/static/css/main.14acfaa5.css" rel="stylesheet">
+
+<!-- Create the Label Studio container -->
+<div id="label-studio"></div>
+
+<!-- Include the Label Studio library -->
+<script src="/js/inlabjs/main.js"></script>
+<script src="/js/idp.js"></script>
+<script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
+<!-- Initialize Label Studio -->
+<script>
+
+    window.onload = function() {
+        var task_config = [{
+            completions: [],
+            predictions: [],
+            id: 1,
+            data: {
+                dialogs: "<div style=\"max-width: 750px\"><div style=\"clear: both\"><div style=\"float: right; display: inline-block; border: 1px solid #F2F3F4; background-color: #F8F9F9; border-radius: 5px; padding: 7px; margin: 10px 0;\"><p><b>Tiến Dũng</b>: Hương ơi sáng nay tớ đưa người yêu đi chơi nên không làm được phần cậu giao đâu nhé.</p></div></div><div style=\"clear: both\"><div style=\"float: right; display: inline-block; border: 1px solid #F2F3F4; background-color: #F8F9F9; border-radius: 5px; padding: 7px; margin: 10px 0;\"><p><b>Hương</b>: Nhưng cậu đã hứa với mọi người sẽ hoàn thành nó trong hôm nay mà.</p></div></div><div style=\"clear: both\"><div style=\"display: inline-block; border: 1px solid #D5F5E3; background-color: #EAFAF1; border-radius: 5px; padding: 7px; margin: 10px 0;\"><p><b>Tiến Dũng</b>: Kệ cậu tớ chán lắm rồi tớ xin nghỉ việc đây thế nhé hahaha.</p></div></div></div>"
+                
+            }
+        },
+        
+        {
+            completions: [],
+            predictions: [],
+            id: 2,
+            data: {
+                dialogs: "<div style=\"max-width: 750px\"><div style=\"clear: both\"><div style=\"float: right; display: inline-block; border: 1px solid #F2F3F4; background-color: #F8F9F9; border-radius: 5px; padding: 7px; margin: 10px 0;\"><p><b>Tiến Dũng</b>: Hương ơi sáng nay tớ đưa người yêu đi chơi nên không làm được phần cậu giao đâu nhé.</p></div></div><div style=\"clear: both\"><div style=\"float: right; display: inline-block; border: 1px solid #F2F3F4; background-color: #F8F9F9; border-radius: 5px; padding: 7px; margin: 10px 0;\"><p><b>Hương</b>: Nhưng cậu đã hứa với mọi người sẽ hoàn thành nó trong hôm nay mà.</p></div></div><div style=\"clear: both\"><div style=\"display: inline-block; border: 1px solid #D5F5E3; background-color: #EAFAF1; border-radius: 5px; padding: 7px; margin: 10px 0;\"><p><b>Tiến Dũng</b>: Ừ nhỉ tớ quên mất, vậy tớ sẽ hẹn cô ấy đi chơi hôm khác. Tớ sẽ hoàn thành công việc trong hôm nay, mọi người cứ yên tâm nhé.</p></div></div></div>"
+            }
+        },
+        {
+            completions: [],
+            predictions: [],
+            id: 3,
+            data: {
+                dialogs: "<div style=\"max-width: 750px\"><div style=\"clear: both\"><div style=\"float: right; display: inline-block; border: 1px solid #F2F3F4; background-color: #F8F9F9; border-radius: 5px; padding: 7px; margin: 10px 0;\"><p><b>Tiến Dũng</b>: Hương ơi sáng nay tớ đưa người yêu đi chơi nên không làm được phần cậu giao đâu nhé.</p></div></div><div style=\"clear: both\"><div style=\"float: right; display: inline-block; border: 1px solid #F2F3F4; background-color: #F8F9F9; border-radius: 5px; padding: 7px; margin: 10px 0;\"><p><b>Hương</b>: Nhưng cậu đã hứa với mọi người sẽ hoàn thành nó trong hôm nay mà.</p></div></div><div style=\"clear: both\"><div style=\"display: inline-block; border: 1px solid #D5F5E3; background-color: #EAFAF1; border-radius: 5px; padding: 7px; margin: 10px 0;\"><p><b>Tiến Dũng</b>: Ơ hay *** *** ** *** *** tớ thích đi chơi cơ *** ** ***.</p></div></div></div>"
+                
+            }
+        },
+        {
+            completions: [],
+            predictions: [],
+            id: 3,
+            data: {
+                dialogs: "<div style=\"max-width: 750px\"><div style=\"clear: both\"><div style=\"float: right; display: inline-block; border: 1px solid #F2F3F4; background-color: #F8F9F9; border-radius: 5px; padding: 7px; margin: 10px 0;\"><p><b>Tiến Dũng</b>: Hương ơi sáng nay tớ đưa người yêu đi chơi nên không làm được phần cậu giao đâu nhé.</p></div></div><div style=\"clear: both\"><div style=\"float: right; display: inline-block; border: 1px solid #F2F3F4; background-color: #F8F9F9; border-radius: 5px; padding: 7px; margin: 10px 0;\"><p><b>Hương</b>: Nhưng cậu đã hứa với mọi người sẽ hoàn thành nó trong hôm nay mà.</p></div></div><div style=\"clear: both\"><div style=\"display: inline-block; border: 1px solid #D5F5E3; background-color: #EAFAF1; border-radius: 5px; padding: 7px; margin: 10px 0;\"><p><b>Tiến Dũng</b>: Bỏ ra bạn ei.</p></div></div></div>"
+                
+            }
+        }
+    ];
+    
+    var labelStudio = new LabelStudio('label-studio', {
+        config: `
+        <View>
+            <HyperText name="dialog" value="$dialogs"></HyperText>
+            <Header value="Rate last answer:"></Header>
+            <Choices name="chc-1" choice="single-radio" toName="dialog" showInline="true">
+                <Choice value="Bad answer"></Choice>
+                <Choice value="Neutral answer"></Choice>
+                <Choice value="Good answer"></Choice>
+            </Choices>
+            <Header value="Your answer:"></Header>
+            <TextArea name="answer"></TextArea>
+        </View>
+    `,
+
+        interfaces: [
+            "panel",
+            "update",
+            "controls",
+        ],
+
+        user: {
+            pk: 1,
+            firstName: "Mậu",
+            lastName: "Nguyễn"
+        },
+
+        task: task_config[0],
+
+        onLabelStudioLoad: function (LS) {
+            var c = LS.completionStore.addCompletion({
+                userGenerate: true
+            });
+            LS.completionStore.selectCompletion(c.id);
+
+            
+        },
+
+        onSubmitCompletion: function(ls, completion) {
+            console.log("completion", completion);
+            console.log(task_config[1])
+            //ls.resetState();
+            //console.log(ls.resetState)
+
+            var response = task_config[Math.floor(Math.random() * task_config.length)] ;
+
+            console.log("response", response)
+            response.data = JSON.stringify(response.data)
+            ls.assignTask(response);
+            //console.log(ls.assignTask)
+            
+            ls.initializeStore(_convertTask(response));
+            let cs = ls.completionStore;
+            let c;
+            if (cs.predictions.length > 0) {
+            c = ls.completionStore.addCompletionFromPrediction(cs.predictions[0]);
+            }
+            else {
+            c = ls.completionStore.addCompletion({ userGenerate: true });
+            }
+
+            cs.selectCompletion(c.id);
+
+            ls.setFlags({ isLoading: false });
+            console.log("Re-assisgned!")
+            
+        },
+
+        onEntityCreate: function(region) {
+            console.log(region);
+            //getNewData();
+            //task_config.data.image = "https://htx-misc.s3.amazonaws.com/opensource/label-studio/examples/images/nick-owuor-astro-nic-visuals-wDifg5xc9Z4-unsplash.jpg";
+            // labelStudio.task.data.image = "https://htx-misc.s3.amazonaws.com/opensource/label-studio/examples/images/nick-owuor-astro-nic-visuals-wDifg5xc9Z4-unsplash.jpg"
+        }
+        });
+    }
+
+    
+   
+</script>

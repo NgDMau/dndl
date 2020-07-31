@@ -1,0 +1,134 @@
+<!-- Include Label Studio stylesheet -->
+<link href="https://unpkg.com/label-studio@0.4.0/build/static/css/main.14acfaa5.css" rel="stylesheet">
+
+<!-- Create the Label Studio container -->
+<div id="label-studio"></div>
+
+<!-- Include the Label Studio library -->
+<script src="/js/inlabjs/main.js"></script>
+<script src="/js/idp.js"></script>
+<script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
+<!-- Initialize Label Studio -->
+<script>
+
+    window.onload = function() {
+        var task_config = [{
+            completions: [],
+            predictions: [],
+            id: 1,
+            data: {
+                text1: "Ronaldo là cầu thủ xuất sắc nhất thế giới",
+                text2: "Messi là cầu thủ xuất sắc nhất mọi thời đại"                
+            }
+        },
+        
+        {
+            completions: [],
+            predictions: [],
+            id: 2,
+            data: {
+                text1: "Dạ vâng nhyaf em có 3 người và 2 con chó ạ",
+                text2: "da vang nha em co 2 nguoi va 3 con cho"
+            }
+        },
+        {
+            completions: [],
+            predictions: [],
+            id: 3,
+            data: {
+                text1: "HÔm qua tôi thấy trời mưa rất to",
+                text2: "hom qua toi thay troi mua rat to"
+            }
+        },
+        {
+            completions: [],
+            predictions: [],
+            id: 4,
+            data: {
+                text1: "Vì sao lại chia tay",
+                text2: "Vi sao lai chia tay"
+                
+            }
+        }
+    ];
+    
+    var labelStudio = new LabelStudio('label-studio', {
+        config: `
+        <View>
+        <Header>Chọn câu hoàn chỉnh hơn</Header>
+        <Pairwise name="pw" toName="txt-1,txt-2" />
+        <Text name="txt-1" value="$text1" />
+        <Text name="txt-2" value="$text2" />
+        </View>
+    `,
+
+        interfaces: [
+            "panel",
+            "update",
+            "controls",
+            "side-column",
+            "completions:menu",
+            "completions:add-new",
+            "completions:delete",
+            "predictions:menu",
+        ],
+
+        user: {
+            pk: 1,
+            firstName: "Mậu",
+            lastName: "Nguyễn"
+        },
+
+        task: task_config[0],
+
+        onLabelStudioLoad: function (LS) {
+            var c = LS.completionStore.addCompletion({
+                userGenerate: true
+            });
+            LS.completionStore.selectCompletion(c.id);
+
+            
+        },
+
+        onSubmitCompletion: function(ls, completion) {
+            console.log("completion", completion);
+            console.log(task_config[1])
+            //ls.resetState();
+            //console.log(ls.resetState)
+
+            var response = task_config[Math.floor(Math.random() * task_config.length)] ;
+
+            console.log("response", response)
+            response.data = JSON.stringify(response.data)
+            ls.assignTask(response);
+            //console.log(ls.assignTask)
+            
+            ls.initializeStore(_convertTask(response));
+            let cs = ls.completionStore;
+            let c;
+            if (cs.predictions.length > 0) {
+            c = ls.completionStore.addCompletionFromPrediction(cs.predictions[0]);
+            }
+            else {
+            c = ls.completionStore.addCompletion({ userGenerate: true });
+            }
+
+            cs.selectCompletion(c.id);
+
+            ls.setFlags({ isLoading: false });
+            console.log("Re-assisgned!")
+            
+        },
+
+        onEntityCreate: function(region) {
+            console.log(region);
+            //getNewData();
+            //task_config.data.image = "https://htx-misc.s3.amazonaws.com/opensource/label-studio/examples/images/nick-owuor-astro-nic-visuals-wDifg5xc9Z4-unsplash.jpg";
+            // labelStudio.task.data.image = "https://htx-misc.s3.amazonaws.com/opensource/label-studio/examples/images/nick-owuor-astro-nic-visuals-wDifg5xc9Z4-unsplash.jpg"
+        }
+        });
+    }
+
+    
+   
+</script>

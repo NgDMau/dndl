@@ -1,0 +1,135 @@
+<!-- Include Label Studio stylesheet -->
+<link href="https://unpkg.com/label-studio@0.4.0/build/static/css/main.14acfaa5.css" rel="stylesheet">
+
+<!-- Create the Label Studio container -->
+<div id="label-studio"></div>
+
+<!-- Include the Label Studio library -->
+<script src="/js/inlabjs/main.js"></script>
+<!-- <script src="https://unpkg.com/label-studio@0.4.0/build/static/js/main.0249ea16.js"></script> -->
+
+<script src="/js/idp.js"></script>
+<script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
+<!-- Initialize Label Studio -->
+<script>
+
+    window.onload = function() {
+        var task_config = [{
+            completions: [],
+            predictions: [],
+            id: 1,
+            data: {
+                image: "https://www.autocar.co.uk/sites/autocar.co.uk/files/images/car-reviews/first-drives/legacy/large-2479-s-classsaloon.jpg"                
+            }
+        },
+        
+        {
+            completions: [],
+            predictions: [],
+            id: 2,
+            data: {
+                image: "https://www.acko.com/wp-content/uploads/2020/01/get-fancy-registration-number-for-car-and-bike.jpg"
+                
+            }
+        },
+        {
+            completions: [],
+            predictions: [],
+            id: 3,
+            data: {
+                image: "https://vnn-imgs-f.vgcloud.vn/2020/02/21/23/dich-covid-19-hang-bay-viet-meo-mat-giam-gia-ve-cho-thue-may-bay.jpg"
+                
+            }
+        },
+        {
+            completions: [],
+            predictions: [],
+            id: 4,
+            data: {
+                image: "https://image.vietstock.vn/2019/12/26/vietstock_s_cac-hang-hang-khong-viet-dang-co-bao-nhieu-may-bay_20191226155631.jpg"
+                
+            }
+        }
+    ];
+    
+    var labelStudio = new LabelStudio('label-studio', {
+        config: `
+        <View>
+            <Header value="Ảnh chứa biển số xe"></Header>
+            <Image name="image" value="$image"/>
+            <Header value="Nhập biển số xe vào ô bên dưới:"></Header>
+            <TextArea name="answer" toName="image" rows="4" editable="false"></TextArea>
+        </View>
+    `,
+
+        interfaces: [
+            "panel",
+            "update",
+            "controls",
+            "side-column",
+            "completions:menu",
+            "completions:add-new",
+            "completions:delete",
+            "predictions:menu",
+        ],
+
+        user: {
+            pk: 1,
+            firstName: "Mậu",
+            lastName: "Nguyễn"
+        },
+
+        task: task_config[0],
+
+        onLabelStudioLoad: function (LS) {
+            var c = LS.completionStore.addCompletion({
+                userGenerate: true
+            });
+            LS.completionStore.selectCompletion(c.id);
+
+            
+        },
+
+        onSubmitCompletion: function(ls, completion) {
+            console.log("completion", completion);
+            console.log(task_config[1])
+            //ls.resetState();
+            //console.log(ls.resetState)
+            console.log("serialize", ls.completionStore.selected.serializeCompletion());
+
+            var response = task_config[Math.floor(Math.random() * task_config.length)] ;
+
+            console.log("response", response)
+            response.data = JSON.stringify(response.data)
+            ls.assignTask(response);
+            //console.log(ls.assignTask)
+            
+            ls.initializeStore(_convertTask(response));
+            let cs = ls.completionStore;
+            let c;
+            if (cs.predictions.length > 0) {
+            c = ls.completionStore.addCompletionFromPrediction(cs.predictions[0]);
+            }
+            else {
+            c = ls.completionStore.addCompletion({ userGenerate: true });
+            }
+
+            cs.selectCompletion(c.id);
+
+            ls.setFlags({ isLoading: false });
+            console.log("Re-assisgned!")
+            
+        },
+
+        onEntityCreate: function(region) {
+            console.log("region", region);
+            //getNewData();
+            //task_config.data.image = "https://htx-misc.s3.amazonaws.com/opensource/label-studio/examples/images/nick-owuor-astro-nic-visuals-wDifg5xc9Z4-unsplash.jpg";
+            // labelStudio.task.data.image = "https://htx-misc.s3.amazonaws.com/opensource/label-studio/examples/images/nick-owuor-astro-nic-visuals-wDifg5xc9Z4-unsplash.jpg"
+        }
+        });
+    }
+
+    
+   
+</script>
