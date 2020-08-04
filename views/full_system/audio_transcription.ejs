@@ -1,0 +1,203 @@
+<title>Audio transcription</title>
+<link rel="shortcut icon" type="image/png" href="/img/logoInlabSquare.png"/>
+<!-- Include Label Studio stylesheet -->
+<link href="https://unpkg.com/label-studio@0.4.0/build/static/css/main.14acfaa5.css" rel="stylesheet">
+
+<div id="label-studio"></div>
+<!-- <div id="review"></div> -->
+
+<script src="/js/inlabjs/main.js"></script>
+<script src="/js/idp.js"></script>
+<script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
+<!-- Initialize Label Studio -->
+<script>
+
+    window.onload = async function() {
+
+    var currentProjectId = '<%= project_id %>';
+
+    var currentTaskID;
+    var currentWorkerID;
+    var currentWorkerPk;
+    var currentWorkerName;
+    var initialTask = await initTask(currentProjectId);
+
+    var start_timestamp = Math.floor(Date.now() / 1000);
+
+    console.log("initialTask", initialTask);
+
+    currentTaskID = initialTask.id;
+    currentWorkerID = initialTask.workerID;
+    currentWorkerPk = initialTask.workerPk;
+    currentWorkerName = initialTask.workerName;
+
+    console.log("Name: ", currentWorkerName);
+
+    if (currentTaskID === undefined) {
+        console.log("Hết dữ liệu dán nhãn");
+        //alert("Hiện đã hết dữ liệu để dán nhãn");
+    }
+    console.log("initialTask", initialTask);
+    
+    var labelStudio = new LabelStudio('label-studio', {
+        config: `
+        <View>
+            <Header value="Công việc: dán nhãn âm thanh" />
+            <Audio name="audio" value="$url" />
+            <Header value="Gõ lại phụ đề của audio" />
+            <TextArea name="transcription" toName="audio"
+                        rows="4" editable="true" maxSubmissions="1" />            
+        </View>
+    `,
+
+        interfaces: [
+            "panel",
+            "update",
+            "controls",
+            "skip",
+        ],
+
+        user: {
+            pk: currentWorkerPk,
+            firstName: "",
+            lastName: currentWorkerName
+        },
+
+        messages: {
+            DONE: "Đã hoàn thành!",
+            NO_COMP_LEFT: "Đã hết completion",
+            NO_NEXT_TASK: "Dữ liệu để dán nhãn đã hết, xin cảm ơn!",
+            NO_ACCESS: "Bạn không được cấp quyền truy cập dữ liệu này"
+        },
+
+        description: "Nghe đoạn âm thanh dưới đây rồi gõ lại nội dung của đoạn âm thanh đó",
+
+        task: initialTask,
+
+        onLabelStudioLoad: function (LS) {
+            var c = LS.completionStore.addCompletion({
+                userGenerate: true
+            });
+            LS.completionStore.selectCompletion(c.id);
+            if (currentTaskID === undefined) {
+                LS.setFlags({ noTask: true });
+            }
+        },
+
+        onSubmitCompletion: async function(ls, completion) {
+            ls.setFlags({ isLoading: true });
+            console.log("completion", completion);
+            //console.log("task_config[1]", task_config[1])
+
+            if (currentTaskID === undefined) {
+                ls.setFlags({ noTask: true });
+                return;
+            }
+            //ls.resetState();
+            //console.log(ls.resetState)
+
+            // var response = task_config[Math.floor(Math.random() * task_config.length)] ;
+            // var response = task_config[3]
+
+            // console.log("response", response)
+            // response.data = JSON.stringify(response.data)
+            let cs = ls.completionStore;
+            let c;
+            console.log("serialize", ls.completionStore.selected.serializeCompletion()[0]);
+            var serialized = ls.completionStore.selected.serializeCompletion()[0];
+
+            var interval_sec = Math.floor(Date.now() / 1000) - start_timestamp;
+
+
+            var result = {
+                id: currentTaskID,
+                value: serialized.value,
+                createdBy: currentWorkerPk,
+                createdDate: completion.createdDate,
+                createdInterval: interval_sec
+            }
+
+            console.log("Result done: ", result);
+
+            var task = await submitResult(currentProjectId, result);
+
+            start_timestamp = Math.floor(Date.now() / 1000) ;
+
+            if (task === undefined) {
+                ls.setFlags({ noTask: true})
+            } else {
+                ls.setFlags({isLoading: false})
+            }
+            
+            
+            task.data = JSON.stringify(task.data);
+            // task = JSON.stringify(task);
+            console.log("Received task from server: ", task)
+
+            currentTaskID = task.id;
+            currentWorkerID = task.workerID;
+            currentWorkerPk = task.workerPk;
+            currentWorkerName = task.workerName;
+
+            ls.assignTask(task);
+            ls.initializeStore(_convertTask(task));
+
+            if (cs.predictions.length > 0) {
+                c = ls.completionStore.addCompletionFromPrediction(cs.predictions[0]);
+            }
+            else {
+                c = ls.completionStore.addCompletion({ userGenerate: true });
+            }
+
+            cs.selectCompletion(c.id);
+            //ls.setFlags({ isLoading: false });
+            console.log("Re-assisgned!")
+            
+        },
+
+        onEntityCreate: async function(region) {
+            console.log("region", region);
+            // var result = {
+            //     id: region.id,
+            //     value: region._value,
+            //     createdBy: currentWorkerID,
+            //     createdDate: region.completion.createdDate,
+            //     createdInterval: Math.floor(Date.now() / 1000) - start_timestamp
+            // }
+            // console.log("Result: ", result);
+            //getNewData();
+            //task_config.data.image = "https://htx-misc.s3.amazonaws.com/opensource/label-studio/examples/images/nick-owuor-astro-nic-visuals-wDifg5xc9Z4-unsplash.jpg";
+            // labelStudio.task.data.image = "https://htx-misc.s3.amazonaws.com/opensource/label-studio/examples/images/nick-owuor-astro-nic-visuals-wDifg5xc9Z4-unsplash.jpg"
+        },
+
+        onSkipTask: async function(ls) {
+            let cs = ls.completionStore;
+            let c;
+            
+            var task = await initTask(currentProjectId);
+            task.data = JSON.stringify(task.data);
+            // task = JSON.stringify(task);
+            console.log("Received task from server: ", task)
+            currentTaskID = task.id;
+            currentWorkerID = task.workerID;
+            currentWorkerPk = task.workerPk;
+            currentWorkerName = task.workerName;
+
+            ls.assignTask(task);
+            ls.initializeStore(_convertTask(task));
+
+            if (cs.predictions.length > 0) {
+                c = ls.completionStore.addCompletionFromPrediction(cs.predictions[0]);
+            }
+            else {
+                c = ls.completionStore.addCompletion({ userGenerate: true });
+            }
+
+            cs.selectCompletion(c.id);
+        }
+        });
+    }
+
+    
+   
+</script>

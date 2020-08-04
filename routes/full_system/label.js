@@ -13,9 +13,12 @@ module.exports = function(app) {
             switch (project_type) {
                 case "audio_transcription":
                     res.render('full_system/audio_transcription.ejs', {project_id: project_id});
-                    return
-                    break
+                    break;
+                case "image_object_detection":
+                    res.render("full_system/image_object_detection.ejs", {project_id: project_id});
+                    break;
             }
+            return
         }
         res.redirect('/login');
     })

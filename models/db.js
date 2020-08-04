@@ -303,8 +303,7 @@ module.exports = {
     
     getDataFromTable: async function (table) {
         // var cmd = "SELECT * FROM audio_transcription WHERE result IS NULL ORDER BY random()";
-        var values = [table];
-        var cmd = "SELECT * FROM projects." + table + " WHERE checked IS NULL AND RESULT IS NULL ORDER BY random()";
+        var cmd = "SELECT * FROM projects." + table + " WHERE checked IS NULL AND finish_at IS NULL ORDER BY random()";
         // var values = [table];
         var client = await pool.connect();
         try {

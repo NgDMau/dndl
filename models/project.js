@@ -128,7 +128,7 @@ module.exports = class Project {
                 values_number = 2;
                 break;
             case "image_object_detection":
-                cmd = "INSERT INTO projects." + table_name + "(image, result) " + "VALUES($1, $2)";
+                cmd = "INSERT INTO projects." + table_name + "(url, result) " + "VALUES($1, $2)";
                 values_number = 2;
                 break;
             case "audio_transcription":

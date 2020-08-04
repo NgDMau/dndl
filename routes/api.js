@@ -79,7 +79,7 @@ module.exports = function (app) {
                 predictions: [],
                 id: dataFromDb.id,
                 data: {
-                    audio: dataFromDb.audio
+                    url: dataFromDb.url
                 }
             }
             res.send(task);
@@ -100,18 +100,16 @@ module.exports = function (app) {
             var receivedData = data.body;
 
             if(receivedData.value !== 1) {
-                var insertResult = await  db.insertIntoTable("audio_transcription", receivedData);
+                var insertResult = await  db.insertIntoTable(project_id, receivedData);
                 console.log("insertResult: ", insertResult);
             }
 
-            var dataFromDb = await db.getDataFromTable("audio_transcription");
+            var dataFromDb = await db.getDataFromTable(project_id);
             if (dataFromDb === undefined) {
                 res.send({value: "none"});
                 return
             }
             console.log("dataFromDb: ", dataFromDb);
-
-            //console.log("FULLNAME: ", req.session.passport.user);
 
             var task = {
                 workerPk: req.session.passport.user.id,

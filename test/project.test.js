@@ -20,12 +20,12 @@ async function getAllProjects() {
     return result.rows;
 }
 
-// async function test_destroy(project_id) {
-//     var Project = require('../models/project');
-//     var test_project = new Project({id: project_id})
-//     var result = await test_project.destroy();
-//     return result
-// }
+async function test_destroy(project_id) {
+    var Project = require('../models/project');
+    var test_project = new Project({id: project_id})
+    var result = await test_project.destroy();
+    return result
+}
 
 // getAllProjects()
 //     .then(function(projects_list) {
