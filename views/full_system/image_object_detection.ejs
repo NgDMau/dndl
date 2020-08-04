@@ -4,7 +4,7 @@
 <link rel="shortcut icon" type="image/png" href="/img/logoInlabSquare.png"/>
 <!-- Create the Label Studio container -->
 <div id="label-studio"></div>
-<div id="no-work-done">Number of Work Done: <%= noWorkDone %></div>
+<div id="no-work-done">&nbsp&nbsp&nbsp&nbspNumber of Work Done: <%= noWorkDone %></div>
 <!-- Include the Label Studio library -->
 <script src="/js/inlabjs/main.js"></script>
 <script src="/js/idp.js"></script>
@@ -186,7 +186,7 @@
             currentWorkerName = task.workerName;
             noWorkDone = task.noWorkDone;
 
-            document.getElementById('no-work-done').innerHTML = "Number of work done: " + noWorkDone;
+            document.getElementById('no-work-done').innerHTML = " Number of work done: " + noWorkDone;
 
             ls.assignTask(task);
             ls.initializeStore(_convertTask(task));
