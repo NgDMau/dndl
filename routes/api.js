@@ -111,8 +111,8 @@ module.exports = function (app) {
             }
 
             let workerPK = req.session.passport.user.id;
-            let noWorkDone = await db.numberOfWorkDone(workerPK, project_id).count;
-            
+            let noWorkDone = await db.numberOfWorkDone(workerPK, project_id);
+            noWorkDone = noWorkDone.count;
             console.log("dataFromDb: ", dataFromDb);
             console.log("noWorkDone", noWorkDone);
 
