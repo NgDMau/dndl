@@ -4,7 +4,7 @@
 <link rel="shortcut icon" type="image/png" href="/img/logoInlabSquare.png"/>
 <!-- Create the Label Studio container -->
 <div id="label-studio"></div>
-
+<div id="no-work-done">Number of Work Done: <%= noWorkDone %></div>
 <!-- Include the Label Studio library -->
 <script src="/js/inlabjs/main.js"></script>
 <script src="/js/idp.js"></script>
@@ -52,13 +52,15 @@
     //     }
     // ];
 
-
+    
     var currentProjectId = '<%= project_id %>';
 
     var currentTaskID;
     var currentWorkerID;
     var currentWorkerPk;
     var currentWorkerName;
+    var noWorkDone;
+
     var initialTask = await initTask(currentProjectId);
 
     var start_timestamp = Math.floor(Date.now() / 1000);
@@ -69,6 +71,9 @@
     currentWorkerID = initialTask.workerID;
     currentWorkerPk = initialTask.workerPk;
     currentWorkerName = initialTask.workerName;
+    // noWorkDone = initialTask.noWorkDone;
+
+    // document.getElementById("no-work-done").innerHTML = "Number of work done: " + noWorkDone;
 
     console.log("Name: ", currentWorkerName);
 
@@ -179,6 +184,9 @@
             currentWorkerID = task.workerID;
             currentWorkerPk = task.workerPk;
             currentWorkerName = task.workerName;
+            noWorkDone = task.noWorkDone;
+
+            document.getElementById('no-work-done').innerHTML = "Number of work done: " + noWorkDone;
 
             ls.assignTask(task);
             ls.initializeStore(_convertTask(task));

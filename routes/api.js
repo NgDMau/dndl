@@ -109,12 +109,18 @@ module.exports = function (app) {
                 res.send({value: "none"});
                 return
             }
+
+            let workerPK = req.session.passport.user.id;
+            let noWorkDone = await db.numberOfWorkDone(workerPK, project_id).count;
+            
             console.log("dataFromDb: ", dataFromDb);
+            console.log("noWorkDone", noWorkDone);
 
             var task = {
-                workerPk: req.session.passport.user.id,
+                workerPk: workerPK,
                 workerID: req.session.passport.user.username,
                 workerName: req.session.passport.user.full_name,
+                noWorkDone: noWorkDone,
                 completions: [],
                 predictions: [],
                 id: dataFromDb.id,

@@ -303,7 +303,7 @@ module.exports = {
     
     getDataFromTable: async function (table) {
         // var cmd = "SELECT * FROM audio_transcription WHERE result IS NULL ORDER BY random()";
-        var cmd = "SELECT * FROM projects." + table + " WHERE checked IS NULL AND finish_at IS NULL ORDER BY random()";
+        var cmd = "SELECT * FROM projects." + table + " WHERE checked IS NULL AND finish_at IS NULL ORDER BY random() LIMIT 1";
         // var values = [table];
         var client = await pool.connect();
         try {
@@ -314,6 +314,19 @@ module.exports = {
         } catch(e) {
             client.release();
             return e;
+        }
+    },
+
+    async numberOfWorkDone(workerID, projectID) {
+        let cmd = "SELECT COUNT(*) FROM projects." + projectID + " WHERE worker_id=" + workerID;
+        var client = await pool.connect();
+        try {
+            var result = await client.query(cmd);
+            console.log("numberOfWorkDone", result);
+            client.release();
+            return result.rows[0] || 0;
+        } catch(e) {
+            client.release();
         }
     },
 
