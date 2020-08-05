@@ -89,7 +89,7 @@ module.exports = function (app) {
                     }
                     res.send(data.rows)
                 }else{
-                    res.send('You are not owner this project')
+                    res.send('You are not owner of this project')
                 }
             }else{
                 res.send('Permission denied')
@@ -115,7 +115,7 @@ module.exports = function (app) {
                     }
                     res.send(data.rows)
                 }else{
-                    res.send('You are not owner this project')
+                    res.send('You are not owner of this project')
                 }
             }else{
                 res.send('Permission denied')
