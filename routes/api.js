@@ -46,48 +46,6 @@ module.exports = function (app) {
         }
         
     },
-    
-    // app.post('/api/data/:project_id', async function(req, res) {
-    //     if (req.isAuthenticated()) {
-    //         var data = req;
-    //         var project_id = data.params.project_id;
-    //         console.log("project_id", project_id)
-    //         console.log("Received data from client: ", data.body);
-
-    //         var receivedData = data.body;
-
-    //         if(receivedData.value !== 1) {
-    //             var insertResult = await  db.insertIntoTable(project_id, receivedData);
-    //             console.log("insertResult: ", insertResult);
-    //         }
-
-    //         var dataFromDb = await db.getDataFromTable(project_id);
-    //         console.log("dataFromDb", dataFromDb);
-    //         if (dataFromDb === undefined) {
-    //             res.send({value: "none"});
-    //             return
-    //         }
-    //         console.log("dataFromDb: ", dataFromDb);
-
-    //         //console.log("FULLNAME: ", req.session.passport.user);
-
-    //         var task = {
-    //             workerPk: req.session.passport.user.id,
-    //             workerID: req.session.passport.user.username,
-    //             workerName: req.session.passport.user.full_name,
-    //             completions: [],
-    //             predictions: [],
-    //             id: dataFromDb.id,
-    //             data: {
-    //                 url: dataFromDb.url
-    //             }
-    //         }
-    //         res.send(task);
-    //     } else {
-    //         res.redirect('/login')
-    //     }
-    // }),
-
 
     app.post('/api/data/:project_id', async function(req, res) {
         if (req.isAuthenticated()) {

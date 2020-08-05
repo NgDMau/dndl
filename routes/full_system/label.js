@@ -12,6 +12,7 @@ module.exports = function(app) {
             }
 
             let workerID = req.session.passport.user.id;
+            let workerName = req.session.passport.user.fullname;
             let noWorkDone = await db.numberOfWorkDone(workerID, projectID);
             noWorkDone = noWorkDone.count
             console.log("WORK HAVE DONE:", noWorkDone)
@@ -20,10 +21,10 @@ module.exports = function(app) {
 
             switch (project_type) {
                 case "audio_transcription":
-                    res.render('full_system/audio_transcription.ejs', {project_id: projectID, noWorkDone: noWorkDone});
+                    res.render('full_system/audio_transcription.ejs', {project_id: projectID, noWorkDone: noWorkDone, workerName: workerName});
                     break;
                 case "image_object_detection":
-                    res.render("full_system/image_object_detection.ejs", {project_id: projectID, noWorkDone: noWorkDone});
+                    res.render("full_system/image_object_detection.ejs", {project_id: projectID, noWorkDone: noWorkDone, workerName: workerName});
                     break;
             }
             return

@@ -1,60 +1,23 @@
-<!-- Include Label Studio stylesheet -->
-<head>
-    <title>INLAB - Image Object Detection</title>
-    <link rel="shortcut icon" type="image/png" href="/img/logoInlabSquare.png"/>
-</head>
+<!-- Include title, favicon and label studio stylesheet -->
+<title>INLAB - Image Object Detection</title>
+<link rel="shortcut icon" type="image/png" href="/img/logoInlabSquare.png"/>
 <link href="https://unpkg.com/label-studio@0.4.0/build/static/css/main.14acfaa5.css" rel="stylesheet">
 
-<!-- Create the Label Studio container -->
-<div id="label-studio"></div>
-<div id="no-work-done">&nbsp&nbsp&nbsp&nbspNumber of Work Done: <%= noWorkDone %></div>
-<!-- Include the Label Studio library -->
+<!-- Create the ls container -->
+<div id="label-window"></div>
+
+<!-- Display worker name and number of tasks have done-->
+<div id="worker-name">&nbsp&nbsp&nbsp&nbsp <%= workerName %></div>
+<div id="no-work-done">&nbsp&nbsp&nbsp&nbspSố ảnh đã dán nhãn: <%= noWorkDone %></div>
+
+<!-- Include the label library -->
 <script src="/js/inlabjs/main.js"></script>
 <script src="/js/idp.js"></script>
 <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
-<!-- Initialize Label Studio -->
+
+<!-- Initialize Label window -->
 <script>
-
     window.onload = async function() {
-    //     var task_config = [{
-    //         completions: [],
-    //         predictions: [],
-    //         id: 1,
-    //         data: {
-    //             image: "https://miro.medium.com/max/5778/1*ne8pqysxw4k1EJ_asfwS5w.jpeg"
-                
-    //         }
-    //     },
-        
-    //     {
-    //         completions: [],
-    //         predictions: [],
-    //         id: 2,
-    //         data: {
-    //             image: "https://image.plo.vn/w653/Uploaded/2020/yqxwpmrnw/2020_02_16/sieu-may-bay-khai-thac-duong-bay-vang_dxxi.jpg"
-                
-    //         }
-    //     },
-    //     {
-    //         completions: [],
-    //         predictions: [],
-    //         id: 3,
-    //         data: {
-    //             image: "https://vnn-imgs-f.vgcloud.vn/2020/02/21/23/dich-covid-19-hang-bay-viet-meo-mat-giam-gia-ve-cho-thue-may-bay.jpg"
-                
-    //         }
-    //     },
-    //     {
-    //         completions: [],
-    //         predictions: [],
-    //         id: 4,
-    //         data: {
-    //             image: "https://image.vietstock.vn/2019/12/26/vietstock_s_cac-hang-hang-khong-viet-dang-co-bao-nhieu-may-bay_20191226155631.jpg"
-                
-    //         }
-    //     }
-    // ];
-
     
     var currentProjectId = '<%= project_id %>';
 
@@ -63,6 +26,9 @@
     var currentWorkerPk;
     var currentWorkerName;
     var noWorkDone;
+
+    var workerNameDiv = document.getElementById('worker-name');
+    var noWokeDoneDiv = document.getElementById('no-work-done');
 
     var initialTask = await initTask(currentProjectId);
 
@@ -74,19 +40,16 @@
     currentWorkerID = initialTask.workerID;
     currentWorkerPk = initialTask.workerPk;
     currentWorkerName = initialTask.workerName;
-    // noWorkDone = initialTask.noWorkDone;
-
-    // document.getElementById("no-work-done").innerHTML = "Number of work done: " + noWorkDone;
+    
 
     console.log("Name: ", currentWorkerName);
 
     if (currentTaskID === undefined) {
         console.log("Hết dữ liệu dán nhãn");
-        //alert("Hiện đã hết dữ liệu để dán nhãn");
     }
-    console.log("initialTask", initialTask);
+    console.log("initialTask: ", initialTask);
     
-    var labelStudio = new LabelStudio('label-studio', {
+    var labelStudio = new LabelStudio('label-window', {
         config: `
       <View>
         <Image name="img" value="$url"></Image>
@@ -136,27 +99,18 @@
         onSubmitCompletion: async function(ls, completion) {
             ls.setFlags({ isLoading: true });
             console.log("completion", completion);
-            //console.log("task_config[1]", task_config[1])
 
             if (currentTaskID === undefined) {
                 ls.setFlags({ noTask: true });
                 return;
             }
-            //ls.resetState();
-            //console.log(ls.resetState)
 
-            // var response = task_config[Math.floor(Math.random() * task_config.length)] ;
-            // var response = task_config[3]
-
-            // console.log("response", response)
-            // response.data = JSON.stringify(response.data)
             let cs = ls.completionStore;
             let c;
             console.log("serialize", ls.completionStore.selected.serializeCompletion()[0]);
             var serialized = ls.completionStore.selected.serializeCompletion()[0];
 
             var interval_sec = Math.floor(Date.now() / 1000) - start_timestamp;
-
 
             var result = {
                 id: currentTaskID,
@@ -178,9 +132,7 @@
                 ls.setFlags({isLoading: false})
             }
             
-            
             task.data = JSON.stringify(task.data);
-            // task = JSON.stringify(task);
             console.log("Received task from server: ", task)
 
             currentTaskID = task.id;
@@ -189,7 +141,8 @@
             currentWorkerName = task.workerName;
             noWorkDone = task.noWorkDone;
 
-            document.getElementById('no-work-done').innerHTML = " Number of work done: " + noWorkDone;
+            noWokeDoneDiv.innerHTML = " Số ảnh đã dán nhãn: " + noWorkDone;
+            workerNameDiv.innerHTML = currentWorkerName;
 
             ls.assignTask(task);
             ls.initializeStore(_convertTask(task));
@@ -202,24 +155,19 @@
             }
 
             cs.selectCompletion(c.id);
-            //ls.setFlags({ isLoading: false });
             console.log("Re-assisgned!")
-            
         },
 
         onEntityCreate: function(region) {
-            console.log("region", region);
-            //getNewData();
-            //task_config.data.image = "https://htx-misc.s3.amazonaws.com/opensource/label-studio/examples/images/nick-owuor-astro-nic-visuals-wDifg5xc9Z4-unsplash.jpg";
-            // labelStudio.task.data.image = "https://htx-misc.s3.amazonaws.com/opensource/label-studio/examples/images/nick-owuor-astro-nic-visuals-wDifg5xc9Z4-unsplash.jpg"
+            console.log("Region: ", region);
         },
+
         onSkipTask: async function(ls) {
             let cs = ls.completionStore;
             let c;
             
             var task = await initTask(currentProjectId);
             task.data = JSON.stringify(task.data);
-            // task = JSON.stringify(task);
             console.log("Received task from server: ", task)
             currentTaskID = task.id;
             currentWorkerID = task.workerID;
