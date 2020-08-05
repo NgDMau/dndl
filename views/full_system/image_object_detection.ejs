@@ -7,7 +7,7 @@
 <div id="label-window"></div>
 
 <!-- Display worker name and number of tasks have done-->
-<div id="worker-name">&nbsp&nbsp&nbsp&nbsp <%= workerName %></div>
+<div id="worker-name">&nbsp&nbsp&nbsp&nbsp<%= workerName %></div>
 <div id="no-work-done">&nbsp&nbsp&nbsp&nbspSố ảnh đã dán nhãn: <%= noWorkDone %></div>
 
 <!-- Include the label library -->
@@ -141,6 +141,8 @@
             currentWorkerName = task.workerName;
             noWorkDone = task.noWorkDone;
 
+            console.log("currentWorkerName: ", currentWorkerName);
+            console.log("workerName: ", '<%= workerName %>');
             noWokeDoneDiv.innerHTML = " Số ảnh đã dán nhãn: " + noWorkDone;
             workerNameDiv.innerHTML = currentWorkerName;
 
