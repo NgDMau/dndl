@@ -45,7 +45,7 @@ module.exports = {
     },
 
     unregisterProject: async function (projectID) {
-        var cmd = 'DELETE FROM projects_metadata WHERE id=$1'
+        var cmd = 'DELETE FROM projects_metadata WHERE id=$1';
         var values = [projectID]
         var client = await pool.connect();
         try {
@@ -56,7 +56,6 @@ module.exports = {
             client.release();
             return e;
         }
-
     },
 
     dropTableInSchema: async function (table, schema) {
