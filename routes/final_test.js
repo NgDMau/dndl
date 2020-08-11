@@ -23,7 +23,8 @@ module.exports = function (app) {
 
                 var listQuestion = [], numberQuestion = 30;
                 shuffledQuestions(numberQuestion).then(function () {
-                    res.render("final_test.ejs", { list: listQuestion });
+                    //res.render("final_test.ejs", { list: listQuestion });
+                    res.render('dashboard.ejs', {name: user.fullname, level: user.role});
                 }
                 );
                 async function shuffledQuestions(index) {
@@ -62,14 +63,14 @@ module.exports = function (app) {
                         return console.error(err);
                     }
                     if (resultTest == "true") {
-                        // client.query('UPDATE users SET role=$1 WHERE username=$2', ['worker', user.username], function (err, result) {
-                        //     if (err) {
-                        //         client.release();
-                        //         return console.error(err);
-                        //     }
+                        client.query('UPDATE users SET role=$1 WHERE username=$2', ['worker', user.username], function (err, result) {
+                            if (err) {
+                                client.release();
+                                return console.error(err);
+                            }
                             
 
-                        // });
+                        });
                         client.query('UPDATE score SET total_score=$1, test_score=$2 WHERE username=$3', [time,score, user.username], function (err, result) {
                             if (err) {
                                 client.release();
