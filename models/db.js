@@ -112,8 +112,8 @@ module.exports = {
     },
 
     getAllProjects: async function (index) {
-        var cmd = "select id, name, type, rate, starttime from projects_metadata order by starttime desc OFFSET (("+index+" - 1) * 10) FETCH NEXT 10 ROWS ONLY"
-        var client = await pool.connect()
+        var cmd = "select id, name, type, rate, starttime from projects_metadata order by starttime desc OFFSET (("+index+" - 1) * 10) FETCH NEXT 10 ROWS ONLY";
+        var client = await pool.connect();
 
         try{
             var res = await client.query(cmd);

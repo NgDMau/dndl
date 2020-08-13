@@ -13,7 +13,7 @@ module.exports = function(app) {
 
             let workerID = req.session.passport.user.id;
             let workerName = req.session.passport.user.full_name;
-            let noWorkDone = await db.numberOfWorkDone(workerID, projectID);
+            let noWorkDone = await db.numberOfWorkDone(workerID, projectID) || {count: 12};
             noWorkDone = noWorkDone.count
             console.log("WORK HAVE DONE:", noWorkDone)
 
