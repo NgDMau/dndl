@@ -22,7 +22,7 @@ passport.deserializeUser(function(user, done) {
 const app = express()
 
 const port = process.env.PORT || 8002;
-app.use(helmet());
+// app.use(helmet());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -49,6 +49,8 @@ app.use(passport.session());
 
 app.set('view engine', 'ejs')
 app.set('view engine', 'pug')
+
+
 
 require('./routes/index')(app);
 require('./routes/text_sentiment')(app);
@@ -93,14 +95,31 @@ require('./routes/finish_project')(app);
 
 require('./routes/project_api')(app);
 
+
+
+
+
+app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`)
+});
+
 //The 404 Route (ALWAYS Keep this as the last route)
-app.get('*', function(req, res) {
+app.get('*', function(req, res, next) {
     //res.status(404).sendFile('error404.html');
     // res.status(404).sendFile(path.join(__dirname, './views/', 'error404.html'))
     res.status(404).render("error404.ejs")
 });
 
+app.get('*', function(req, res, next) {
+    //res.status(404).sendFile('error404.html');
+    // res.status(404).sendFile(path.join(__dirname, './views/', 'error404.html'))
+    res.status(502).send("some errors happened");
+    
+});
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+app.get('*', function(req, res, next) {
+    //res.status(404).sendFile('error404.html');
+    // res.status(404).sendFile(path.join(__dirname, './views/', 'error404.html'))
+    res.status(500).send("some errors happened");
+    
 });
