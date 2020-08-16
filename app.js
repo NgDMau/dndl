@@ -9,6 +9,7 @@ const bodyParser = require('body-parser');
 var passport = require('passport');
 
 var cookieParser = require('cookie-parser');
+var helmet = require('helmet');
 
 passport.serializeUser(function(user, done) {
     done(null, user);
@@ -21,7 +22,7 @@ passport.deserializeUser(function(user, done) {
 const app = express()
 
 const port = process.env.PORT || 8002;
-
+app.use(helmet);
 app.use(bodyParser.urlencoded({
     extended: true
 }));
