@@ -1,0 +1,56 @@
+<!-- Include Label Studio stylesheet -->
+<link href="/css/main082.css" rel="stylesheet">
+
+<!-- Create the Label Studio container -->
+<div id="label-studio"></div>
+<script>var exports = {};</script>
+<!-- Include the Label Studio library -->
+<script src="/js/main082.js"></script>
+
+<!-- Initialize Label Studio -->
+<script>
+  var labelStudio = new LabelStudio('label-studio', {
+    config: `
+    <View>
+        <Image name="img" value="$image" zoom="true"></Image>
+        <KeyPointLabels name="tag" toName="img" strokewidth="5" fillcolor="red">
+            <Label value="Hello" background="yellow"></Label>
+            <Label value="World" background="blue"></Label>  
+        </KeyPointLabels>
+    </View>
+    `,
+
+    interfaces: [
+      "panel",
+      "update",
+      "controls",
+      "side-column",
+      "completions:menu",
+      "completions:add-new",
+      "completions:delete",
+      "predictions:menu",
+    ],
+
+    user: {
+      pk: 1,
+      firstName: "James",
+      lastName: "Dean"
+    },
+
+    task: {
+      completions: [],
+      predictions: [],
+      id: 1,
+      data: {
+        image: "https://htx-misc.s3.amazonaws.com/opensource/label-studio/examples/images/nick-owuor-astro-nic-visuals-wDifg5xc9Z4-unsplash.jpg"
+      }
+    },
+    
+    onLabelStudioLoad: function(LS) {
+      var c = LS.completionStore.addCompletion({
+        userGenerate: true
+      });
+      LS.completionStore.selectCompletion(c.id);
+    }
+  });
+</script>

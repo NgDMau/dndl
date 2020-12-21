@@ -36,8 +36,7 @@ app.use(session({
     }
 }));
 
-app.use(express.static('public'));
-app.use(express.static('view'));
+
 app.use(flash());
 
 app.use(passport.initialize());
@@ -45,20 +44,18 @@ app.use(passport.session());
 
 app.set('view engine', 'ejs')
 
+app.use(express.static('public'));
+app.use(express.static('view'));
+
 require('./routes/common_routes/index')(app);
-require('./routes/worker_routes/text_sentiment')(app);
 require('./routes/common_routes/signup')(app);
 require('./routes/common_routes/login')(app);
 require('./routes/common_routes/forgotpass')(app);
 require('./routes/common_routes/about')(app);
 require('./routes/common_routes/dashboard')(app);
-require('./routes/worker_routes/training_topic')(app);
-require('./routes/worker_routes/training_audio')(app);
 require('./routes/common_routes/certificate')(app);
 require('./routes/common_routes/logout')(app);
-require('./routes/worker_routes/result')(app);
 require('./routes/common_routes/upload')(app)
-require('./routes/worker_routes/create_project')(app);
 require('./routes/manager_routes/user_management')(app);
 require('./routes/common_routes/upload')(app);
 require('./routes/common_routes/uploadresult')(app);
@@ -69,7 +66,16 @@ require('./routes/common_routes/contactsale')(app);
 require('./routes/common_routes/verify')(app);
 require('./routes/common_routes/info')(app);
 require('./routes/common_routes/api')(app);
+
 require('./routes/worker_routes/final_test')(app);
+require('./routes/worker_routes/result')(app);
+require('./routes/worker_routes/label')(app);
+require('./routes/worker_routes/training_audio')(app);
+require('./routes/worker_routes/training_topic')(app);
+require('./routes/worker_routes/text_sentiment')(app);
+require('./routes/worker_routes/create_project')(app);
+
+
 // require('./routes/labeling')(app);
 require('./routes/common_routes/dataset')(app);
 require('./routes/common_routes/api')(app);
