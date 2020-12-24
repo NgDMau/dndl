@@ -1,17 +1,6 @@
 // import fetch from "node-fetch";
 
-async function getNewData(project_id) {
-    const URL = "/api/data/" + project_id;
-    let response = await fetch(URL);
-    try {
-        return response.json();
-    } catch(e) {
-        throw e;
-    }
-    
-}
-
-const _convertTask = function(task) {
+const convertTask = function(task) {
     // converts the task from the server format to the format
     // supported by the LS frontend
     if (!task) return;
@@ -33,39 +22,48 @@ const _convertTask = function(task) {
         }
     }
 
-    return task;
+    return {
+        completions: [],
+        predictions: [],
+        id: task.id,
+        data: {
+          image: task.url || "https://htx-misc.s3.amazonaws.com/opensource/label-studio/examples/images/nick-owuor-astro-nic-visuals-wDifg5xc9Z4-unsplash.jpg"
+        }
+      };
 };
 
 async function initTask(project_id) {
-    return await this.submitResult(project_id, {value: 1});
-    var testTask = {
-        completions: [],
-        predictions: [],
-        id: 4,
-        data: {
-            audio: "audio/audio_example.wav"
-            
-        }
-    }
-    return testTask;
+    return await this.getNextTask(project_id);
 }
 
-async function submitResult(project_id, result) {
+async function submitTask(project_id, result) {
     //import fetch from "node-fetch";
     var postUrl = '/api/data/' + project_id;
     console.log("postUrl: ", postUrl)
-    var data = result;
 
     var otherParams = {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(result),
         method: "POST"
     }
 
-    console.log("data: ", JSON.stringify(data))
+    console.log("data: ", JSON.stringify(result))
     var res = await fetch(postUrl, otherParams);
     //console.log(res.json());
     return res.json();
 }
+
+async function getTask(projectID) {
+    let getUrl = '/api/data/' + projectID;
+    let otherParams = {
+        method: "GET"
+    }
+    let result = await fetch(getUrl, otherParams);
+    result = await result.json();
+    console.log("result", result);
+    return result
+}
+
+

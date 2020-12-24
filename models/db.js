@@ -172,9 +172,10 @@ module.exports = {
         return pool;
     },
 
-    insertIntoTable: async function (table, data) {
-        var cmd = "UPDATE projects." + table + " SET result=$1, worker_id=$2, label=$3, finish_at=$4, finish_time=$5 WHERE id=$6";
-        var values = [data, data.createdBy, data.value.text, data.createdDate, data.createdInterval, data.id];
+    insertIntoTable: async function (table, submitObject) {
+        var cmd = "UPDATE projects." + table + " SET labeled_result=$1, labeler_id=$2, finished_at=$3, finished_in=$4 WHERE id=$5";
+        var values = [submitObject.data, submitObject.created_by, submitObject.created_at, submitObject.created_in, submitObject.task_id];
+        console.log("submitObject ", submitObject)
         var client = await pool.connect();
         try {
             var result = await client.query(cmd, values);
@@ -293,14 +294,23 @@ module.exports = {
     getDataFromTable: async function (table) {
         // var cmd = "SELECT * FROM audio_transcription WHERE result IS NULL ORDER BY random()";
         var values = [table];
-        var cmd = "SELECT * FROM projects." + table + " WHERE checked IS NULL AND RESULT IS NULL ORDER BY random()";
+        var cmd = "SELECT * FROM projects." + table + " WHERE finished_at IS NULL ORDER BY random()";
         // var values = [table];
         var client = await pool.connect();
         try {
             var result = await client.query(cmd);
             console.log("getDataFromTable:", result)
             client.release();
-            return result.rows[0];
+            if(result.rowCount === 0) {
+                return {
+                    code: 'OUT_OF_STOCK',
+                }
+            }
+            return {
+                code: 'OK',
+                data: result.rows[0]
+            }
+
         } catch(e) {
             client.release();
             return e;

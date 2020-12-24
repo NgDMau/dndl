@@ -4,6 +4,10 @@ module.exports = function(app) {
     app.get('/label', async function(req, res) {
         if(req.isAuthenticated()) {
             var project_id = req.query.project_id;
+            var labeler_id = req.session.passport.user.id;
+            var labeler_username = req.session.passport.user.username;
+            var labeler_name = req.session.passport.user.fullname;
+            
             console.log("project_id", project_id);
             var this_project = new Project({id: project_id});
             let result = await this_project.getAttribute("type");
@@ -18,7 +22,7 @@ module.exports = function(app) {
                     break
 
                 case "image_key_points":
-                    res.render('worker_views/image_key_points.ejs', {project_id: project_id});
+                    res.render('worker_views/image_key_points.ejs', {project_id: project_id, labeler_id: labeler_id, labeler_name: labeler_name, labeler_username: labeler_username});
                     break
             }
             return

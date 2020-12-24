@@ -2,20 +2,42 @@
 <link href="/css/main082.css" rel="stylesheet">
 
 <!-- Create the Label Studio container -->
-<div id="label-studio"></div>
+<div id="inlab"></div>
 <script>var exports = {};</script>
+<script src="/js/idp.js"></script>
 <!-- Include the Label Studio library -->
 <script src="/js/main082.js"></script>
+<script>
+  function preProcessOutput(object) {
+        delete object.from_name;
+        delete object.to_name;
+        delete object.type;
+    }
+</script>
 
 <!-- Initialize Label Studio -->
 <script>
-  var labelStudio = new LabelStudio('label-studio', {
+  window.onload = async function() {
+
+    let projectID = '<%= project_id %>';
+    let taskID;
+    let labelerID = parseInt('<%= labeler_id %>');
+    let labelerUsername = '<%= labeler_username %>'
+    let labelerName = '<%= labeler_name %>';
+
+    console.log("project n worker",projectID, labelerID)
+
+    let initialTask = await getTask(projectID);
+    taskID = initialTask.id;
+
+    let startTime = Math.floor(Date.now() / 1000);
+
+    var labelStudio = new LabelStudio('inlab', {
     config: `
     <View>
         <Image name="img" value="$image" zoom="true"></Image>
         <KeyPointLabels name="tag" toName="img" strokewidth="5" fillcolor="red">
-            <Label value="Hello" background="yellow"></Label>
-            <Label value="World" background="blue"></Label>  
+            <Label value="Human" background="red"></Label>
         </KeyPointLabels>
     </View>
     `,
@@ -24,6 +46,7 @@
       "panel",
       "update",
       "controls",
+      "skip",
       "side-column",
       "completions:menu",
       "completions:add-new",
@@ -31,18 +54,27 @@
       "predictions:menu",
     ],
 
+    messages: {
+      DONE: "Done!",
+      NO_COMP_LEFT: "Đã hết dữ liệu hoàn thành",
+      NO_NEXT_TASK: "Đã hết dữ liệu dán nhãn",
+      NO_ACCESS: "Bạn không được cấp quyền truy cập dữ liệu này"
+    },
+
+    desciption: "Chấm điểm ảnh theo các nhãn có sẵn",
+
     user: {
-      pk: 1,
-      firstName: "James",
-      lastName: "Dean"
+      pk: labelerID,
+      firstName: "",
+      lastName: labelerName
     },
 
     task: {
       completions: [],
       predictions: [],
-      id: 1,
+      id: initialTask.id,
       data: {
-        image: "https://htx-misc.s3.amazonaws.com/opensource/label-studio/examples/images/nick-owuor-astro-nic-visuals-wDifg5xc9Z4-unsplash.jpg"
+        image: initialTask.url || "https://htx-misc.s3.amazonaws.com/opensource/label-studio/examples/images/nick-owuor-astro-nic-visuals-wDifg5xc9Z4-unsplash.jpg"
       }
     },
     
@@ -51,6 +83,97 @@
         userGenerate: true
       });
       LS.completionStore.selectCompletion(c.id);
-    }
+      // check if database has images to label
+      if (initialTask.code === 'OUT_OF_STOCK') {
+        LS.setFlags({ noTask: true });
+      }
+    },
+
+    onSubmitCompletion: async function(ls, completion) {
+      let finishedIn = Math.floor(Date.now() / 1000) - startTime;
+      console.log(completion);
+      let cs = ls.completionStore;
+      let outputObjects = ls.completionStore.selected.serializeCompletion();
+      outputObjects.forEach(preProcessOutput)
+      console.log("serialize", outputObjects);
+      let submitObject = {
+        skip: false,
+        task_id: taskID,
+        created_by: labelerID,
+        created_at: completion.createdDate,
+        created_in: finishedIn,
+        data: outputObjects
+      }
+      let submitResult = await submitTask(projectID, submitObject)
+      if (submitResult.code === 'OK') {
+        let nextTask = await getTask(projectID);
+        if (nextTask.code === 'OUT_OF_STOCK') {
+          ls.setFlags({ noTask: true });
+        }
+        nextTask = convertTask(nextTask);
+          taskID = nextTask.id;
+          ls.assignTask(nextTask);
+          ls.initializeStore(nextTask);
+          if (cs.predictions.length > 0) {
+                c = ls.completionStore.addCompletionFromPrediction(cs.predictions[0]);
+            }
+            else {
+                c = ls.completionStore.addCompletion({ userGenerate: true });
+            }
+          cs.selectCompletion(c.id);
+          return
+      }
+      
+      
+      
+      
+      // .then((result) => {
+      //   console.log(result);
+      //   if (result.code === 'OK') {
+      //     getTask(projectID)
+      //     .then((nextTask) => {
+      //       if (nextTask.code === 'OUT_OF_STOCK') {
+      //         ls.setFlags({ noTask: true });
+      //       }
+      //       nextTask = convertTask(nextTask);
+      //       ls.assignTask(nextTask);
+      //       ls.initializeStore(nextTask);
+      //       if (cs.predictions.length > 0) {
+      //             c = ls.completionStore.addCompletionFromPrediction(cs.predictions[0]);
+      //         }
+      //         else {
+      //             c = ls.completionStore.addCompletion({ userGenerate: true });
+      //         }
+
+      //       cs.selectCompletion(c.id);
+      //       //ls.setFlags({ isLoading: false });
+      //       console.log("Re-assisgned!")
+      //     })
+
+          
+      //   }
+      // })
+    },
+
+    onSkipTask: async function(ls) {
+      let cs = ls.completionStore;
+      let nextTask = await getTask(projectID);
+        if (nextTask.code === 'OUT_OF_STOCK') {
+          ls.setFlags({ noTask: true });
+        }
+        nextTask = convertTask(nextTask);
+          taskID = nextTask.id;
+          ls.assignTask(nextTask);
+          ls.initializeStore(nextTask);
+          if (cs.predictions.length > 0) {
+                c = ls.completionStore.addCompletionFromPrediction(cs.predictions[0]);
+            }
+            else {
+                c = ls.completionStore.addCompletion({ userGenerate: true });
+            }
+          cs.selectCompletion(c.id);
+          return
+    },
   });
+  }
 </script>
