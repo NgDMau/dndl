@@ -92,7 +92,7 @@
     onSubmitCompletion: async function(ls, completion) {
       let finishedIn = Math.floor(Date.now() / 1000) - startTime;
       console.log(completion);
-      let cs = ls.completionStore;
+      
       let outputObjects = ls.completionStore.selected.serializeCompletion();
       outputObjects.forEach(preProcessOutput)
       console.log("serialize", outputObjects);
@@ -112,8 +112,12 @@
         }
         nextTask = convertTask(nextTask);
           taskID = nextTask.id;
+          ls.resetState();
           ls.assignTask(nextTask);
-          ls.initializeStore(nextTask);
+          console.log("nextTask ", nextTask)
+          ls.initializeStore(_convertTask(nextTask));
+          let cs = ls.completionStore;
+          let c;
           if (cs.predictions.length > 0) {
                 c = ls.completionStore.addCompletionFromPrediction(cs.predictions[0]);
             }
@@ -163,7 +167,9 @@
         }
         nextTask = convertTask(nextTask);
           taskID = nextTask.id;
+          ls.resetState();
           ls.assignTask(nextTask);
+          console.log("nextTask ", nextTask)
           ls.initializeStore(nextTask);
           if (cs.predictions.length > 0) {
                 c = ls.completionStore.addCompletionFromPrediction(cs.predictions[0]);
