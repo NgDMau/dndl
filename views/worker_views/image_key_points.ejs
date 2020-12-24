@@ -160,7 +160,6 @@
     },
 
     onSkipTask: async function(ls) {
-      let cs = ls.completionStore;
       let nextTask = await getTask(projectID);
         if (nextTask.code === 'OUT_OF_STOCK') {
           ls.setFlags({ noTask: true });
