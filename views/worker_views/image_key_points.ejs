@@ -170,7 +170,9 @@
           ls.resetState();
           ls.assignTask(nextTask);
           console.log("nextTask ", nextTask)
-          ls.initializeStore(nextTask);
+          ls.initializeStore(_convertTask(nextTask));
+          let cs = ls.completionStore;
+          let c;
           if (cs.predictions.length > 0) {
                 c = ls.completionStore.addCompletionFromPrediction(cs.predictions[0]);
             }
