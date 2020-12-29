@@ -22,13 +22,15 @@
       delete obj.value.width;
       delete obj.id;
       if (obj.value.keypointlabels[0] === 'visible') {
-        obj.value.v = '2';
+        obj.value.v = 2;
         delete obj.value.keypointlabels;
       } else if (obj.value.keypointlabels[0] === 'hidden') {
-        obj.value.v = '1';
+        obj.value.v = 1;
         delete obj.value.keypointlabels;
       } else {
-        obj.value.v = '0';
+        obj.value.v = 0;
+        obj.value.x = 0;
+        obj.value.y = 0;
         delete obj.value.keypointlabels;
       }
     })
