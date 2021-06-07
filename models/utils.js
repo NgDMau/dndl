@@ -63,4 +63,4 @@ async function insertCovidSoundToDB(file_name) {
     });
 }
 
-insertCovidSoundToDB('train_data_negative.json')
+// insertCovidSoundToDB('train_data_negative.json')
