@@ -316,6 +316,22 @@ module.exports = {
         }
     },
 
+    getTrivialDataFromTable: async function (table) {
+        // var cmd = "SELECT * FROM audio_transcription WHERE result IS NULL ORDER BY random()";
+        var cmd = "SELECT * FROM projects." + table;
+        // var values = [table];
+        var client = await pool.connect();
+        try {
+            var result = await client.query(cmd);
+            //console.log("getTrivialDataFromTable:", result)
+            client.release();
+            return result.rows[0];
+        } catch(e) {
+            client.release();
+            return e;
+        }
+    },
+
     async numberOfWorkDone(workerID, projectID) {
         let cmd = "SELECT COUNT(*) FROM projects." + projectID + " WHERE worker_id=" + workerID;
         var client = await pool.connect();

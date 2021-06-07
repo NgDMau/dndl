@@ -40,3 +40,27 @@ async function getAllID () {
     )
     return result
 }
+
+async function insertCovidSoundToDB(file_name) {
+    var db = require('./db');
+    var fs = require('fs');
+    let pool = db.getPgPool();
+    let client = await pool.connect()
+    var objs;
+    fs.readFile(file_name, 'utf8', function (err, data) {
+    if (err) throw err;
+        objs = JSON.parse(data);
+        objs.forEach(async function(obj) {
+            let patient_id = obj.id;
+            let patient_info = obj;
+            let cmd = "INSERT INTO projects._covidn2021(patient_id, patient_info) VALUES($1, $2)";
+            let values = [patient_id, patient_info];
+            let result = await client.query(cmd, values);
+            console.log(result);
+            return
+        })
+    return
+    });
+}
+
+insertCovidSoundToDB('train_data_negative.json')
