@@ -2,7 +2,7 @@ const path = require('path');
 const db = require('../models/db');
 
 module.exports = function (app) {
-    app.get('/api/data', function (req, res) {
+    app.get('/api/data/:project_id', async function (req, res) {
         if (req.isAuthenticated()) {
             let tasks = [{
                 completions: [],
@@ -40,7 +40,21 @@ module.exports = function (app) {
                 }
             }];
             let task = tasks[Math.floor(Math.random() * tasks.length)];
-            res.send(task);
+            let project_id = req.params.project_id;
+            let workerPK = req.session.passport.user.id
+
+            if (project_id == '_covidn2021') {
+
+
+
+
+                task = await db.getTrivialDataFromTable(project_id)
+                console.log(task)
+                res.send(task);
+                return
+            }
+
+            
         } else {
             res.send("Authentication failure");
         }

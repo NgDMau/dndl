@@ -1,0 +1,283 @@
+<!-- Include Label Studio stylesheet -->
+<link href="/css/main082.css" rel="stylesheet">
+
+<!-- Create the Label Studio container -->
+<div id="inlab"></div>
+<script>var exports = {};</script>
+<script src="/js/idp.js"></script>
+<!-- Include the Label Studio library -->
+<script src="/js/main082.js"></script>
+<script>
+  function preProcessOutput(object) {
+        delete object.from_name;
+        delete object.to_name;
+        delete object.type;
+    }
+
+  function prettify(objects) {
+    objects.forEach((obj) => {
+      delete obj.original_width;
+      delete obj.original_height;
+      delete obj.image_rotation;
+      delete obj.value.width;
+      delete obj.id;
+      if (obj.value.keypointlabels[0] === 'visible') {
+        obj.value.v = 2;
+        delete obj.value.keypointlabels;
+      } else if (obj.value.keypointlabels[0] === 'hidden') {
+        obj.value.v = 1;
+        delete obj.value.keypointlabels;
+      } else {
+        obj.value.v = 0;
+        obj.value.x = 0;
+        obj.value.y = 0;
+        delete obj.value.keypointlabels;
+      }
+    })
+    return objects;
+  }
+
+  const VALID_NUMBER = 17;
+
+  function checkValidQuantity(objects) {
+    if (objects % 17 === 0) {
+      return true;
+    }
+    return false;
+  }
+
+  function labelize(objects) {
+    objects.forEach((object) => {
+      switch (objects.indexOf(object) % 17) {
+        case 0:
+          object.label = '0_HE'
+          break;
+        case 1:
+          object.label = '1_NO'
+          break;
+        case 2:
+          object.label = '2_NE'
+          break;
+        case 3: 
+          object.label = '3_RS'
+          break;
+        case 4:
+          object.label = '4_RE'
+          break;
+        case 5:
+          object.label = '5_RW'
+          break;
+        case 6:
+          object.label = '6_LS'
+          break;
+        case 7: 
+          object.label = '7_LE'
+          break;
+        case 8: 
+          object.label = '8_LW'
+          break;
+        case 9: 
+          object.label = '9_RH'
+          break;
+        case 10: 
+          object.label = '10_RK'
+          break;
+        case 11: 
+          object.label = '11_RA'
+          break;
+        case 12:
+          object.label = '12_LH'
+          break;
+        case 13: 
+          object.label = '13_LK'
+          break;
+        case 14: 
+          object.label = '14_LA'
+          break;
+        case 15:
+          object.label = '15_TL'
+          break;
+        case 16: 
+          object.label = '16_BR'
+          break;
+      }
+    })
+
+  };
+
+  // const list = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14];
+  function chunkMaxLength(arr, chunkSize, maxLength) {
+    return Array.from({length: maxLength}, () => arr.splice(0,chunkSize));
+  }
+
+  // console.log(chunkMaxLength(list, 17, ));
+    
+</script>
+
+<!-- Initialize Label Studio -->
+<script>
+  window.onload = async function() {
+
+    let projectID = '<%= project_id %>';
+    let taskID;
+    let labelerID = parseInt('<%= labeler_id %>');
+    let labelerUsername = '<%= labeler_username %>'
+    let labelerName = '<%= labeler_name %>';
+
+    console.log("project n worker",projectID, labelerID)
+
+    let initialTask = await getTask(projectID);
+    taskID = initialTask.id;
+
+    let startTime = Math.floor(Date.now() / 1000);
+
+    var labelStudio = new LabelStudio('inlab', {
+    config: `
+    <View style="display: flex; width: 1050px;">
+      <View>
+          <Image name="image" value="$image" width="150%" height="150%"/>
+          <KeyPointLabels name="label" toName="image"
+                  strokewidth="2" opacity="1" >
+            <Label value="visible" background="green"/>
+            <Label value="hidden" background="blue"/>
+            <Label value="outside" background="red"/>
+          </KeyPointLabels>
+      </View>
+    </View>
+    `,
+
+    interfaces: [
+      "panel",
+      "update",
+      "controls",
+      "skip",
+      "side-column",
+      "completions:menu",
+      "completions:add-new",
+      // "completions:delete",
+      // "predictions:menu",
+    ],
+
+    messages: {
+      DONE: "Done!",
+      NO_COMP_LEFT: "Đã hết dữ liệu hoàn thành",
+      NO_NEXT_TASK: "Đã hết dữ liệu dán nhãn",
+      NO_ACCESS: "Bạn không được cấp quyền truy cập dữ liệu này"
+    },
+
+    desciption: "Chấm điểm ảnh theo các nhãn có sẵn",
+
+    user: {
+      pk: labelerID,
+      firstName: "",
+      lastName: labelerName
+    },
+
+    task: {
+      completions: [],
+      predictions: [],
+      id: initialTask.id,
+      data: {
+        image: initialTask.url || "https://htx-misc.s3.amazonaws.com/opensource/label-studio/examples/images/nick-owuor-astro-nic-visuals-wDifg5xc9Z4-unsplash.jpg"
+      }
+    },
+    
+    onLabelStudioLoad: function(LS) {
+      var c = LS.completionStore.addCompletion({
+        userGenerate: true
+      });
+      LS.completionStore.selectCompletion(c.id);
+      // check if database has images to label
+      if (initialTask.code === 'OUT_OF_STOCK') {
+        LS.setFlags({ noTask: true });
+      }
+    },
+
+    onSubmitCompletion: async function(ls, completion) {
+      let finishedIn = Math.floor(Date.now() / 1000) - startTime;
+      console.log("completion", completion);
+      
+      let outputObjects = ls.completionStore.selected.serializeCompletion();
+      outputObjects.forEach(preProcessOutput)
+
+      let currentWidth = outputObjects[0].original_width;
+      let currentHeight = outputObjects[0].original_height;
+      console.log("serialize", outputObjects);
+
+      outputObjects = prettify(outputObjects);
+
+
+      if (outputObjects.length % 17 !== 0) {
+        window.alert("THIẾU OBJECT, BẠN VUI LÒNG KIỂM TRA LẠI NHÉ");
+        location.reload()
+      }
+
+      outputObjects = chunkMaxLength(outputObjects, VALID_NUMBER, outputObjects.length/VALID_NUMBER);
+
+      outputObjects.forEach((arr) => {
+        arr = labelize(arr);
+      })
+
+      console.log("outputObjects: ", outputObjects)
+
+      let submitObject = {
+        skip: false,
+        task_id: taskID,
+        created_by: labelerID,
+        created_at: completion.createdDate,
+        created_in: finishedIn,
+        original_width: currentWidth,
+        original_height: currentHeight,
+        data: outputObjects
+      }
+      console.log("submitObject: ", submitObject);
+      let submitResult = await submitTask(projectID, submitObject)
+      if (submitResult.code === 'OK') {
+        let nextTask = await getTask(projectID);
+        if (nextTask.code === 'OUT_OF_STOCK') {
+          ls.setFlags({ noTask: true });
+        }
+        nextTask = convertTask(nextTask);
+          taskID = nextTask.id;
+          ls.resetState();
+          ls.assignTask(nextTask);
+          console.log("nextTask ", nextTask)
+          ls.initializeStore(_convertTask(nextTask));
+          let cs = ls.completionStore;
+          let c;
+          if (cs.predictions.length > 0) {
+                c = ls.completionStore.addCompletionFromPrediction(cs.predictions[0]);
+            }
+            else {
+                c = ls.completionStore.addCompletion({ userGenerate: true });
+            }
+          cs.selectCompletion(c.id);
+          return
+      }
+    },
+
+    onSkipTask: async function(ls) {
+      let nextTask = await getTask(projectID);
+        if (nextTask.code === 'OUT_OF_STOCK') {
+          ls.setFlags({ noTask: true });
+        }
+        nextTask = convertTask(nextTask);
+          taskID = nextTask.id;
+          ls.resetState();
+          ls.assignTask(nextTask);
+          console.log("nextTask ", nextTask)
+          ls.initializeStore(_convertTask(nextTask));
+          let cs = ls.completionStore;
+          let c;
+          if (cs.predictions.length > 0) {
+                c = ls.completionStore.addCompletionFromPrediction(cs.predictions[0]);
+            }
+            else {
+                c = ls.completionStore.addCompletion({ userGenerate: true });
+            }
+          cs.selectCompletion(c.id);
+          return
+    },
+  });
+  }
+</script>
