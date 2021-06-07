@@ -325,7 +325,7 @@ module.exports = {
             var result = await client.query(cmd);
             //console.log("getTrivialDataFromTable:", result)
             client.release();
-            return result.rows[0];
+            return result.rows;
         } catch(e) {
             client.release();
             return e;
