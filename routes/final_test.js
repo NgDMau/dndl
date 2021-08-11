@@ -17,14 +17,16 @@ const pool = new Pool({
 
 module.exports = function (app) {
     app.get('/final_test', function (req, res) {
+        
         if (req.isAuthenticated()) {
             var user = new User(req.session.passport.user)
             if (user.role == "beginner" || user.role == "worker") {
 
                 var listQuestion = [], numberQuestion = 30;
                 shuffledQuestions(numberQuestion).then(function () {
-                    //res.render("final_test.ejs", { list: listQuestion });
-                    res.render('dashboard.ejs', {name: user.fullname, level: user.role});
+                    console.log("FINAL TEST")
+                    res.render("final_test.ejs", { list: listQuestion });
+                    // res.render('dashboard.ejs', {name: user.fullname, level: user.role});
                 }
                 );
                 async function shuffledQuestions(index) {
