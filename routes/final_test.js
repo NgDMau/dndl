@@ -25,8 +25,8 @@ module.exports = function (app) {
                 var listQuestion = [], numberQuestion = 30;
                 shuffledQuestions(numberQuestion).then(function () {
                     console.log("FINAL TEST")
-                    res.render("final_test.ejs", { list: listQuestion });
-                    // res.render('dashboard.ejs', {name: user.fullname, level: user.role});
+                    // res.render("final_test.ejs", { list: listQuestion });
+                    res.render('dashboard.ejs', {name: user.fullname, level: user.role});
                 }
                 );
                 async function shuffledQuestions(index) {
