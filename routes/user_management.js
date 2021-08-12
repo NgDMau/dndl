@@ -133,6 +133,8 @@ module.exports = function ( app ) {
                     var address = req.body.address;
                     var role = req.body.role;
                     var password = req.body.password;
+                    var course = req.body.course;
+
                     if (role === 'admin') {
                         role = 'moderator'
                     }
@@ -148,7 +150,7 @@ module.exports = function ( app ) {
                             req.flash('mess','Tên tài khoản đã tồn tại')
                             res.redirect('/user_management');
                         }else{
-                            client.query('INSERT INTO users(username, full_name, email, address, role, password) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',[username, full_name, email, address, role, password], function (err,result) {
+                            client.query('INSERT INTO users(username, full_name, email, address, role, course, password) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *',[username, full_name, email, address, role, course, password], function (err,result) {
                                 if (err) {
                                     client.release();
                                     return console.error(err);
@@ -215,6 +217,7 @@ module.exports = function ( app ) {
                     var address = req.body.address;
                     var role = req.body.role;
                     var password = req.body.password;
+                    var course = req.body.course
                     
                     if (err) {
                         return console.error(err);
@@ -227,7 +230,7 @@ module.exports = function ( app ) {
                             req.flash('mess','Tên tài khoản đã tồn tại')
                             res.redirect('/user_management');
                         }else{
-                            client.query('UPDATE users SET username = $1, full_name = $2, email = $3, address = $4, role = $5 , password = $6 WHERE id=$7',[username, full_name, email, address, role, password, id], function (err) {
+                            client.query('UPDATE users SET username = $1, full_name = $2, email = $3, address = $4, role = $5 , course =  $6, password = $7 WHERE id=$8',[username, full_name, email, address, role, course,password, id], function (err) {
                                 if (err) {
                                     client.release();
                                     return console.error(err);
@@ -308,6 +311,40 @@ module.exports = function ( app ) {
                         
                         client.release();
                         req.flash('mess','Xóa thông tin tài khoản thành công')
+                        res.redirect('/user_management')
+
+                    });
+                })
+            } else {
+                res.redirect('/login');
+            }
+            
+        } else {
+            res.redirect('/login')
+        }
+    });
+
+    // reset all workers
+    app.post('/user_management/reset_all', function (req, res) {
+        if (req.isAuthenticated()) {
+
+            var user = new User(req.session.passport.user)
+            
+            if (user.isMod()) {
+                pool.connect(function (err, client, done) {
+                    var id = req.body.id;
+            
+                    client.query('UPDATE public.users SET role=$1 WHERE role=$2 OR role=$3 OR role=$4 OR role=$5',['level_1','beginner', 'level_2', 'level_3', 'worker'], function (err) {
+                        if (err) {
+                            client.release();
+                            req.flash('mess','Reset tài khoản học viên thất bại')
+                            console.error(err);
+                            res.redirect('/user_management')
+                            // return console.error(err);
+                        }
+                        
+                        client.release();
+                        req.flash('mess','Reset tài khoản học viên thành công')
                         res.redirect('/user_management')
 
                     });

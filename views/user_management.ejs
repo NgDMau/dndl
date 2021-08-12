@@ -258,6 +258,14 @@
                                                     <button class="au-btn-filter" type="submit">
                                                         <i class="zmdi zmdi-filter-list"></i>Lọc
                                                     </button>
+                                                    
+
+                                                </form>
+                                                <br>
+                                                <form action="/user_management/reset_all" method="POST">
+                                                    <button class="au-btn-filter" type="submit">
+                                                        Reset bài kiểm tra
+                                                    </button>
                                                 </form>
                                             </div>
 
@@ -271,6 +279,7 @@
                                                         <option value="email">Email</option>
                                                         <option value="address">Địa chỉ</option>
                                                         <option value="role">Quyền tài khoản</option>
+                                                        <option value="course">Tên khóa học</option>
                                                     </select>
                                                     <input class="au-input" type="text" name="search" placeholder="Tìm kiếm" />
                                                     <button class="au-btn--submit" type="submit">
@@ -293,6 +302,7 @@
                                                         <th>Email</th>
                                                         <th>Địa chỉ</th>
                                                         <th>Quyền</th>
+                                                        <th>Khóa học</th>
                                                         <th>Điểm</th>
                                                         <th>Thời gian</th>
                                                     </tr>
@@ -306,7 +316,8 @@
                                                             <td name="full_name"><%= item.full_name %></td>
                                                             <td name="email"><%= item.email %></td>
                                                             <td name="address"><%= item.address %></td>    
-                                                            <td name="role"><%= item.role %></td> 
+                                                            <td name="role"><%= item.role %></td>
+                                                            <td name="role"><%= item.course %></td>  
                                                             <td name="score"><%= item.test_score %></td>
                                                             <td name="time"><%= new Date(item.total_score * 1000).toISOString().substr(11, 8) %></td>
                                                                                                               
@@ -431,6 +442,13 @@
                         </div>
 
                     </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Khóa học</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="classcourse" name="course" placeholder="Khóa học">
+                        </div>
+                    </div>
+                    
 
                     <div class="form-group row">
                         <div class="col-sm-12 d-flex justify-content-center">
@@ -507,6 +525,12 @@
                         </div>
 
                     </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Khóa học</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="classcourse_edit" name="course" placeholder="Khóa học">
+                        </div>
+                    </div>
 
                     <div class="form-group row">
                         <div class="col-sm-12 d-flex justify-content-center">
@@ -572,6 +596,7 @@
             $('#email_edit').val($(value[4]).text());
             $('#address_edit').val($(value[5]).text());
             $('#role_edit').val($(value[6]).text());
+            $('#classcourse_edit').val($(value[7]).text());
 
 
         });

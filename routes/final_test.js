@@ -20,13 +20,14 @@ module.exports = function (app) {
         
         if (req.isAuthenticated()) {
             var user = new User(req.session.passport.user)
-            if (user.role == "beginner" || user.role == "worker") {
-
+            console.log("VERIFYyyyyyyyyyyy", user.verify)
+            if (user.role == "level_1" || user.role == "level_2" || user.role == "level_3") {
                 var listQuestion = [], numberQuestion = 30;
                 shuffledQuestions(numberQuestion).then(function () {
                     console.log("FINAL TEST")
-                    // res.render("final_test.ejs", { list: listQuestion });
-                    res.render('dashboard.ejs', {name: user.fullname, level: user.role});
+                    
+                    res.render("final_test.ejs", { list: listQuestion });
+                    //res.render('dashboard.ejs', {name: user.fullname, level: user.role});
                 }
                 );
                 async function shuffledQuestions(index) {
@@ -36,11 +37,16 @@ module.exports = function (app) {
                         listQuestion.push(shuffled[i]);
                     }
                 }
-
-
-            } else {
-                res.redirect('/')
             }
+
+
+            if (user.role == "beginner") {
+                res.render('dashboard.ejs', {name: user.fullname, level: user.role});
+            }
+
+            if (user.role == "worker") {
+                res.render('worker_dashboard.ejs', {name: user.fullname, level: user.role});
+            }    
 
         } else {
             res.redirect('/')
