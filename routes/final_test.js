@@ -21,7 +21,8 @@ module.exports = function (app) {
         if (req.isAuthenticated()) {
             var user = new User(req.session.passport.user)
             console.log("VERIFYyyyyyyyyyyy", user.verify)
-            if (user.role == "level_1" || user.role == "level_2" || user.role == "level_3") {
+
+            if (user.role == "beginner") {
                 var listQuestion = [], numberQuestion = 30;
                 shuffledQuestions(numberQuestion).then(function () {
                     console.log("FINAL TEST")
@@ -40,9 +41,9 @@ module.exports = function (app) {
             }
 
 
-            if (user.role == "beginner") {
-                res.render('dashboard.ejs', {name: user.fullname, level: user.role});
-            }
+            // if (user.role == "beginner") {
+            //     res.render('dashboard.ejs', {name: user.fullname, level: user.role});
+            // }
 
             if (user.role == "worker") {
                 res.render('worker_dashboard.ejs', {name: user.fullname, level: user.role});
